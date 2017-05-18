@@ -1,3 +1,8 @@
 body {
+	font-family: "Courier New", Courier, monospace;
 	background-color: #7C8A8F;
+}
+
+.textC {
+	text-align: center;
 }
