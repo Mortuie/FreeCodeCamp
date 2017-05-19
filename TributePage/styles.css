@@ -1,6 +1,7 @@
 body {
-	font-family: "Courier New", Courier, monospace;
-	background-color: #7C8A8F;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	background-color: white;
+	padding: 20px;
 }
 
 .text {
