@@ -1,4 +1,6 @@
-
+body {
+	background-color: black;
+}
 
 li {
 	float: right;
@@ -42,7 +44,7 @@ ul {
 	height: 500px;
 }
 
-h1 {
-	position: absolute;
-	top: 125px;
+.aboutMe {
+	text-align: center;
+	color: white;
 }
