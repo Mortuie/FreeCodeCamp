@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<script>
+
+	$(document).ready(function() {
+
+		$("#getMessage").on("click", function() {
+
+			$.getJSON("https://thesimpsonsquoteapi.glitch.me/quotes", function(json) {
+				var thing = JSON.parse(JSON.stringify(json))[0];
+				$(".message").html(thing.quote);
+				$(".author").html(thing.character);
+				console.log(thing);
+				// $(".message").html(thing.quote);
+
+			});
+
+		});
+
+	});
+
+</script>
+
+<html>
+
+	<div class="message">Message will go here</div>
+
+	<div class="author">Author here!</div>
+
+
+	<button id="getMessage">Get Message</button>
+</html>
