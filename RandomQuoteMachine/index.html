@@ -42,6 +42,7 @@ h1 {
 	height: 600px;
 	background-color: #303f9f;
 	margin: auto;
+	position: relative;
 }
 
 div {
@@ -54,6 +55,12 @@ div {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+}
+
+.button_bottom {
+	position: absolute;
+	width: 100%;
+	bottom: 0;
 }
 
 </style>
@@ -69,7 +76,7 @@ div {
 
 		<div class="image">Picture!</div>
 
-		<button id="getMessage">Get Message</button>
+		<button id="getMessage" class="button_bottom">Get Message</button>
 
 	</div>
 
