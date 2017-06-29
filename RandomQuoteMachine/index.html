@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
 <script>
 
 	$(document).ready(function() {
@@ -23,12 +22,58 @@
 </script>
 
 <html>
+<style>
 
-	<div class="message">Message will go here</div>
+body {
+	background-color: #3f51b5;
+	padding: 100px;
 
-	<div class="author">Author here!</div>
+}
 
-	<div class="image">Picture!</div>
+h1 {
+	text-align: center;
+}
 
-	<button id="getMessage">Get Message</button>
+.main_box {
+	margin-left: auto;
+	margin-right: auto;
+	border-radius: 10px;
+	width: 75%;
+	height: 600px;
+	background-color: #303f9f;
+	margin: auto;
+}
+
+div {
+	border: 1px solid red;
+
+}
+
+.flex_column {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+</style>
+<body class="flex_column">
+
+	<h1>Leon's Quote Machine</h1>
+
+	<div class="main_box flex_column">
+
+		<div class="message">Message will go here</div>
+
+		<div class="author">Author here!</div>
+
+		<div class="image">Picture!</div>
+
+		<button id="getMessage">Get Message</button>
+
+	</div>
+
+	
+
+</body>
 </html>
