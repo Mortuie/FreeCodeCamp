@@ -11,8 +11,8 @@
 				var thing = JSON.parse(JSON.stringify(json))[0];
 				$(".message").html(thing.quote);
 				$(".author").html(thing.character);
+				$(".image").html("<img src='" + thing.image + "'>");
 				console.log(thing);
-				// $(".message").html(thing.quote);
 
 			});
 
@@ -28,6 +28,7 @@
 
 	<div class="author">Author here!</div>
 
+	<div class="image">Picture!</div>
 
 	<button id="getMessage">Get Message</button>
 </html>
