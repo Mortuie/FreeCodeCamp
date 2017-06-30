@@ -1,1 +1,5 @@
-# FreeCodeCamp projects Repository
+# FreeCodeCamp Projects Repository
+
+- Tribute Page
+- Personal Portfolio
+- Random Quote Machine
