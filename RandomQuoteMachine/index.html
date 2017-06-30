@@ -15,9 +15,12 @@
 				$(".image").html("<img src='" + data.image + "'>");
 
 			});
-
 		});
 
+		$("#sendTweet").on("click", function() {
+			var data = $(".quote").text();
+			window.open("https://twitter.com/intent/tweet?text=" + data);
+		});
 	});
 
 </script>
@@ -29,7 +32,6 @@ body {
 	background-color: #ffcc00;
 	padding: 50px;
 	font-family: "Lobset", cursive;
-
 }
 
 h1 {
@@ -42,12 +44,12 @@ h1 {
 	border: 10px solid;
 	width: 50%;
 	height: 700px;
+	padding: 20px;
 	background-color: #ffcc00;
 	position: relative;
 }
 
 div {
-	border: 1px solid red;
 	font-size: 30px;
 	font-weight: bold;
 }
@@ -59,9 +61,16 @@ div {
 	justify-content: center;
 }
 
+.quote {
+	max-width: 300px;
+	max-height: 300px;
+}
+
 .button_bottom {
-	width: 75px;
+	width: 125px;
 	height: 75px;
+	border-radius: 10px;
+	background-color: #ffcc00;
 }
 
 .flex_row {
@@ -85,7 +94,7 @@ div {
 
 		<div class="flex_row">
 			<button id="getMessage" class="button_bottom">Get Message</button>
-			<button id="sendTwitter" class="button_bottom">Tweet</button>
+			<button id="sendTweet" class="button_bottom">Tweet</button>
 		</div>
 
 	</div>
