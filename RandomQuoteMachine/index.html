@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<head>
+<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+</head>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>
 
@@ -7,11 +10,9 @@
 		$("#getMessage").on("click", function() {
 
 			$.getJSON("https://thesimpsonsquoteapi.glitch.me/quotes", function(json) {
-				var thing = JSON.parse(JSON.stringify(json))[0];
-				$(".message").html(thing.quote);
-				$(".author").html(thing.character);
-				$(".image").html("<img src='" + thing.image + "'>");
-				console.log(thing);
+				var data = JSON.parse(JSON.stringify(json))[0];
+				$(".quote").html('"' + data.quote + '" by ' + data.character);
+				$(".image").html("<img src='" + data.image + "'>");
 
 			});
 
@@ -25,8 +26,9 @@
 <style>
 
 body {
-	background-color: #3f51b5;
-	padding: 100px;
+	background-color: #ffcc00;
+	padding: 50px;
+	font-family: "Lobset", cursive;
 
 }
 
@@ -37,17 +39,17 @@ h1 {
 .main_box {
 	margin-left: auto;
 	margin-right: auto;
-	border-radius: 10px;
-	width: 75%;
-	height: 600px;
-	background-color: #303f9f;
-	margin: auto;
+	border: 10px solid;
+	width: 50%;
+	height: 700px;
+	background-color: #ffcc00;
 	position: relative;
 }
 
 div {
 	border: 1px solid red;
-
+	font-size: 30px;
+	font-weight: bold;
 }
 
 .flex_column {
@@ -58,29 +60,35 @@ div {
 }
 
 .button_bottom {
-	position: absolute;
-	width: 100%;
-	bottom: 0;
+	width: 75px;
+	height: 75px;
+}
+
+.flex_row {
+	display: flex;
+	flex-direction: row;
+
 }
 
 </style>
 <body class="flex_column">
 
-	<h1>Leon's Quote Machine</h1>
+	<h1>Random Quote Generation</h1>
 
 	<div class="main_box flex_column">
 
-		<div class="message">Message will go here</div>
+		<div class="flex_row">
+			<div class="quote">"You're turning me into a criminal when all I want to be is a petty thug." by Bart Simpson</div>
 
-		<div class="author">Author here!</div>
+			<div class="image"><img src="https://cdn.glitch.com/3c3ffadc-3406-4440-bb95-d40ec8fcde72%2FBartSimpson.png?1497567511638"></div>
+		</div>
 
-		<div class="image">Picture!</div>
-
-		<button id="getMessage" class="button_bottom">Get Message</button>
+		<div class="flex_row">
+			<button id="getMessage" class="button_bottom">Get Message</button>
+			<button id="sendTwitter" class="button_bottom">Tweet</button>
+		</div>
 
 	</div>
-
-	
 
 </body>
 </html>
