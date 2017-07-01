@@ -1,0 +1,12 @@
+body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
+	text-align: center;
+}
+
+h1 {
+	color: red;
+	border: 1px solid red;
+}
