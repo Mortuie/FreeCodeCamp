@@ -10,3 +10,14 @@ h1 {
 	color: red;
 	border: 1px solid red;
 }
+
+html {
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-attachment: fixed;
+	background-size: cover;
+}
+
+#error {
+	color: red;
+}
