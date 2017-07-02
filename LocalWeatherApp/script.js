@@ -31,7 +31,7 @@ $(document).ready(function() {
 	}
 
 	function setData(temp, wind, where, summary, icon) {
-		$("#temperature").text(Math.round(temp).toString() + " F");
+		$("#temperature").text(getDegreesFromFarenheit(Math.round(temp)).toString() + " C");
 		$("#wind").text(wind.toString() + " mph");
 		$("#location").text(where);
 		$("#summary").text(summary);

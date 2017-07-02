@@ -21,3 +21,7 @@ html {
 #error {
 	color: red;
 }
+
+footer {
+	margin-top: 300px;
+}
