@@ -1,9 +1,10 @@
 $(document).ready(function() {
 
+
 	getLocation();
 
 	function getLocation() {
-		if (navigator.geolocation) {
+		if (navigator && navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(showPosition);
 		} else {
 			$("#error").text("Geolocation is not supported by this browser>");
@@ -21,7 +22,7 @@ $(document).ready(function() {
 		}).done(function(data) {
 			console.log(data);
 			var temperature = data.currently.temperature;
-			var windSpeed = data.currently.windSpeed;
+			var windSpeed = (data.currently.windSpeed * 1.6).toFixed(2);
 			var where = data.currently.timezone;
 			var summary = data.currently.summary;
             var icon = data.currently.icon;
@@ -32,7 +33,7 @@ $(document).ready(function() {
 
 	function setData(temp, wind, where, summary, icon) {
 		$("#temperature").text(getDegreesFromFarenheit(Math.round(temp)).toString() + " C");
-		$("#wind").text(wind.toString() + " mph");
+		$("#wind").text(wind.toString() + " kmph");
 		$("#location").text(where);
 		$("#summary").text(summary);
         setBackground(icon);

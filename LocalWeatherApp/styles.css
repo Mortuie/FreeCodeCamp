@@ -6,11 +6,6 @@ body {
 	text-align: center;
 }
 
-h1 {
-	color: red;
-	border: 1px solid red;
-}
-
 html {
 	background-repeat: no-repeat;
 	background-position: center center;
@@ -18,10 +13,22 @@ html {
 	background-size: cover;
 }
 
-#error {
+.error {
 	color: red;
+	font-weight: bold;
+	font-size: 50px;
 }
 
 footer {
-	margin-top: 300px;
+	position: fixed;
+	left: 0px;
+	bottom: 0px;
+	height: 30px;
+	width: 100%;
+}
+
+.footerText {
+	color: black;
+	font-weight: bold;
+	font-size: 20px;
 }
