@@ -2,22 +2,25 @@
 <html>
 <head> 
 <link rel="stylesheet" type="text/css" href="styles.css">
+<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
 </head>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src='config.js'></script>
 <script src="script.js"></script>
 
-<body>
+<body class="boxAroundComponent">
 
-	<h1>FreeCodeCamp</h1>
-	<h2>Local Weather Application</h2>
+	<div class="title">FreeCodeCamp Challenge!</div>
+	<div class="secondaryHeader">Local Weather Application</div>
 
-	<div id="temperature"></div>
-	<div id="location"></div>
-	<div id="summary"></div>
-	<div id="wind"></div>
+	<div class="horizontalFlex">
+		<div class="item" id="temperature"></div>
+		<div class="item" id="location"></div>
+		<div class="item" id="summary"></div>
+		<div class="item" id="wind"></div>
+	</div>
+
 	<button id="convert">Convert to Farenheit</button>
-
 	<div class="error" id="error"></div>
 
 </body>

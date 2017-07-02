@@ -23,7 +23,7 @@ $(document).ready(function() {
 			console.log(data);
 			var temperature = data.currently.temperature;
 			var windSpeed = (data.currently.windSpeed * 1.6).toFixed(2);
-			var where = data.currently.timezone;
+			var where = data.timezone;
 			var summary = data.currently.summary;
             var icon = data.currently.icon;
 
@@ -32,10 +32,10 @@ $(document).ready(function() {
 	}
 
 	function setData(temp, wind, where, summary, icon) {
-		$("#temperature").text(getDegreesFromFarenheit(Math.round(temp)).toString() + " C");
-		$("#wind").text(wind.toString() + " kmph");
-		$("#location").text(where);
-		$("#summary").text(summary);
+		$("#temperature").text("Temperature: " + getDegreesFromFarenheit(Math.round(temp)).toString() + " C");
+		$("#wind").text("Windspeed: " + wind.toString() + " kmph");
+		$("#location").text("Location: " + where);
+		$("#summary").text("General Weather: " + summary);
         setBackground(icon);
 	}
 
@@ -47,6 +47,16 @@ $(document).ready(function() {
 	function getDegreesFromFarenheit(farenheit) {
 		return Math.round(((parseInt(farenheit) - 32) / 1.8)).toString();
 	}
+
+    function strip(str) {
+        return str
+        .replace(" F", "")
+        .replace(" C", "")
+        .replace("Windspeed: ", "")
+        .replace("Location: ", "")
+        .replace("General Weather: ", "")
+        .replace("Temperature: ", "");
+    }
 
     function setBackground(icon) {
         var url;
@@ -89,10 +99,10 @@ $(document).ready(function() {
         var currentTemperature = $("#temperature").text();
 
         if (currentTemperature.indexOf("F") > -1) {
-            $("#temperature").text(getDegreesFromFarenheit(currentTemperature.replace(" F", "")) + " C");
+            $("#temperature").text("Temperature: " + getDegreesFromFarenheit(strip(currentTemperature)) + " C");
             $("#convert").text("Convert to Farenheit");
         } else {
-            $("#temperature").text(getFarenheitFromDegrees(currentTemperature.replace(" C", "")) + " F");
+            $("#temperature").text("Temperature: " + getFarenheitFromDegrees(strip(currentTemperature)) + " F");
             $("#convert").text("Convert to Celcius");
         }
     });
