@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	var wikiUrl = "https://en.wikipedia.org/w/api.php";
-	var arrayOfData = [];
+	var arrayOfData;
 
 
 	$("#pressTest").on("click", function() {
@@ -23,7 +23,7 @@ $(document).ready(function() {
 		url: wikiUrl,
 		dataType: "jsonp",
 		success: function(data) {
-
+			arrayOfData = [];
 			console.log(data);
 			for (var i = 0; i < data[1].length; i++) {
 				var temp = {};
@@ -38,10 +38,4 @@ $(document).ready(function() {
 	});
 
 	
-	
-
-
-	
-
-
 });
