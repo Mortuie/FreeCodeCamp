@@ -4,16 +4,25 @@ $(document).ready(function() {
 		window.open("https://en.wikipedia.org/wiki/Special:Random");
 	});
 
+	
+	var wikiUrl = "https://en.wikipedia.org/w/api.php";
+	wikiUrl += "?" + $.param({
+		"action": "opensearch",
+		"search": "butterflies",
+		"prop": "revisions",
+		"rvprop": "content",
+		"format": "json",
+		"limit": 10,
+	})
+
+
 	$.ajax({
-		url: niggga,
-		data: queryData,
-		dataType, "json",
-		type: "POST",
-		headers: {"Api-User-Agent": "Example/1.0"}.
+		url: wikiUrl,
+		dataType: "jsonp",
 		success: function(data) {
 			console.log(data);
 		}
-
 	});
+
 
 });
