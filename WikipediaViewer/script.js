@@ -37,7 +37,7 @@ $(document).ready(function() {
 			console.log(arrayOfData);
 
 			for (var j = 0; j < arrayOfData.length; j++) {
-				$("#container").append('<a class="black" href="' +
+				$("#container").append('<a class="item" href="' +
 					arrayOfData[j].link +
 					'" target="_blank"><p>' +
 					arrayOfData[j].title + '</p><p>' +

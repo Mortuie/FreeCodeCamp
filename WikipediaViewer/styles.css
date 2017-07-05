@@ -25,7 +25,7 @@ html {
 }
 
 .centeringView {
-	vertical-align: middle;
+	margin-top: 125px;
 }
 
 
@@ -34,5 +34,17 @@ html {
 }
 
 .background2 {
-	background-color: grey;
+	background-color: red;
 }
+
+.dataView {
+	max-height: 500px;
+	overflow-y: scroll;
+}
+
+.item {
+	background-color: grey;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
