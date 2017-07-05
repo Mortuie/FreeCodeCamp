@@ -24,6 +24,8 @@ $(document).ready(function() {
 		dataType: "jsonp",
 		success: function(data) {
 			arrayOfData = [];
+			$(".flexbox").html("");
+			
 			console.log(data);
 			for (var i = 0; i < data[1].length; i++) {
 				var temp = {};
@@ -35,15 +37,12 @@ $(document).ready(function() {
 			console.log(arrayOfData);
 
 			for (var j = 0; j < arrayOfData.length; j++) {
-				console.log("banter");
-				$(".flexbox").append('<a class="black" href="' + arrayOfData[j].link + '" target="_blank"></a>');
-			}
-
+				$(".flexbox").append('<a class="black" href="' +
+					arrayOfData[j].link +
+					'" target="_blank"><p>' +
+					arrayOfData[j].title + '</p><p>' +
+					arrayOfData[j].description + '</p></a>'
+				);}
 		}});
-
-
-
 	});
-
-	
 });
