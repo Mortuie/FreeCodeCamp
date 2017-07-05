@@ -3,7 +3,7 @@ $(document).ready(function() {
 	var arrayOfData;
 
 
-	$("#pressTest").on("click", function() {
+	$("#randomArticle").on("click", function() {
 		window.open("https://en.wikipedia.org/wiki/Special:Random");
 	});
 
@@ -33,7 +33,15 @@ $(document).ready(function() {
 				arrayOfData.push(temp);
 			}
 			console.log(arrayOfData);
+
+			for (var j = 0; j < arrayOfData.length; j++) {
+				console.log("banter");
+				$(".flexbox").append('<a class="black" href="' + arrayOfData[j].link + '" target="_blank"></a>');
+			}
+
 		}});
+
+
 
 	});
 

@@ -6,3 +6,17 @@ input[type=text] {
 input[type=text]:focus {
 	width: 50%;
 }
+
+.flexbox {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.black {
+	background-color: grey;
+	width: 40%;
+	height: 100px;
+	margin: 5px;
+}
