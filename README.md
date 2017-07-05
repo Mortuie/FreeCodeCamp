@@ -4,3 +4,4 @@
 - [Personal Portfolio](http://portfolio-leon.surge.sh/)
 - [Random Quote Machine](http://randomquote-leon.surge.sh)
 - [Local Weather Application](https://localweather-leon.surge.sh)
+- [Wikipedia Viewer](https://wikiviewer-leon.surge.sh)
