@@ -7,6 +7,16 @@ input[type=text]:focus {
 	width: 50%;
 }
 
+a {
+	color: black;
+	text-decoration: none;
+}
+
+html {
+	min-height: 100%;
+	background: linear-gradient(to bottom right, #2E1BA8, #38306E);
+}
+
 .flexboxCenter {
 	display: flex;
 	flex-direction: column;
@@ -14,21 +24,10 @@ input[type=text]:focus {
 	align-items: center;
 }
 
-.child {
-	margin: auto;
+.centeringView {
+	vertical-align: middle;
 }
 
-.black {
-	background-color: grey;
-	width: 40%;
-	height: 100px;
-	margin: 5px;
-}
-
-a {
-	color: black;
-	text-decoration: none;
-}
 
 .background {
 	background-color: black;
