@@ -24,8 +24,8 @@ $(document).ready(function() {
 		dataType: "jsonp",
 		success: function(data) {
 			arrayOfData = [];
-			$(".flexbox").html("");
-			
+			$("#container").html("");
+
 			console.log(data);
 			for (var i = 0; i < data[1].length; i++) {
 				var temp = {};
@@ -37,7 +37,7 @@ $(document).ready(function() {
 			console.log(arrayOfData);
 
 			for (var j = 0; j < arrayOfData.length; j++) {
-				$(".flexbox").append('<a class="black" href="' +
+				$("#container").append('<a class="black" href="' +
 					arrayOfData[j].link +
 					'" target="_blank"><p>' +
 					arrayOfData[j].title + '</p><p>' +

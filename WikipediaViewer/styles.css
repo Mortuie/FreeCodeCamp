@@ -7,11 +7,15 @@ input[type=text]:focus {
 	width: 50%;
 }
 
-.flexbox {
+.flexboxCenter {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+}
+
+.child {
+	margin: auto;
 }
 
 .black {
@@ -24,4 +28,12 @@ input[type=text]:focus {
 a {
 	color: black;
 	text-decoration: none;
+}
+
+.background {
+	background-color: black;
+}
+
+.background2 {
+	background-color: grey;
 }
