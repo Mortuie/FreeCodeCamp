@@ -1,10 +1,8 @@
 input[type=text] {
-	width: 130px;
+	border-radius: 5px;
+	width: 300px;
+	text-align: center;
 	transition: width 0.4s ease-in-out;
-}
-
-input[type=text]:focus {
-	width: 50%;
 }
 
 a {
@@ -13,8 +11,8 @@ a {
 }
 
 html {
-	min-height: 100%;
-	background: linear-gradient(to bottom right, #2E1BA8, #38306E);
+	background-color: black;
+	background-size: 100%;
 }
 
 .flexboxCenter {
@@ -25,7 +23,7 @@ html {
 }
 
 .centeringView {
-	margin-top: 125px;
+	margin-top: 185px;
 }
 
 
@@ -38,13 +36,26 @@ html {
 }
 
 .dataView {
+	margin: auto;
+	width: 90%;
 	max-height: 500px;
 	overflow-y: scroll;
 }
 
 .item {
 	background-color: grey;
-	margin-top: 10px;
-	margin-bottom: 10px;
+	border: 1px solid black;
 }
 
+.buttonCSS {
+	border-radius: 5px;
+	width: 150px;
+	height: 40px;
+	font-size: 20px;
+	margin-top: 3px;
+}
+
+.whiteText {
+	color: white;
+	text-align: center;
+}
