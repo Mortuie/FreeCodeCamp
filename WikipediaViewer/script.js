@@ -30,18 +30,18 @@ $(document).ready(function() {
 			for (var i = 0; i < data[1].length; i++) {
 				var temp = {};
 				temp.title = data[1][i];
-				temp.description = (data[2][i] === "") ? "No description.": data[2][i];
+				temp.description = (data[2][i] === "") ? "No description given.": data[2][i];
 				temp.link = data[3][i];
 				arrayOfData.push(temp);
 			}
 			console.log(arrayOfData);
 
 			for (var j = 0; j < arrayOfData.length; j++) {
-				$("#container").append('<a class="item" href="' +
+				$("#container").append('<div class="item"><a href="' +
 					arrayOfData[j].link +
 					'" target="_blank"><p>' +
 					arrayOfData[j].title + '</p><p>' +
-					arrayOfData[j].description + '</p></a>'
+					arrayOfData[j].description + '</p></a></div>'
 				);}
 		}});
 	});

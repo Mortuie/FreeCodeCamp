@@ -23,20 +23,21 @@ html {
 }
 
 .centeringView {
-	margin-top: 185px;
+	margin-top: 100px;
 }
 
 .dataView {
 	margin: auto;
-	width: 90%;
+	width: 95%;
 	max-height: 500px;
 	overflow-y: scroll;
 }
 
 .item {
-	border: 1px solid white;
+	color: white;
 	text-align: center;
-	background-color: white;
+	background-color: white !important;
+	border: 2px solid blue;
 }
 
 .buttonCSS {
@@ -45,4 +46,10 @@ html {
 	height: 40px;
 	font-size: 20px;
 	margin-top: 3px;
+	margin-bottom: 3px;
+}
+
+h1 {
+	color: white;
+	text-align: center;
 }
