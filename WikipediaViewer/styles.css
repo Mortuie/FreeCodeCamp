@@ -1,6 +1,6 @@
 input[type=text] {
 	border-radius: 5px;
-	width: 300px;
+	width: 350px;
 	text-align: center;
 	transition: width 0.4s ease-in-out;
 }
@@ -26,15 +26,6 @@ html {
 	margin-top: 185px;
 }
 
-
-.background {
-	background-color: black;
-}
-
-.background2 {
-	background-color: red;
-}
-
 .dataView {
 	margin: auto;
 	width: 90%;
@@ -43,19 +34,15 @@ html {
 }
 
 .item {
-	background-color: grey;
-	border: 1px solid black;
+	border: 1px solid white;
+	text-align: center;
+	background-color: white;
 }
 
 .buttonCSS {
 	border-radius: 5px;
-	width: 150px;
+	width: 175px;
 	height: 40px;
 	font-size: 20px;
 	margin-top: 3px;
-}
-
-.whiteText {
-	color: white;
-	text-align: center;
 }

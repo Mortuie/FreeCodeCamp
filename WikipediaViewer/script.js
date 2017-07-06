@@ -30,7 +30,7 @@ $(document).ready(function() {
 			for (var i = 0; i < data[1].length; i++) {
 				var temp = {};
 				temp.title = data[1][i];
-				temp.description = data[2][i];
+				temp.description = (data[2][i] === "") ? "No description.": data[2][i];
 				temp.link = data[3][i];
 				arrayOfData.push(temp);
 			}
