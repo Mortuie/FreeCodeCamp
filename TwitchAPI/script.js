@@ -20,25 +20,26 @@ $(document).ready(function() {
 
 	
 
+			function testing() {
+				$.getJSON(streamData, function(json) {
+					//console.log(json);
+					streamObject[i].name = json.name;
+					temp.description = json.bio;
+				});
+					console.log(streamObject[i].name);
 
-			$.getJSON(streamData, function(json) {
-				//console.log(json);
-				streamObject[i].name = json.name;
-				temp.description = json.bio;
-			});
-				console.log(streamObject[i].name);
+				$.getJSON(streamState, function(json) {
+					//console.log(json);
+					temp.isOnline = json.stream === null;
+				});
 
-			$.getJSON(streamState, function(json) {
-				//console.log(json);
-				temp.isOnline = json.stream === null;
-			});
-
-			$.getJSON(channelInfo, function(json) {
-				//console.log(json);
-				temp.logo = json.logo;
-				temp.url = json.url;
-			});
-
+				$.getJSON(channelInfo, function(json) {
+					//console.log(json);
+					temp.logo = json.logo;
+					temp.url = json.url;
+				});
+			}
+			testing();
 			streamObject.push(temp);
 		}
 
