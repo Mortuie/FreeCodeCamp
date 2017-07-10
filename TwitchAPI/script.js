@@ -5,42 +5,44 @@ $(document).ready(function() {
 	getRegularStreamers();
 
 	function getRegularStreamers() {
-		$.ajaxSetup({async: false});
+
 		for (var i = 0; i < regularStreamers.length; i++)  {
+			var counter = 0;
 			var streamState = "https://wind-bow.glitch.me/twitch-api/streams/" + regularStreamers[i];
 			var streamData = "https://wind-bow.glitch.me/twitch-api/users/" + regularStreamers[i];
 			var channelInfo = "https://wind-bow.glitch.me/twitch-api/channels/" + regularStreamers[i];
 
 			var temp = {};
 
-
-
-			$.getJSON(streamData, function(data) {
-				temp.name = data.name;
-				temp.desc = data.bio;
-			}).then(function() {
+			getData(streamData, temp).then(successMessage => {
+				getData(streamState, successMessage).then(successMessage => {
+					getData(channelInfo, successMessage).then(successMessage => {
+						streamObject.push(successMessage);
+					});
+				});
 			});
-
-			$.getJSON(streamState, function(data) {
-				temp.isOnline = data.stream === null;
-			}).then(function() {
-
-			});
-
-			$.getJSON(channelInfo, function(data) {
-				temp.logo = data.logo;
-				temp.url = data.url;
-			}).then(function() {
-
-			});
-
-
-			streamObject.push(temp);
-			
+	
 
 		}
 
 		console.log(streamObject);
+	}
+
+	function getData(url, temp) {
+		return new Promise((resolve, reject) => {
+				$.getJSON(url, function(data) {
+					if (url.includes("users/")) {
+						temp.name = data.name;
+						temp.bio = data.bio;
+					} else if (url.includes("streams/")) {
+						temp.isOnline = (data.stream === null);
+					} else {
+						temp.logo = data.logo;
+						temp.url = data.url;
+					}
+					resolve(temp);
+				});
+			});
 	}
 
 	
