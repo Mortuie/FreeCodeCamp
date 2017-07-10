@@ -7,17 +7,16 @@ $(document).ready(function() {
 	function getRegularStreamers() {
 
 		for (var i = 0; i < regularStreamers.length; i++)  {
-			var counter = 0;
 			var streamState = "https://wind-bow.glitch.me/twitch-api/streams/" + regularStreamers[i];
 			var streamData = "https://wind-bow.glitch.me/twitch-api/users/" + regularStreamers[i];
 			var channelInfo = "https://wind-bow.glitch.me/twitch-api/channels/" + regularStreamers[i];
 
 			var temp = {};
 
-			getData(streamData, temp).then(successMessage => {
-				getData(streamState, successMessage).then(successMessage => {
-					getData(channelInfo, successMessage).then(successMessage => {
-						streamObject.push(successMessage);
+			getData(streamData, temp).then(temp1 => {
+				getData(streamState, temp1).then(temp2 => {
+					getData(channelInfo, temp2).then(temp3 => {
+						streamObject.push(temp3);
 					});
 				});
 			});
