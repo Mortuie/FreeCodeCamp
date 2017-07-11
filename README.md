@@ -2,9 +2,9 @@
 
 - [Tribute Page](http://tribute-leon.surge.sh/)
 - [Personal Portfolio](http://portfolio-leon.surge.sh/)
-- [Random Quote Machine](http://randomquotemachine.quasimathematician.co.uk/)
-- [Local Weather Application](http://localweather.quasimathematician.co.uk/)
-- [Wikipedia Viewer](http://wikipediaviewer.quasimathematician.co.uk/)
+- [Random Quote Machine](http://randomquotemachine.mortuie.com/)
+- [Local Weather Application](http://localweather.mortuie.com/)
+- [Wikipedia Viewer](http://wikipediaviewer.mortuie.com/)
 
 
 ## Author
