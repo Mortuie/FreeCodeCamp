@@ -49,10 +49,43 @@ $(document).ready(function() {
 
 
 	$("#selectAll").on("click", function() {
+		$("#contentContainer").empty();
 		for (var i = 0; i < streamObject.length; i++) {
-			$("#contentContainer").append('<a class="item" href="' + streamObject[i].url + '" target="_blank">'
-			+ '<img class="boxed" src="' + streamObject[i].logo + '"/></a>');
+			var bio = (streamObject[i].bio === null) ? 'No Description' : streamObject[i].bio;
 
+			$("#contentContainer").append('<a class="item" href="' + streamObject[i].url + '" target="_blank">' +
+			'<img class="boxed" src="' + streamObject[i].logo + '"/>' +
+			'<div class="words"><div>' + streamObject[i].name + '</div>' +
+			'<div>' + bio + '</div></div></a>');
+
+		}
+	});
+
+	$("#selectOnline").on("click", function() {
+		$("#contentContainer").empty();
+		for (var i = 0; i < streamObject.length; i++) {
+			if (streamObject[i].isOnline) {
+				var bio = (streamObject[i].bio === null) ? 'No Description' : streamObject[i].bio;
+
+				$("#contentContainer").append('<a class="item" href="' + streamObject[i].url + '" target="_blank">' +
+				'<img class="boxed" src="' + streamObject[i].logo + '"/>' +
+				'<div class="words"><div>' + streamObject[i].name + '</div>' +
+				'<div>' + bio + '</div></div></a>');
+			}
+		}
+	});
+
+	$("#selectOffline").on("click", function() {
+		$("#contentContainer").empty();
+		for (var i = 0; i < streamObject.length; i++) {
+			if (!streamObject[i].isOnline) {
+				var bio = (streamObject[i].bio === null) ? 'No Description' : streamObject[i].bio;
+
+				$("#contentContainer").append('<a class="item" href="' + streamObject[i].url + '" target="_blank">' +
+				'<img class="boxed" src="' + streamObject[i].logo + '"/>' +
+				'<div class="words"><div>' + streamObject[i].name + '</div>' +
+				'<div>' + bio + '</div></div></a>');
+			}
 		}
 	});
 

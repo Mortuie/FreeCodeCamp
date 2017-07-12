@@ -76,6 +76,16 @@ div.titleBar button.active {
 	margin-right: 5px;
 }
 
+.words {
+	margin-top: 3px;
+	display: flex;
+	flex-direction: column;
+	font-family: 'Bellefair', serif;
+	font-size: 10px;
+	text-decoration: none !important;
+	color: black;
+}
+
 @font-face {
     font-family: "Twitchy";
     src: url("fonts/Twitchy.TV.ttf") format("truetype");
