@@ -51,7 +51,7 @@ $(document).ready(function() {
 	$("#selectAll").on("click", function() {
 		for (var i = 0; i < streamObject.length; i++) {
 			$("#contentContainer").append('<a class="item" href="' + streamObject[i].url + '" target="_blank">'
-			+ '<img class="image" src="' + streamObject[i].logo + '"/></a>');
+			+ '<img class="boxed" src="' + streamObject[i].logo + '"/></a>');
 
 		}
 	});
