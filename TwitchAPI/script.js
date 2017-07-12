@@ -3,7 +3,6 @@ $(document).ready(function() {
 	var regularStreamers = ["freecodecamp", "ESL_SC2", "OgamingSC2", "cretetion", "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas", "ogaminglol"];
 	var streamObject = [];
 	getRegularStreamers();
-	document.getElementById("selectAll").click();
 
 	function getRegularStreamers() {
 
@@ -26,6 +25,7 @@ $(document).ready(function() {
 		}
 
 		console.log(streamObject);
+		$("#selectAll").click();
 	}
 
 	function getData(url, temp) {
@@ -36,9 +36,11 @@ $(document).ready(function() {
 						temp.bio = data.bio;
 					} else if (url.includes("streams/")) {
 						temp.isOnline = (data.stream === null);
-					} else {
+					} else if (url.includes("channels/")) {
 						temp.logo = data.logo;
 						temp.url = data.url;
+					} else {
+						console.log("ERRRRRROR!");
 					}
 					resolve(temp);
 				});
@@ -49,7 +51,7 @@ $(document).ready(function() {
 	$("#selectAll").on("click", function() {
 		for (var i = 0; i < streamObject.length; i++) {
 			$("#contentContainer").append('<a class="item" href="' + streamObject[i].url + '" target="_blank">'
-				+ '</a>');
+			+ '<img class="image" src="' + streamObject[i].logo + '"/></a>');
 
 		}
 	});
