@@ -19,23 +19,49 @@ body {
 	width: 350px;
 	height: 600px;
 	background-color: white;
+	overflow: hidden;
 }
 
-.titleBar {
-	margin-top: 0px;
-	height: 100px;
-	background-color: black;
+div.titleBar {
+	overflow: hidden;
+	border: 1px solid #ccc;
+	background-color: #f1f1f1;
 }
 
-ul {
-	list-style-type: none;
-	color: white;
+div.titleBar button {
+	background-color: inherit;
+	float: left;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	padding: 14px 16px;
+	transition: 0.3s;
 }
 
-li {
-	margin-top: 0px;
-	padding-top: 0px;
-	display: inline;
+div.titleBar button:hover {
+	background-color: #ddd;
+}
+
+div.titleBar button.active {
+	background-color: #ccc;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+}
+
+.item {
+	width: inherit;
+	background-color: #dce0e8;
+	margin-top: 3px;
+	height: 50px;
+	border: 1px solid grey;
+	border-radius: 4px;
+}
+
+.item:hover {
+	transform: scale(1.2);
 }
 
 @font-face {
