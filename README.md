@@ -1,5 +1,7 @@
 # FreeCodeCamp Projects Repository
 
+## Frontend Projects:
+
 - [Tribute Page](http://tribute-leon.surge.sh/)
 - [Personal Portfolio](http://portfolio-leon.surge.sh/)
 - [Random Quote Machine](http://randomquotemachine.mortuie.com/)
