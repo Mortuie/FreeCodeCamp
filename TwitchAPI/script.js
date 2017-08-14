@@ -25,7 +25,6 @@ $(document).ready(function() {
 		}
 
 		console.log(streamObject);
-		$("#selectAll").click();
 	}
 
 	function getData(url, temp) {
@@ -35,14 +34,13 @@ $(document).ready(function() {
 						temp.name = data.name;
 						temp.bio = data.bio;
 					} else if (url.includes("streams/")) {
-						temp.isOnline = (data.stream === null);
+						temp.isOnline = data.stream === null;
 					} else if (url.includes("channels/")) {
 						temp.logo = data.logo;
 						temp.url = data.url;
 					} else {
 						console.log("ERRRRRROR!");
-					}
-					resolve(temp);
+					} resolve(temp);
 				});
 			});
 	}

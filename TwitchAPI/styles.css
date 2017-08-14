@@ -90,3 +90,14 @@ div.titleBar button.active {
     font-family: "Twitchy";
     src: url("fonts/Twitchy.TV.ttf") format("truetype");
 }
+
+.barTop {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+
+.navBar {
+	margin: 5px;
+}
