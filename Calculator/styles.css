@@ -1,0 +1,24 @@
+body {
+	background: #1C2224;
+}
+
+.calculator {
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 200px;
+	position: relative;
+	width: 200px;
+	height: 500px;
+	background: black;
+	display: flex;
+	flex-direction: column;
+	overflow: wrap;
+}
+
+.screen {
+	color: white;
+}
+
+.button {
+	width: 50px;
+}
