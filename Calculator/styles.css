@@ -1,5 +1,6 @@
 body {
 	background: #1C2224;
+	font-family: 'Luckiest Guy', cursive;
 }
 
 .calculator {
@@ -18,12 +19,11 @@ body {
 
 .screen {
 	color: white;
-	grid-area: 2 / 1 / 2 / 5;
 }
 
 .title {
 	color: white;
-	grid-area: 1 / 1 / 2 / 5;
+	margin:;
 }
 
 .button {
