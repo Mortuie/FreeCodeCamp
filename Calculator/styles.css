@@ -7,18 +7,36 @@ body {
 	margin-left: auto;
 	margin-top: 200px;
 	position: relative;
-	width: 200px;
-	height: 500px;
+	width: 300px;
+	height: auto;
 	background: black;
 	display: flex;
 	flex-direction: column;
-	overflow: wrap;
+	justify-content: center;
+	align-items: center;
 }
 
 .screen {
 	color: white;
+	grid-area: 2 / 1 / 2 / 5;
+}
+
+.title {
+	color: white;
+	grid-area: 1 / 1 / 2 / 5;
 }
 
 .button {
-	width: 50px;
+	width: 40px;
+	height: 40px;
+	margin: 10px;
+}
+
+.zero {
+	width: 100px;
+}
+
+.equals {
+	height: 100px;
+	position: absolute;
 }
