@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
-	var screen;
+	var current;
+	var currentCalculation;
 	var total = 0;
 
 	$("#1").click(function() {
@@ -59,36 +60,57 @@ $(document).ready(function() {
 	});
 
 	$("#reset").click(function() {
-		$(".screen").text("0");
+		$(".current").text("0");
 		total = 0;
 	});
 
 	$("#clear").click(function() {
-		$(".screen").text("0");
+		$(".current").text("0");
 	});
 
 	$("#equ").click(function() {
-		$(".screen").text(total);
+		$(".current").text(total);
 	});
+
+	$("#mul").click(function() {
+		getCurrentValue();
+		currentCalculation = parseInt(current) * total;
+		$(".current").text(currentCalculation);
+		total = currentCalculation;
+	});
+
+	$("#plu").click(function() {
+		getCurrentValue();
+		currentCalculation = parseInt(current) + total;
+		$(".current").text(0);
+		total = currentCalculation;
+	});
+
+	$("#div").click(function() {
+		getCurrentValue();
+		currentCalculation = parseInt(current) / total;
+		$(".current").text(0);
+		total = currentCalculation;
+	})
 
 	function addToValue(newVal) {
 		if (newVal === "0") {
-			if (screen !== "0") {
-				$(".screen").text(screen + newVal);
+			if (current !== "0") {
+				$(".current").text(current + newVal);
 			}
-		} else if (screen === '0') {
+		} else if (current === '0') {
 			if (newVal === ".") {
-				$(".screen").text("0" + newVal);
+				$(".current").text("0" + newVal);
 			} else {
-				$(".screen").text(newVal);
+				$(".current").text(newVal);
 			}
 		} else {
-			$(".screen").text(screen + newVal);
+			$(".current").text(current + newVal);
 		}
 	}
 
 	function getCurrentValue() {
-		screen = $(".screen").text();
+		current = $(".current").text();
 	}
 
 

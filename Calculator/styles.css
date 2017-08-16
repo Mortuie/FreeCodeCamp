@@ -41,6 +41,11 @@ body {
 	margin-bottom: 5px;
 }
 
+.total {
+	font-size: 15px;
+	color: black;
+}
+
 .button {
 	width: 50px;
 	height: 40px;
