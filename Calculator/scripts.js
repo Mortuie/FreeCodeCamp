@@ -2,6 +2,7 @@ $(document).ready(function() {
 
 	var current;
 	var currentCalculation;
+	var lastEquals = false;
 	var total = 0;
 
 	$("#1").click(function() {
@@ -61,6 +62,7 @@ $(document).ready(function() {
 
 	$("#reset").click(function() {
 		$(".current").text("0");
+		$(".total").text("0");
 		total = 0;
 	});
 
@@ -77,6 +79,7 @@ $(document).ready(function() {
 		currentCalculation = parseInt(current) * total;
 		$(".current").text(currentCalculation);
 		total = currentCalculation;
+		$(".total").text(total);
 	});
 
 	$("#plu").click(function() {
@@ -84,6 +87,7 @@ $(document).ready(function() {
 		currentCalculation = parseInt(current) + total;
 		$(".current").text(0);
 		total = currentCalculation;
+		$(".total").text(total);
 	});
 
 	$("#div").click(function() {
@@ -91,6 +95,7 @@ $(document).ready(function() {
 		currentCalculation = parseInt(current) / total;
 		$(".current").text(0);
 		total = currentCalculation;
+		$(".total").text(total);
 	})
 
 	function addToValue(newVal) {
