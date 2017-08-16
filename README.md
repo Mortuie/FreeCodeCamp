@@ -8,6 +8,7 @@
 - [Local Weather Application](http://localweather.mortuie.com/)
 - [Wikipedia Viewer](http://wikipediaviewer.mortuie.com/)
 - [Calculator](http://calculator.mortuie.com/)
+- [Twitch API Viewer](http://twitchapi.mortuie.com/)
 
 ## Author
 Copyright Leon Boehmer 2017
