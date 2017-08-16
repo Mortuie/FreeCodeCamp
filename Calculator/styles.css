@@ -1,6 +1,7 @@
 body {
 	background: #1C2224;
 	font-family: 'Luckiest Guy', cursive;
+	font-size: 25px;
 }
 
 .calculator {
@@ -8,22 +9,36 @@ body {
 	margin-left: auto;
 	margin-top: 200px;
 	position: relative;
-	width: 260px;
-	height: auto;
-	background: black;
+	width: 300px;
+	height: 400px;
+	border-radius: 10px;
+	box-shadow: 3px 3px 2px #8C8888;
+	background: #990000;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 }
 
+.calculator:hover {
+	box-shadow: none;
+	transform: translate(3px, 3px);
+}
+
 .screen {
 	color: white;
+	height: 35px;
+	background-color: grey;
+	width: 80%;
+	border-radius: 7px;
+	text-align: right;
+	padding: 10px;
 }
 
 .title {
+	margin-top: 5px;
 	color: white;
-	margin:;
+	margin-bottom: 5px;
 }
 
 .button {
@@ -33,13 +48,19 @@ body {
 	margin-right: 5px;
 	margin-left: 5px;
 	margin-bottom: 5px;
+	border-radius: 7px;
+	border: none;
+	box-shadow: 3px 3px 2px #8C8888;
+	background-color: #F0BA46;
+}
+
+.button:active {
+	box-shadow: none;
+	transform: translate(3px, 3px);
 }
 
 .red {
-	background-color: red;
-	border: none;
-	border-radius: 5px;
-	border-bottom: 3px solid white;
+	background-color: #FF7700;
 }
 
 .red:active {
@@ -53,4 +74,12 @@ body {
 .equals {
 	height: 90px;
 	position: absolute;
+}
+
+.leftCenter {
+	margin-left: 26px;
+}
+
+.buttonGrid {
+	margin-top: 20px;
 }
