@@ -71,51 +71,62 @@ $(document).ready(function() {
 	});
 
 	$("#equ").click(function() {
-		$(".current").text(total);
+		$(".current").text("TOTAL: " + total);
+		lastEquals = true;
 	});
 
 	$("#mul").click(function() {
 		getCurrentValue();
-		currentCalculation = parseInt(current) * total;
-		$(".current").text(currentCalculation);
+		currentCalculation = parseFloat(current) * total;
+		$(".current").text(currentCalculation.toString());
 		total = currentCalculation;
 		$(".total").text(total);
 	});
 
 	$("#plu").click(function() {
 		getCurrentValue();
-		currentCalculation = parseInt(current) + total;
-		$(".current").text(0);
+		currentCalculation = parseFloat(current) + total;
+		$(".current").text("0");
 		total = currentCalculation;
-		$(".total").text(total);
+		$(".total").text(total.toString());
 	});
 
 	$("#div").click(function() {
 		getCurrentValue();
-		currentCalculation = parseInt(current) / total;
-		$(".current").text(0);
-		total = currentCalculation;
-		$(".total").text(total);
+		if (current === "0" || current === 0) {
+			$(".errorBox").css("color", "red");
+		} else {
+			currentCalculation = total / parseFloat(current);
+			$(".current").text("0");
+			total = currentCalculation;
+			$(".total").text(total.toString());
+		}
 	})
 
 	function addToValue(newVal) {
+		getRidOfError()
 		if (newVal === "0") {
 			if (current !== "0") {
-				$(".current").text(current + newVal);
+				$(".current").text((current + newVal).toString());
 			}
 		} else if (current === '0') {
 			if (newVal === ".") {
-				$(".current").text("0" + newVal);
+				$(".current").text("0" + newVal.toString());
 			} else {
-				$(".current").text(newVal);
+				$(".current").text(newVal.toString());
 			}
 		} else {
-			$(".current").text(current + newVal);
+			$(".current").text((current + newVal).toString());
 		}
 	}
 
 	function getCurrentValue() {
-		current = $(".current").text();
+		current = (!lastEquals) ? $(".current").text() : "0";
+		lastEquals = false;
+	}
+
+	function getRidOfError() {
+		$(".errorBox").css("color", "#1C2224");
 	}
 
 

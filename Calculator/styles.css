@@ -7,7 +7,7 @@ body {
 .calculator {
 	margin-right: auto;
 	margin-left: auto;
-	margin-top: 200px;
+	margin-top: 10px;
 	position: relative;
 	width: 300px;
 	height: 400px;
@@ -87,4 +87,10 @@ body {
 
 .buttonGrid {
 	margin-top: 20px;
+}
+
+.errorBox {
+	margin-top: 200px;
+	color: #1C2224;
+	text-align: center;
 }
