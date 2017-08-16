@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
 	var screen;
+	var total = 0;
 
 	$("#1").click(function() {
 		getCurrentValue();
@@ -53,13 +54,21 @@ $(document).ready(function() {
 	});
 
 	$("#dec").click(function() {
+		getCurrentValue();
+		addToValue(".");
 	});
 
 	$("#reset").click(function() {
+		$(".screen").text("0");
+		total = 0;
 	});
 
 	$("#clear").click(function() {
 		$(".screen").text("0");
+	});
+
+	$("#equ").click(function() {
+		$(".screen").text(total);
 	});
 
 	function addToValue(newVal) {
@@ -68,7 +77,11 @@ $(document).ready(function() {
 				$(".screen").text(screen + newVal);
 			}
 		} else if (screen === '0') {
-			$(".screen").text(newVal);
+			if (newVal === ".") {
+				$(".screen").text("0" + newVal);
+			} else {
+				$(".screen").text(newVal);
+			}
 		} else {
 			$(".screen").text(screen + newVal);
 		}
