@@ -1,19 +1,20 @@
 import React from 'react';
+import {StyleSheet, css} from 'aphrodite';
+
 
 export default class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <div>
-          <h2>Welcome to React</h2>
-        </div>
-        <p >
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <html className={css(styles.red)}></html>
     );
   }
 
 }
+
+const styles = StyleSheet.create({
+	red: {
+		backgroundColor: 'red',
+	},
+});
 
