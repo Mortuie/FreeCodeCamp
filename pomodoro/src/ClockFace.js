@@ -4,7 +4,7 @@ export default class ClockFace extends React.Component {
 	
 	render() {
 		return (
-			<div> NOTHING </div>
+			<div>{this.props.time}</div>
 		);
 	}
 
