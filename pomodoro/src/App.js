@@ -22,7 +22,7 @@ export default class App extends React.Component {
     		return (
 			<div>
     				<div className={css(styles.titleText)}>Pomodoro timer</div>
-				<ClockFace time={this.state.timer} />
+				<ClockFace timer={this.state.timer} />
 				
 				<div>
 					<button onClick={() => this.changeTimer(-1)} >-</button>
