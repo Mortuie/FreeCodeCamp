@@ -5,12 +5,12 @@ export default class ClockFace extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			date: Date(),
+			seconds: 0,
 		};
 	}
 
 	componentDidMount() {
-		this.interval = setInterval(() => this.setState({date: Date()}), 1000);
+		this.interval = setInterval(() => this.setState({seconds: this.state.seconds - 1}), 1000);
 	}
 
 	componentWillUnmount() {
@@ -19,14 +19,16 @@ export default class ClockFace extends React.Component {
 
 	
 	render() {
-		var startTime = new Date();
-		var projectedTime = new Date();
-		projectedTime.setMinutes(startTime.getMinutes() + this.props.timer);
+
+		if (this.state.seconds < 0) {
+			this.setState({seconds: 59});
+			this.props.decrease();
+		}
+
 		
 		return (
 			<div>
-				<div>{this.props.timer}</div>
-				<div>{projectedTime.getMinutes()}</div>
+				<div>{this.props.lengthOfTimer + ':' + this.state.seconds}</div>
 			</div>
 		);
 	}

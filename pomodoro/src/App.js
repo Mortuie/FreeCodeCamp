@@ -8,30 +8,37 @@ export default class App extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			timer: 25,
+			lengthOfTimer: 25,
+			dummyTimer: 25,
 		};
 	}
 
 
-	changeTimer(increment) {
-		this.setState({timer: this.state.timer + increment});
+	changelengthOfTimer(increment) {
+		this.setState({lengthOfTimer: this.state.lengthOfTimer + increment});
+		this.setState({dummyTimer: this.state.lengthOfTimer});
+	}
+
+
+	decrease() {
+		this.setState({dummyTimer: this.state.dummyTimer - 1});
 	}
 
 
 	render() {
     		return (
 			<div>
-    				<div className={css(styles.titleText)}>Pomodoro timer</div>
-				<ClockFace timer={this.state.timer} />
+    				<div className={css(styles.titleText)}>Pomodoro lengthOfTimer</div>
+				<ClockFace lengthOfTimer={this.state.dummyTimer} decrease={this.decrease}/>
 				
 				<div>
-					<button onClick={() => this.changeTimer(-1)} >-</button>
-					{this.state.timer}
-					<button onClick={() => this.changeTimer(1)} >+</button>
+					<button onClick={() => this.changelengthOfTimer(-1)} >-</button>
+					{this.state.lengthOfTimer}
+					<button onClick={() => this.changelengthOfTimer(1)} >+</button>
 				</div>
 
 				<div className={css(styles.side)}>
-					<button>Start/Stop</button>
+					<button onClick={() => this.decrease()}>Start/Stop</button>
 					<button>Reset</button>
 				</div>
 
