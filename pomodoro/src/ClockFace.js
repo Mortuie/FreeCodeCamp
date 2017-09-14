@@ -19,12 +19,15 @@ export default class ClockFace extends React.Component {
 
 	
 	render() {
-		var test = new Date();
-		var newDate = new Date(test);
-		newDate.setMinutes(test.getMinutes() + 25);
+		var startTime = new Date();
+		var projectedTime = new Date();
+		projectedTime.setMinutes(startTime.getMinutes() + this.props.timer);
 		
 		return (
-			<div>{newDate}</div>
+			<div>
+				<div>{this.props.timer}</div>
+				<div>{projectedTime.getMinutes()}</div>
+			</div>
 		);
 	}
 

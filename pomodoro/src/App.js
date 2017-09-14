@@ -29,6 +29,12 @@ export default class App extends React.Component {
 					{this.state.timer}
 					<button onClick={() => this.changeTimer(1)} >+</button>
 				</div>
+
+				<div className={css(styles.side)}>
+					<button>Start/Stop</button>
+					<button>Reset</button>
+				</div>
+
 			</div>
 		);
   	}
@@ -40,6 +46,9 @@ const styles = StyleSheet.create({
 		color: 'white',
 		textAlign: 'center',
 		marginTop: '50px',
+	},
+	side: {
+		display: 'flex',
 	},
 });
 
