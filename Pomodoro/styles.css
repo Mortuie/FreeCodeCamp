@@ -2,15 +2,26 @@ html {
 	background-color: #f44242;
 	font-family: 'Monofett', cursive;
 	font-size: 50px;
+	color: white;
 }
 
 
 .bottomBar {
 	display: flex;
-
+	margin-right: auto;
+	margin-left: auto;
+	text-align: center;
 }
 
 button {
 	border-radius: 10px;
 	border: none;
+}
+
+.clock {
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 50px;
+	text-align: center;
+	font-size: 100px;
 }

@@ -79,4 +79,11 @@ $(document).ready(function() {
 		$("#clock").text(minutes + ":" + sec);
 	}
 
+
+	$(document).bind('keypress', function(e) {
+       		if (e.which == 32){
+               	$("#start").click();
+            	}
+    	});
+
 });
