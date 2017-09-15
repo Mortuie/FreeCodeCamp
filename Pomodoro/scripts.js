@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	var nearlyFinished = false;
 	var timeout = null;
 	var value = 25;
 	var minutes = 25;
@@ -28,12 +29,16 @@ $(document).ready(function() {
 	function countdown() {
 		seconds--;
 
-		if (minutes !== 0 && seconds !== 0) {
+		if (!nearlyFinished) {
 
 			if (seconds < 0) {
 				seconds = 59;
 				minutes--;
 				value;
+			}
+
+			if (seconds < 10 && minutes === 0) {
+				nearlyFinished = true;
 			}
 
 			setClockFace();
