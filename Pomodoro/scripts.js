@@ -6,20 +6,20 @@ $(document).ready(function() {
 
 	$("#minus").click(function() {
 		value--;
-		minutes--;
 		$("#minutes").text(value);
 
 		if (!timeout) {
+			minutes--;
 			setClockFace();
 		}
 	});	
 
 	$("#plus").click(function() {
 		value++;
-		minutes++;
 		$("#minutes").text(value);
 
 		if (!timeout) {
+			minutes++;
 			setClockFace();
 		} 
 	});
@@ -42,7 +42,7 @@ $(document).ready(function() {
 			minutes = value;
 			seconds = 0;
 			setClockFace();
-
+			$("#sound")[0].play();
 		}
 	}
 
