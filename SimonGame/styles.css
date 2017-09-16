@@ -20,16 +20,32 @@ body {
 	background-color: #f24b3c;
 }
 
+.red:active {
+
+}
+
 .blue {
 	background-color: #4286f4;
+}
+
+.blue:active {
+
 }
 
 .yellow {
 	background-color: #ebf441;
 }
 
+.yellow:active {
+
+}
+
 .green {
 	background-color: #47d87c;
+}
+
+.green:active {
+
 }
 
 .piece {
