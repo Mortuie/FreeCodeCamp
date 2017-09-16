@@ -1,3 +1,45 @@
 html {
-	background-color: black;
+	background-color: #6b325b;
+	font-family: "Montserrat", sans-serif;
+	font-size: 50px;
+}
+
+.buttons {
+	display: flex;
+	flex-direction: row;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.red {
+	background-color: #f24b3c;
+}
+
+.blue {
+	background-color: #4286f4;
+}
+
+.yellow {
+	background-color: #ebf441;
+}
+
+.green {
+	background-color: #47d87c;
+}
+
+.piece {
+	width: 125px;
+	height: 50px;
+	border-radius: 5px;
+	margin-right: 3px;
+	margin-left: 3px;
+}
+
+.title {
+	margin-top: 50px;
 }
