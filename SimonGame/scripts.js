@@ -1,14 +1,11 @@
 $(document).ready(function() {
-	var options = {
-		0: 'red',
-		1: 'blue',
-		2: 'yellow',
-		3: 'green',
-	};
 	var on = false;
 	var finished = false;
 	var pastTurns = [];
 	var turns = 0;
+	var playerTurn = false;
+	var count = 0;
+	var playerCount = 0;
 
 
 	$("#onoff").click(function() {
@@ -31,51 +28,106 @@ $(document).ready(function() {
 
 	function startGame() {
 		pastTurns = [];
-		var whatTurn = 0;
-		$("#status").text("Starting. Count: 0");
+		$("#status").text("Starting...");
 
-
-		while (!finished) {
-			
-
-		}
+		computerTurn(0);
 	}
 
-	function computerTurn() {
+	function generateTurn() {
+		var randomNumber = Math.round(Math.random() * 3);
+		pastTurns.push(randomNumber);
+		console.log(pastTurns);
+	}
 
-	};
+	function computerTurn(i) {
+		// loop through array... make it a whole turn...
+		count++;
+		if (i === 0) generateTurn();
 
-	function playerTurn() {
+			$("#" + pastTurns[i++]).click();
+			if (i < pastTurns.length) {
+				setTimeout(function() {
+					computerTurn(i);
+				}, 750);
+			}
+		playerTurn = true;
+		updateCount();
+	}
 
-	};
+	function updateCount() {
+		$("#status").text("Count: " + count);
+	}
 
-	$("#red").click(function() {
-		$(this).addClass("active");
-		setTimeout(function() {
-			$(".active").removeClass("active");
-		}, 500);
-
+	$("#0").click(function() {
+		if (!playerTurn) {
+			$(this).addClass("active");
+			setTimeout(function() {
+				$(".active").removeClass("active");
+			}, 500);
+		} else { // player turn
+			var shouldBe = pastTurns[playerCount];
+			playerTurn = false;
+			if (shouldBe === 0) { 
+				playerCount++;
+				computerTurn(0);
+			} else { //got it wrong...
+				$("#status").text("Wrong! Start over!");
+			}
+		}
 	});
 
-	$("#blue").click(function() {
-		$(this).addClass("active");
-		setTimeout(function() {
-			$(".active").removeClass("active");
-		}, 500);
+	$("#1").click(function() {
+		if (!playerTurn) {
+			$(this).addClass("active");
+			setTimeout(function() {
+				$(".active").removeClass("active");
+			}, 500);
+		} else { // player turn
+			var shouldBe = pastTurns[playerCount];
+			playerTurn = false;
+			if (shouldBe === 1) { 
+				playerCount++;
+				computerTurn(0);
+			} else { //got it wrong...
+				$("#status").text("Wrong! Start over!");
+			}
+		}
 	});
 
-	$("#yellow").click(function() {
-		$(this).addClass("active");
-		setTimeout(function() {
-			$(".active").removeClass("active");
-		}, 500);
+	$("#2").click(function() {
+		if (!playerTurn) {
+			$(this).addClass("active");
+			setTimeout(function() {
+				$(".active").removeClass("active");
+			}, 500);
+		} else { // player turn
+			var shouldBe = pastTurns[playerCount];
+			playerTurn = false;
+			if (shouldBe === 2) { 
+				playerCount++;
+				computerTurn(0);
+			} else { //got it wrong...
+				$("#status").text("Wrong! Start over!");
+			}
+		}
 	});
 
-	$("#green").click(function() {
-		$(this).addClass("active");
-		setTimeout(function() {
-			$(".active").removeClass("active");
-		}, 500);
+	$("#3").click(function() {
+		if (!playerTurn) {
+			$(this).addClass("active");
+			setTimeout(function() {
+				$(".active").removeClass("active");
+			}, 500);
+		} else { // player turn
+			var shouldBe = pastTurns[playerCount];
+			playerTurn = false;
+			if (shouldBe === 3) { 
+				playerCount++;
+				computerTurn(0);
+			} else { //got it wrong...
+				$("#status").text("Wrong! Start over!");
+			}
+		}
 	});
 
 });
