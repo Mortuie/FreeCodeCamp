@@ -30,28 +30,29 @@ $(document).ready(function() {
 		pastTurns = [];
 		$("#status").text("Starting...");
 
-		computerTurn(0);
+		computerTurn();
 	}
 
 	function generateTurn() {
 		var randomNumber = Math.round(Math.random() * 3);
 		pastTurns.push(randomNumber);
-		console.log(pastTurns);
 	}
 
-	function computerTurn(i) {
-		// loop through array... make it a whole turn...
-		count++;
-		if (i === 0) generateTurn();
+	function computerTurn() {
+		count = 0;
+		generateTurn();
 
-			$("#" + pastTurns[i++]).click();
-			if (i < pastTurns.length) {
-				setTimeout(function() {
-					computerTurn(i);
-				}, 750);
-			}
-		playerTurn = true;
-		updateCount();
+		for (var i = 0; i < pastTurns.length; i++) {
+			setTimeout(function() {
+				$("#" + pastTurns[i]).click();
+				count++;
+				updateCount();
+			}, 750 * i);
+		}
+
+		var inter = setInterval(function() {
+			if (count === pastTurns.length) playerTurn = true;
+		}, 500);
 	}
 
 	function updateCount() {
@@ -66,10 +67,15 @@ $(document).ready(function() {
 			}, 500);
 		} else { // player turn
 			var shouldBe = pastTurns[playerCount];
-			playerTurn = false;
+
+			if (playerCount === count) {
+				playerTurn = false;
+				playerCount = 0;
+				computerTurn();
+			}
+
 			if (shouldBe === 0) { 
 				playerCount++;
-				computerTurn(0);
 			} else { //got it wrong...
 				$("#status").text("Wrong! Start over!");
 			}
@@ -84,15 +90,21 @@ $(document).ready(function() {
 			}, 500);
 		} else { // player turn
 			var shouldBe = pastTurns[playerCount];
-			playerTurn = false;
+
+			if (playerCount === count) {
+				playerTurn = false;
+				playerCount = 0;
+				computerTurn();
+			}
+
 			if (shouldBe === 1) { 
 				playerCount++;
-				computerTurn(0);
 			} else { //got it wrong...
 				$("#status").text("Wrong! Start over!");
 			}
 		}
 	});
+
 
 	$("#2").click(function() {
 		if (!playerTurn) {
@@ -102,15 +114,21 @@ $(document).ready(function() {
 			}, 500);
 		} else { // player turn
 			var shouldBe = pastTurns[playerCount];
-			playerTurn = false;
+
+			if (playerCount === count) {
+				playerTurn = false;
+				playerCount = 0;
+				computerTurn();
+			}
+
 			if (shouldBe === 2) { 
 				playerCount++;
-				computerTurn(0);
 			} else { //got it wrong...
 				$("#status").text("Wrong! Start over!");
 			}
 		}
 	});
+
 
 	$("#3").click(function() {
 		if (!playerTurn) {
@@ -120,14 +138,20 @@ $(document).ready(function() {
 			}, 500);
 		} else { // player turn
 			var shouldBe = pastTurns[playerCount];
-			playerTurn = false;
+
+			if (playerCount === count) {
+				playerTurn = false;
+				playerCount = 0;
+				computerTurn();
+			}
+
 			if (shouldBe === 3) { 
 				playerCount++;
-				computerTurn(0);
 			} else { //got it wrong...
 				$("#status").text("Wrong! Start over!");
 			}
 		}
 	});
+
 
 });
