@@ -61,13 +61,11 @@ $(document).ready(function() {
 	}
 
 	$("#0").click(function() {
-		console.log(playerTurn);
-		if (!playerTurn) {
-			$(this).addClass("active");
-			setTimeout(function() {
-				$(".active").removeClass("active");
-			}, 500);
-		} else { // player turn
+		$(this).addClass("active");
+		setTimeout(function() {
+			$(".active").removeClass("active");
+		}, 500);
+		if (playerTurn) { // player turn
 			var shouldBe = pastTurns[playerCount];
 			console.log("NIGGA");
 			if (playerCount === count - 1) {
@@ -78,7 +76,7 @@ $(document).ready(function() {
 
 			if (shouldBe === 0) { 
 				playerCount++;
-			} else { //got it wrong...
+			} else if (shouldBe !== 0) { //got it wrong...
 				$("#status").text("Wrong! Start over!");
 				startGame();
 			}
@@ -86,12 +84,11 @@ $(document).ready(function() {
 	});
 
 	$("#1").click(function() {
-		if (!playerTurn) {
-			$(this).addClass("active");
-			setTimeout(function() {
-				$(".active").removeClass("active");
-			}, 500);
-		} else { // player turn
+	$(this).addClass("active");
+		setTimeout(function() {
+			$(".active").removeClass("active");
+		}, 500);
+		if (playerTurn) { // player turn
 			var shouldBe = pastTurns[playerCount];
 
 			if (playerCount === count - 1) {
@@ -102,7 +99,7 @@ $(document).ready(function() {
 
 			if (shouldBe === 1) { 
 				playerCount++;
-			} else { //got it wrong...
+			} else if (shouldBe !== 1) { //got it wrong...
 				$("#status").text("Wrong! Start over!");
 				startGame();
 			}
@@ -111,12 +108,11 @@ $(document).ready(function() {
 
 
 	$("#2").click(function() {
-		if (!playerTurn) {
-			$(this).addClass("active");
-			setTimeout(function() {
-				$(".active").removeClass("active");
-			}, 500);
-		} else { // player turn
+		$(this).addClass("active");
+		setTimeout(function() {
+			$(".active").removeClass("active");
+		}, 500);
+		if (playerTurn) { // player turn
 			var shouldBe = pastTurns[playerCount];
 
 			if (playerCount === count - 1) {
@@ -127,7 +123,7 @@ $(document).ready(function() {
 
 			if (shouldBe === 2) { 
 				playerCount++;
-			} else { //got it wrong...
+			} else if (shouldBe !== 2) { //got it wrong...
 				$("#status").text("Wrong! Start over!");
 				startGame();
 			}
@@ -136,12 +132,11 @@ $(document).ready(function() {
 
 
 	$("#3").click(function() {
-		if (!playerTurn) {
-			$(this).addClass("active");
-			setTimeout(function() {
-				$(".active").removeClass("active");
-			}, 500);
-		} else { // player turn
+		$(this).addClass("active");
+		setTimeout(function() {
+			$(".active").removeClass("active");
+		}, 500);
+		if (playerTurn) { // player turn
 			var shouldBe = pastTurns[playerCount];
 
 			if (playerCount === count - 1) {
@@ -152,7 +147,7 @@ $(document).ready(function() {
 
 			if (shouldBe === 3) { 
 				playerCount++;
-			} else { //got it wrong...
+			} else if (shouldBe !== 3) { //got it wrong...
 				$("#status").text("Wrong! Start over!");
 				startGame();
 			}
