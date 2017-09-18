@@ -6,6 +6,8 @@
     "aphrodite": "^1.2.4",
     "marked": "^0.3.6",
     "react": "^15.6.1",
+    "react-addons-css-transition-group": "^15.6.0",
+    "react-addons-transition-group": "^15.6.0",
     "react-dom": "^15.6.1",
     "react-scripts": "1.0.13"
   },
