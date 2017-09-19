@@ -28,6 +28,16 @@ $(document).ready(function() {
 		}
 	});
 
+	$("#strict").click(function() {
+		if (strictGame) {
+			strictGame = false;
+			$("#strict").text("STRICT ON");
+		} else {
+			strictGame = true;
+			$("#strict").text("STRICT OFF");
+		}
+	});
+
 	function startGame() {
 		pastTurns = [];
 		finished = false;
@@ -47,7 +57,8 @@ $(document).ready(function() {
 	}
 
 	function computerTurn() {
-		count = 0;
+		timeoutsForGameLoop = []
+	;	count = 0;
 		generateTurn();
 
 		for (var i = 0; i < pastTurns.length; i++) {
@@ -56,6 +67,7 @@ $(document).ready(function() {
 	}
 
 	function reloopGame() {
+		timeoutsForGameLoop = [];
 		count = 0;
 
 		for (var i = 0; i < pastTurns.length; i++) {
