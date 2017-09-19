@@ -31,10 +31,10 @@ $(document).ready(function() {
 	$("#strict").click(function() {
 		if (strictGame) {
 			strictGame = false;
-			$("#strict").text("STRICT ON");
+			$("#strict").text("STRICT MODE ON");
 		} else {
 			strictGame = true;
-			$("#strict").text("STRICT OFF");
+			$("#strict").text("STRICT MODE OFF");
 		}
 	});
 
