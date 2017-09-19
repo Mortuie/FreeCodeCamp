@@ -70,6 +70,9 @@ $(document).ready(function() {
 		timeoutsForGameLoop = [];
 		count = 0;
 
+		console.log("RELOOP");
+		console.log(timeoutsForGameLoop);
+
 		for (var i = 0; i < pastTurns.length; i++) {
 			press(i);
 		}
@@ -118,9 +121,10 @@ $(document).ready(function() {
 				if (strictGame) {
 					document.location.href = document.location.href;
 				} else {
+					playerTurn = false;
 					clearTimeouts();
 					setTimeout(function() {
-						reloopGame();					
+						reloopGame();
 					}, 1000);
 				}
 			}
@@ -156,6 +160,7 @@ $(document).ready(function() {
 				if (strictGame) {
 					document.location.href = document.location.href;
 				} else {
+					playerTurn = false;
 					clearTimeouts();
 					setTimeout(function() {
 						reloopGame();					
@@ -196,6 +201,7 @@ $(document).ready(function() {
 				if (strictGame) {
 					document.location.href = document.location.href;
 				} else {
+					playerTurn = false;
 					clearTimeouts();
 					setTimeout(function() {
 						reloopGame();					
@@ -235,6 +241,7 @@ $(document).ready(function() {
 				if (strictGame) {
 					document.location.href = document.location.href;
 				} else {
+					playerTurn = false;
 					clearTimeouts();
 					setTimeout(function() {
 						reloopGame();					
