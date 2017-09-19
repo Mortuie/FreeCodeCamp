@@ -60,6 +60,10 @@ $(document).ready(function() {
 		$("#status").text("Count: " + count);
 	}
 
+	function playerCountUpdate() {
+		$("#status").text("Count: " + playerCount);
+	}
+
 	$("#0").click(function() {
 		$(this).addClass("active");
 		setTimeout(function() {
@@ -67,15 +71,18 @@ $(document).ready(function() {
 		}, 500);
 		if (playerTurn) { // player turn
 			var shouldBe = pastTurns[playerCount];
-			console.log("NIGGA");
 			if (playerCount === count - 1) {
 				playerTurn = false;
 				playerCount = 0;
-				computerTurn();
+				setTimeout(function() {
+					computerTurn();
+	
+				}, 1000);
 			}
 
-			if (shouldBe === 0) { 
+			else if (shouldBe === 0) { 
 				playerCount++;
+				playerCountUpdate();
 			} else if (shouldBe !== 0) { //got it wrong...
 				$("#status").text("Wrong! Start over!");
 				startGame();
@@ -94,11 +101,16 @@ $(document).ready(function() {
 			if (playerCount === count - 1) {
 				playerTurn = false;
 				playerCount = 0;
-				computerTurn();
+
+				setTimeout(function() {
+	
+					computerTurn();
+				}, 1000);
 			}
 
-			if (shouldBe === 1) { 
+			else if (shouldBe === 1) { 
 				playerCount++;
+				playerCountUpdate();
 			} else if (shouldBe !== 1) { //got it wrong...
 				$("#status").text("Wrong! Start over!");
 				startGame();
@@ -118,11 +130,15 @@ $(document).ready(function() {
 			if (playerCount === count - 1) {
 				playerTurn = false;
 				playerCount = 0;
-				computerTurn();
+				setTimeout(function() {
+	
+					computerTurn();
+				}, 1000);
 			}
 
-			if (shouldBe === 2) { 
+			else if (shouldBe === 2) { 
 				playerCount++;
+				playerCountUpdate();
 			} else if (shouldBe !== 2) { //got it wrong...
 				$("#status").text("Wrong! Start over!");
 				startGame();
@@ -142,11 +158,14 @@ $(document).ready(function() {
 			if (playerCount === count - 1) {
 				playerTurn = false;
 				playerCount = 0;
-				computerTurn();
+				setTimeout(function() {
+					computerTurn();
+				}, 1000);
 			}
 
-			if (shouldBe === 3) { 
+			else if (shouldBe === 3) { 
 				playerCount++;
+				playerCountUpdate();
 			} else if (shouldBe !== 3) { //got it wrong...
 				$("#status").text("Wrong! Start over!");
 				startGame();
