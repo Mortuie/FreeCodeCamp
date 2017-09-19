@@ -28,6 +28,12 @@ $(document).ready(function() {
 
 	function startGame() {
 		pastTurns = [];
+		finished = false;
+		turns = 0;
+		playerTurn = false;
+		count = 0;
+		playerCount = 0;
+
 		$("#status").text("Starting...");
 
 		computerTurn();
@@ -63,6 +69,13 @@ $(document).ready(function() {
 	function playerCountUpdate() {
 		$("#status").text("Count: " + playerCount);
 	}
+
+	$("#reset").click(function() {
+		$("#status").text("Restarting the game...");
+		setTimeout(function() {
+			startGame();
+		}, 1000);
+	});
 
 	$("#0").click(function() {
 		$(this).addClass("active");
