@@ -1,11 +1,13 @@
 $(document).ready(function() {
 	var on = false;
+	var strictGame = false;
 	var finished = false;
 	var pastTurns = [];
 	var turns = 0;
 	var playerTurn = false;
 	var count = 0;
 	var playerCount = 0;
+	var timeoutsForGameLoop = [];
 
 
 	$("#onoff").click(function() {
@@ -53,13 +55,21 @@ $(document).ready(function() {
 		}
 	}
 
+	function reloopGame() {
+		count = 0;
+
+		for (var i = 0; i < pastTurns.length; i++) {
+			press(i);
+		}
+	}
+
 	function press(i) {
-		setTimeout(function() {
+		timeoutsForGameLoop.push(setTimeout(function() {
 			$("#" + pastTurns[i]).click();
 			count++;
 			updateCount();
 			if (i === pastTurns.length - 1) playerTurn = true;
-		}, 750 * i);
+		}, 750 * i));
 	}
 
 	function updateCount() {
@@ -70,10 +80,16 @@ $(document).ready(function() {
 		$("#status").text("Count: " + playerCount);
 	}
 
+	function clearTimeouts() {
+		for (var i = 0; i < timeoutsForGameLoop.length; i++) {
+			clearTimeout(timeoutsForGameLoop[i]);
+		}
+	}
+
 	$("#reset").click(function() {
-		$("#status").text("Restarting the game...");
+		$("#status").text("Restarting the game");
 		setTimeout(function() {
-			startGame();
+			document.location.href = document.location.href;
 		}, 1000);
 	});
 
@@ -84,7 +100,22 @@ $(document).ready(function() {
 		}, 500);
 		if (playerTurn) { // player turn
 			var shouldBe = pastTurns[playerCount];
-			if (playerCount === count - 1) {
+
+			if (shouldBe !== 0) {
+				$("#status").text("Wrong! Start over!");
+				if (strictGame) {
+					document.location.href = document.location.href;
+				} else {
+					clearTimeouts();
+					setTimeout(function() {
+						reloopGame();					
+					}, 1000);
+				}
+			}
+
+			else if (playerCount === count - 1) {
+				playerCount++;
+				playerCountUpdate();
 				playerTurn = false;
 				playerCount = 0;
 				setTimeout(function() {
@@ -96,9 +127,6 @@ $(document).ready(function() {
 			else if (shouldBe === 0) { 
 				playerCount++;
 				playerCountUpdate();
-			} else if (shouldBe !== 0) { //got it wrong...
-				$("#status").text("Wrong! Start over!");
-				startGame();
 			}
 		}
 	});
@@ -111,12 +139,26 @@ $(document).ready(function() {
 		if (playerTurn) { // player turn
 			var shouldBe = pastTurns[playerCount];
 
-			if (playerCount === count - 1) {
+			if (shouldBe !== 1) {
+				$("#status").text("Wrong! Start over!");
+				if (strictGame) {
+					document.location.href = document.location.href;
+				} else {
+					clearTimeouts();
+					setTimeout(function() {
+						reloopGame();					
+					}, 1000);					
+				}			
+			}
+
+
+			else if (playerCount === count - 1) {
+				playerCount++;
+				playerCountUpdate();
 				playerTurn = false;
 				playerCount = 0;
 
 				setTimeout(function() {
-	
 					computerTurn();
 				}, 1000);
 			}
@@ -124,10 +166,7 @@ $(document).ready(function() {
 			else if (shouldBe === 1) { 
 				playerCount++;
 				playerCountUpdate();
-			} else if (shouldBe !== 1) { //got it wrong...
-				$("#status").text("Wrong! Start over!");
-				startGame();
-			}
+			} 
 		}
 	});
 
@@ -140,7 +179,21 @@ $(document).ready(function() {
 		if (playerTurn) { // player turn
 			var shouldBe = pastTurns[playerCount];
 
-			if (playerCount === count - 1) {
+			if (shouldBe !== 2) {
+				$("#status").text("Wrong! Start over!");
+				if (strictGame) {
+					document.location.href = document.location.href;
+				} else {
+					clearTimeouts();
+					setTimeout(function() {
+						reloopGame();					
+					}, 1000);				
+				}
+			} 
+
+			else if (playerCount === count - 1) {
+				playerCount++;
+				playerCountUpdate();
 				playerTurn = false;
 				playerCount = 0;
 				setTimeout(function() {
@@ -152,9 +205,6 @@ $(document).ready(function() {
 			else if (shouldBe === 2) { 
 				playerCount++;
 				playerCountUpdate();
-			} else if (shouldBe !== 2) { //got it wrong...
-				$("#status").text("Wrong! Start over!");
-				startGame();
 			}
 		}
 	});
@@ -168,7 +218,21 @@ $(document).ready(function() {
 		if (playerTurn) { // player turn
 			var shouldBe = pastTurns[playerCount];
 
-			if (playerCount === count - 1) {
+			if (shouldBe !== 3) { // got it wrong
+				$("#status").text("Wrong! Start over!");
+				if (strictGame) {
+					document.location.href = document.location.href;
+				} else {
+					clearTimeouts();
+					setTimeout(function() {
+						reloopGame();					
+					}, 1000);					
+				}
+			}
+
+			else if (playerCount === count - 1) {
+				playerCount++;
+				playerCountUpdate();
 				playerTurn = false;
 				playerCount = 0;
 				setTimeout(function() {
@@ -179,12 +243,7 @@ $(document).ready(function() {
 			else if (shouldBe === 3) { 
 				playerCount++;
 				playerCountUpdate();
-			} else if (shouldBe !== 3) { //got it wrong...
-				$("#status").text("Wrong! Start over!");
-				startGame();
 			}
 		}
 	});
-
-
 });
