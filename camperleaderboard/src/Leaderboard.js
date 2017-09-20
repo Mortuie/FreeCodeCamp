@@ -37,7 +37,10 @@ export default class Leaderboard extends React.Component {
 				<div className={css(styles.background)}>
 					{iterateOver.map((player) => 
 						<div className={css(styles.card)} key={player.username}>
-							{player.username}
+							<img className={css(styles.image)} src={player.img} alt={player.username}/>
+							<div>{player.username}</div>
+							<div>{player.alltime}</div>
+							<div>{player.recent}</div>
 						</div>
 
 					)}
@@ -62,6 +65,14 @@ const styles = StyleSheet.create({
 		backgroundColor: 'grey',
 		marginTop: '10px',
 		marginBottom: '10px',
+		display: 'flex',
+		justifyContext: 'center',
+		alignItems: 'center',
+		padding: '10px',
+	},
+	image: {
+		width: '75px',
+		height: '75px',
 	}
 
 });
