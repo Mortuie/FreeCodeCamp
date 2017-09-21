@@ -10,7 +10,7 @@ export default class Leaderboard extends React.Component {
 		};
 	}
 
-	componentDidMount() {
+	componentWillMount() {
 		this.getPastThirty();
 		this.getAllTime();
 	}
@@ -35,12 +35,13 @@ export default class Leaderboard extends React.Component {
 			return (
 				
 				<div className={css(styles.background)}>
+		
 					{iterateOver.map((player) => 
 						<div className={css(styles.card)} key={player.username}>
-							<img className={css(styles.image)} src={player.img} alt={player.username}/>
-							<div>{player.username}</div>
-							<div>{player.alltime}</div>
-							<div>{player.recent}</div>
+							<img className={css(styles.image, styles.item)} src={player.img} alt={player.username}/>
+							<div className={css(styles.item)}>{player.username}</div>
+							<div className={css(styles.item)}>{player.alltime}</div>
+							<div className={css(styles.item)}>{player.recent}</div>
 						</div>
 
 					)}
@@ -54,14 +55,14 @@ export default class Leaderboard extends React.Component {
 
 const styles = StyleSheet.create({
 	background: {
-		width: '50%',
+		width: '23%',
 		height: '100%',
 		margin: 'auto',
 		overflow: 'hidden',
 	},
 	card: {
 		width: '100%',
-		height: '100px',
+		height: '5%',
 		backgroundColor: 'grey',
 		marginTop: '10px',
 		marginBottom: '10px',
@@ -73,6 +74,10 @@ const styles = StyleSheet.create({
 	image: {
 		width: '75px',
 		height: '75px',
+		borderRadius: '50%',
+	},
+	item: {
+		margin: '15px',
 	}
 
 });

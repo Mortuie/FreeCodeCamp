@@ -13,8 +13,8 @@ export default class App extends React.Component {
 	}
 
 	obj = {
-		'All time': () => this.setState({allTime: false}),
-		'Past thirty days': () => this.setState({allTime: true}),
+		'All time': () => this.setState({allTime: true}),
+		'Past thirty days': () => this.setState({allTime: false}),
 	}
 
 	render() {
