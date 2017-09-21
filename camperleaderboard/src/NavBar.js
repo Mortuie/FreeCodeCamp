@@ -19,7 +19,7 @@ export default class NavBar extends React.Component {
 
 const styles = StyleSheet.create({
 	background: {
-		backgroundColor: 'red',
+		backgroundColor: '#E3B505',
 		width: '100%',
 		height: '50px',
 		display: 'flex',

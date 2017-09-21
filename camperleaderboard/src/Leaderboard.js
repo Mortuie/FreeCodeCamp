@@ -55,17 +55,20 @@ export default class Leaderboard extends React.Component {
 
 const styles = StyleSheet.create({
 	background: {
-		width: '23%',
+		width: '100%',
 		height: '100%',
 		margin: 'auto',
 		overflow: 'hidden',
+		backgroundColor: '#084c61',
 	},
 	card: {
-		width: '100%',
-		height: '5%',
-		backgroundColor: 'grey',
+		width: '23%',
+		height: '100px',
+		backgroundColor: '#db504a',
 		marginTop: '10px',
 		marginBottom: '10px',
+		marginLeft: 'auto',
+		marginRight: 'auto',
 		display: 'flex',
 		justifyContext: 'center',
 		alignItems: 'center',

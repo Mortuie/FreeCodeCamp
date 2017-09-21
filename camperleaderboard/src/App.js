@@ -1,7 +1,7 @@
 import React from 'react';
 import NavBar from './NavBar';
 import Leaderboard from './Leaderboard';
-
+import {StyleSheet, css} from 'aphrodite';
 
 export default class App extends React.Component {
 
@@ -25,7 +25,15 @@ export default class App extends React.Component {
 
 				<Leaderboard allTime={this.state.allTime}/>
 
+				<div className={css(styles.footer)}>Made by Leon Boehmer</div>
 			</div>
 		);
 	}
 }
+
+const styles = StyleSheet.create({
+	footer: {
+		textAlign: 'center',
+		backgroundColor: '#084c61',
+	}
+});
