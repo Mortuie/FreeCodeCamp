@@ -29,19 +29,33 @@ export default class App extends React.Component {
 
 		this.state = {
 			recipes: this.localRecipes,
+			newName: "",
+			newIngredients: "",
 		};
 		this.changeCollapsed = this.changeCollapsed.bind(this);
+		this.changeNewName = this.changeNewName.bind(this);
+		this.changeNewIngredients = this.changeNewIngredients.bind(this);
+		this.createNewRecipe = this.createNewRecipe.bind(this);
+	}
 
+	changeNewName(event) {
+		this.setState({newName: event.target.value});
+	}
+
+	changeNewIngredients(event) {
+		this.setState({newIngredients: event.target.value});
 	}
 
 
 	changeCollapsed(key) {
 		this.localRecipes[key].collapsed = !this.localRecipes[key].collapsed;
-		var ls = JSON.parse(localStorage.getItem(key));
-		ls.collapsed = !ls.collapsed;
-		localStorage.setItem(key, JSON.stringify(ls));
 		this.setState({recipes: this.localRecipes});
+	}
 
+	createNewRecipe() {
+		console.log(this.state.newName + " " + this.state.newIngredients);
+
+		this.setState({newName: "", newIngredients: ""});
 	}
 
 	render() {
@@ -49,7 +63,15 @@ export default class App extends React.Component {
 		console.log(localStorage);
 		return (
 			<div>
-				<Recipe recipes={this.state.recipes} changeCollapsed={this.changeCollapsed}/>
+				<Recipe 
+					recipes={this.state.recipes} 
+					changeCollapsed={this.changeCollapsed} 
+					newName={this.state.newName} 
+					newIngredients={this.state.newIngredients}
+					changeNewName={this.changeNewName}
+					changeNewIngredients={this.changeNewIngredients}
+					createNewRecipe={this.createNewRecipe}
+				/>
 			</div>
 		);
 	}

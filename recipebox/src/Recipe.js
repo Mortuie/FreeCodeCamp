@@ -9,6 +9,9 @@ export default class Recipe extends React.Component {
 		super();
 		this.state = {
 			showModal: false,
+			showNewRecipeModal: false,
+			newName: "",
+			newIngredients: "",
 		}
 
 		this.close = this.close.bind(this);
@@ -22,8 +25,6 @@ export default class Recipe extends React.Component {
 	open() {
 		this.setState({showModal: true});
 	}
-
-
 
 	render() {
 
@@ -66,7 +67,26 @@ export default class Recipe extends React.Component {
 
 					</div>
 				)}
-				<button>Add recipe</button>
+				<button onClick={() => this.setState({showNewRecipeModal: true})}>Add recipe</button>
+
+				<Modal show={this.state.showNewRecipeModal} onHide={() => this.setState({showNewRecipeModal: false})}>
+					<h1>Add a new recipe</h1>
+
+					<div>
+						<div>Name:</div>
+						<textarea onChange={this.props.changeNewName} value={this.props.newName}></textarea>
+					</div>
+
+
+					<div>
+						<div>Ingredients:</div>
+						<textarea onChange={this.props.changeNewIngredients} value={this.props.newIngredients}></textarea>
+					</div>
+
+
+					<button onClick={this.props.createNewRecipe}>Save</button>
+					<button onClick={() => this.setState({showNewRecipeModal: false})}>Close</button>
+				</Modal>
 			</div>
 		);
 	}
