@@ -7,18 +7,12 @@ export default class Recipe extends React.Component {
 
 	constructor() {
 		super();
-
 		this.state = {
-			collapsed: false,
 			showModal: false,
 		}
+
 		this.close = this.close.bind(this);
 		this.open = this.open.bind(this);
-	}
-
-
-	changeCollapsedState() {
-		this.setState({collapsed: !this.state.collapsed});
 	}
 
 	close() {
@@ -32,60 +26,83 @@ export default class Recipe extends React.Component {
 
 
 	render() {
-		return {Array.from(this.props.recipes).map((r) => <div>{r.title}</div>)};
-	}
 
+		var r = this.props.recipes;
 
-}
+		return (
+			<div>
 
-const styles = StyleSheet.create({
-	textArea: {
-		width: '300px',
-		height: '75px',
-		resize: 'none',
-	},
-	inputs: {
-		display: 'flex',
-		flexDirection: 'row',
-		justifyContext: 'center',
-		alignItems: 'center',
-	},
-});
+				{Object.keys(r).map((key) => 
+					<div key={r[key].title}>
 
-/*
-	<div key={recipe.title}>
-					
-						<div onClick={() => this.changeCollapsedState()}>{recipe.title}</div>
+						<div onClick={() => {this.props.changeCollapsed(key)}}>{r[key].title}</div>
 
 						<div>
-							{recipe.defaultCollapsed && 
+							{r[key].collapsed && 
 								<div>
 									<div>Ingredients</div>
-									{recipe.ingredients.split(",").map((ingredient) => <div>{ingredient}</div>)}
+									{r[key].ingredients.split(",").map((ingredient) => <div>{ingredient}</div>)}
 									<button onClick={this.open}>edit</button>
 								</div>
 							}
 						</div>
 
 
-						<Modal show={this.props.showModal} onHide={this.close}>
-							<h1>Edit your recipe</h1>
-							<div className={css(styles.inputs)}>
-								<text>Name:</text>
-								<textarea className={css(styles.textArea)} value={recipe.title}/>
-							</div>
+	 					<Modal show={this.state.showModal} onHide={this.close}>
+	 						<h1>Edit your recipe</h1>
+	 						<div >
+	 							<text>Name:</text>
+	 							<textarea />
+	 						</div>
 
-							<div className={css(styles.inputs)}>
+							<div>
 								<text>Ingredients:</text>
-								<textarea className={css(styles.textArea)} value={recipe.ingredients}/>
+								<textarea />
 							</div>
 							<button>Save</button>
 							<button onClick={this.close}>Close</button>
 						</Modal>
 
+
 					</div>
+				)}
+				<button>Add recipe</button>
+			</div>
+		);
+	}
 
 
+}
 
+
+/*
+
+<div onClick={() => this.changeCollapsedState()}>{recipe.title}</div>
+
+	// 					<div>
+	// 						{recipe.collapsed && 
+	// 							<div>
+	// 								<div>Ingredients</div>
+	// 								{recipe.ingredients.split(",").map((ingredient) => <div>{ingredient}</div>)}
+	// 								<button onClick={this.open}>edit</button>
+	// 							</div>
+	// 						}
+	// 					</div>
+
+
+	// 					<Modal show={this.props.showModal} onHide={this.close}>
+	// 						<h1>Edit your recipe</h1>
+	// 						<div className={css(styles.inputs)}>
+	// 							<text>Name:</text>
+	// 							<textarea className={css(styles.textArea)} value={recipe.title}/>
+	// 						</div>
+
+	// 						<div className={css(styles.inputs)}>
+	// 							<text>Ingredients:</text>
+	// 							<textarea className={css(styles.textArea)} value={recipe.ingredients}/>
+	// 						</div>
+	// 						<button>Save</button>
+	// 						<button onClick={this.close}>Close</button>
+	// 					</Modal>
 
  */
