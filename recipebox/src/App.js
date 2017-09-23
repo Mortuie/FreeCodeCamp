@@ -5,6 +5,7 @@ import Recipe from './Recipe';
 export default class App extends React.Component {
 
 	localRecipes = {};
+	nextNumber = 2;
 
 	constructor() {
 		super();
@@ -24,6 +25,7 @@ export default class App extends React.Component {
 
 		Object.keys(localStorage).map((key) => {
 			this.localRecipes[key] = JSON.parse(localStorage.getItem(key));
+			// do something so no duplicate numbers occur
 		});
 
 
@@ -31,11 +33,16 @@ export default class App extends React.Component {
 			recipes: this.localRecipes,
 			newName: "",
 			newIngredients: "",
+			editName: "",
+			editIngredients: "",
 		};
 		this.changeCollapsed = this.changeCollapsed.bind(this);
 		this.changeNewName = this.changeNewName.bind(this);
 		this.changeNewIngredients = this.changeNewIngredients.bind(this);
 		this.createNewRecipe = this.createNewRecipe.bind(this);
+		this.changeEditName = this.changeEditName.bind(this);
+		this.changeEditIngredients = this.changeEditIngredients.bind(this);
+		this.editRecipe = this.editRecipe.bind(this);
 	}
 
 	changeNewName(event) {
@@ -52,14 +59,44 @@ export default class App extends React.Component {
 		this.setState({recipes: this.localRecipes});
 	}
 
+	changeEditName(event) {
+		this.setState({editName: event.target.value});
+	}
+
+	changeEditIngredients(event) {
+		this.setStatte({editIngredients: event.target.value});
+	}
+
+	editRecipe(key) {
+		if (this.state.editName !== "" && this.state.ingredients !== "") {
+			this.localRecipes[key] = {title: this.state.editName, ingredients: this.state.editIngredients, collapsed: true};
+			localStorage.setItem(key, JSON.stringify(this.localRecipes[key]));
+			this.setState({recipes: this.localRecipes});
+		} else {
+			alert("No data entered, please try again.");
+		}
+	}
+
 	createNewRecipe() {
 		console.log(this.state.newName + " " + this.state.newIngredients);
 
-		this.setState({newName: "", newIngredients: ""});
+		localStorage.setItem(this.nextNumber, JSON.stringify({
+			title: this.state.newName,
+			ingredients: this.state.newIngredients,
+			collapsed: true,
+		}));
+		this.localRecipes[this.nextNumber] = {
+			title: this.state.newName,
+			ingredients: this.state.newIngredients,
+			collapsed: true,
+		};
+		this.nextNumber++;
+
+		// addd the new recipe....
+		this.setState({newName: "", newIngredients: "", recipes: this.localRecipes});
 	}
 
 	render() {
-		console.log(this.state.recipes[0].collapsed);
 		console.log(localStorage);
 		return (
 			<div>
@@ -71,6 +108,9 @@ export default class App extends React.Component {
 					changeNewName={this.changeNewName}
 					changeNewIngredients={this.changeNewIngredients}
 					createNewRecipe={this.createNewRecipe}
+					changeEditName={this.changeEditName}
+					changeEditIngredients={this.changeNewIngredients}
+					editRecipe={this.editRecipe}
 				/>
 			</div>
 		);
