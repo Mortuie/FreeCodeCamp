@@ -5,12 +5,16 @@ import Recipe from './Recipe';
 export default class App extends React.Component {
 
 	localRecipes = {};
-	nextNumber = 2;
+	nextNumber = null;
 
 	constructor() {
 		super();
 
 		if (localStorage.length === 0) { // set localStorage
+			// localStorage.removeItem(0);
+			// localStorage.removeItem(1);
+			// localStorage.removeItem(2);
+			localStorage.setItem(99999, 2); // next free key
 			localStorage.setItem(0, JSON.stringify({
 				title: "Pancakes",
 				ingredients: "Eggs,Milk,Flour",
@@ -24,11 +28,13 @@ export default class App extends React.Component {
 		}
 
 		Object.keys(localStorage).map((key) => {
-			this.localRecipes[key] = JSON.parse(localStorage.getItem(key));
-			// do something so no duplicate numbers occur
+			if (key !== 99999) {
+				this.localRecipes[key] = JSON.parse(localStorage.getItem(key));
+				// do something so no duplicate numbers occur
+			}
 		});
 
-
+		this.nextNumber = localStorage.getItem(0);
 		this.state = {
 			recipes: this.localRecipes,
 			newName: "",
@@ -79,6 +85,8 @@ export default class App extends React.Component {
 
 	createNewRecipe() {
 		console.log(this.state.newName + " " + this.state.newIngredients);
+		this.nextNumber = localStorage.getItem(0);
+
 
 		localStorage.setItem(this.nextNumber, JSON.stringify({
 			title: this.state.newName,
@@ -91,9 +99,10 @@ export default class App extends React.Component {
 			collapsed: true,
 		};
 		this.nextNumber++;
-
+		localStorage.setItem(0, this.nextNumber);
 		// addd the new recipe....
 		this.setState({newName: "", newIngredients: "", recipes: this.localRecipes});
+		alert("New recipe added!");
 	}
 
 	render() {
