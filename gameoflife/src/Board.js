@@ -20,7 +20,7 @@ export default class Board extends React.Component {
 		for (var i = 0; i < this.props.height; i++) {
 				tempBoard.push([]);
 			for (var j = 0; j < this.props.width; j++) {
-				tempBoard[i].push(Math.floor(Math.random() * 6));
+				tempBoard[i].push(Math.floor(Math.random() * 2));
 			}
 		}
 		this.setState({board: tempBoard});
@@ -28,6 +28,56 @@ export default class Board extends React.Component {
 
 	componentWillMount() {
 		this.newBoard();
+	}
+
+	componentDidMount() {
+
+		//setInterval(() => {
+			var tempBoard = this.state.board;
+			console.log(tempBoard);
+			for (var i = 0; i < this.props.height; i++) {
+				for (var j = 0; j < this.props.width; j++) {
+					if (this.isAlive(j, i, tempBoard)) {
+						console.log("alive");
+						tempBoard[i][j] = 0;
+					} else {
+						console.log("dead");
+						tempBoard[i][j] = 1;
+					}
+				}
+			} this.setState({board: tempBoard});
+			console.log(this.state.board);
+		//}, 2000);
+
+	}
+
+	isAlive(x, y, board) {
+		var neighbours = 0;
+		for (var i = y - 1; i <= y + 1; i++) {
+			for (var j = x - 1; j <= x + 1; j++) {
+				if (j === x && y === i) {
+					continue;
+				} else if (x < 0 || x >= this.props.height || y < 0 || y >= this.props.width) {
+					continue;
+				} else {
+					if (board[y][x] === 0) {
+						neighbours++;
+					}
+				}
+			}
+		}
+		
+		var selfPiece = board[y][x];
+
+		if (selfPiece === 0 && neighbours < 2) {
+			return false;
+		} else if (selfPiece === 0 && neighbours >= 2 && neighbours <= 3) {
+			return true;
+		} else if (selfPiece === 0 && neighbours > 3) {
+			return false;
+		} else if (selfPiece !== 0 && neighbours === 3) {
+			return true;
+		} return selfPiece === 0;
 	}
 
 	render() {
