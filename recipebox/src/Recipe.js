@@ -48,7 +48,8 @@ export default class Recipe extends React.Component {
 									<div>
 										<div>Ingredients:</div>
 										{r[key].ingredients.split(",").map((ingredient) => <li>{ingredient}</li>)}
-										<button onClick={() => this.props.open(key)}>edit</button>
+										<button onClick={() => this.props.open(key)}>Edit</button>
+										<button onClick={() => this.props.delete(key)}>Delete</button>
 									</div>
 								}
 							</div>

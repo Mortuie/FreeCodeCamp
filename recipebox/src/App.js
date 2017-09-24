@@ -44,6 +44,7 @@ export default class App extends React.Component {
 		this.editRecipe = this.editRecipe.bind(this);
 		this.close = this.close.bind(this);
 		this.open = this.open.bind(this);
+		this.delete = this.delete.bind(this);
 	}
 
 	getNextFreeSlot() {
@@ -105,6 +106,12 @@ export default class App extends React.Component {
 		this.setState({recipes: this.localRecipes});
 	}
 
+	delete(key) {
+		delete this.localRecipes[key];
+		localStorage.removeItem(key);
+		this.setState({recipes: this.localRecipes});
+	}
+
 
 	createNewRecipe() {
 		if (this.state.newName !== "" || this.state.newIngredients !== "") {
@@ -148,6 +155,7 @@ export default class App extends React.Component {
 					editIngredients={this.state.editIngredients}
 					open={this.open}
 					close={this.close}
+					delete={this.delete}
 				/>
 			</div>
 		);
