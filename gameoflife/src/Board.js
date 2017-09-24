@@ -1,5 +1,5 @@
 import React from 'react';
-
+import SingleSquare from './SingleSquare';
 
 
 export default class Board extends React.Component {
@@ -32,7 +32,12 @@ export default class Board extends React.Component {
 	render() {
 		console.log(this.state.board);
 		return (
-			<div>HI</div>
+			<div>
+				
+				<SingleSquare isAlive={1}/>
+
+
+			</div>
 		);
 	}
 }
