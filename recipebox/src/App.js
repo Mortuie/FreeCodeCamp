@@ -14,17 +14,18 @@ export default class App extends React.Component {
 				title: "Pancakes",
 				ingredients: "Eggs,Milk,Flour",
 				collapsed: true,
+				editModal: false,
 			}));
 			localStorage.setItem(1, JSON.stringify({
 				title: "Porridge",
 				ingredients: "Oats,Milk",
 				collapsed: true,
+				editModal: false,
 			}));
 		}
 
 		Object.keys(localStorage).map((key) => {
 				this.localRecipes[key] = JSON.parse(localStorage.getItem(key));
-				// do something so no duplicate numbers occur
 		});
 
 		this.state = {
@@ -41,6 +42,8 @@ export default class App extends React.Component {
 		this.changeEditName = this.changeEditName.bind(this);
 		this.changeEditIngredients = this.changeEditIngredients.bind(this);
 		this.editRecipe = this.editRecipe.bind(this);
+		this.close = this.close.bind(this);
+		this.open = this.open.bind(this);
 	}
 
 	getNextFreeSlot() {
@@ -77,18 +80,31 @@ export default class App extends React.Component {
 		if (this.state.editName === "" && this.state.editIngredients === "") {
 			alert("Values have been kept the same!");
 		} else if (this.state.editName === "") {
-			this.localRecipes[key] = {title: this.localRecipes[key].title, ingredients: this.state.editIngredients, collapsed: true};
+			this.localRecipes[key] = {title: this.localRecipes[key].title, ingredients: this.state.editIngredients, collapsed: true, editModal: false};
 		} else if (this.state.editIngredients === "") {
-			this.localRecipes[key] = {title: this.state.editName, ingredients: this.localRecipes[key].ingredients, collapsed: true};
+			this.localRecipes[key] = {title: this.state.editName, ingredients: this.localRecipes[key].ingredients, collapsed: true, editModal: false};
 		} else {
-			this.localRecipes[key] = {title: this.state.editName, ingredients: this.state.editIngredients, collapsed: true};
+			this.localRecipes[key] = {title: this.state.editName, ingredients: this.state.editIngredients, collapsed: true, editModa: false};
 		}
 
 
 		localStorage.setItem(key, JSON.stringify(this.localRecipes[key]));
-		this.setState({recipes: this.localRecipes});
-		this.setState({editName: "", editIngredients: ""});
+		this.setState({recipes: this.localRecipes, editName: "", editIngredients: ""});
 	}
+
+
+	close(key) {
+		this.localRecipes[key].editModal = false;
+		localStorage.setItem(key, JSON.stringify(this.localRecipes[key]));
+		this.setState({recipes: this.localRecipes});
+	}
+
+	open(key) {
+		this.localRecipes[key].editModal = true;
+		localStorage.setItem(key, JSON.stringify(this.localRecipes[key]));
+		this.setState({recipes: this.localRecipes});
+	}
+
 
 	createNewRecipe() {
 		var newKey = this.getNextFreeSlot();
@@ -97,11 +113,13 @@ export default class App extends React.Component {
 			title: this.state.newName,
 			ingredients: this.state.newIngredients,
 			collapsed: true,
+			editModal: false,
 		}));
 		this.localRecipes[newKey] = {
 			title: this.state.newName,
 			ingredients: this.state.newIngredients,
 			collapsed: true,
+			editModal: false,
 		};
 
 		this.setState({newName: "", newIngredients: "", recipes: this.localRecipes});
@@ -124,6 +142,8 @@ export default class App extends React.Component {
 					editRecipe={this.editRecipe}
 					editName={this.state.editName}
 					editIngredients={this.state.editIngredients}
+					open={this.open}
+					close={this.close}
 				/>
 			</div>
 		);

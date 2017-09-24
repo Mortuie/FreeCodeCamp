@@ -46,13 +46,13 @@ export default class Recipe extends React.Component {
 								<div>
 									<div>Ingredients</div>
 									{r[key].ingredients.split(",").map((ingredient) => <div>{ingredient}</div>)}
-									<button onClick={this.open}>edit</button>
+									<button onClick={() => this.props.open(key)}>edit</button>
 								</div>
 							}
 						</div>
 
 
-	 					<Modal show={this.state.showModal} onHide={this.close}>
+	 					<Modal show={r[key].editModal} onHide={() => this.props.close(key)}>
 	 						<Modal.Header closeButton>
 	 							<Modal.Title>Edit your recipe</Modal.Title>
 	 						</Modal.Header>
@@ -69,7 +69,7 @@ export default class Recipe extends React.Component {
 
 
 							<button onClick={() => {this.props.editRecipe(key)}}>Save</button>
-							<button onClick={this.close}>Close</button>
+							<button onClick={() => this.props.close(key)}>Close</button>
 						</Modal>
 
 
