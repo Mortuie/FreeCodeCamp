@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from 'react-bootstrap/lib/Modal';
 import {StyleSheet, css} from 'aphrodite';
-import {Header, Title, Footer} from 'react-bootstrap';
+import {Header, Title, Footer, Body} from 'react-bootstrap';
 
 
 export default class Recipe extends React.Component {
@@ -32,52 +32,59 @@ export default class Recipe extends React.Component {
 		var r = this.props.recipes;
 
 		return (
-			<div>
+			<div className={css(styles.background)}>
 
-				{Object.keys(r).map((key) => 
+				<div className={css(styles.title)}>Recipe Box</div>
 
-				
-					<div key={r[key].title}>
+				<div className={css(styles.recipeBox)}>
+					{Object.keys(r).map((key) => 
 
-						<div onClick={() => {this.props.changeCollapsed(key)}}>{r[key].title}</div>
+	 					<div key={key}>
 
-						<div>
-							{!r[key].collapsed && 
-								<div>
-									<div>Ingredients</div>
-									{r[key].ingredients.split(",").map((ingredient) => <div>{ingredient}</div>)}
-									<button onClick={() => this.props.open(key)}>edit</button>
-								</div>
-							}
-						</div>
+							<div className={css(styles.titleRecipe)} onClick={() => {this.props.changeCollapsed(key)}}>{r[key].title}</div>
 
-
-	 					<Modal show={r[key].editModal} onHide={() => this.props.close(key)}>
-	 						<Modal.Header closeButton>
-	 							<Modal.Title>Edit your recipe</Modal.Title>
-	 						</Modal.Header>
-
-	 						<div className={css(styles.modalBoxes)}>
-	 							<text>Name:</text>
-	 							<textarea className={css(styles.textArea)} onChange={this.props.changeEditName} value={this.props.editName} placeholder={r[key].title}></textarea>
-	 						</div>
-
-							<div className={css(styles.modalBoxes)}>
-								<text>Ingredients:</text>
-								<textarea className={css(styles.textArea)} onChange={this.props.changeEditIngredients} value={this.props.editIngredients} placeholder={r[key].ingredients}></textarea>
+							<div>
+								{!r[key].collapsed && 
+									<div>
+										<div>Ingredients:</div>
+										{r[key].ingredients.split(",").map((ingredient) => <li>{ingredient}</li>)}
+										<button onClick={() => this.props.open(key)}>edit</button>
+									</div>
+								}
 							</div>
 
 
-							<button onClick={() => {this.props.editRecipe(key)}}>Save</button>
-							<button onClick={() => this.props.close(key)}>Close</button>
-						</Modal>
+		 					<Modal show={r[key].editModal} onHide={() => this.props.close(key)}>
+		 						<Modal.Header closeButton>
+		 							<Modal.Title>Edit your recipe</Modal.Title>
+		 						</Modal.Header>
+
+		 						<Modal.Body>
+			 						<div className={css(styles.modalBoxes)}>
+			 							<text>Name:</text>
+			 							<textarea className={css(styles.textArea)} onChange={this.props.changeEditName} value={this.props.editName} placeholder={r[key].title}></textarea>
+			 						</div>
+
+									<div className={css(styles.modalBoxes)}>
+										<text>Ingredients:</text>
+										<textarea className={css(styles.textArea)} onChange={this.props.changeEditIngredients} value={this.props.editIngredients} placeholder={r[key].ingredients}></textarea>
+									</div>
+								</Modal.Body>
 
 
-					</div>
-					
-				)}
+								<Modal.Footer>
+									<button onClick={() => {this.props.editRecipe(key)}}>Save</button>
+									<button onClick={() => this.props.close(key)}>Close</button>
+								</Modal.Footer>
+							</Modal>
 
-				<button onClick={() => this.setState({showNewRecipeModal: true})}>Add recipe</button>
+
+						</div>
+						
+					)}
+				</div>
+
+				<button className={css(styles.addRecipe)} onClick={() => this.setState({showNewRecipeModal: true})}>Add recipe</button>
 
 				<Modal show={this.state.showNewRecipeModal} onHide={() => this.setState({showNewRecipeModal: false})}>
 
@@ -85,17 +92,18 @@ export default class Recipe extends React.Component {
 						<Modal.Title>Add a new recipe</Modal.Title>
 					</Modal.Header>
 
+					<Modal.Body>
+						<div className={css(styles.modalBoxes)}>
+							<div>Name:</div>
+							<textarea className={css(styles.textArea)} onChange={this.props.changeNewName} value={this.props.newName}></textarea>
+						</div>
 
-					<div className={css(styles.modalBoxes)}>
-						<div>Name:</div>
-						<textarea className={css(styles.textArea)} onChange={this.props.changeNewName} value={this.props.newName}></textarea>
-					</div>
 
-
-					<div className={css(styles.modalBoxes)}>
-						<div>Ingredients:</div>
-						<textarea className={css(styles.textArea)} onChange={this.props.changeNewIngredients} value={this.props.newIngredients}></textarea>
-					</div>
+						<div className={css(styles.modalBoxes)}>
+							<div>Ingredients:</div>
+							<textarea className={css(styles.textArea)} onChange={this.props.changeNewIngredients} value={this.props.newIngredients}></textarea>
+						</div>
+					</Modal.Body>
 
 					<Modal.Footer>
 						<button onClick={this.props.createNewRecipe}>Save</button>
@@ -110,6 +118,22 @@ export default class Recipe extends React.Component {
 }
 
 const styles = StyleSheet.create({
+	background: {
+		display: 'flex',
+		flexDirection: 'column',
+		justifyContext: 'center',
+		alignItems: 'center',
+	},
+	title: {
+		fontSize: '30px',
+		marginTop: '20px',
+	},
+	recipeBox: {
+		backgroundColor: '#c2c3c4',
+		width: '60%',
+		height: '400px',
+		borderRadius: '10px',
+	},
 	modalBoxes: {
 		display: 'flex',
 		justifyContext: 'center',
@@ -120,5 +144,16 @@ const styles = StyleSheet.create({
 	},
 	textArea: {
 		resize: 'none',
-	}
+	},
+	addRecipe: {
+		border: 'none',
+		width: '100px',
+		height: '50px',
+		marginTop: '10px',
+	},
+	titleRecipe: {
+		fontSize: '20px',
+		textAlign: 'left',
+		padding: '10px',
+	},
 });

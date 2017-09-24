@@ -107,23 +107,27 @@ export default class App extends React.Component {
 
 
 	createNewRecipe() {
-		var newKey = this.getNextFreeSlot();
+		if (this.state.newName !== "" || this.state.newIngredients !== "") {
+			var newKey = this.getNextFreeSlot();
 
-		localStorage.setItem(newKey, JSON.stringify({
-			title: this.state.newName,
-			ingredients: this.state.newIngredients,
-			collapsed: true,
-			editModal: false,
-		}));
-		this.localRecipes[newKey] = {
-			title: this.state.newName,
-			ingredients: this.state.newIngredients,
-			collapsed: true,
-			editModal: false,
-		};
+			localStorage.setItem(newKey, JSON.stringify({
+				title: this.state.newName,
+				ingredients: this.state.newIngredients,
+				collapsed: true,
+				editModal: false,
+			}));
+			this.localRecipes[newKey] = {
+				title: this.state.newName,
+				ingredients: this.state.newIngredients,
+				collapsed: true,
+				editModal: false,
+			};
 
-		this.setState({newName: "", newIngredients: "", recipes: this.localRecipes});
-		alert("New recipe added!");
+			this.setState({newName: "", newIngredients: "", recipes: this.localRecipes});
+			alert("New recipe added!");
+		} else {
+			alert("One of the inputs was empty...");
+		}
 	}
 
 	render() {
