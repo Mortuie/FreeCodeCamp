@@ -5,16 +5,11 @@ import Recipe from './Recipe';
 export default class App extends React.Component {
 
 	localRecipes = {};
-	nextNumber = null;
 
 	constructor() {
 		super();
 
 		if (localStorage.length === 0) { // set localStorage
-			// localStorage.removeItem(0);
-			// localStorage.removeItem(1);
-			// localStorage.removeItem(2);
-			//localStorage.setItem(99999, 2); // next free key
 			localStorage.setItem(0, JSON.stringify({
 				title: "Pancakes",
 				ingredients: "Eggs,Milk,Flour",
@@ -32,7 +27,6 @@ export default class App extends React.Component {
 				// do something so no duplicate numbers occur
 		});
 
-		this.nextNumber = localStorage.getItem(0);
 		this.state = {
 			recipes: this.localRecipes,
 			newName: "",
@@ -47,6 +41,14 @@ export default class App extends React.Component {
 		this.changeEditName = this.changeEditName.bind(this);
 		this.changeEditIngredients = this.changeEditIngredients.bind(this);
 		this.editRecipe = this.editRecipe.bind(this);
+	}
+
+	getNextFreeSlot() {
+		var randomN = Math.floor((Math.random() * 10000));
+
+		while (localStorage.getItem(randomN) !== null) {
+			randomN = Math.floor(Math.random() * 10000);
+		} return randomN;
 	}
 
 	changeNewName(event) {
@@ -89,21 +91,19 @@ export default class App extends React.Component {
 	}
 
 	createNewRecipe() {
-		this.nextNumber = localStorage.getItem(0);
+		var newKey = this.getNextFreeSlot();
 
-		localStorage.setItem(this.nextNumber, JSON.stringify({
+		localStorage.setItem(newKey, JSON.stringify({
 			title: this.state.newName,
 			ingredients: this.state.newIngredients,
 			collapsed: true,
 		}));
-		this.localRecipes[this.nextNumber] = {
+		this.localRecipes[newKey] = {
 			title: this.state.newName,
 			ingredients: this.state.newIngredients,
 			collapsed: true,
 		};
-		this.nextNumber++;
-		localStorage.setItem(0, this.nextNumber);
-		// addd the new recipe....
+
 		this.setState({newName: "", newIngredients: "", recipes: this.localRecipes});
 		alert("New recipe added!");
 	}
