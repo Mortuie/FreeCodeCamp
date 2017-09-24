@@ -1,4 +1,6 @@
 # FreeCodeCamp Projects Repository
+I am currently trying to complete all the freecodecamp certificates, I have started my [100 days of code.](http://mortuie.com)
+
 
 ## Frontend Projects:
 
@@ -12,6 +14,12 @@
 - [Tictactoe](http://tictactoe.mortuie.com)
 
 ## Data Visualisation Projects: 
+
+
+
+## Documentation
+See some of the progress reports on my personal blog: mortuie.com.
+
 
 
 ## Author
