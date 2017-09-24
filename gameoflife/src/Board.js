@@ -1,5 +1,6 @@
 import React from 'react';
 import SingleSquare from './SingleSquare';
+import {StyleSheet, css} from 'aphrodite';
 
 
 export default class Board extends React.Component {
@@ -16,10 +17,10 @@ export default class Board extends React.Component {
 	newBoard() {
 		var tempBoard = [];
 
-		for (var i = 0; i < this.props.width; i++) {
+		for (var i = 0; i < this.props.height; i++) {
 				tempBoard.push([]);
-			for (var j = 0; j < this.props.height; j++) {
-				tempBoard[i].push([Math.floor(Math.random() * 2)]);
+			for (var j = 0; j < this.props.width; j++) {
+				tempBoard[i].push(Math.floor(Math.random() * 6));
 			}
 		}
 		this.setState({board: tempBoard});
@@ -30,14 +31,23 @@ export default class Board extends React.Component {
 	}
 
 	render() {
-		console.log(this.state.board);
+		var b = this.state.board;
+		
 		return (
 			<div>
 				
-				<SingleSquare isAlive={1}/>
-
+				{b.map(j => 
+					<div className={css(styles.row)}>{j.map(i => <SingleSquare isAlive={i}/>)}</div>
+				)}
 
 			</div>
 		);
 	}
 }
+
+const styles = StyleSheet.create({
+	row: {
+		display: 'flex',
+		flexDirection: 'row',
+	}
+});

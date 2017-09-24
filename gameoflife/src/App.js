@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import Board from './Board';
+import {StyleSheet, css} from 'aphrodite';
 
 export default class App extends React.Component {
 
@@ -15,10 +16,19 @@ export default class App extends React.Component {
 
 	render() {
 		return (
-
-			<Board width={this.state.width} height={this.state.height}/>
-		
+			<div className={css(styles.background)}>
+				<Board width={this.state.width} height={this.state.height}/>
+			</div>
 		);
 
 	}
 }
+
+const styles = StyleSheet.create({
+	background: {
+		display: 'flex',
+		flexDirection: 'column',
+		justifyContext: 'center',
+		alignItems: 'center',
+	}
+});
