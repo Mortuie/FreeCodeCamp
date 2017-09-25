@@ -10,7 +10,7 @@ export default class SingleSquare extends React.Component {
 
 		return (
 
-			<div className={css(state, styles.box)}></div>
+			<div onClick={() => this.props.clickSquare(this.props.j, this.props.i)} className={css(state, styles.box)}></div>
 
 
 		);

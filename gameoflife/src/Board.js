@@ -28,10 +28,21 @@ export default class Board extends React.Component {
 				tempBoard[i].push(Math.floor(Math.random() * 2));
 			}
 		} 
-		this.setState({board: tempBoard});
+		this.setState({board: tempBoard, generation: 0});
 	}
 
 	componentDidMount() {
+		this.start();
+	}
+
+	change = (j, i) => {
+		var grid = this.state.board;
+		grid[j][i] = (grid[j][i] === 0) ? 1 : 0;
+		this.setState({board: grid});
+	}
+
+
+	start = () => {
 		var inter = setInterval(() => {
 			var newBoard = [];
 
@@ -45,10 +56,34 @@ export default class Board extends React.Component {
 					}
 				}
 			}
-			this.setState({board: newBoard});
+			this.setState({board: newBoard, generation: this.state.generation + 1});
 		}, 500);
 		this.setState({interval: inter});
 	}
+
+	stop = () => {
+		clearInterval(this.state.interval);
+	}
+
+	startNewGame = () => {
+		this.stop();
+		this.newBoard();
+		this.start();
+	}
+
+	clear = () => {
+		this.stop();
+
+		var tempBoard = [];
+		for (var i = 0; i < this.props.height; i++) {
+			tempBoard.push([]);
+			for (var j = 0; j < this.props.width; j++) {
+				tempBoard[i].push(1);
+			}
+		} 
+		this.setState({board: tempBoard, generation: 0});
+	}
+
 
 	isAlive(i, j) {
 		var neighbours = 0;
@@ -82,7 +117,12 @@ export default class Board extends React.Component {
 		var b = this.state.board;
 		return (
 			<div>
-				{b.map(j => <div className={css(styles.row)}>{j.map(i => <SingleSquare isAlive={i}/>)}</div>)}
+				<div>{"Generations: " + this.state.generation}</div>
+				{Object.keys(b).map(j => <div className={css(styles.row)}>{Object.keys(b[j]).map(i => <SingleSquare i={i} j={j} clickSquare={this.change} isAlive={b[j][i]}/>)}</div>)}
+				<button onClick={this.stop}>Stop</button>
+				<button onClick={this.start}>Start</button>
+				<button onClick={this.startNewGame}>New Game</button>
+				<button onClick={this.clear}>Clear Game</button>
 			</div>
 		);
 
