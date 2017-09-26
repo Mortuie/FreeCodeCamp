@@ -13,7 +13,6 @@ body {
 </style>
 <body></body>
 <script src="https://d3js.org/d3.v4.min.js"></script>
-<script type="text/javascript" src="data.js"></script>
 <script>
 
 var barData = [
@@ -1121,11 +1120,10 @@ var barData = [
 var height = 600, width = 600, barWidth = width / barData.length;
 
 var yScale = d3.scaleLinear()
-				.domain([0, d3.max(barData)[1]])
+				.domain([0, d3.max(barData, function(d) {return d[1];})])
 				.range([0, height]);
 
-
-console.log(d3.max(barData, function(d) {console.log(d)}));
+console.log(d3.max(barData, function(d) {return d[1]}));
 
 d3.select("body")
 	.append("svg")
