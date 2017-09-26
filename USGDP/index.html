@@ -1119,7 +1119,13 @@ var barData = [
     ]
 ];
 var height = 600, width = 600, barWidth = width / barData.length;
-console.log(barData);
+
+var yScale = d3.scaleLinear()
+				.domain([0, d3.max(barData)[1]])
+				.range([0, height]);
+
+
+console.log(d3.max(barData, function(d) {console.log(d)}));
 
 d3.select("body")
 	.append("svg")
@@ -1131,9 +1137,9 @@ d3.select("body")
 	.enter()
 	.append("rect")
 	.attr("width", barWidth)
-	.attr("height", function(d) {return d[1] / 35;})
+	.attr("height", function(d) {return yScale(d[1])})
 	.attr("x", function(d, i) {return (i * barWidth);})
-	.attr("y", function(d) {return (height - (d[1] / 35))})
+	.attr("y", function(d) {return (height - yScale(d[1]))})
 	.style("fill", "blue");
 
 
