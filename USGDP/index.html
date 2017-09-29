@@ -1119,6 +1119,7 @@ var barData = [
       18064.7
     ]
 ];
+var paddingBottom = 20;
 
 maxHeight = () => {
   return d3.max(barData, function(d) {return d[1];});
@@ -1127,12 +1128,12 @@ maxHeight = () => {
 var height = 600, width = 600, barWidth = width / barData.length;
 
 var yScale = d3.scaleLinear()
-				.domain([0, maxHeight()])
+				.domain([0, d3.max(barData, function(d) {return d[1]})])
 				.range([0, height]);
 
-var colorScale = d3.scaleLinear()
-  .domain([0, maxHeight()])
-  .range(['#B0CBD4', '#71C7E3']);
+var xScale = d3.scaleTime()
+        .domain([new Date(d3.min(barData, function(d) {return d3.min(d[0])})), new Date(d3.max(barData, function(d) {return d3.max(d[1])}))])
+        .range([0, width]);
 
 var tooltip = d3.select("body")
                 .append("div")
@@ -1141,11 +1142,11 @@ var tooltip = d3.select("body")
                 .style("background", "white")
                 .style("opacity", 0);
 
+
 var barChart = d3.select("body")
 	.append("svg")
 	.attr("width", width)
 	.attr("height", height)
-	.style("background-color", "black")
 	.selectAll("rect")
 	.data(barData)
 	.enter()
@@ -1154,10 +1155,10 @@ var barChart = d3.select("body")
 	.attr("height", function(d) {return yScale(d[1])})
 	.attr("x", function(d, i) {return (i * barWidth);})
 	.attr("y", function(d) {return (height - yScale(d[1]))})
-	.attr("fill", 'white')
+	.attr("fill", 'blue')
   .on('mouseover', function(d) {
 
-    tooltip.html(d)
+    tooltip.html("Date: " + d[0] + ", $" + d[1] + " (billions)")
       .style("left", (d3.event.pageX) - 35 + "px")
       .style("top", (d3.event.pageY) - 30 + "px")
       .style("opacity", 0.9);
@@ -1167,8 +1168,13 @@ var barChart = d3.select("body")
       .style("opacity", 0.5);
   })
   .on('mouseout', function(d) {
+    
+    tooltip.style("opacity", 0);
+
+
     d3.select(this)
       .style("opacity", 1);
-  })
+  });
+
 
 </script>
