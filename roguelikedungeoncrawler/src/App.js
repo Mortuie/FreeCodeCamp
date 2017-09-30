@@ -6,8 +6,8 @@ export default class App extends Component {
 	constructor() {
 		super();
 		this.state = {
-			width: 100,
-			height: 100,
+			width: 150,
+			height: 150,
 		}
 	}
 

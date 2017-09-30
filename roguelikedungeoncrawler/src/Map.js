@@ -27,11 +27,13 @@ export default class Map extends Component {
 		var nodes = [];
 
 
-		for (var i = 0; i < 5; i++) {
+		for (var i = 0; i < 7; i++) {
 			nodes.push(this.generateAnotherNode());
-			tempMap[nodes[i][1]][nodes[i][0]] = 1;
+			tempMap[nodes[i][1]][nodes[i][0]] = 2;
 		}
 
+		tempMap = this.createNodes(tempMap, nodes);
+		console.log(tempMap);
 		//console.log(nodes);
 
 		var closest = [];
@@ -71,8 +73,42 @@ export default class Map extends Component {
 		this.setState({map: tempMap});
 	}
 
+	createNodes(tempMap, nodes) {
+		var radius  = 5;
+		var mapWidth = this.props.dimensions[0];
+		var mapHeight = this.props.dimensions[1];
+
+
+		for (var i = 0; i < nodes.length; i++) {
+			var x = nodes[i][0];
+			var y = nodes[i][1];
+
+			for (var j = -5; j < 5; j++) {
+				for (var k = -5; k < 5; k++) {
+					tempMap[y + j][x + k] = 1;
+				}
+			}
+
+		}
+		return tempMap;
+	}
+
 
 	connectNodes(realMap, closestNodes, nodes, index) {
+
+
+		function makeThickerWalkways(direction) {
+			var thickness = 2;
+			if (direction === "y") {
+				for (var i = ((-1) * thickness); i < thickness; i++) {
+					realMap[y + i][x] = 1;
+				}
+			} else {
+				for (var i = ((-1) * thickness); i < thickness; i++) {
+					realMap[y][x + i] = 1;
+				}
+			}
+		}
 
 		for (var i = 0; i < closestNodes.length; i++) {
 			var node = closestNodes[i];
@@ -87,18 +123,18 @@ export default class Map extends Component {
 				if (Math.abs(dx) >= Math.abs(dy)) {
 					if (dx < 0) {
 						x++, dx++;
-						realMap[y][x] = 1;
+						makeThickerWalkways("y");
 					} else if (dx > 0) {
 						x--, dx--;
-						realMap[y][x] = 1;
+						makeThickerWalkways("y");
 					}
 				} else {
 					if (dy < 0) {
 						y++, dy++;
-						realMap[y][x] = 1;
+						makeThickerWalkways("x");
 					} else if (dy > 0) {
 						y--, dy--;
-						realMap[y][x] = 1;
+						makeThickerWalkways("x");
 					}
 				}	
 			}
@@ -117,11 +153,10 @@ export default class Map extends Component {
 		var height = this.props.dimensions[1];
 
 
-		var boundaryWidth = Math.floor(width / 3);
-		var boundaryHeight = Math.floor(height / 3);
+		var boundaryWidth = Math.floor(width / 10);
+		var boundaryHeight = Math.floor(height / 10);
 
-
-		return [this.getRandomInteger(boundaryWidth) + boundaryWidth, this.getRandomInteger(boundaryHeight) + boundaryHeight];
+		return [this.getRandomInteger(width - (2 * boundaryWidth)) + boundaryWidth, this.getRandomInteger(height - (2 * boundaryHeight)) + boundaryHeight];
 	}
 
 	square(number) {
@@ -137,8 +172,7 @@ export default class Map extends Component {
 
 	render() {
 
-		console.log(this.props.dimensions); // width x height
-		console.log(this.state.map);
+		//console.log(this.state.map);
 
 		var MAP = this.state.map;
 

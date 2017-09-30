@@ -14,6 +14,9 @@ export default class Piece extends Component {
 			case 1:
 				style = styles.red;
 				break;
+			case 2:
+				style = styles.blue;
+				break;
 			default:
 				break;
 		}
@@ -34,7 +37,9 @@ const styles = StyleSheet.create({
 	},
 	red: {
 		backgroundColor: 'red',
+	},
+	blue: {
+		backgroundColor: 'blue',
 	}
-
 
 });
