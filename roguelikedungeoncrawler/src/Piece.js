@@ -29,8 +29,8 @@ export default class Piece extends Component {
 
 const styles = StyleSheet.create({
 	box: {
-		width: '5px',
-		height: '5px',
+		width: '15px',
+		height: '15px',
 	},
 	black: {
 		backgroundColor: 'black',

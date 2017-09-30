@@ -15,10 +15,8 @@ export default class Map extends Component {
 
 
 	keyPressed = (e) => {
-		console.log(e.keyCode);
 
 		if (e.keyCode === 38) {
-			console.log("up pressed");
 			var tempMap = this.state.map;
 
 			var x = this.state.playerX;
@@ -26,7 +24,6 @@ export default class Map extends Component {
 
 			var tile = tempMap[y - 1][x];
 
-			console.log(tile);
 
 			if (tile === 1) {
 				tempMap[y - 1][x] = 2;
@@ -34,7 +31,6 @@ export default class Map extends Component {
 				this.setState({map: tempMap, playerY: y - 1});
 			}
 		} else if (e.keyCode === 37) {
-			console.log("left pressed");
 			var tempMap = this.state.map;
 
 			var x = this.state.playerX;
@@ -42,7 +38,6 @@ export default class Map extends Component {
 
 			var tile = tempMap[y][x - 1];
 
-			console.log(tile);
 
 			if (tile === 1) {
 				tempMap[y][x - 1] = 2;
@@ -51,7 +46,6 @@ export default class Map extends Component {
 			}
 
 		} else if (e.keyCode === 39) {
-			console.log("right pressed");
 			var tempMap = this.state.map;
 
 			var x = this.state.playerX;
@@ -59,7 +53,6 @@ export default class Map extends Component {
 
 			var tile = tempMap[y][x + 1];
 
-			console.log(tile);
 
 			if (tile === 1) {
 				tempMap[y][x + 1] = 2;
@@ -68,7 +61,6 @@ export default class Map extends Component {
 			}
 
 		} else if (e.keyCode === 40) {
-			console.log("down pressed");
 			var tempMap = this.state.map;
 
 			var x = this.state.playerX;
@@ -76,7 +68,6 @@ export default class Map extends Component {
 
 			var tile = tempMap[y + 1][x];
 
-			console.log(tile);
 
 			if (tile === 1) {
 				tempMap[y + 1][x] = 2;
@@ -279,9 +270,31 @@ export default class Map extends Component {
 
 
 	render() {
+		var MAP = [];
 
+		for (var i = 0; i < 5; i++) {
+			MAP.push([]);
+			for (var j = 0; j < 5; j++) {
+				MAP[i].push(0);
+			}
+		}
 
-		var MAP = this.state.map;
+		var tempMap = this.state.map;
+
+		var x = this.state.playerX;
+		var y = this.state.playerY;
+
+		var a = 0; // y
+		var b = 0; // x
+
+		for (var i = y - 2; i <= y + 2; i++) {
+			for (var j = x - 2; j <= x + 2; j++) {
+				MAP[a][b] = tempMap[i][j];
+				b++;
+			}
+			b = 0;
+			a++;
+		}
 
 		return (
 			<div>
