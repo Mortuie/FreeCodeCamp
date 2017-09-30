@@ -84,6 +84,7 @@ export default class Map extends Component {
 			map: null,
 			playerX: null,
 			playerY: null,
+			size: 1,
 		}
 	}
 
@@ -267,12 +268,25 @@ export default class Map extends Component {
 		return Math.floor(Math.random() * upTo);
 	}
 
+	changeSize = () => {
+		if (!this.state.size) {
+			this.setState({size: 1});
+		} else {
+			this.setState({size: 0});
+		}
+	}
+
 
 
 	render() {
+		var size = this.state.size;
 		var MAP = [];
 
-		for (var i = 0; i < 5; i++) {
+
+		if (!size) { // small version
+			MAP = this.state.map;
+		} else { // big version
+			for (var i = 0; i < 5; i++) {
 			MAP.push([]);
 			for (var j = 0; j < 5; j++) {
 				MAP[i].push(0);
@@ -295,13 +309,16 @@ export default class Map extends Component {
 			b = 0;
 			a++;
 		}
+		}
+		
 
 		return (
 			<div>
 				
 				{
-					MAP.map((i) => <div className={css(styles.row)}> {i.map((j) => <Piece typeOfPiece={j} />)} </div>)
+					MAP.map((i) => <div className={css(styles.row)}> {i.map((j) => <Piece typeOfPiece={j} size={size}/>)} </div>)
 				}
+				<button onClick={() => this.changeSize()}>Change view</button>
 
 			</div>
 		);		

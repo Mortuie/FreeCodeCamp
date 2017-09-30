@@ -6,6 +6,7 @@ export default class Piece extends Component {
 
 	render() {
 		var style;
+		var size;
 
 		switch (this.props.typeOfPiece) {
 			case 0: 
@@ -18,19 +19,36 @@ export default class Piece extends Component {
 				style = styles.blue;
 				break;
 			default:
+				style = styles.black;
+				break;
+		}
+
+		switch (this.props.size) {
+			case 0:
+				size = styles.boxSmall;
+				break;
+			case 1:
+				size = styles.boxBig;
+				break;
+			default:
+				size = styles.boxSmall;
 				break;
 		}
 
 
 
-		return <div className={css(style, styles.box)}></div>;
+		return <div className={css(style, size)}></div>;
 	}
 }
 
 const styles = StyleSheet.create({
-	box: {
-		width: '15px',
-		height: '15px',
+	boxSmall: {
+		width: '5px',
+		height: '5px',
+	},
+	boxBig: {
+		width: '25px',
+		height: '25px',
 	},
 	black: {
 		backgroundColor: 'black',
