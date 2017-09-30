@@ -9,14 +9,23 @@ export default class Piece extends Component {
 		var size;
 
 		switch (this.props.typeOfPiece) {
-			case 0: 
+			case 0: // wall
 				style = styles.black;
 				break;
-			case 1:
+			case 1: // walkway
 				style = styles.red;
 				break;
-			case 2:
+			case 2: // player
 				style = styles.blue;
+				break;
+			case 3: // monster
+				style = styles.yellow;
+				break;
+			case 4: // health
+				style = styles.green;
+				break;
+			case 5: // weapon
+				style = styles.cyan;
 				break;
 			default:
 				style = styles.black;
@@ -58,6 +67,14 @@ const styles = StyleSheet.create({
 	},
 	blue: {
 		backgroundColor: 'blue',
-	}
-
+	},
+	yellow: {
+		backgroundColor: 'yellow',
+	},
+	cyan: {
+		backgroundColor: 'cyan',
+	},
+	green: {
+		backgroundColor: 'green',
+	},
 });

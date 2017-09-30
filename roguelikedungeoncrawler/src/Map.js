@@ -84,6 +84,7 @@ export default class Map extends Component {
 			map: null,
 			playerX: null,
 			playerY: null,
+			playerHealth: 100,
 			size: 1,
 		}
 	}
@@ -148,6 +149,9 @@ export default class Map extends Component {
 		}
 
 		tempMap = this.placePlayer(tempMap);
+		tempMap = this.placeHealth(tempMap);
+		tempMap = this.placeWeapon(tempMap);
+		tempMap = this.placeMonster(tempMap);
 
 
 		this.setState({map: tempMap});
@@ -171,6 +175,60 @@ export default class Map extends Component {
 		this.setState({playerX: randWidth, playerY: randHeight});
 		return tempMap;
 
+	}
+
+	placeMonster(tempMap) {
+		var width = this.props.dimensions[0];
+		var height = this.props.dimensions[1];
+
+		var randWidth = Math.floor(Math.random() * width);
+		var randHeight = Math.floor(Math.random() * height);
+
+		for (var i = 0; i < 7; i++) {
+			while (tempMap[randHeight][randWidth] !== 1) {
+				randWidth = Math.floor(Math.random() * width);
+				randHeight = Math.floor(Math.random() * height);
+			}
+			tempMap[randHeight][randWidth] = 3;
+		}
+		// do I need to setState
+		return tempMap;
+	}
+
+	placeHealth(tempMap) {
+		var width = this.props.dimensions[0];
+		var height = this.props.dimensions[1];
+
+		var randWidth = Math.floor(Math.random() * width);
+		var randHeight = Math.floor(Math.random() * height);
+
+		for (var i = 0; i < 20; i++) {
+			while (tempMap[randHeight][randWidth] !== 1) {
+				randWidth = Math.floor(Math.random() * width);
+				randHeight = Math.floor(Math.random() * height);
+			}
+			tempMap[randHeight][randWidth] = 4;
+		}
+		// do I need to setState
+		return tempMap;
+	}
+
+	placeWeapon(tempMap) {
+		var width = this.props.dimensions[0];
+		var height = this.props.dimensions[1];
+
+		var randWidth = Math.floor(Math.random() * width);
+		var randHeight = Math.floor(Math.random() * height);
+
+		for (var i = 0; i < 5; i++) {
+			while (tempMap[randHeight][randWidth] !== 1) {
+				randWidth = Math.floor(Math.random() * width);
+				randHeight = Math.floor(Math.random() * height);
+			}
+			tempMap[randHeight][randWidth] = 5;
+		}
+		// do I need to setState
+		return tempMap;
 	}
 
 	createNodes(tempMap, nodes) {
@@ -280,35 +338,36 @@ export default class Map extends Component {
 
 	render() {
 		var size = this.state.size;
+		var viewWidth = 2;
 		var MAP = [];
 
 
-		if (!size) { // small version
+		if (!size) { // big version
 			MAP = this.state.map;
-		} else { // big version
+		} else { // small version
 			for (var i = 0; i < 5; i++) {
-			MAP.push([]);
-			for (var j = 0; j < 5; j++) {
-				MAP[i].push(0);
+				MAP.push([]);
+				for (var j = 0; j < 5; j++) {
+					MAP[i].push(0);
+				}
 			}
-		}
 
-		var tempMap = this.state.map;
+			var tempMap = this.state.map;
 
-		var x = this.state.playerX;
-		var y = this.state.playerY;
+			var x = this.state.playerX;
+			var y = this.state.playerY;
 
-		var a = 0; // y
-		var b = 0; // x
+			var a = 0; // y
+			var b = 0; // x
 
-		for (var i = y - 2; i <= y + 2; i++) {
-			for (var j = x - 2; j <= x + 2; j++) {
-				MAP[a][b] = tempMap[i][j];
-				b++;
+			for (var i = y - viewWidth; i <= y + viewWidth; i++) {
+				for (var j = x - viewWidth; j <= x + viewWidth; j++) {
+					MAP[a][b] = tempMap[i][j];
+					b++;
+				}
+				b = 0;
+				a++;
 			}
-			b = 0;
-			a++;
-		}
 		}
 		
 
