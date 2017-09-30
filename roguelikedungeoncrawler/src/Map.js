@@ -29,6 +29,18 @@ export default class Map extends Component {
 				tempMap[y - 1][x] = 2;
 				tempMap[y][x] = 1;
 				this.setState({map: tempMap, playerY: y - 1});
+			} else if (tile === 4) {
+				var health = this.state.playerHealth;
+
+				if (health <= 86) {
+					this.setState({playerHealth: health + 14});
+				} else {
+					this.setState({playerHealth: 100});
+				}
+
+				tempMap[y - 1][x] = 2;
+				tempMap[y][x] = 1;
+				this.setState({map: tempMap, playerY: y - 1});
 			}
 		} else if (e.keyCode === 37) {
 			var tempMap = this.state.map;
@@ -40,6 +52,18 @@ export default class Map extends Component {
 
 
 			if (tile === 1) {
+				tempMap[y][x - 1] = 2;
+				tempMap[y][x] = 1;
+				this.setState({map: tempMap, playerX: x - 1});
+			} else if (tile === 4) {
+				var health = this.state.playerHealth;
+
+				if (health <= 86) {
+					this.setState({playerHealth: health + 14});
+				} else {
+					this.setState({playerHealth: 100});
+				}
+
 				tempMap[y][x - 1] = 2;
 				tempMap[y][x] = 1;
 				this.setState({map: tempMap, playerX: x - 1});
@@ -58,6 +82,18 @@ export default class Map extends Component {
 				tempMap[y][x + 1] = 2;
 				tempMap[y][x] = 1;
 				this.setState({map: tempMap, playerX: x + 1});
+			} else if (tile === 4) {
+				var health = this.state.playerHealth;
+
+				if (health <= 86) {
+					this.setState({playerHealth: health + 14});
+				} else {
+					this.setState({playerHealth: 100});
+				}
+
+				tempMap[y][x + 1] = 2;
+				tempMap[y][x] = 1;
+				this.setState({map: tempMap, playerX: x + 1});
 			}
 
 		} else if (e.keyCode === 40) {
@@ -70,6 +106,18 @@ export default class Map extends Component {
 
 
 			if (tile === 1) {
+				tempMap[y + 1][x] = 2;
+				tempMap[y][x] = 1;
+				this.setState({map: tempMap, playerY: y + 1});
+			} else if (tile === 4) {
+				var health = this.state.playerHealth;
+
+				if (health <= 86) {
+					this.setState({playerHealth: health + 14});
+				} else {
+					this.setState({playerHealth: 100});
+				}
+
 				tempMap[y + 1][x] = 2;
 				tempMap[y][x] = 1;
 				this.setState({map: tempMap, playerY: y + 1});
@@ -373,10 +421,8 @@ export default class Map extends Component {
 
 		return (
 			<div>
-				
-				{
-					MAP.map((i) => <div className={css(styles.row)}> {i.map((j) => <Piece typeOfPiece={j} size={size}/>)} </div>)
-				}
+				<div>Health: {this.state.playerHealth}</div>
+				{MAP.map((i) => <div className={css(styles.row)}> {i.map((j) => <Piece typeOfPiece={j} size={size}/>)} </div>)}
 				<button onClick={() => this.changeSize()}>Change view</button>
 
 			</div>
