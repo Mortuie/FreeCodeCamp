@@ -85,8 +85,6 @@ export default class Map extends Component {
 					}
 				}
 				this.setState({map: tempMap, damageInflicted: weaponDamage, weaponArray: weaponArray, playerY: y - 1});
-
-
 			}
 		} else if (e.keyCode === 37) {
 			var tempMap = this.state.map;
@@ -136,6 +134,23 @@ export default class Map extends Component {
 				tempMap[y][x - 1] = 2;
 				tempMap[y][x] = 1;
 				this.setState({map: tempMap, playerX: x - 1});
+			} else if (tile === 5) {
+				// loop through the array, finding the weapon, then check if it's damage is higher, if so, switch weapons, move player....
+
+				var weaponDamage = this.state.damageInflicted;
+				var weaponArray = this.state.weaponArray;
+
+				for (var i = 0; i < weaponArray.length; i++) {
+					if (x - 1 === weaponArray[i][0] && y === weaponArray[i][1]) {
+						if (weaponArray[i][2] > weaponDamage) {
+							weaponDamage = weaponArray[i][2];
+						}
+						tempMap[y][x - 1] = 2;
+						tempMap[y][x] = 1;
+						weaponArray.splice(i, 1);
+					}
+				}
+				this.setState({map: tempMap, damageInflicted: weaponDamage, weaponArray: weaponArray, playerX: x - 1});
 			}
 
 		} else if (e.keyCode === 39) {
@@ -186,6 +201,23 @@ export default class Map extends Component {
 				tempMap[y][x + 1] = 2;
 				tempMap[y][x] = 1;
 				this.setState({map: tempMap, playerX: x + 1});
+			} else if (tile === 5) {
+				// loop through the array, finding the weapon, then check if it's damage is higher, if so, switch weapons, move player....
+
+				var weaponDamage = this.state.damageInflicted;
+				var weaponArray = this.state.weaponArray;
+
+				for (var i = 0; i < weaponArray.length; i++) {
+					if (x + 1 === weaponArray[i][0] && y === weaponArray[i][1]) {
+						if (weaponArray[i][2] > weaponDamage) {
+							weaponDamage = weaponArray[i][2];
+						}
+						tempMap[y][x + 1] = 2;
+						tempMap[y][x] = 1;
+						weaponArray.splice(i, 1);
+					}
+				}
+				this.setState({map: tempMap, damageInflicted: weaponDamage, weaponArray: weaponArray, playerX: x + 1});
 			}
 
 		} else if (e.keyCode === 40) {
@@ -234,6 +266,23 @@ export default class Map extends Component {
 				tempMap[y + 1][x] = 2;
 				tempMap[y][x] = 1;
 				this.setState({map: tempMap, playerY: y + 1});
+			} else if (tile === 5) {
+				// loop through the array, finding the weapon, then check if it's damage is higher, if so, switch weapons, move player....
+
+				var weaponDamage = this.state.damageInflicted;
+				var weaponArray = this.state.weaponArray;
+
+				for (var i = 0; i < weaponArray.length; i++) {
+					if (x === weaponArray[i][0] && y + 1 === weaponArray[i][1]) {
+						if (weaponArray[i][2] > weaponDamage) {
+							weaponDamage = weaponArray[i][2];
+						}
+						tempMap[y + 1][x] = 2;
+						tempMap[y][x] = 1;
+						weaponArray.splice(i, 1);
+					}
+				}
+				this.setState({map: tempMap, damageInflicted: weaponDamage, weaponArray: weaponArray, playerY: y + 1});
 			}
 
 		}
