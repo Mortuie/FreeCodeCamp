@@ -15,7 +15,7 @@ export default class Map extends Component {
 
 
 	keyPressed = (e) => {
-
+		var status = "";
 		if (e.keyCode === 38) {
 			var tempMap = this.state.map;
 
@@ -37,8 +37,6 @@ export default class Map extends Component {
 				var monsterArray = this.state.monsterArray;
 				var playerHealth = this.state.playerHealth;
 
-				console.log(monsterArray);
-				console.log("HERE");
 
 				for (var i = 0; i < monsterArray.length; i++) {
 					if (x === monsterArray[i][0] && y - 1 === monsterArray[i][1]) { // found monster...
@@ -98,10 +96,14 @@ export default class Map extends Component {
 
 				if (bossHealth <= 0) { // monster has died...
 					tempMap[y - 1][x] = 1;
+				} else if (playerHealth <= 0) { // player has died....	
+					tempMap[y][x] = 1;					
+					status = "You have died, press play again to try again!";
+					this.setState({playerX: null, playerY: null});
 				}
 
 					
-				this.setState({map: tempMap, playerHealth: playerHealth, bossHealth: bossHealth});
+				this.setState({map: tempMap, playerHealth: playerHealth, bossHealth: bossHealth, status: status});
 			}
 		} else if (e.keyCode === 37) {
 			var tempMap = this.state.map;
@@ -635,7 +637,8 @@ export default class Map extends Component {
 		return (
 			<div>
 				<div>Health: {this.state.playerHealth}hp</div>
-				<div>Weapon damage: {this.state.damageInflicted}hp</div>
+				<div>Weapon damage: {this.state.damageInflicted}</div>
+				<div>Status: {this.state.status}</div>
 				<button onClick={() => this.changeSize()}>Change view</button>
 				{MAP.map((i) => <div className={css(styles.row)}> {i.map((j) => <Piece typeOfPiece={j} size={size}/>)} </div>)}
 			</div>
