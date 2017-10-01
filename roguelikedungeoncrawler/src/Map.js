@@ -68,6 +68,25 @@ export default class Map extends Component {
 				tempMap[y - 1][x] = 2;
 				tempMap[y][x] = 1;
 				this.setState({map: tempMap, playerY: y - 1});
+			} else if (tile === 5) {
+				// loop through the array, finding the weapon, then check if it's damage is higher, if so, switch weapons, move player....
+
+				var weaponDamage = this.state.damageInflicted;
+				var weaponArray = this.state.weaponArray;
+
+				for (var i = 0; i < weaponArray.length; i++) {
+					if (x === weaponArray[i][0] && y - 1 === weaponArray[i][1]) {
+						if (weaponArray[i][2] > weaponDamage) {
+							weaponDamage = weaponArray[i][2];
+						}
+						tempMap[y - 1][x] = 2;
+						tempMap[y][x] = 1;
+						weaponArray.splice(i, 1);
+					}
+				}
+				this.setState({map: tempMap, damageInflicted: weaponDamage, weaponArray: weaponArray, playerY: y - 1});
+
+
 			}
 		} else if (e.keyCode === 37) {
 			var tempMap = this.state.map;
@@ -84,16 +103,12 @@ export default class Map extends Component {
 				this.setState({map: tempMap, playerX: x - 1});
 			} else if (tile === 3) {
 
-				// finds monster at location... gets random damage, 
-				// does dmg to monster, and takes dmg, if monster or player <= 0, ded.
 
 				var monsterRandomDamage = Math.floor(Math.random() * 10);
 
 				var monsterArray = this.state.monsterArray;
 				var playerHealth = this.state.playerHealth;
 
-				console.log(monsterArray);
-				console.log("HERE");
 
 				for (var i = 0; i < monsterArray.length; i++) {
 					if (x - 1 === monsterArray[i][0] && y === monsterArray[i][1]) { // found monster...
@@ -138,16 +153,12 @@ export default class Map extends Component {
 				this.setState({map: tempMap, playerX: x + 1});
 			} else if (tile === 3) {
 
-				// finds monster at location... gets random damage, 
-				// does dmg to monster, and takes dmg, if monster or player <= 0, ded.
 
 				var monsterRandomDamage = Math.floor(Math.random() * 10);
 
 				var monsterArray = this.state.monsterArray;
 				var playerHealth = this.state.playerHealth;
 
-				console.log(monsterArray);
-				console.log("HERE");
 
 				for (var i = 0; i < monsterArray.length; i++) {
 					if (x + 1 === monsterArray[i][0] && y === monsterArray[i][1]) { // found monster...
@@ -192,16 +203,12 @@ export default class Map extends Component {
 				this.setState({map: tempMap, playerY: y + 1});
 			} else if (tile === 3) {
 
-				// finds monster at location... gets random damage, 
-				// does dmg to monster, and takes dmg, if monster or player <= 0, ded.
 
 				var monsterRandomDamage = Math.floor(Math.random() * 10);
 
 				var monsterArray = this.state.monsterArray;
 				var playerHealth = this.state.playerHealth;
 
-				console.log(monsterArray);
-				console.log("HERE");
 
 				for (var i = 0; i < monsterArray.length; i++) {
 					if (x === monsterArray[i][0] && y + 1 === monsterArray[i][1]) { // found monster...
@@ -237,9 +244,9 @@ export default class Map extends Component {
 		this.state = {
 			map: null,
 			monsterArray: null,
+			weaponArray: null,
 			playerX: null,
 			playerY: null,
-			weapon: 'standard',
 			damageInflicted: 10,
 			playerHealth: 100,
 			size: 1,
@@ -374,20 +381,26 @@ export default class Map extends Component {
 	}
 
 	placeWeapon(tempMap) {
+		var tempWeaponArray = [];
+
+
 		var width = this.props.dimensions[0];
 		var height = this.props.dimensions[1];
 
 		var randWidth = Math.floor(Math.random() * width);
 		var randHeight = Math.floor(Math.random() * height);
+		var randDamage = Math.floor(Math.random() * 30) + 10;
 
 		for (var i = 0; i < 5; i++) {
 			while (tempMap[randHeight][randWidth] !== 1) {
 				randWidth = Math.floor(Math.random() * width);
 				randHeight = Math.floor(Math.random() * height);
+				randDamage = Math.floor(Math.random() * 30) + 10;
 			}
 			tempMap[randHeight][randWidth] = 5;
+			tempWeaponArray.push([randWidth, randHeight, randDamage]);
 		}
-		// do I need to setState
+		this.setState({weaponArray: tempWeaponArray});
 		return tempMap;
 	}
 
@@ -533,10 +546,10 @@ export default class Map extends Component {
 
 		return (
 			<div>
-				<div>Health: {this.state.playerHealth}</div>
-				<div>Weapon: {this.state.weapon}</div>
-				{MAP.map((i) => <div className={css(styles.row)}> {i.map((j) => <Piece typeOfPiece={j} size={size}/>)} </div>)}
+				<div>Health: {this.state.playerHealth}hp</div>
+				<div>Weapon damage: {this.state.damageInflicted}hp</div>
 				<button onClick={() => this.changeSize()}>Change view</button>
+				{MAP.map((i) => <div className={css(styles.row)}> {i.map((j) => <Piece typeOfPiece={j} size={size}/>)} </div>)}
 
 			</div>
 		);		
