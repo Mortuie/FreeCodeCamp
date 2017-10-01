@@ -27,6 +27,9 @@ export default class Piece extends Component {
 			case 5: // weapon
 				style = styles.cyan;
 				break;
+			case 6:
+				style = styles.grey;
+				break;
 			default:
 				style = styles.black;
 				break;
@@ -76,5 +79,8 @@ const styles = StyleSheet.create({
 	},
 	green: {
 		backgroundColor: 'green',
+	},
+	grey: {
+		backgroundColor: 'grey',
 	},
 });

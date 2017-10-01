@@ -31,8 +31,6 @@ export default class Map extends Component {
 				this.setState({map: tempMap, playerY: y - 1});
 			} else if (tile === 3) {
 
-				// finds monster at location... gets random damage, 
-				// does dmg to monster, and takes dmg, if monster or player <= 0, ded.
 
 				var monsterRandomDamage = Math.floor(Math.random() * 10);
 
@@ -85,6 +83,25 @@ export default class Map extends Component {
 					}
 				}
 				this.setState({map: tempMap, damageInflicted: weaponDamage, weaponArray: weaponArray, playerY: y - 1});
+			} else if (tile === 6) {
+				var monsterRandomDamage = Math.floor(Math.random() * 30);
+
+				var bossHealth = this.state.bossHealth;
+				var playerHealth = this.state.playerHealth;
+
+				var bossX = this.state.bossX;
+				var bossY = this.state.bossY;
+
+
+				bossHealth -= this.state.damageInflicted;
+				playerHealth -= monsterRandomDamage;
+
+				if (bossHealth <= 0) { // monster has died...
+					tempMap[y - 1][x] = 1;
+				}
+
+					
+				this.setState({map: tempMap, playerHealth: playerHealth, bossHealth: bossHealth});
 			}
 		} else if (e.keyCode === 37) {
 			var tempMap = this.state.map;
@@ -296,9 +313,13 @@ export default class Map extends Component {
 			weaponArray: null,
 			playerX: null,
 			playerY: null,
+			bossX: null,
+			bossY: null,
+			bossHealth: 300,
 			damageInflicted: 10,
 			playerHealth: 100,
 			size: 1,
+			status: "Playing the game",
 		}
 	}
 
@@ -365,9 +386,27 @@ export default class Map extends Component {
 		tempMap = this.placeHealth(tempMap);
 		tempMap = this.placeWeapon(tempMap);
 		tempMap = this.placeMonster(tempMap);
+		tempMap = this.placeBoss(tempMap);
 
 
 		this.setState({map: tempMap});
+	}
+
+	placeBoss(tempMap) {
+		var width = this.props.dimensions[0];
+		var height = this.props.dimensions[1];
+
+
+		var randWidth = Math.floor(Math.random() * width);
+		var randHeight = Math.floor(Math.random() * height);
+
+		while (tempMap[randHeight][randWidth] !== 1) {
+			randWidth = Math.floor(Math.random() * width);
+			randHeight = Math.floor(Math.random() * height);
+		}
+		tempMap[randHeight][randWidth] = 6;
+		this.setState({bossX: randWidth, bossY: randHeight});
+		return tempMap;
 	}
 
 
@@ -599,7 +638,6 @@ export default class Map extends Component {
 				<div>Weapon damage: {this.state.damageInflicted}hp</div>
 				<button onClick={() => this.changeSize()}>Change view</button>
 				{MAP.map((i) => <div className={css(styles.row)}> {i.map((j) => <Piece typeOfPiece={j} size={size}/>)} </div>)}
-
 			</div>
 		);		
 	}
