@@ -5,7 +5,7 @@ This is a repository which houses all of my experimental projects which I have c
 
 
 ## Frontend Projects:
-These are all the links to the frontend projects, that I have completed during this part of the curriculum. Technologies used: HTML & CSS, JavaScript, JQuery, React.
+These are all the links to the frontend projects, that I have completed during this part of the curriculum. Technologies used: HTML & CSS, Bootstrap, JavaScript, JQuery, React.
 
 - [Tribute Page](http://tribute-leon.surge.sh/)
 - [Personal Portfolio](http://portfolio-leon.surge.sh/)
