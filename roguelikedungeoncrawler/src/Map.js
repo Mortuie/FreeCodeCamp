@@ -676,7 +676,7 @@ export default class Map extends Component {
 	getView() {
 		if (this.state.gameOver) {
 			return <div>Game Over Retard</div>;
-		} else {
+		} else if (this.state.playerX !== null && this.state.playerY !== null) {
 			var size = this.state.size;
 			var viewWidth = 2;
 			var MAP = [];
@@ -709,9 +709,8 @@ export default class Map extends Component {
 					a++;
 				}
 			}
-		}
 
-		return (
+			return (
 			<div>
 				<div>Health: {this.state.playerHealth}hp</div>
 				<div>Weapon damage: {this.state.damageInflicted}</div>
@@ -719,7 +718,13 @@ export default class Map extends Component {
 				<button onClick={() => this.changeSize()}>Change view</button>
 				{MAP.map((i) => <div className={css(styles.row)}> {i.map((j) => <Piece typeOfPiece={j} size={size}/>)} </div>)}
 			</div>
-		);
+			);
+
+		} else {
+			return <div>Error</div>
+		}
+
+		
 	}
 
 
