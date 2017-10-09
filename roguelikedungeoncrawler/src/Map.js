@@ -170,6 +170,29 @@ export default class Map extends Component {
 					}
 				}
 				this.setState({map: tempMap, damageInflicted: weaponDamage, weaponArray: weaponArray, playerX: x - 1});
+			} else if (tile === 6) {
+				var monsterRandomDamage = Math.floor(Math.random() * 30);
+
+				var bossHealth = this.state.bossHealth;
+				var playerHealth = this.state.playerHealth;
+
+				var bossX = this.state.bossX;
+				var bossY = this.state.bossY;
+
+
+				bossHealth -= this.state.damageInflicted;
+				playerHealth -= monsterRandomDamage;
+
+				if (bossHealth <= 0) { // monster has died...
+					tempMap[y][x - 1] = 1;
+				} else if (playerHealth <= 0) { // player has died....	
+					tempMap[y][x] = 1;					
+					status = "You have died, press play again to try again!";
+					this.setState({playerX: null, playerY: null});
+				}
+
+					
+				this.setState({map: tempMap, playerHealth: playerHealth, bossHealth: bossHealth, status: status});
 			}
 
 		} else if (e.keyCode === 39) {
@@ -237,6 +260,29 @@ export default class Map extends Component {
 					}
 				}
 				this.setState({map: tempMap, damageInflicted: weaponDamage, weaponArray: weaponArray, playerX: x + 1});
+			} else if (tile === 6) {
+				var monsterRandomDamage = Math.floor(Math.random() * 30);
+
+				var bossHealth = this.state.bossHealth;
+				var playerHealth = this.state.playerHealth;
+
+				var bossX = this.state.bossX;
+				var bossY = this.state.bossY;
+
+
+				bossHealth -= this.state.damageInflicted;
+				playerHealth -= monsterRandomDamage;
+
+				if (bossHealth <= 0) { // monster has died...
+					tempMap[y][x + 1] = 1;
+				} else if (playerHealth <= 0) { // player has died....	
+					tempMap[y][x] = 1;					
+					status = "You have died, press play again to try again!";
+					this.setState({playerX: null, playerY: null});
+				}
+
+					
+				this.setState({map: tempMap, playerHealth: playerHealth, bossHealth: bossHealth, status: status});
 			}
 
 		} else if (e.keyCode === 40) {
@@ -302,6 +348,29 @@ export default class Map extends Component {
 					}
 				}
 				this.setState({map: tempMap, damageInflicted: weaponDamage, weaponArray: weaponArray, playerY: y + 1});
+			} else if (tile === 6) {
+				var monsterRandomDamage = Math.floor(Math.random() * 30);
+
+				var bossHealth = this.state.bossHealth;
+				var playerHealth = this.state.playerHealth;
+
+				var bossX = this.state.bossX;
+				var bossY = this.state.bossY;
+
+
+				bossHealth -= this.state.damageInflicted;
+				playerHealth -= monsterRandomDamage;
+
+				if (bossHealth <= 0) { // monster has died...
+					tempMap[y + 1][x] = 1;
+				} else if (playerHealth <= 0) { // player has died....	
+					tempMap[y][x] = 1;					
+					status = "You have died, press play again to try again!";
+					this.setState({playerX: null, playerY: null});
+				}
+
+					
+				this.setState({map: tempMap, playerHealth: playerHealth, bossHealth: bossHealth, status: status});
 			}
 
 		}
