@@ -46,6 +46,9 @@ export default class Map extends Component {
 						if (monsterArray[i][2] <= 0) { // monster has died...
 							tempMap[y - 1][x] = 1;
 							monsterArray.splice(i, 1);
+						} else if (playerHealth <= 0) {
+							tempMap[y][x] = 1;
+							this.setState({playerX: null, playerY: null, gameOver: true});
 						}
 					}
 
@@ -99,7 +102,7 @@ export default class Map extends Component {
 				} else if (playerHealth <= 0) { // player has died....	
 					tempMap[y][x] = 1;					
 					status = "You have died, press play again to try again!";
-					this.setState({playerX: null, playerY: null});
+					this.setState({playerX: null, playerY: null, gameOver: true});
 				}
 
 					
@@ -131,10 +134,12 @@ export default class Map extends Component {
 					if (x - 1 === monsterArray[i][0] && y === monsterArray[i][1]) { // found monster...
 						monsterArray[i][2] = monsterArray[i][2] - this.state.damageInflicted;
 						playerHealth -= monsterRandomDamage;
-						console.log("here");
 						if (monsterArray[i][2] <= 0) { // monster has died...
 							tempMap[y][x - 1] = 1;
 							monsterArray.splice(i, 1);
+						} else if (playerHealth <= 0) {
+							tempMap[y][x] = 1;
+							this.setState({playerX: null, playerY: null, gameOver: true});
 						}
 					}
 
@@ -188,7 +193,7 @@ export default class Map extends Component {
 				} else if (playerHealth <= 0) { // player has died....	
 					tempMap[y][x] = 1;					
 					status = "You have died, press play again to try again!";
-					this.setState({playerX: null, playerY: null});
+					this.setState({playerX: null, playerY: null, gameOver: true});
 				}
 
 					
@@ -221,10 +226,11 @@ export default class Map extends Component {
 					if (x + 1 === monsterArray[i][0] && y === monsterArray[i][1]) { // found monster...
 						monsterArray[i][2] = monsterArray[i][2] - this.state.damageInflicted;
 						playerHealth -= monsterRandomDamage;
-						console.log("here");
 						if (monsterArray[i][2] <= 0) { // monster has died...
 							tempMap[y][x + 1] = 1;
-							monsterArray.splice(i, 1);
+						} else if (playerHealth <= 0) {
+							tempMap[y][x] = 1;
+							this.setState({playerX: null, playerY: null, gameOver: true});
 						}
 					}
 
@@ -278,7 +284,7 @@ export default class Map extends Component {
 				} else if (playerHealth <= 0) { // player has died....	
 					tempMap[y][x] = 1;					
 					status = "You have died, press play again to try again!";
-					this.setState({playerX: null, playerY: null});
+					this.setState({playerX: null, playerY: null, gameOver: true});
 				}
 
 					
@@ -311,10 +317,12 @@ export default class Map extends Component {
 					if (x === monsterArray[i][0] && y + 1 === monsterArray[i][1]) { // found monster...
 						monsterArray[i][2] = monsterArray[i][2] - this.state.damageInflicted;
 						playerHealth -= monsterRandomDamage;
-						console.log("here");
 						if (monsterArray[i][2] <= 0) { // monster has died...
 							tempMap[y + 1][x] = 1;
 							monsterArray.splice(i, 1);
+						} else if (playerHealth <= 0) {
+							tempMap[y][x] = 1;
+							this.setState({playerX: null, playerY: null, gameOver: true});
 						}
 					}
 				}
@@ -365,9 +373,7 @@ export default class Map extends Component {
 					tempMap[y + 1][x] = 1;
 				} else if (playerHealth <= 0) { // player has died....	
 					tempMap[y][x] = 1;					
-					status = "You have died, press play again to try again!";
-					this.setState({playerX: null, playerY: null});
-				}
+					status = "You have died, press play again to try again!";}
 
 					
 				this.setState({map: tempMap, playerHealth: playerHealth, bossHealth: bossHealth, status: status});
@@ -391,6 +397,7 @@ export default class Map extends Component {
 			playerHealth: 100,
 			size: 1,
 			status: "Playing the game",
+			gameOver: false,
 		}
 	}
 
@@ -666,42 +673,43 @@ export default class Map extends Component {
 		}
 	}
 
+	getView() {
+		if (this.state.gameOver) {
+			return <div>Game Over Retard</div>;
+		} else {
+			var size = this.state.size;
+			var viewWidth = 2;
+			var MAP = [];
 
 
-	render() {
-		var size = this.state.size;
-		var viewWidth = 2;
-		var MAP = [];
-
-
-		if (!size) { // big version
-			MAP = this.state.map;
-		} else { // small version
-			for (var i = 0; i < 5; i++) {
-				MAP.push([]);
-				for (var j = 0; j < 5; j++) {
-					MAP[i].push(0);
+			if (!size) { // big version
+				MAP = this.state.map;
+			} else { // small version
+				for (var i = 0; i < 5; i++) {
+					MAP.push([]);
+					for (var j = 0; j < 5; j++) {
+						MAP[i].push(0);
+					}
 				}
-			}
 
-			var tempMap = this.state.map;
+				var tempMap = this.state.map;
 
-			var x = this.state.playerX;
-			var y = this.state.playerY;
+				var x = this.state.playerX;
+				var y = this.state.playerY;
 
-			var a = 0; // y
-			var b = 0; // x
+				var a = 0; // y
+				var b = 0; // x
 
-			for (var i = y - viewWidth; i <= y + viewWidth; i++) {
-				for (var j = x - viewWidth; j <= x + viewWidth; j++) {
-					MAP[a][b] = tempMap[i][j];
-					b++;
+				for (var i = y - viewWidth; i <= y + viewWidth; i++) {
+					for (var j = x - viewWidth; j <= x + viewWidth; j++) {
+						MAP[a][b] = tempMap[i][j];
+						b++;
+					}
+					b = 0;
+					a++;
 				}
-				b = 0;
-				a++;
 			}
 		}
-		
 
 		return (
 			<div>
@@ -711,7 +719,13 @@ export default class Map extends Component {
 				<button onClick={() => this.changeSize()}>Change view</button>
 				{MAP.map((i) => <div className={css(styles.row)}> {i.map((j) => <Piece typeOfPiece={j} size={size}/>)} </div>)}
 			</div>
-		);		
+		);
+	}
+
+
+
+	render() {
+		return this.getView();
 	}
 }
 
