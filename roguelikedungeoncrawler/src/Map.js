@@ -675,8 +675,14 @@ export default class Map extends Component {
 
 	getView() {
 		if (this.state.gameOver) {
-			return <div>Game Over Retard</div>;
-		} else if (this.state.playerX !== null && this.state.playerY !== null) {
+			return (
+				<div>
+					<button>Restart the Game</button>
+					<div>Game Over</div>
+				</div>
+			);
+
+		} else if (!this.state.gameOver) {
 			var size = this.state.size;
 			var viewWidth = 2;
 			var MAP = [];
