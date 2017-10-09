@@ -48,7 +48,7 @@ export default class Map extends Component {
 							monsterArray.splice(i, 1);
 						} else if (playerHealth <= 0) {
 							tempMap[y][x] = 1;
-							this.setState({playerX: null, playerY: null, gameOver: true});
+							this.setState({gameOver: true});
 						}
 					}
 
@@ -102,7 +102,7 @@ export default class Map extends Component {
 				} else if (playerHealth <= 0) { // player has died....	
 					tempMap[y][x] = 1;					
 					status = "You have died, press play again to try again!";
-					this.setState({playerX: null, playerY: null, gameOver: true});
+					this.setState({gameOver: true});
 				}
 
 					
@@ -139,7 +139,7 @@ export default class Map extends Component {
 							monsterArray.splice(i, 1);
 						} else if (playerHealth <= 0) {
 							tempMap[y][x] = 1;
-							this.setState({playerX: null, playerY: null, gameOver: true});
+							this.setState({gameOver: true});
 						}
 					}
 
@@ -193,7 +193,7 @@ export default class Map extends Component {
 				} else if (playerHealth <= 0) { // player has died....	
 					tempMap[y][x] = 1;					
 					status = "You have died, press play again to try again!";
-					this.setState({playerX: null, playerY: null, gameOver: true});
+					this.setState({gameOver: true});
 				}
 
 					
@@ -230,7 +230,7 @@ export default class Map extends Component {
 							tempMap[y][x + 1] = 1;
 						} else if (playerHealth <= 0) {
 							tempMap[y][x] = 1;
-							this.setState({playerX: null, playerY: null, gameOver: true});
+							this.setState({gameOver: true});
 						}
 					}
 
@@ -284,7 +284,7 @@ export default class Map extends Component {
 				} else if (playerHealth <= 0) { // player has died....	
 					tempMap[y][x] = 1;					
 					status = "You have died, press play again to try again!";
-					this.setState({playerX: null, playerY: null, gameOver: true});
+					this.setState({gameOver: true});
 				}
 
 					
@@ -322,7 +322,7 @@ export default class Map extends Component {
 							monsterArray.splice(i, 1);
 						} else if (playerHealth <= 0) {
 							tempMap[y][x] = 1;
-							this.setState({playerX: null, playerY: null, gameOver: true});
+							this.setState({gameOver: true});
 						}
 					}
 				}
@@ -373,9 +373,9 @@ export default class Map extends Component {
 					tempMap[y + 1][x] = 1;
 				} else if (playerHealth <= 0) { // player has died....	
 					tempMap[y][x] = 1;					
-					status = "You have died, press play again to try again!";}
-
-					
+					status = "You have died, press play again to try again!";
+					this.setState({gameOver: true});
+				}
 				this.setState({map: tempMap, playerHealth: playerHealth, bossHealth: bossHealth, status: status});
 			}
 
@@ -673,11 +673,15 @@ export default class Map extends Component {
 		}
 	}
 
+	resetPage() {
+		document.location.href = document.location.href;
+	}
+
 	getView() {
 		if (this.state.gameOver) {
 			return (
 				<div>
-					<button>Restart the Game</button>
+					<button onClick={this.resetPage}>Restart the Game</button>
 					<div>Game Over</div>
 				</div>
 			);
