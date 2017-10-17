@@ -398,7 +398,7 @@ svg.selectAll("circle")
   .attr("cx", d => xScale(d.Place))
   .attr("cy", d => yScale(d.Seconds))
   .attr("r", 7)
-  .style("color", "red");
+  .style("fill", "red");
 
 svg.append("g")
   .attr("transform", "translate(" + padding + ", 0)")
