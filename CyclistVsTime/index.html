@@ -367,7 +367,7 @@ const dataset = [
     "URL": ""
   }];
 
-const padding = 30;
+const padding = 50;
 const width = 600;
 const height = 600;
 
@@ -379,8 +379,11 @@ const xScale = d3.scaleLinear()
 
 
 const yScale = d3.scaleLinear()
-  .domain([d3.max(dataset, d => d.Seconds), d3.min(dataset, d => d.Seconds)])
+  .domain([d3.min(dataset, d => d.Seconds), d3.max(dataset, d => d.Seconds)])
   .range([padding, height - padding]);
+
+const xAxis = d3.axisBottom(xScale);
+const yAxis = d3.axisLeft(yScale);
 
 const svg = d3.select("body")
   .append("svg")
@@ -394,8 +397,16 @@ svg.selectAll("circle")
   .append("circle")
   .attr("cx", d => xScale(d.Place))
   .attr("cy", d => yScale(d.Seconds))
-  .attr("r", 15)
+  .attr("r", 7)
   .style("color", "red");
+
+svg.append("g")
+  .attr("transform", "translate(" + padding + ", 0)")
+  .call(yAxis);
+
+svg.append("g")
+  .attr("transform", "translate(0, " + (height - padding) + ")")
+  .call(xAxis);
 
 console.log(dataset);
 
