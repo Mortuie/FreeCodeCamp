@@ -9,9 +9,12 @@ body {
 	align-items: center;
 }
 
+
 </style>
 <title>Cyclist vs Time</title>
-<body></body>
+<body>
+
+</body>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
 const dataset = [
@@ -366,7 +369,7 @@ const dataset = [
     "URL": ""
   }];
 
-const padding = 50;
+const padding = 55;
 const width = 600;
 const height = 600;
 
@@ -389,14 +392,27 @@ const yScale = d3.scaleLinear()
 const xAxis = d3.axisBottom(xScale);
 const yAxis = d3.axisLeft(yScale);
 
+d3.select("body")
+  .append("text")
+  .text("Rank vs Time");
+
+
 const svg = d3.select("body")
   .append("svg")
   .attr("width", width)
   .attr("height", height);
 
-svg.append("text")
-  .text("BANTER");
+d3.select("body")
+  .append("text")
+  .text("Admitted to Doping")
+  .style("background-color", "red")
+  .style("color", "white");
 
+d3.select("body")
+  .append("text")
+  .text("Are not convicted Drug users.")
+  .style("background-color", "blue")
+  .style("color", "white");
 
 svg.selectAll("circle")
   .data(dataset)
@@ -437,6 +453,17 @@ svg.append("g")
 svg.append("g")
   .attr("transform", "translate(0, " + (height - padding) + ")")
   .call(xAxis);
+
+svg.append("text")
+  .text("Rank of respective time taken")
+  .attr("x", width / 3)
+  .attr("y", height - (padding / 2.5));
+
+svg.append("text")
+  .text("Time taken to the Top of the mountain (s)")
+  .attr("x", 13)
+  .attr("y", (height / 4) * 3)
+  .attr("transform", "rotate(270, " + 13 + ", " + (height / 4) * 3 + ")");
 
 console.log(dataset);
 
