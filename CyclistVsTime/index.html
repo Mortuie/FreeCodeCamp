@@ -14,7 +14,6 @@ body {
 <body></body>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
-// rank vs time in seconds....
 const dataset = [
   {
     "Time": "36:50",
@@ -371,10 +370,15 @@ const padding = 50;
 const width = 600;
 const height = 600;
 
-
+var tooltip = d3.select("body")
+                .append("div")
+                .style("position", "absolute")
+                .style("padding", "0 10px")
+                .style("background", "white")
+                .style("opacity", 0);
 
 const xScale = d3.scaleLinear()
-  .domain([d3.max(dataset, d => d.Place), d3.min(dataset, d => d.Place)])
+  .domain([d3.max(dataset, d => d.Place) + 1, d3.min(dataset, d => d.Place) - 1])
   .range([padding, width - padding]);
 
 
@@ -390,6 +394,9 @@ const svg = d3.select("body")
   .attr("width", width)
   .attr("height", height);
 
+svg.append("text")
+  .text("BANTER");
+
 
 svg.selectAll("circle")
   .data(dataset)
@@ -398,7 +405,30 @@ svg.selectAll("circle")
   .attr("cx", d => xScale(d.Place))
   .attr("cy", d => yScale(d.Seconds))
   .attr("r", 7)
-  .style("fill", "red");
+  .style("fill", d => { 
+    if (d.Doping === "") return "blue";
+    else return "red";
+  })
+  .on('mouseover', function(d) {
+
+    tooltip.html("Name: " + d.Name + "<br/>" + "Nationality: " + d.Nationality + "<br/>" + "Year: " + d.Year + "<br/>" + "Time: " + d.Time)
+      .style("left", (d3.event.pageX) - 200 + "px")
+      .style("top", (d3.event.pageY) + 0 + "px")
+      .style("opacity", 0.9);
+
+
+    d3.select(this)
+      .style("opacity", 0.5);
+  })
+  .on("mouseout", function(d) {
+
+    tooltip.style("opacity", 0);
+
+
+    d3.select(this)
+      .style("opacity", 1);
+
+  });
 
 svg.append("g")
   .attr("transform", "translate(" + padding + ", 0)")

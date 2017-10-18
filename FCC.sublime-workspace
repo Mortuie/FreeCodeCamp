@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"y",
+				"yAxis"
+			],
+			[
+				"x",
+				"xScale"
+			],
+			[
+				"data",
+				"dataset"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
 				"get",
 				"getView"
 			],
@@ -206,10 +222,6 @@
 			[
 				"padd",
 				"paddingBottom"
-			],
-			[
-				"y",
-				"yAxis"
 			],
 			[
 				"sele",
@@ -502,54 +514,20 @@
 			[
 				"ty",
 				"tupley"
-			],
-			[
-				"list",
-				"listChecker2"
-			],
-			[
-				"li",
-				"listChecker2"
-			],
-			[
-				"p",
-				"pentagonNumbers"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "roguelikedungeoncrawler/src/Map.js",
+			"contents": "<!DOCTYPE html>\n<meta charset=\"utf-8\">\n<style>\n\nbody {\n\tdisplay: flex;\n\tflex-direction: column;\n\tjustify-content: center;\n\talign-items: center;\n}\n\n</style>\n<title>Cyclist vs Time</title>\n<body></body>\n<script src=\"https://d3js.org/d3.v4.min.js\"></script>\n<script>\nconst dataset = [\n  {\n    \"Time\": \"36:50\",\n    \"Place\": 1,\n    \"Seconds\": 2210,\n    \"Name\": \"Marco Pantani\",\n    \"Year\": 1995,\n    \"Nationality\": \"ITA\",\n    \"Doping\": \"Alleged drug use during 1995 due to high hematocrit levels\",\n    \"URL\": \"https://en.wikipedia.org/wiki/Marco_Pantani#Alleged_drug_use\"\n  },\n  {\n    \"Time\": \"36:55\",\n    \"Place\": 2,\n    \"Seconds\": 2215,\n    \"Name\": \"Marco Pantani\",\n    \"Year\": 1997,\n    \"Nationality\": \"ITA\",\n    \"Doping\": \"Alleged drug use during 1997 due to high hermatocrit levels\",\n    \"URL\": \"https://en.wikipedia.org/wiki/Marco_Pantani#Alleged_drug_use\"\n  },\n  {\n    \"Time\": \"37:15\",\n    \"Place\": 3,\n    \"Seconds\": 2235,\n    \"Name\": \"Marco Pantani\",\n    \"Year\": 1994,\n    \"Nationality\": \"ITA\",\n    \"Doping\": \"Alleged drug use during 1994 due to high hermatocrit levels\",\n    \"URL\": \"https://en.wikipedia.org/wiki/Marco_Pantani#Alleged_drug_use\"\n  },\n  {\n    \"Time\": \"37:36\",\n    \"Place\": 4,\n    \"Seconds\": 2256,\n    \"Name\": \"Lance Armstrong\",\n    \"Year\": 2004,\n    \"Nationality\": \"USA\",\n    \"Doping\": \"2004 Tour de France title stripped by UCI in 2012\",\n    \"URL\": \"https://en.wikipedia.org/wiki/History_of_Lance_Armstrong_doping_allegations\"\n  },\n  {\n    \"Time\": \"37:42\",\n    \"Place\": 5,\n    \"Seconds\": 2262,\n    \"Name\": \"Jan Ullrich\",\n    \"Year\": 1997,\n    \"Nationality\": \"GER\",\n    \"Doping\": \"Confessed later in his career to doping\",\n    \"URL\": \"https://en.wikipedia.org/wiki/Jan_Ullrich#Operaci.C3.B3n_Puerto_doping_case\"\n  },\n  {\n    \"Time\": \"38:05\",\n    \"Place\": 6,\n    \"Seconds\": 2285,\n    \"Name\": \"Lance Armstrong\",\n    \"Year\": 2001,\n    \"Nationality\": \"USA\",\n    \"Doping\": \"2001 Tour de France title stripped by UCI in 2012\",\n    \"URL\": \"https://en.wikipedia.org/wiki/History_of_Lance_Armstrong_doping_allegations\"\n  },\n  {\n    \"Time\": \"38:14\",\n    \"Place\": 7,\n    \"Seconds\": 2294,\n    \"Name\": \"Miguel Indurain\",\n    \"Year\": 1995,\n    \"Nationality\": \"ESP\",\n    \"Doping\": \"1994 Failed test for salbutemol, not a banned drug at that time\",\n    \"URL\": \"http://www.independent.co.uk/sport/drugs-in-sport-indurain-allowed-to-use-banned-drug-1379584.html\"\n  },\n  {\n    \"Time\": \"38:14\",\n    \"Place\": 8,\n    \"Seconds\": 2294,\n    \"Name\": \"Alex Zülle\",\n    \"Year\": 1995,\n    \"Nationality\": \"SUI\",\n    \"Doping\": \"Confessed in 1998 to taking EPO\",\n    \"URL\": \"https://en.wikipedia.org/wiki/Alex_Z%C3%BClle#Festina_affair\"\n  },\n  {\n    \"Time\": \"38:16\",\n    \"Place\": 9,\n    \"Seconds\": 2296,\n    \"Name\": \"Bjarne Riis\",\n    \"Year\": 1995,\n    \"Nationality\": \"DEN\",\n    \"Doping\": \"Alleged drug use during 1995 due to high hermatrocite levels\",\n    \"URL\": \"https://en.wikipedia.org/wiki/Bjarne_Riis#Doping_allegations\"\n  },\n  {\n    \"Time\": \"38:22\",\n    \"Place\": 10,\n    \"Seconds\": 2302,\n    \"Name\": \"Richard Virenque\",\n    \"Year\": 1997,\n    \"Nationality\": \"FRA\",\n    \"Doping\": \"In 2000 confessed to doping during his career\",\n    \"URL\": \"https://en.wikipedia.org/wiki/Richard_Virenque#Festina_affair\"\n  },\n  {\n    \"Time\": \"38:36\",\n    \"Place\": 11,\n    \"Seconds\": 2316,\n    \"Name\": \"Floyd Landis\",\n    \"Year\": 2006,\n    \"Nationality\": \"USA\",\n    \"Doping\": \"Stripped of 2006 Tour de France title\",\n    \"URL\": \"https://en.wikipedia.org/wiki/Floyd_Landis_doping_case\"\n  },\n  {\n    \"Time\": \"38:36\",\n    \"Place\": 12,\n    \"Seconds\": 2316,\n    \"Name\": \"Andreas Klöden\",\n    \"Year\": 2006,\n    \"Nationality\": \"GER\",\n    \"Doping\": \"Alleged use of illegal blood transfusions in 2006\",\n    \"URL\": \"https://en.wikipedia.org/wiki/Andreas_Kl%C3%B6den#2009_Doping_allegations\"\n  },\n  {\n    \"Time\": \"38:40\",\n    \"Place\": 13,\n    \"Seconds\": 2320,\n    \"Name\": \"Jan Ullrich\",\n    \"Year\": 2004,\n    \"Nationality\": \"GER\",\n    \"Doping\": \"Confessed later in his career to doping\",\n    \"URL\": \"https://en.wikipedia.org/wiki/Jan_Ullrich#Operaci.C3.B3n_Puerto_doping_case\"\n  },\n  {\n    \"Time\": \"38:44\",\n    \"Place\": 14,\n    \"Seconds\": 2324,\n    \"Name\": \"Laurent Madouas\",\n    \"Year\": 1995,\n    \"Nationality\": \"FRA\",\n    \"Doping\": \"Tested positive for Salbutemol in 1994, suspended for 1 month\",\n    \"URL\": \"http://www.dopeology.org/incidents/Madouas-positive/\"\n  },\n  {\n    \"Time\": \"38:55\",\n    \"Place\": 15,\n    \"Seconds\": 2335,\n    \"Name\": \"Richard Virenque\",\n    \"Year\": 1994,\n    \"Nationality\": \"FRA\",\n    \"Doping\": \"In 2000 confessed to doping during his career\",\n    \"URL\": \"https://en.wikipedia.org/wiki/Richard_Virenque#Festina_affair\"\n  },\n  {\n    \"Time\": \"39:01\",\n    \"Place\": 16,\n    \"Seconds\": 2341,\n    \"Name\": \"Carlos Sastre\",\n    \"Year\": 2006,\n    \"Nationality\": \"ESP\",\n    \"Doping\": \"\",\n    \"URL\": \"\"\n  },\n  {\n    \"Time\": \"39:09\",\n    \"Place\": 17,\n    \"Seconds\": 2349,\n    \"Name\": \"Iban Mayo\",\n    \"Year\": 2003,\n    \"Nationality\": \"ESP\",\n    \"Doping\": \"Failed doping test in 2007 Tour de France\",\n    \"URL\": \"https://en.wikipedia.org/wiki/Iban_Mayo\"\n  },\n  {\n    \"Time\": \"39:12\",\n    \"Place\": 18,\n    \"Seconds\": 2352,\n    \"Name\": \"Andreas Klöden\",\n    \"Year\": 2004,\n    \"Nationality\": \"GER\",\n    \"Doping\": \"Alleged doping during 2006 Tour de France\",\n    \"URL\": \"https://en.wikipedia.org/wiki/Operaci%C3%B3n_Puerto_doping_case\"\n  },\n  {\n    \"Time\": \"39:14\",\n    \"Place\": 19,\n    \"Seconds\": 2354,\n    \"Name\": \"Jose Azevedo\",\n    \"Year\": 2004,\n    \"Nationality\": \"POR\",\n    \"Doping\": \"Implicated in the Operación Puerto doping case\",\n    \"URL\": \"https://en.wikipedia.org/wiki/Operaci%C3%B3n_Puerto_doping_case\"\n  },\n  {\n    \"Time\": \"39:15\",\n    \"Place\": 20,\n    \"Seconds\": 2355,\n    \"Name\": \"Levi Leipheimer\",\n    \"Year\": 2006,\n    \"Nationality\": \"USA\",\n    \"Doping\": \"Testified in 2012 to doping during his time with US Postal Service \",\n    \"URL\": \"http://www.wsj.com/articles/SB10000872396390444799904578048352672452328\"\n  },\n  {\n    \"Time\": \"39:22\",\n    \"Place\": 21,\n    \"Seconds\": 2362,\n    \"Name\": \"Francesco Casagrande\",\n    \"Year\": 1997,\n    \"Nationality\": \"ITA\",\n    \"Doping\": \"Positive testosterone test in 1998\",\n    \"URL\": \"http://autobus.cyclingnews.com/results/1998/sep98/sep2.shtml\"\n  },\n  {\n    \"Time\": \"39:23\",\n    \"Place\": 22,\n    \"Seconds\": 2363,\n    \"Name\": \"Nairo Quintana\",\n    \"Year\": 2015,\n    \"Nationality\": \"COL\",\n    \"Doping\": \"\",\n    \"URL\": \"\"\n  },\n  {\n    \"Time\": \"39:23\",\n    \"Place\": 23,\n    \"Seconds\": 2363,\n    \"Name\": \"Bjarne Riis\",\n    \"Year\": 1997,\n    \"Nationality\": \"DEN\",\n    \"Doping\": \"Alleged drug use during 1995 due to high hermatrocite levels\",\n    \"URL\": \"https://en.wikipedia.org/wiki/Bjarne_Riis#Doping_allegations\"\n  },\n  {\n    \"Time\": \"39:30\",\n    \"Place\": 24,\n    \"Seconds\": 2370,\n    \"Name\": \"Miguel Indurain\",\n    \"Year\": 1994,\n    \"Nationality\": \"ESP\",\n    \"Doping\": \"1994 Failed test for salbutemol, not a banned drug at that time\",\n    \"URL\": \"http://www.independent.co.uk/sport/drugs-in-sport-indurain-allowed-to-use-banned-drug-1379584.html\"\n  },\n  {\n    \"Time\": \"39:30\",\n    \"Place\": 25,\n    \"Seconds\": 2370,\n    \"Name\": \"Luc Leblanc\",\n    \"Year\": 1994,\n    \"Nationality\": \"FRA\",\n    \"Doping\": \"Admitted to using epo and amphetimines throughout 1994 \",\n    \"URL\": \"http://www.dopeology.org/people/Luc_Leblanc/\"\n  },\n  {\n    \"Time\": \"39:32\",\n    \"Place\": 26,\n    \"Seconds\": 2372,\n    \"Name\": \"Carlos Sastre\",\n    \"Year\": 2008,\n    \"Nationality\": \"ESP\",\n    \"Doping\": \"\",\n    \"URL\": \"\"\n  },\n  {\n    \"Time\": \"39:37\",\n    \"Place\": 27,\n    \"Seconds\": 2377,\n    \"Name\": \"Vladimir Poulnikov\",\n    \"Year\": 1994,\n    \"Nationality\": \"UKR\",\n    \"Doping\": \"\",\n    \"URL\": \"\"\n  },\n  {\n    \"Time\": \"39:40\",\n    \"Place\": 28,\n    \"Seconds\": 2380,\n    \"Name\": \"Giuseppe Guerini\",\n    \"Year\": 2004,\n    \"Nationality\": \"ITA\",\n    \"Doping\": \"\",\n    \"URL\": \"\"\n  },\n  {\n    \"Time\": \"39:41\",\n    \"Place\": 29,\n    \"Seconds\": 2381,\n    \"Name\": \"Santos Gonzalez\",\n    \"Year\": 2004,\n    \"Nationality\": \"ESP\",\n    \"Doping\": \"High Hematocrit during 2005 season, removed by team management\",\n    \"URL\": \"http://www.cyclingnews.com/news/santos-gonzalez-sacked-by-phonak/\"\n  },\n  {\n    \"Time\": \"39:41\",\n    \"Place\": 30,\n    \"Seconds\": 2381,\n    \"Name\": \"Vladimir Karpets\",\n    \"Year\": 2004,\n    \"Nationality\": \"RUS\",\n    \"Doping\": \"Made payments to Ferrari, but no charges filed\",\n    \"URL\": \"http://www.dopeology.org/incidents/Ferrari-investigation/\"\n  },\n  {\n    \"Time\": \"39:45\",\n    \"Place\": 31,\n    \"Seconds\": 2385,\n    \"Name\": \"Fernando Escartin\",\n    \"Year\": 1995,\n    \"Nationality\": \"ESP\",\n    \"Doping\": \"Implicated in Giardini Margherita Raid in 1998 as a 'victim' \",\n    \"URL\": \"http://www.dopeology.org/incidents/Giardini-Margherita-raid-%5bBologna%5d/\"\n  },\n  {\n    \"Time\": \"39:47\",\n    \"Place\": 32,\n    \"Seconds\": 2387,\n    \"Name\": \"Denis Menchov\",\n    \"Year\": 2006,\n    \"Nationality\": \"RUS\",\n    \"Doping\": \"\",\n    \"URL\": \"\"\n  },\n  {\n    \"Time\": \"39:47\",\n    \"Place\": 33,\n    \"Seconds\": 2387,\n    \"Name\": \"Michael Rasmussen\",\n    \"Year\": 2006,\n    \"Nationality\": \"DEN\",\n    \"Doping\": \"Admitted to doping with multiple substances 1998-2010\",\n    \"URL\": \"http://www.dopeology.org/people/Michael_Rasmussen/\"\n  },\n  {\n    \"Time\": \"39:47\",\n    \"Place\": 34,\n    \"Seconds\": 2387,\n    \"Name\": \"Pietro Caucchioli\",\n    \"Year\": 2006,\n    \"Nationality\": \"ITA\",\n    \"Doping\": \"Associated with Mantova investigation, charges dropped\",\n    \"URL\": \"http://www.cyclingnews.com/news/italian-judge-set-to-decide-if-32-named-in-mantova-doping-investigation-should-go-on-trial/\"\n  },\n  {\n    \"Time\": \"39:50\",\n    \"Place\": 35,\n    \"Seconds\": 2390,\n    \"Name\": \"Nairo Quintana\",\n    \"Year\": 2013,\n    \"Nationality\": \"COL\",\n    \"Doping\": \"\",\n    \"URL\": \"\"\n  }];\n\nconst padding = 50;\nconst width = 600;\nconst height = 600;\n\n\n\nconst xScale = d3.scaleLinear()\n  .domain([d3.max(dataset, d => d.Place), d3.min(dataset, d => d.Place)])\n  .range([padding, width - padding]);\n\n\nconst yScale = d3.scaleLinear()\n  .domain([d3.min(dataset, d => d.Seconds), d3.max(dataset, d => d.Seconds)])\n  .range([padding, height - padding]);\n\nconst xAxis = d3.axisBottom(xScale);\nconst yAxis = d3.axisLeft(yScale);\n\nconst svg = d3.select(\"body\")\n  .append(\"svg\")\n  .attr(\"width\", width)\n  .attr(\"height\", height);\n\n\nsvg.selectAll(\"circle\")\n  .data(dataset)\n  .enter()\n  .append(\"circle\")\n  .attr(\"cx\", d => xScale(d.Place))\n  .attr(\"cy\", d => yScale(d.Seconds))\n  .attr(\"r\", 7)\n  .style(\"fill\", \"red\");\n\nsvg.append(\"g\")\n  .attr(\"transform\", \"translate(\" + padding + \", 0)\")\n  .call(yAxis);\n\nsvg.append(\"g\")\n  .attr(\"transform\", \"translate(0, \" + (height - padding) + \")\")\n  .call(xAxis);\n\nconsole.log(dataset);\n\n</script>",
+			"file": "CyclistVsTime/index.html",
+			"file_size": 10628,
+			"file_write_time": 131527531317462571,
 			"settings":
 			{
-				"buffer_size": 19980,
+				"buffer_size": 10593,
 				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "USGDP/index.html",
-			"settings":
-			{
-				"buffer_size": 14376,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "roguelikedungeoncrawler/src/Piece.js",
-			"settings":
-			{
-				"buffer_size": 1319,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "roguelikedungeoncrawler/src/App.js",
-			"settings":
-			{
-				"buffer_size": 317,
 				"line_ending": "Unix"
 			}
 		}
@@ -627,10 +605,15 @@
 	"expanded_folders":
 	[
 		"/home/mortuie/Documents/Programming/FreeCodeCamp",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/CyclistVsTime",
 		"/home/mortuie/Documents/Programming/FreeCodeCamp/USGDP"
 	],
 	"file_history":
 	[
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/roguelikedungeoncrawler/src/Map.js",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/USGDP/index.html",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/roguelikedungeoncrawler/src/Piece.js",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/roguelikedungeoncrawler/src/App.js",
 		"/home/mortuie/Documents/Programming/MiscellaneousProjects/Zoohackathon-foobar/clientsidereact/src/Foobar-26199406cb93.json",
 		"/home/mortuie/Documents/Programming/MiscellaneousProjects/Zoohackathon-foobar/clientsidereact/src/App.js",
 		"/home/mortuie/Documents/Programming/MiscellaneousProjects/Zoohackathon-foobar/clientsidereact/src/index.js",
@@ -650,11 +633,8 @@
 		"/home/mortuie/Desktop/test/App.js",
 		"/home/mortuie/Desktop/test/media/testpic.jpg",
 		"/home/mortuie/Documents/Programming/Project Euler/Python/prob69.py",
-		"/home/mortuie/Documents/Programming/FreeCodeCamp/roguelikedungeoncrawler/src/Piece.js",
 		"/home/mortuie/Documents/Programming/Project Euler/Python/prob97.py",
 		"/home/mortuie/Desktop/p74.py",
-		"/home/mortuie/Documents/Programming/FreeCodeCamp/roguelikedungeoncrawler/src/App.js",
-		"/home/mortuie/Documents/Programming/FreeCodeCamp/roguelikedungeoncrawler/src/Map.js",
 		"/home/mortuie/Documents/Programming/FreeCodeCamp/testPortfolio/index.html",
 		"/home/mortuie/Documents/Programming/FreeCodeCamp/testPortfolio/styles.css",
 		"/home/mortuie/Documents/Programming/FreeCodeCamp/roguelikedungeoncrawler/public/index.html",
@@ -662,7 +642,6 @@
 		"/home/mortuie/Documents/Programming/FreeCodeCamp/PortfolioPage/index.html",
 		"/home/mortuie/Documents/Programming/FreeCodeCamp/roguelikedungeoncrawler/src/index.js",
 		"/home/mortuie/Documents/Programming/FreeCodeCamp/roguelikedungeoncrawler/src/index.css",
-		"/home/mortuie/Documents/Programming/FreeCodeCamp/USGDP/index.html",
 		"/home/mortuie/Documents/Programming/FreeCodeCamp/tictactoe/src/index.css",
 		"/home/mortuie/Documents/Programming/FreeCodeCamp/tictactoe/src/Square.js",
 		"/home/mortuie/Documents/Programming/FreeCodeCamp/tictactoe/src/Board.js",
@@ -794,53 +773,24 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "roguelikedungeoncrawler/src/Map.js",
+					"file": "CyclistVsTime/index.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 19980,
+						"buffer_size": 10593,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								11427,
-								11427
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 5523.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "USGDP/index.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 14376,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								13869,
-								13869
+								264,
+								264
 							]
 						],
 						"settings":
@@ -850,68 +800,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 432.0,
+						"translation.y": 192.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "roguelikedungeoncrawler/src/Piece.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1319,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "roguelikedungeoncrawler/src/App.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 317,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Babel/JavaScript (Babel).sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
 					"type": "text"
 				}
 			]
