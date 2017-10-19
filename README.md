@@ -17,7 +17,7 @@ These are all the links to the frontend projects, that I have completed during t
 - [Tictactoe](http://tictactoe.mortuie.com)
 
 ## Data Visualisation Projects: 
-These are all the links to the data visualisation projects, that I have completed.
+These are all the links to the data visualisation projects, that I have completed. Technologies used: D3js, React, CSS, HTML.
 
 
 ## Backend Projects:
