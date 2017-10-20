@@ -404,13 +404,13 @@ const svg = d3.select("body")
 
 d3.select("body")
   .append("text")
-  .text("Admitted to Doping")
+  .text("Doping allegations")
   .style("background-color", "red")
   .style("color", "white");
 
 d3.select("body")
   .append("text")
-  .text("Are not convicted Drug users.")
+  .text("No doping allegations")
   .style("background-color", "blue")
   .style("color", "white");
 
@@ -464,6 +464,7 @@ svg.append("text")
   .attr("x", 13)
   .attr("y", (height / 4) * 3)
   .attr("transform", "rotate(270, " + 13 + ", " + (height / 4) * 3 + ")");
+
 
 console.log(dataset);
 
