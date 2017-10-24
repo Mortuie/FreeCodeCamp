@@ -1119,42 +1119,45 @@ var barData = [
       18064.7
     ]
 ];
-var paddingBottom = 20;
-
-maxHeight = () => {
-  return d3.max(barData, function(d) {return d[1];});
-}
+var padding = 40;
 
 var height = 600, width = 600, barWidth = width / barData.length;
 
 var yScale = d3.scaleLinear()
-				.domain([0, d3.max(barData, function(d) {return d[1]})])
-				.range([0, height]);
+	.domain([d3.min(barData, d => d[1]), d3.max(barData, d => d[1])])
+	.range([height - padding, padding]);
+
 
 var xScale = d3.scaleTime()
-        .domain([new Date(d3.min(barData, function(d) {return d3.min(d[0])})), new Date(d3.max(barData, function(d) {return d3.max(d[1])}))])
-        .range([0, width]);
+  .domain([d3.min(barData, d => new Date(d[0])), d3.max(barData, d => new Date(d[0]))])
+  .range([padding, width - padding]);
+
+var yAxis = d3.axisLeft(yScale);
+var xAxis = d3.axisBottom(xScale);
+
 
 var tooltip = d3.select("body")
-                .append("div")
-                .style("position", "absolute")
-                .style("padding", "0 10px")
-                .style("background", "white")
-                .style("opacity", 0);
+  .append("div")
+  .style("position", "absolute")
+  .style("padding", "0 10px")
+  .style("background", "white")
+  .style("opacity", 0);
 
 
-var barChart = d3.select("body")
+var svg = d3.select("body")
 	.append("svg")
 	.attr("width", width)
-	.attr("height", height)
-	.selectAll("rect")
+	.attr("height", height);
+
+
+svg.selectAll("rect")
 	.data(barData)
 	.enter()
 	.append("rect")
 	.attr("width", barWidth)
-	.attr("height", (d) => yScale(d[1]))
-	.attr("x", (d, i) => (i * barWidth))
-	.attr("y", (d) => (height - yScale(d[1])))
+	.attr("height", d => yScale(d[1]))
+	.attr("x", d => xScale(new Date(d[0])))
+	.attr("y", d => yScale(d[1]))
 	.attr("fill", 'blue')
   .on('mouseover', function(d) {
 
@@ -1176,5 +1179,17 @@ var barChart = d3.select("body")
       .style("opacity", 1);
   });
 
+
+svg.append("g")
+  .attr("transform", "translate(0, " + (height - padding) + ")")
+  .call(xAxis);
+
+
+svg.append("g")
+  .attr("transform", "translate(" + padding + ", 0)")
+  .call(yAxis);
+
+
+console.log(barData);
 
 </script>

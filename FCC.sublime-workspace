@@ -523,17 +523,16 @@
 			"file": "CyclistVsTime/index.html",
 			"settings":
 			{
-				"buffer_size": 12051,
+				"buffer_size": 12044,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "README.md",
+			"file": "USGDP/index.html",
 			"settings":
 			{
-				"buffer_size": 1574,
-				"encoding": "UTF-8",
+				"buffer_size": 14376,
 				"line_ending": "Unix"
 			}
 		}
@@ -616,6 +615,7 @@
 	],
 	"file_history":
 	[
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/README.md",
 		"/home/mortuie/Documents/Programming/FreeCodeCamp/USGDP/index.html",
 		"/home/mortuie/Documents/Programming/FreeCodeCamp/roguelikedungeoncrawler/src/Map.js",
 		"/home/mortuie/Documents/Programming/FreeCodeCamp/roguelikedungeoncrawler/src/Piece.js",
@@ -653,7 +653,6 @@
 		"/home/mortuie/Documents/Programming/FreeCodeCamp/tictactoe/src/Board.js",
 		"/home/mortuie/Documents/Programming/FreeCodeCamp/tictactoe/src/Game.js",
 		"/home/mortuie/Documents/Programming/FreeCodeCamp/tictactoe/src/index.js",
-		"/home/mortuie/Documents/Programming/FreeCodeCamp/README.md",
 		"/home/mortuie/Documents/Programming/MiscellaneousProjects/remittance/frontend/views/login.ejs",
 		"/home/mortuie/Documents/Programming/MiscellaneousProjects/remittance/frontend/views/theme/css/freelancer.css",
 		"/home/mortuie/Documents/Programming/MiscellaneousProjects/remittance/frontend/views/profile.ejs",
@@ -754,6 +753,7 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"doping",
 			"if (playerHealth",
 			"gameOver"
 		],
@@ -788,15 +788,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 12051,
+						"buffer_size": 12044,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								11804,
-								11804
+								10697,
+								10697
 							]
 						],
 						"settings":
@@ -806,7 +806,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1200.0,
+						"translation.y": 316.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -814,27 +814,29 @@
 				},
 				{
 					"buffer": 1,
-					"file": "README.md",
+					"file": "USGDP/index.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1574,
+						"buffer_size": 14376,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1309,
-								1309
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Markdown/Markdown.sublime-syntax"
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 240.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
