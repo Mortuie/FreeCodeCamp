@@ -1124,8 +1124,8 @@ var padding = 40;
 var height = 600, width = 600, barWidth = width / barData.length;
 
 var yScale = d3.scaleLinear()
-	.domain([d3.min(barData, d => d[1]), d3.max(barData, d => d[1])])
-	.range([height - padding, padding]);
+	.domain([d3.max(barData, d => d[1]), d3.min(barData, d => d[1])])
+	.range([padding, height - padding]);
 
 
 var xScale = d3.scaleTime()
@@ -1155,9 +1155,9 @@ svg.selectAll("rect")
 	.enter()
 	.append("rect")
 	.attr("width", barWidth)
-	.attr("height", d => yScale(d[1]))
+	.attr("height", d => height - yScale(d[1]))
 	.attr("x", d => xScale(new Date(d[0])))
-	.attr("y", d => yScale(d[1]))
+	.attr("y", d => yScale(d[1]) - padding)
 	.attr("fill", 'blue')
   .on('mouseover', function(d) {
 
@@ -1190,6 +1190,6 @@ svg.append("g")
   .call(yAxis);
 
 
-console.log(barData);
+console.log(yScale(barData[0][1]));
 
 </script>
