@@ -1,6 +1,6 @@
 var height = 800;
 var width = 800;
-var padding = 20;
+var padding = 30;
 
 var monthMap = {"1": "Jan", "2": "Feb", "3": "Mar", "4": "Apr", "5": "May", "6": "Jun", "7": "Jul", "8": "Aug", "9": "Sep", "10": "Oct", "11": "Nov", "12": "Dec"};
 
@@ -15779,17 +15779,20 @@ var baseVariance = data.baseVariance;
 var wholeData = data.monthlyVariance;
 
 var xElements = d3.set(wholeData.map(item => item.year)).values();
-var yElements = d3.set(wholeData.map(item => item.month)).values().map(item => monthMap[item]);
+var yElements = d3.set(wholeData.map(item => item.month)).values();
+
+var xScale = d3.scaleLinear()
+	.domain([xElements[0], xElements[xElements.length - 1]])
+	.range([0, width]);
+
+var yScale = d3.scaleLinear()
+	.domain([yElements[0], yElements[11]])
+	.range([0, height - 150]);
 
 
-var xScale = d3.scaleOrdinal()
-	.domain(xElements)
-	.range([0, xElements.length * 20]);
-
-var yScale = d3.scaleOrdinal()
-	.domain(yElements)
-	.range([0, yElements.length * 20]);
-
+var colorScale = d3.scaleLinear()
+	.domain([d3.min(wholeData, data => data.variance), d3.max(wholeData, data => data.variance)])
+	.range(["blue", "red"]);
 
 var xAxis = d3.axisBottom(xScale);
 var yAxis = d3.axisLeft(yScale);
@@ -15802,18 +15805,28 @@ var svg = d3.select("body")
 
 
 
+svg.selectAll("rect")
+	.data(wholeData)
+	.enter()
+	.append("rect")
+	.attr("width", 10)
+	.attr("height", 10)
+	.attr("x", d => xScale(d.year))
+	.attr("y", d => yScale(d.month))
+	.attr("fill", d => colorScale(d.variance));
+
 
 
 svg.append("g")
-	.attr("transform", "translate(30, 30)")
+	.attr("transform", "translate(0, " + (height - padding) + ")")
 	.call(xAxis);
 
 svg.append("g")
-	.attr("transform", "translate(50, 50)")
+	.attr("transform", "translate(" + padding + ", 100)")
 	.call(yAxis);
 
 
 
-console.log(yElements);
+console.log(wholeData);
 
 
