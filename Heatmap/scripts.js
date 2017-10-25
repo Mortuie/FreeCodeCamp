@@ -1,5 +1,5 @@
 var height = 800;
-var width = 800;
+var width = 1000;
 var padding = 30;
 
 var monthMap = {"1": "Jan", "2": "Feb", "3": "Mar", "4": "Apr", "5": "May", "6": "Jun", "7": "Jul", "8": "Aug", "9": "Sep", "10": "Oct", "11": "Nov", "12": "Dec"};
@@ -15781,21 +15781,35 @@ var wholeData = data.monthlyVariance;
 var xElements = d3.set(wholeData.map(item => item.year)).values();
 var yElements = d3.set(wholeData.map(item => item.month)).values();
 
+var minMonth = d3.min(yElements, d => parseInt(d));
+var maxMonth = d3.max(yElements, d => parseInt(d));
+
+var minYear = d3.min(xElements);
+var maxYear = d3.max(xElements);
+
 var xScale = d3.scaleLinear()
-	.domain([xElements[0], xElements[xElements.length - 1]])
-	.range([0, width]);
+	.domain([minYear, maxYear])
+	.range([padding, (maxYear - minYear)]);
 
 var yScale = d3.scaleLinear()
-	.domain([yElements[0], yElements[11]])
-	.range([0, height - 150]);
+	.domain([maxMonth, minMonth])
+	.range([100, height - padding - 30]);
+
+
+
+
+
 
 
 var colorScale = d3.scaleLinear()
-	.domain([d3.min(wholeData, data => data.variance), d3.max(wholeData, data => data.variance)])
-	.range(["blue", "red"]);
+	.domain([d3.min(wholeData, data => data.variance), 0 ,d3.max(wholeData, data => data.variance)])
+	.range(["blue", "green", "red"]);
 
-var xAxis = d3.axisBottom(xScale);
-var yAxis = d3.axisLeft(yScale);
+var xAxis = d3.axisBottom(xScale)
+	.tickFormat(d3.format("d"));
+
+var yAxis = d3.axisLeft(yScale)
+	.tickFormat(d3.format("d"));
 
 
 var svg = d3.select("body")
@@ -15809,8 +15823,8 @@ svg.selectAll("rect")
 	.data(wholeData)
 	.enter()
 	.append("rect")
-	.attr("width", 10)
-	.attr("height", 10)
+	.attr("width", 30)
+	.attr("height", 30)
 	.attr("x", d => xScale(d.year))
 	.attr("y", d => yScale(d.month))
 	.attr("fill", d => colorScale(d.variance));
@@ -15822,11 +15836,11 @@ svg.append("g")
 	.call(xAxis);
 
 svg.append("g")
-	.attr("transform", "translate(" + padding + ", 100)")
+	.attr("transform", "translate(" + padding + ", 0)")
 	.call(yAxis);
 
 
 
-console.log(wholeData);
+console.log(yElements);
 
 
