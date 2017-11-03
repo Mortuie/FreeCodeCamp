@@ -3,7 +3,7 @@ var width = 1400;
 var padding = 30;
 
 var monthMap = {"1": "Jan", "2": "Feb", "3": "Mar", "4": "Apr", "5": "May", "6": "Jun", "7": "Jul", "8": "Aug", "9": "Sep", "10": "Oct", "11": "Nov", "12": "Dec"};
-
+var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 var data = {
   "baseTemperature": 8.66,
   "monthlyVariance": [
@@ -15796,11 +15796,11 @@ var maxYear = d3.max(xElements);
 
 var xScale = d3.scaleLinear()
 	.domain([minYear, maxYear])
-	.range([padding, padding + (xElements.length * itemWidth)]);
+	.range([3 * padding, padding + (xElements.length * itemWidth)]);
 
 
 var yScale = d3.scaleLinear()
-	.domain([maxMonth, minMonth])
+	.domain([minMonth, maxMonth])
 	.range([padding, padding + (yElements.length * itemHeight)]);
 
 
@@ -15809,10 +15809,19 @@ var colorScale = d3.scaleLinear()
 	.range(["red", "green", "blue"]);
 
 var xAxis = d3.axisBottom(xScale)
-	.tickFormat(d3.format("d"));
+	.tickFormat(d3.format("d"))
+    .ticks(30);
 
 var yAxis = d3.axisLeft(yScale)
 	.tickFormat(d3.format("d"));
+
+
+var tooltip = d3.select("body")
+    .append("div")
+    .style("position", "absolute")
+    .style("padding", "0 10px")
+    .style("background", "white")
+    .style("opacity", 0);
 
 
 var svg = d3.select("body")
@@ -15830,7 +15839,22 @@ svg.selectAll("rect")
 	.attr("height", realHeight)
 	.attr("x", d => xScale(d.year))
 	.attr("y", d => yScale(d.month))
-	.attr("fill", d => colorScale(d.variance));
+	.attr("fill", d => colorScale(d.variance))
+    .on("mouseover", d => {
+        tooltip.html("BANTER")
+        .style("left", (d3.event.pageX) - 35 + "px")
+        .style("top", (d3.event.pageY) - 30 + "px")
+        .style("opacity", 0.9);
+
+
+        console.log(d);
+    })
+    .on("mouseout", d => {
+        tooltip.style("opacity", 0);
+
+
+
+    });
 
 
 
@@ -15838,9 +15862,18 @@ svg.append("g")
 	.attr("transform", "translate(0, " + (height - padding) + ")")
 	.call(xAxis);
 
-svg.append("g")
-	.attr("transform", "translate(" + padding + ", 0)")
-	.call(yAxis);
+// svg.append("g")
+// 	.attr("transform", "translate(" + (3 * padding) + ", 0)")
+// 	.call(yAxis);
+
+
+svg.selectAll("g.text")
+    .data(months)
+    .enter()
+    .append("text")
+    .text(d => d)
+    .attr("x", 0)
+    .attr("y", (d, i) => (i * realHeight) + padding + 30);
 
 
 
