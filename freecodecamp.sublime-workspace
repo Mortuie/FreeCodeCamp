@@ -1,0 +1,717 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"rec",
+				"recipeBox"
+			],
+			[
+				"loca",
+				"localRecipes"
+			],
+			[
+				"toggl",
+				"toggleEditModal"
+			],
+			[
+				"edit",
+				"editModal"
+			],
+			[
+				"local",
+				"localRecipes"
+			],
+			[
+				"get",
+				"getNextFreeSlot"
+			],
+			[
+				"ed",
+				"editIngredients"
+			],
+			[
+				"changeE",
+				"changeNewIngredients"
+			],
+			[
+				"text",
+				"textArea"
+			],
+			[
+				"new",
+				"newIngredients"
+			],
+			[
+				"next",
+				"nextNumber"
+			],
+			[
+				"changeNew",
+				"changeNewIngredients"
+			],
+			[
+				"change",
+				"changeNewName"
+			],
+			[
+				"show",
+				"showNewRecipeModal"
+			],
+			[
+				"close",
+				"closeRecipeModal"
+			],
+			[
+				"open",
+				"openRecipeModal"
+			],
+			[
+				"inger",
+				"ingredients"
+			],
+			[
+				"def",
+				"defaultCollapsed"
+			],
+			[
+				"react",
+				"react-bootstrap"
+			],
+			[
+				"back",
+				"background"
+			],
+			[
+				"set",
+				"setDefaultCloseOperation"
+			],
+			[
+				"GUI",
+				"GUIExample"
+			],
+			[
+				"Side",
+				"SideNav"
+			],
+			[
+				"cont",
+				"container"
+			],
+			[
+				"player",
+				"playerTurn"
+			],
+			[
+				"strc",
+				"strictGame"
+			],
+			[
+				"clear",
+				"clearTimeout"
+			],
+			[
+				"time",
+				"timeoutsForGameLoop"
+			],
+			[
+				"tim",
+				"timeoutsForGameLoop"
+			],
+			[
+				"pl",
+				"playerCountUpdate"
+			],
+			[
+				"start",
+				"startGame"
+			],
+			[
+				"fle",
+				"flexDirection"
+			],
+			[
+				"Navbar",
+				"NavbarBrand"
+			],
+			[
+				"backl",
+				"background-color"
+			],
+			[
+				"li",
+				"link\tTag"
+			],
+			[
+				"play",
+				"playerCount"
+			],
+			[
+				"pla",
+				"playerTurn"
+			],
+			[
+				"ra",
+				"randomNumber"
+			],
+			[
+				"star",
+				"startGame"
+			],
+			[
+				"background",
+				"background-color"
+			],
+			[
+				"bacl",
+				"background-color"
+			],
+			[
+				"align",
+				"align-items"
+			],
+			[
+				"bacgroun",
+				"background-color"
+			],
+			[
+				"margin",
+				"margin-right"
+			],
+			[
+				"border",
+				"border-radius"
+			],
+			[
+				"last",
+				"lastEquals"
+			],
+			[
+				"las",
+				"lastEquals"
+			],
+			[
+				"cu",
+				"currentCalculation"
+			],
+			[
+				"sc",
+				"screen"
+			],
+			[
+				"add",
+				"addToValue"
+			],
+			[
+				"box-s",
+				"box-shadow"
+			],
+			[
+				"ali",
+				"align-items"
+			],
+			[
+				"stream",
+				"streamObject"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"min",
+				"min-height"
+			],
+			[
+				"backgrou",
+				"background-color"
+			],
+			[
+				"par",
+				"partly-cloudy-day"
+			],
+			[
+				"max",
+				"max-height"
+			],
+			[
+				"flex",
+				"flex-column"
+			],
+			[
+				"flex-",
+				"flex-direction"
+			],
+			[
+				"g",
+				"getNextNode"
+			],
+			[
+				"c",
+				"counter"
+			],
+			[
+				"inde",
+				"indexGiven"
+			],
+			[
+				"so",
+				"Solution"
+			],
+			[
+				"de",
+				"divideBy2"
+			],
+			[
+				"base",
+				"baseConverter"
+			],
+			[
+				"sol",
+				"sol2"
+			],
+			[
+				"d",
+				"divideBy2"
+			],
+			[
+				"__",
+				"__init__"
+			],
+			[
+				"if",
+				"ifmain\tif __name__ == '__main__'"
+			],
+			[
+				"in",
+				"inline"
+			],
+			[
+				"list-",
+				"list-style-type"
+			],
+			[
+				"fl",
+				"flatDict"
+			],
+			[
+				"f",
+				"flatten"
+			],
+			[
+				"flat",
+				"flatDict"
+			],
+			[
+				"name",
+				"nameOfMap"
+			],
+			[
+				"map",
+				"mapWidth"
+			],
+			[
+				"ma",
+				"mapHeight"
+			],
+			[
+				"setMa",
+				"setMapWidth"
+			],
+			[
+				"gol",
+				"goldRequired"
+			],
+			[
+				"go",
+				"goldString"
+			],
+			[
+				"job",
+				"jobjectArray"
+			],
+			[
+				"nam",
+				"nameOfMap"
+			],
+			[
+				"rea",
+				"Java_Map_readMap"
+			],
+			[
+				"j",
+				"jobject"
+			],
+			[
+				"re",
+				"returnableAmount"
+			],
+			[
+				"wh",
+				"wholeMap"
+			],
+			[
+				"p",
+				"placeHolder"
+			],
+			[
+				"num",
+				"numberOfTimes"
+			],
+			[
+				"m",
+				"mapArray"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 94.0,
+		"last_filter": "ssbab",
+		"selected_items":
+		[
+			[
+				"ssbab",
+				"Set Syntax: JavaScript (Babel)"
+			],
+			[
+				"Space",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"Packa",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: Instal",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"package control: insta",
+				"Package Control: Install Package"
+			],
+			[
+				"package control: remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"package control: in",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: Remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: Remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: Insta",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: Install",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: In",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 479.0
+	},
+	"console":
+	{
+		"height": 139.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/mortuie/Documents/Programming/FreeCodeCamp"
+	],
+	"file_history":
+	[
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/recipebox/src/App.js",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/recipebox/src/Recipe.js",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/recipebox/src/index.js",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/camperleaderboard/src/Leaderboard.js",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/camperleaderboard/src/App.js",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/recipebox/public/index.html",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/recipebox/src/App.css",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/recipebox/src/Recipebox.js",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/camperleaderboard/node_modules/react-scripts/config/jest/babelTransform.js",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/recipebox/src/reactlogo.png",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/recipebox/public/favicon.ico",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/camperleaderboard/src/index.css",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/camperleaderboard/src/index.js",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/camperleaderboard/src/NavBar.js",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/camperleaderboard/public/index.css",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/camperleaderboard/public/index.html",
+		"/home/mortuie/Desktop/test.java",
+		"/home/mortuie/Desktop/GUIExample.java",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/camperleaderboard/src/Sidenav.js",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/camperleaderboard/src/App.css",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/camperleaderboard/src/App.test.js",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/CamperLeaderboard/App.test.js",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/CamperLeaderboard/App.js",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/CamperLeaderboard/README.md",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/CamperLeaderboard/app.json",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/CamperLeaderboard/package.json",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/SimonGame/styles.css",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/SimonGame/index.html",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/SimonGame/scripts.js",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/react-markdown/public/index.html",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/react-markdown/public/styles.css",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/react-markdown/src/index.js",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/react-markdown/src/TextInput.js",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/react-markdown/src/MarkdownView.js",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/react-markdown/src/MainView.js",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/react-markdown/src/syles.css",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/README.md",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/react-markdown/src/App.test.js",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/Pomodoro/index.html",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/Pomodoro/scripts.js",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/Pomodoro/styles.css",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/Calculator/styles.css",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/Calculator/index.html",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/Calculator/scripts.js",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/LocalWeatherApp/index.html",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/pomodoro/src/App.js",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/pomodoro/src/ClockFace.js",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/pomodoro/src/index.js",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/pomodoro/public/index.html",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/TwitchAPI/script.js",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/TwitchAPI/index.html",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/TwitchAPI/styles.css",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/WikipediaViewer/index.html",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/LocalWeatherApp/script.js",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/WikipediaViewer/script.js",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/WikipediaViewer/styles.css",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/RandomQuoteMachine/index.html",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/LocalWeatherApp/styles.css",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/LocalWeatherApp/apirequests.js",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/LocalWeatherApp/.eslintrc.js",
+		"/home/mortuie/.config/sublime-text-3/Packages/SublimeLinter/SublimeLinter.sublime-settings",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/LocalWeatherApp/config.js",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/RandomQuoteMachine/styles.css",
+		"/home/mortuie/Documents/Programming/FreeCodeCamp/RandomQuoteMachine/getQuotes.js",
+		"/home/mortuie/Documents/Programming/Algorithms-Datastructure-School/LinearDatastructures/LinkedLists/OrderedList.py",
+		"/home/mortuie/Documents/Programming/Algorithms-Datastructure-School/LinearDatastructures/LinkedLists/UnorderedList.py",
+		"/home/mortuie/Documents/Programming/Algorithms-Datastructure-School/README.md",
+		"/home/mortuie/Documents/Programming/Algorithms-Datastructure-School/LinearDatastructures/Queues/backwardQueue.py",
+		"/home/mortuie/Documents/Programming/Algorithms-Datastructure-School/LinearDatastructures/Queues/forwardQueue.py",
+		"/home/mortuie/Documents/Programming/Algorithms-Datastructure-School/LinearDatastructures/Deque/backwardDeque.py",
+		"/home/mortuie/Documents/Programming/Algorithms-Datastructure-School/LinearDatastructures/Deque/forwardDeque.py",
+		"/home/mortuie/Documents/Programming/Algorithms-Datastructure-School/LinearDatastructures/forwardStack.py",
+		"/home/mortuie/Documents/Programming/Algorithms-Datastructure-School/LinearDatastructures/backStack.py",
+		"/home/mortuie/Desktop/pramp.py",
+		"/home/mortuie/Documents/Programming/Dungeons-of-Doom-Extended/src/Map.h",
+		"/home/mortuie/Documents/Programming/Dungeons-of-Doom-Extended/src/DODServerGUI.java",
+		"/home/mortuie/Documents/Programming/Dungeons-of-Doom-Extended/src/Map.c",
+		"/home/mortuie/Documents/Programming/Dungeons-of-Doom-Extended/src/GameLogic.java",
+		"/home/mortuie/Documents/Programming/Dungeons-of-Doom-Extended/src/Map.java",
+		"/home/mortuie/Desktop/TestingJNI/HelloWorld.c",
+		"/home/mortuie/Documents/Programming/Dungeons-of-Doom-Extended/src/maps/example_map.txt",
+		"/home/mortuie/Documents/Programming/Dungeons-of-Doom-Extended/src/hs_err_pid14768.log",
+		"/home/mortuie/Documents/Programming/Dungeons-of-Doom-Extended/src/hs_err_pid14732.log",
+		"/home/mortuie/Documents/Programming/Dungeons-of-Doom-Extended/src",
+		"/home/mortuie/Desktop/TestingJNI/HelloWorld.java",
+		"/home/mortuie/Desktop/TestingJNI/HelloWorld.h",
+		"/home/mortuie/Documents/Programming/Dungeons-of-Doom-Extended/src/example_map.txt",
+		"/home/mortuie/Documents/Programming/Dungeons-of-Doom-Extended/src/MapJNI.c",
+		"/home/mortuie/Documents/Programming/Dungeons-of-Doom-Extended/src/MapJNI.h",
+		"/home/mortuie/Documents/Programming/Dungeons-of-Doom-Extended/src/MapJNI.java",
+		"/home/mortuie/Documents/Programming/Dungeons-of-Doom-Extended/.gitignore",
+		"/home/mortuie/Documents/Programming/Dungeons-of-Doom-Extended/src/test",
+		"/home/mortuie/Documents/Programming/Dungeons-of-Doom-Extended/maps/example_map.txt"
+	],
+	"find":
+	{
+		"height": 38.0
+	},
+	"find_in_files":
+	{
+		"height": 98.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"collapsed",
+			"nextNUmber",
+			"nextNumber",
+			"nigga",
+			"changeEditIngredients",
+			"defaultCollapsed",
+			"r",
+			");\n",
+			"item",
+			"item\n",
+			"clear",
+			"strict",
+			"reset",
+			"console.log(\"NIGGA\");",
+			"setTimeount",
+			"computerTurn",
+			"500",
+			"2000",
+			"timer",
+			"newDate",
+			"newDate\t\t",
+			"test",
+			"parseInt",
+			"screen",
+			"total",
+			"button",
+			"background-color",
+			"\n\t",
+			"black",
+			"x",
+			"thing",
+			"placeHolder"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"j"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"folders":
+	[
+		{
+			"path": "/home/mortuie/Documents/Programming/FreeCodeCamp"
+		}
+	],
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 25.0
+	},
+	"input":
+	{
+		"height": 36.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "",
+	"replace":
+	{
+		"height": 46.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"ssbab",
+				"camperleaderboard/node_modules/react-scripts/config/jest/babelTransform.js"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 207.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
