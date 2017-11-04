@@ -15842,11 +15842,13 @@ svg.selectAll("rect")
 	.attr("fill", d => colorScale(d.variance))
     .on("mouseover", d => {
 
-    tooltip.html("" + d.month + " " + d.year + " " + d.variance)
+    tooltip.html("" + monthMap[d.month] + " " + d.year + " " + d.variance)
         .style("left", (d3.event.pageX) - 35 + "px")
         .style("top", (d3.event.pageY) - 30 + "px")
         .style("opacity", 0.9);
 
+
+        console.log(d.month);
 
     })
     .on("mouseout", d => {
