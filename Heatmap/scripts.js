@@ -15841,18 +15841,18 @@ svg.selectAll("rect")
 	.attr("y", d => yScale(d.month))
 	.attr("fill", d => colorScale(d.variance))
     .on("mouseover", d => {
-        tooltip.html("BANTER")
+
+        tooltip.html(d.month + " " + d.year + " " + d.variance);
         .style("left", (d3.event.pageX) - 35 + "px")
         .style("top", (d3.event.pageY) - 30 + "px")
         .style("opacity", 0.9);
 
 
-        console.log(d);
+        console.log(d.month);
     })
     .on("mouseout", d => {
+
         tooltip.style("opacity", 0);
-
-
 
     });
 
@@ -15861,10 +15861,6 @@ svg.selectAll("rect")
 svg.append("g")
 	.attr("transform", "translate(0, " + (height - padding) + ")")
 	.call(xAxis);
-
-// svg.append("g")
-// 	.attr("transform", "translate(" + (3 * padding) + ", 0)")
-// 	.call(yAxis);
 
 
 svg.selectAll("g.text")
