@@ -1,8 +1,8 @@
-var height = 800;
+var height = 700;
 var width = 1400;
 var padding = 30;
 
-var monthMap = {"1": "Jan", "2": "Feb", "3": "Mar", "4": "Apr", "5": "May", "6": "Jun", "7": "Jul", "8": "Aug", "9": "Sep", "10": "Oct", "11": "Nov", "12": "Dec"};
+var monthMap = {"1": "January", "2": "February", "3": "March", "4": "April", "5": "May", "6": "June", "7": "July", "8": "August", "9": "September", "10": "October", "11": "November", "12": "December"};
 var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 var data = {
   "baseTemperature": 8.66,
@@ -15772,11 +15772,12 @@ var data = {
       "month": 9,
       "variance": 0.870
     }
-  ]
-};
+  ]};
+var varianceColors = ["#007DE8", "#49A0EB", "#81BAEB", "#35E82E", "#7DF279", "#E69797", "#F25E5E", "#E30909"]
+
 
 var itemWidth = 5;
-var itemHeight = 55;
+var itemHeight = 45;
 
 var realHeight = itemHeight + 5;
 
@@ -15804,9 +15805,9 @@ var yScale = d3.scaleLinear()
 	.range([padding, padding + (yElements.length * itemHeight)]);
 
 
-var colorScale = d3.scaleLinear()
-	.domain([d3.min(wholeData, data => data.variance), 0 , d3.max(wholeData, data => data.variance)])
-	.range(["red", "green", "blue"]);
+var colorScale = d3.scaleQuantile()
+	.domain([d3.min(wholeData, data => data.variance), d3.max(wholeData, data => data.variance)])
+	.range(varianceColors);
 
 var xAxis = d3.axisBottom(xScale)
 	.tickFormat(d3.format("d"))
@@ -15842,13 +15843,12 @@ svg.selectAll("rect")
 	.attr("fill", d => colorScale(d.variance))
     .on("mouseover", d => {
 
-    tooltip.html("" + monthMap[d.month] + " " + d.year + " " + d.variance)
-        .style("left", (d3.event.pageX) - 35 + "px")
-        .style("top", (d3.event.pageY) - 30 + "px")
+    	tooltip.html("Variance: " + d.variance + "°C<br>Date: " + monthMap[d.month] + ", " + d.year)
+        .style("left", (d3.event.pageX) - 100 + "px")
+        .style("top", (d3.event.pageY) - 100 + "px")
         .style("opacity", 0.9);
 
 
-        console.log(d.month);
 
     })
     .on("mouseout", d => {
@@ -15860,7 +15860,7 @@ svg.selectAll("rect")
 
 
 svg.append("g")
-	.attr("transform", "translate(0, " + (height - padding) + ")")
+	.attr("transform", "translate(0, " + (height - 80) + ")")
 	.call(xAxis);
 
 
