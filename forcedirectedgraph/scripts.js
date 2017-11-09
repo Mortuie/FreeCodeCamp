@@ -1,17 +1,31 @@
 var width = 750;
 var height = 750;
 
-
 var svg = d3.select("div")
 	.append("svg")
 	.attr("width", width)
 	.attr("height", height);
 
 var simulation = d3.forceSimulation()
-	.force("charge", d3.forceManyBody().strength(-10))
+	.force("charge", d3.forceManyBody().strength(-20))
 	.force("center", d3.forceCenter(width / 2, height / 2))
 	.force("link", d3.forceLink().id(link => link.id).strength(link => link.strength));
 
+var checkWidthBounds = (x) => {
+	if (x < 30) {
+		return 30;
+	} else if (x > width - 50) {
+		return width - 50;
+	} return x;
+}
+
+var checkHeightBounds = (y) => {
+	if (y < 30) {
+		return 30;
+	} else if (y > height - 50) {
+		return height - 50;
+	} return y;
+}
 
 const dragDrop = d3.drag()
 	.on("start", node => {
@@ -73,18 +87,18 @@ d3.json("https://raw.githubusercontent.com/DealPete/forceDirected/master/countri
 
 	simulation.nodes(nodes).on("tick", () => {
 		nodeElements
-			.attr("x", node => node.x)
-			.attr("y", node => node.y);
+			.attr("x", node => checkWidthBounds(node.x))
+			.attr("y", node => checkHeightBounds(node.y));
 
 		textElements
-			.attr("x", node => node.x)
-			.attr("y", node => node.y);
+			.attr("x", node => checkWidthBounds(node.x))
+			.attr("y", node => checkHeightBounds(node.y));
 
 		linkElements
-			.attr("x1", link => link.source.x)
-			.attr("y1", link => link.source.y)
-			.attr("x2", link => link.target.x)
-			.attr("y2", link => link.target.y);
+			.attr("x1", link => checkWidthBounds(link.source.x))
+			.attr("y1", link => checkHeightBounds(link.source.y))
+			.attr("x2", link => checkWidthBounds(link.target.x))
+			.attr("y2", link => checkHeightBounds(link.target.y));
 
 	});
 
