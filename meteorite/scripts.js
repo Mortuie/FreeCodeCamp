@@ -25,18 +25,18 @@ d3.json("https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/mas
 		.range([height, 0]);
 
 	const radialScale = d3.scaleLog()
-		.domain([1e-6, 23000000])
-		.range([10, 20]);
+		.domain([1e-6, max_mass])
+		.range([1, 5]);
 
-	console.log(radialScale(2000));
 
 	var resizeRadius = (size) => {
-		if (size === null || parseInt(size) < 1e-6) {
+		if (size === null || parseInt(size) <= 1e-6) {
 			return 1e-6;
 		} else {
 			return radialScale(size);
 		}
 	}
+	console.log(resizeRadius(0));
 
 
 	const svg = d3.select("body")
@@ -61,7 +61,7 @@ d3.json("https://raw.githubusercontent.com/FreeCodeCamp/ProjectReferenceData/mas
 		.append("circle")
 		.attr("cx", d => xScale((d.properties.reclong)))
 		.attr("cy", d => yScale(d.properties.reclat))
-		.attr("r", d => resizeRadius(d))
+		.attr("r", d => resizeRadius(d.properties.mass))
 		.attr("fill", "red");
 
 
