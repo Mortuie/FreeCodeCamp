@@ -14,12 +14,13 @@ app.get("/", (req, res) => {
 app.post("/:datestring", (req, res) => {
 	var ans = {unix: null, natural: null};
 	var check = decodeURI(req.params.datestring);
-	console.log(check);
 
 	var date = null;
 	if (isNumber(check)) {
 		date = new Date(Number(check) * 1000);
-	} else if (isDate(check)) {
+		console.log("num");
+	} else if (!isDate(check)) {
+		console.log("date");
 		date = new Date(check);
 	} else {
 		res.end(JSON.stringify(ans));
@@ -29,6 +30,7 @@ app.post("/:datestring", (req, res) => {
 	var day = date.getDate();
 	var month = monthMap[Number(date.getMonth())];
 	var year = date.getUTCFullYear();
+	console.log(new Date(check).getUTCFullYear());
 	var unix = Date.now(date);
 	console.log("unix: " + unix);
 
@@ -38,25 +40,15 @@ app.post("/:datestring", (req, res) => {
 	res.end(JSON.stringify(ans));
 
 	
-	res.end("Calculated");
 });
 
 var isNumber = (toCheck) => {
-	try {
-		var number = Number(toCheck);
-		return true;
-	} catch (e) {
-		return false;
-	}
+	return !isNaN(parseInt(toCheck));
 }
 
 var isDate = (toCheck) => {
-	try {
-		var date = new Date(toCheck);
-		return true;
-	} catch (e) {
-		return false;
-	}
+	console.log("Invalid Date" !== new Date(toCheck));
+	return (new Date(toCheck) !== "Invalid Date");
 }
 
 
