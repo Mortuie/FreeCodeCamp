@@ -10,7 +10,8 @@
   "devDependencies": {},
   "scripts": {
     "test": "mocha",
-    "start": "supervisor server.js"
+    "s": "supervisor server.js",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC"

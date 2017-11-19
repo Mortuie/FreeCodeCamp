@@ -5,10 +5,9 @@ const PORT = 8000;
 
 const monthMap = {0: "January", 1: "February", 2: "March", 3: "April", 4: "May", 5: "June", 6: "July", 7: "August", 8: "September", 9: "October", 10: "November", 11: "December"};
 
-
+app.use(express.static("static"));
 app.get("/", (req, res) => {
-
-	res.end(new Date().toDateString());
+	res.sendFile('index.html',{root: 'app'});
 });
 
 app.get("/*", (req, res) => {
@@ -43,10 +42,8 @@ var getNatural = (date) => {
 }
 
 
-var server = http.createServer(app).listen(PORT, () => {
-	console.log("Listening on port: %s", PORT);
-});
+// var server = http.createServer(app).listen(PORT, () => {
+// 	console.log("Listening on port: %s", PORT);
+// });
 
-exports._test = {
-	getNat: getNatural,
-}
+var server = http.createServer(app).listen(process.env.PORT);

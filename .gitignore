@@ -2,3 +2,4 @@ LocalWeatherApp/config.js
 CNAME
 *.swp
 testPortfolio
+/node_modules
