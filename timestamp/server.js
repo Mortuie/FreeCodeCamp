@@ -11,47 +11,42 @@ app.get("/", (req, res) => {
 	res.end(new Date().toDateString());
 });
 
-app.post("/:datestring", (req, res) => {
+app.get("/*", (req, res) => {
 	var ans = {unix: null, natural: null};
-	var check = decodeURI(req.params.datestring);
-
-	var date = null;
-	if (isNumber(check)) {
-		date = new Date(Number(check) * 1000);
-		console.log("num");
-	} else if (!isDate(check)) {
-		console.log("date");
-		date = new Date(check);
-	} else {
-		res.end(JSON.stringify(ans));
-	}
+	var check = decodeURI(req.url).substr(1);
 
 
-	var day = date.getDate();
-	var month = monthMap[Number(date.getMonth())];
-	var year = date.getUTCFullYear();
-	console.log(new Date(check).getUTCFullYear());
-	var unix = Date.now(date);
-	console.log("unix: " + unix);
-
-	ans.unix = unix;
-	ans.natural = "" + month + " " + day + ", " + year; 
-
-	res.end(JSON.stringify(ans));
+	if (isNaN(check)) {
+		var date = new Date(check);
+		if (!isNaN(date.getTime())) {
+			ans.unix = date.getTime() / 1000;
+			ans.natural = getNatural(date);
+		} 
+	} else if (!isNaN(check)) {
+		var input = parseInt(check);
+		var date = new Date(input * 1000);
+		if (!isNaN(date.getTime())) {
+			ans.unix = input;
+			ans.natural = getNatural(date);
+		}
+	} res.send(ans);
 
 	
 });
 
-var isNumber = (toCheck) => {
-	return !isNaN(parseInt(toCheck));
-}
-
-var isDate = (toCheck) => {
-	console.log("Invalid Date" !== new Date(toCheck));
-	return (new Date(toCheck) !== "Invalid Date");
+var getNatural = (date) => {
+	var day = date.getDate();
+	var month = monthMap[parseInt(date.getMonth())];
+	var year = date.getFullYear();
+	
+	return month + " " + day + ", " + year;
 }
 
 
 var server = http.createServer(app).listen(PORT, () => {
 	console.log("Listening on port: %s", PORT);
 });
+
+exports._test = {
+	getNat: getNatural,
+}
