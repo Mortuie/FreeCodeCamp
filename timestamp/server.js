@@ -42,10 +42,6 @@ var getNatural = (date) => {
 }
 
 
-// var server = http.createServer(app).listen(PORT, () => {
-// 	console.log("Listening on port: %s", PORT);
-// });
-
-
-// heroku deploy
-var server = http.createServer(app).listen(process.env.PORT);
+var server = http.createServer(app).listen(process.env.PORT || PORT, () => {
+	console.log("Listening on port: %s", (process.env.PORT || PORT));
+});

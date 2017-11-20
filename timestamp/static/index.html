@@ -2,8 +2,64 @@
 <html>
 <head>
 	<title>Timestamp API</title>
+	<style type="text/css">
+		body {
+			text-align: center;
+		}
+
+		.header {
+			font-size: 40px;
+		}
+
+		.mainBody {
+			height: 500px;
+			width: 500px;
+			margin: auto;
+		}
+
+		footer {
+			margin-top: 50px;
+		}
+	</style>
 </head>
 <body>
-	<div>HI</div>
+	<div class="header">Welcome to the Timestamp Microservice</div>
+
+	<div class="mainBody">
+		<h2>Explanation:</h2>
+
+		<div>
+			This is the homepage of the application.<br><br>
+
+			If you want to send a query to the api, please visit <strong>url/querystring.</strong><br><br>
+
+			After this the API will determine whether or not your querystring contains a valid date format,
+			if it doesn't, you will get JSON will null as both entries. However if your querystring does 
+			contain a valid date. You will get a JSON back containing the unix and natural date.
+
+		</div>
+
+		<h3>Example:</h3>
+
+		<div>
+			url/December%2015,%202015
+			<br><br>
+			or
+			<br><br>
+			url/1450137600
+			<br><br>
+			will both yield:
+			<br>
+			JSON = { "unix": 1450137600, "natural": "December 15, 2015" }
+
+		</div>
+
+	</div>
+
+
+	<footer>
+		Coded by <a href="http://www.github.com/mortuie" target="_blank">Leon Boehmer</a><br>
+		Hosted on <a href="https://damp-thicket-24709.herokuapp.com/" target="_blank">Heroku</a>
+	</footer>
 </body>
 </html>
