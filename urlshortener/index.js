@@ -6,16 +6,16 @@ var url = require("./env.js");
 var app = express();
 var PORT = 8000;
 
-
+app.use(express.static("static"));
+app.get("/", (req, res) => {
+	res.sendFile("index.html", {root: "app"});
+});
 
 app.get("/new/*", (req, res) => {
 	var input = req.url.replace("/new/", "");
 	mongo.connect(url.u, (err, db) => {
 		if (err) throw err;
 
-
-
-		console.log("Connected to MongoDB: %s", url);
 		var con = db.collection("idurlmapping");
 
 		con.count().then(count => {
@@ -43,24 +43,23 @@ app.get("/new/*", (req, res) => {
 
 
 			} else {
-				res.send("Invalid URI....");
+				res.send(JSON.stringify({error: "Invalid URI...."}));	
 			}
 
 		});
 	});
 });
 
+app.get("/old/*", (req, res) => {
 
-app.get("/*", (req, res) => {
-
-	var input = req.url.replace("/", "");
+	var input = req.url.replace("/old/", "");
 
 	mongo.connect(url.u, (err, db) => {
 		var con = db.collection("idurlmapping");
 
 		con.find({short: input}).toArray((err, i) => {
 			if (i.length === 0) {
-				res.send("Invalid query, please check you entered the right code!");
+				res.send(JSON.stringify({error: "Invalid query, please check you entered the right code!"}));
 			} else {
 				res.redirect(i[0].long);
 			}
@@ -68,8 +67,9 @@ app.get("/*", (req, res) => {
 		});
 
 	});
+	
 
 });
 
 
-var server = http.createServer(app).listen(PORT);
+var server = http.createServer(app).listen(process.env.PORT || PORT);
