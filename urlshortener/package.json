@@ -1,18 +1,17 @@
 {
-  "name": "urlshortener",
+  "name": "testingmongo",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "test": "mocha",
-    "start": "node server.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.2",
-    "mocha": "^4.0.1",
     "mongodb": "^2.2.33",
+    "supervisor": "^0.12.0",
     "valid-url": "^1.0.9"
   }
 }
