@@ -16,7 +16,7 @@ These are all the links to the frontend projects, that I have completed during t
 - [Twitch API Viewer](http://twitchapi.mortuie.com/)
 - [Tictactoe](http://tictactoe.mortuie.com)
 
-## Data Visualisation Projects: 
+## Data Visualisation & React Projects: 
 These are all the links to the data visualisation projects, that I have completed. Technologies used: D3js, React, CSS, HTML.
 
 
