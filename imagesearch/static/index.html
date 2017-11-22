@@ -7,10 +7,31 @@
 			text-align: center;
 		}
 
+		footer {
+			position: absolute;
+			width: 95%;
+			bottom: 5px;		
+		}
 
+		.node {
+			height: 20px;
+		}
 	</style>
 </head>
 <body>
+	<h1>Image Search Abstraction Layer</h1>
 
+
+	<h3>How to use:</h3>
+
+	<h4>Visit <strong>url/api/latest</strong> to find the latest search queries in chronological order.</h4>
+
+	<h4>Visit <strong>url/api/imagesearch/[QUERY][?offset=[NUMBER]]</strong> to find images related to [QUERY] with a pagination of [NUMBER], defaults to 10.</h4>
+
+	<footer>
+		Coded by <a href="https://www.github.com/mortuie" target="_blank">Leon Boehmer</a>
+		using <a href="https://nodejs.org/en/" target="_blank"><img src="/img/nodejs.png" class="node"></a>
+		and <a href="https://www.mongodb.com/" target="_blank"><img src="/img/mongodb.jpg" class="node"></a>
+	</footer>
 </body>
 </html>
