@@ -87,11 +87,16 @@ app.get("/api/latest", (req, res) => {
 		db.close();
 	});
 
+});
 
-
+app.use(express.static("static"));
+app.get("/", (req, res) => {
+	res.sendFile("index.html", {root: "app"});
 
 
 });
+
+
 
 var server = http.createServer(app).listen(process.env.PORT || PORT, () => {
 	console.log("Listening on port: %s", process.env.PORT || PORT);
