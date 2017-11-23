@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>File Metadata</title>
+	<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+	<style type="text/css">
+		body {
+			background-color: #039be5;
+			font-family: 'Oswald', sans-serif;
+			text-align: center;
+		}
+
+		.form {
+			margin-top: 200px;
+			margin-right: auto;
+			margin-left: auto;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-content: center;
+			background-color: #006db3;
+			width: 20%;
+			height: 300px;
+		}
+
+		input {
+			font-family: 'Oswald', sans-serif;
+			font-size: 20px;
+		}
+
+		.submit {
+			width: 100px;
+		}
+
+
+
+		footer {
+			bottom: 6px;
+			position: absolute;
+			width: 95%;
+		}
+
+	</style>
+</head>
+<body>
+
+	<h1>File Metadata Microservice</h1>
+	<form class="form" enctype="multipart/form-data" method="post" action="/uploadfile">
+   		<input class="upload" name="myFile" type="file" />
+   		<input class="submit" type="submit" value="Submit"/>
+	</form>
+
+	<footer>Coded by <a href="https://www.github.com/mortuie" target="_blank">Leon Boehmer</a></footer>
+</body>
+</html>
