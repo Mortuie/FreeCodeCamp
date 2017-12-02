@@ -10,7 +10,7 @@ export default class Navigation extends React.Component {
 				<div>
 					<ul className={css(styles.nav)}>
 						<li className={css(styles.title)}><Link className={css(styles.links)} to="/dashboard">Voting App</Link></li>	
-						<li className={css(styles.listElements)}><Link className={css(styles.links)} to="/signout">Sign out</Link></li>
+						<li className={css(styles.listElements)}><a className={css(styles.links)}  onClick={() => this.props.signout()}>Sign out</a></li>
 						<li className={css(styles.listElements)}><Link className={css(styles.links)} to="/createpoll">Create Poll</Link></li>
 						<li className={css(styles.listElements)}><Link className={css(styles.links)} to="/dashboard">Dashboard</Link></li>
 					</ul>
@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 		padding: "14px 16px",
 		textDecoration: "none",
+		cursor: "pointer",
 	}
 });
 

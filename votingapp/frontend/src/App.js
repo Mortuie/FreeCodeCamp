@@ -12,11 +12,16 @@ export default class App extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			auth: false,
+			auth: true,
 
 		}
 
 
+	}
+
+
+	signout = () => {
+		this.setState({auth: false});
 	}
 
 
@@ -25,7 +30,7 @@ export default class App extends React.Component {
 	render() {
 		return (
 			<div>
-				<Navigation authenticated={this.state.auth}/>
+				<Navigation authenticated={this.state.auth} signout={this.signout}/>
 
 				<Switch>
 					<Route exact path="/" component={Dashboard} />
