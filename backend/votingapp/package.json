@@ -4,16 +4,15 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "supervisor server.js",
-    "client": "cd client && npm start",
-    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
+    "dev": "supervisor server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "concurrently": "^3.5.1",
     "express": "^4.16.2",
+    "http": "0.0.0",
     "supervisor": "^0.12.0"
   }
 }
