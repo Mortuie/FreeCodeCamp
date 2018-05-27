@@ -1,0 +1,29 @@
+header {
+    height: 100vh;
+}
+
+h1 {
+    color: black;
+}
+
+.header {
+    text-align: center;
+    width: 100%;
+
+}
+
+
+.header-text {
+    position: absolute;
+    top: 45%;
+    width: 100%;
+    text-align: center;
+    margin: auto;
+}
+
+.header-arrow {
+    bottom: 10px;
+    width: 90px;
+    height: 90px;
+    cursor: pointer;
+}
