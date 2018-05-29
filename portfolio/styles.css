@@ -1,5 +1,11 @@
+body {
+    background-color: #EBEBEB;
+}
+
 header {
     height: 100vh;
+    background-position: 72%;
+    background-image: url('./assets/background3.jpg');
 }
 
 h1 {
@@ -9,9 +15,7 @@ h1 {
 .header {
     text-align: center;
     width: 100%;
-
 }
-
 
 .header-text {
     position: absolute;
@@ -26,4 +30,23 @@ h1 {
     width: 90px;
     height: 90px;
     cursor: pointer;
+}
+
+.description {
+    margin: auto;
+    padding: 2rem;
+    width: 80%;
+    text-align: center;
+}
+
+.footer {
+    width: 100%;
+    text-align: center;
+    margin-top: 3rem;
+    padding: 2rem;
+}
+
+img {
+    height: 230px;
+    width: 230px;
 }
