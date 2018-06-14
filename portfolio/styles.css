@@ -1,11 +1,12 @@
 body {
     background-color: #EBEBEB;
+    font-family: 'IBM Plex Sans', sans-serif;
 }
 
 header {
     height: 100vh;
     background-position: 72%;
-    background-image: url('./assets/background3.jpg');
+    background-image: url('./assets/background.jpg');
 }
 
 h1 {
@@ -44,6 +45,13 @@ h1 {
     text-align: center;
     margin-top: 3rem;
     padding: 2rem;
+}
+
+.width {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem;
 }
 
 img {
