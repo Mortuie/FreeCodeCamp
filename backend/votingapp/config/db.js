@@ -1,10 +1,17 @@
 var mongoose = require('mongoose');
 var chalk = require('chalk');
 
-mongoose.connect('mongodb://localhost/votingapp').then(
+const init = function() {
+  mongoose.connect(process.env.MONGOURI).then(
     () => { console.log(chalk.green("\nConnected to the database")) },
     err => {
-        console.log(chalk.red("\nERROR: ", err));
-        process.exit(1);
+      console.log(chalk.red("\nERROR: ", err));
+      process.exit(1);
     },
-);
+  );
+}
+
+
+module.exports = {
+  init,
+};

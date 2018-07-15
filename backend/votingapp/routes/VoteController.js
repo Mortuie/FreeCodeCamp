@@ -1,5 +1,5 @@
 module.exports = app => {
     app.get('/vote', (req, res) => {
-        res.send("BANTER");
+        res.send("This seems to be working!");
     });
 };
