@@ -11,20 +11,16 @@ const optionSchema = new Schema({
         type: Number,
         required: true,
     },
-    question: {
+    option: {
         type: String,
         require: true,
     }
 });
 
-var voteSchema = Schema({
+var pollSchema = Schema({
     title: String,
     creator: String,
     options: [optionSchema],
 });
 
-var Vote = mongoose.model('Vote', voteSchema);
-
-module.exports = {
-    Vote
-};
+module.exports = mongoose.model('Poll', pollSchema);

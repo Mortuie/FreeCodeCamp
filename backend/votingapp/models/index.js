@@ -1,7 +1,7 @@
 const User = require('./User');
-const Vote = require('./Vote');
+const Poll = require('./Poll');
 
 module.exports = {
     User,
-    Vote,
+    Poll,
 };

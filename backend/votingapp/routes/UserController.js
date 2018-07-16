@@ -8,8 +8,12 @@ module.exports = (app, passport) => {
     res.json({ user: req.user });
   });
 
-  app.get('/', (req, res) => {
+  app.get('/auth/session/check', (req, res) => {
     res.json({ user: req.isAuthenticated() });
   });
 
+  app.get('/auth/logout', (req, res) => {
+    req.logout();
+    res.json({ user: 'Logged out' });
+  });
 };
