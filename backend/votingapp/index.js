@@ -11,7 +11,7 @@ const cookieParser = require('cookie-parser');
 const config = require('./config');
 
 
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
@@ -21,16 +21,16 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(session({ secret: "HEREGOESASECRET", resave: false, saveUninitialized: false }));
+app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 
 config.db.init();
 config.passportConfig(passport);
 
-Controllers.VoteController(app);
+Controllers.PollController(app);
 Controllers.UserController(app, passport);
 
 app.listen(port, () => {
-  console.log(chalk.green("Server running: Listening on port: " + port));
+  console.log(chalk.green('Server running: Listening on port: ' + port));
 });

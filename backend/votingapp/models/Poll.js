@@ -6,21 +6,30 @@ const optionSchema = new Schema({
     upvotes: {
         type: Number,
         required: true,
+        default: 0,
     },
     downvotes: {
         type: Number,
         required: true,
+        default: 0,
     },
-    option: {
+    name: {
         type: String,
-        require: true,
+        required: true,
     }
 });
 
 var pollSchema = Schema({
-    title: String,
-    creator: String,
-    options: [optionSchema],
+    title: {
+        type: String,
+        required: true,
+    },
+    creator: {
+        type: Object,
+        required: true,
+    },
+    options: [ optionSchema ],
 });
 
 module.exports = mongoose.model('Poll', pollSchema);
+

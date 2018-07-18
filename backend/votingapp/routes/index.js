@@ -1,7 +1,7 @@
-const VoteController = require('./VoteController');
+const PollController = require('./PollController');
 const UserController = require('./UserController');
 
 module.exports = {
-    VoteController,
+    PollController,
     UserController,
 };
