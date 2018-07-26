@@ -7,7 +7,8 @@ module.exports = {
         "ecmaFeatures": {
             "jsx": true
         },
-        "ecmaVersion": 2018
+        "ecmaVersion": 2018,
+        "sourceType": "module"
     },
     "plugins": [
         "react"
@@ -29,5 +30,5 @@ module.exports = {
             "error",
             "always"
         ]
-    }
+    },
 };
