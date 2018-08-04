@@ -8,7 +8,12 @@ const morgan = require('morgan');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 const config = require('./config');
+
+const corsOptions = {
+  origin: 'http://localhost:3001'
+};
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
@@ -21,6 +26,7 @@ app.use(cookieParser());
 app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(cors(corsOptions));
 
 config.db.init();
 config.passportConfig(passport);

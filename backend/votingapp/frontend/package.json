@@ -2,12 +2,10 @@
   "name": "frontend",
   "version": "1.0.0",
   "description": "",
-  "main": "webpack.config.js",
+  "main": "src/index.html",
   "proxy": "http://localhost:3000/",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "parcel -p 3001 src/index.html",
-    "build": "webpack --mode production"
+    "start": "parcel -p 3001 src/index.html"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +22,7 @@
     "style-loader": "^0.21.0"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
