@@ -10,12 +10,9 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const config = require('./config');
 
-
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
-
-
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());

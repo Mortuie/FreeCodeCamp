@@ -6,7 +6,7 @@
   "proxy": "http://localhost:3000/",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --mode development --open",
+    "start": "parcel -p 3001 src/index.html",
     "build": "webpack --mode production"
   },
   "keywords": [],
@@ -20,10 +20,8 @@
     "babel-preset-react": "^6.24.1",
     "css-loader": "^1.0.0",
     "html-webpack-plugin": "^3.2.0",
-    "style-loader": "^0.21.0",
-    "webpack": "^4.16.2",
-    "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.5"
+    "parcel-bundler": "^1.9.7",
+    "style-loader": "^0.21.0"
   },
   "dependencies": {
     "prop-types": "^15.6.2",
