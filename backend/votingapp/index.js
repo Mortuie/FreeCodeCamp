@@ -11,13 +11,13 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const config = require('./config');
 
-const corsOptions = {
-  origin: 'http://localhost:3001'
-};
-
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
+
+const corsOptions = {
+  origin: process.env.CORS_DOMAIN
+};
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());

@@ -2,7 +2,6 @@ const HelperFunctions = require('./HelperFunctions');
 const { Poll } = require('../models');
 
 module.exports = app => {
-
   app.get('/poll/getall', (req, res) => {
     Poll.find({}, (err, polls) => {
       if (err) console.log(err);
@@ -11,18 +10,19 @@ module.exports = app => {
   });
 
   app.get('/poll/user', HelperFunctions.isLoggedIn, (req, res) => {
-    Poll.find({
-      creator: req.user.id,
-    }, (err, polls) => {
-      if (err) console.log(err);
+    Poll.find(
+      {
+        creator: req.user.id
+      },
+      (err, polls) => {
+        if (err) console.log(err);
 
-
-      res.json({polls});
-    });
+        res.json({ polls });
+      }
+    );
   });
 
   app.post('/poll', HelperFunctions.isLoggedIn, (req, res) => {
-
     if (!req.body.title) {
       res.json({ status: '', error: 'No poll title given.' });
     } else {
@@ -32,11 +32,13 @@ module.exports = app => {
       tempPoll.creator = req.user.id;
       tempPoll.options = req.body.options;
 
+      console.log(req.user);
+
       tempPoll.save(err => {
         let error = '';
         if (err) error = err;
 
-        res.json({ status: (!error) ? 'Your poll has been saved.' : '', error });
+        res.json({ status: !error ? 'Your poll has been saved.' : '', error });
       });
     }
   });
@@ -49,7 +51,7 @@ module.exports = app => {
         let error = '';
         if (err) error = err;
 
-        res.json({ status: (!error) ? 'Your poll has been deleted.' : '', error });
+        res.json({ status: !error ? 'Your poll has been deleted.' : '', error });
       });
     }
   });
@@ -67,7 +69,7 @@ module.exports = app => {
           let error = '';
           if (err) error = err;
 
-          res.json({ status: (!error) ? 'Upvoted.' : '', error });
+          res.json({ status: !error ? 'Upvoted.' : '', error });
         });
       });
     }
@@ -86,11 +88,9 @@ module.exports = app => {
           let error = '';
           if (err) error = err;
 
-          res.json({ status: (!error) ? 'Downvoted.' : '', error });
+          res.json({ status: !error ? 'Downvoted.' : '', error });
         });
       });
     }
   });
-
-
 };
