@@ -1,17 +1,25 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import PollContainer from './PollContainer';
 import { base } from '../Constants';
 
 class Homepage extends Component {
+  constructor() {
+    super();
+    this.state = {
+      polls: []
+    };
+  }
+
   componentWillMount() {
     axios
       .get(base + '/poll/getall')
-      .then(res => console.log(res))
+      .then(res => this.setState({ polls: res.data.polls }))
       .catch(err => console.warn(err));
   }
 
   render() {
-    return <div>Hello World!</div>;
+    return <PollContainer polls={this.state.polls} />;
   }
 }
 

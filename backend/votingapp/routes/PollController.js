@@ -22,6 +22,14 @@ module.exports = app => {
     );
   });
 
+  app.get('/poll/:id', (req, res) => {
+    Poll.findById(req.params.id, (err, poll) => {
+      if (err) console.log(err);
+
+      res.json({ status: poll, error: '' });
+    });
+  });
+
   app.post('/poll', HelperFunctions.isLoggedIn, (req, res) => {
     if (!req.body.title) {
       res.json({ status: '', error: 'No poll title given.' });
