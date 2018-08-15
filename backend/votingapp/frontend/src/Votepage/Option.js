@@ -10,7 +10,7 @@ export default class Option extends Component {
         id: this.props.id,
         optionid: pollId
       })
-      .then(res => console.log(res))
+      .then(res => this.props.updatePoll(res.data.status))
       .catch(err => console.log(err));
   }
 

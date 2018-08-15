@@ -20,6 +20,10 @@ export default class Votepage extends Component {
       .catch(err => console.log(err));
   }
 
+  updatePoll = poll => {
+    this.setState({ poll });
+  };
+
   prepareData(options) {
     const data = {
       labels: [],
@@ -56,7 +60,9 @@ export default class Votepage extends Component {
           <div>{creator}</div>
         </div>
         <Pie data={data} />
-        {options.map(option => <Option key={option._id} data={option} id={_id} />)}
+        {options.map(option => (
+          <Option updatePoll={this.updatePoll} key={option._id} data={option} id={_id} />
+        ))}
       </div>
     );
   }

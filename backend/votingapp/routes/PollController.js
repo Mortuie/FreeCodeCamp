@@ -73,11 +73,11 @@ module.exports = app => {
           if (option.id === req.body.optionid) option.upvotes++;
         });
 
-        poll.save(err => {
+        poll.save((err, doc) => {
           let error = '';
           if (err) error = err;
 
-          res.json({ status: !error ? 'Upvoted.' : '', error });
+          res.json({ status: !error ? doc : '', error });
         });
       });
     }
