@@ -1,14 +1,14 @@
 {
   "name": "frontend",
   "version": "1.0.0",
-  "description": "",
+  "description": "Voting App",
   "main": "src/index.html",
   "scripts": {
-    "start": "webpack-dev-server --mode development --open",
+    "start": "webpack-dev-server --host 0.0.0.0 --mode development",
     "build": "webpack --mode production"
   },
   "keywords": [],
-  "author": "",
+  "author": "Leon Boehmer 2018",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.26.3",

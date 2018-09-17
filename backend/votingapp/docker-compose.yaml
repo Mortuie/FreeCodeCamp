@@ -1,0 +1,31 @@
+version: '3'
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    image: frontend.dev:latest
+    ports:
+      - '3001:3001'
+    volumes:
+      - ./frontend:/app
+    networks:
+      - frontend
+  backend:
+    build: .
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/app
+    networks:
+      - frontend
+      - backend
+    depends_on:
+      - "mongo"
+  mongo:
+    image: mongo
+    networks:
+      - backend
+networks:
+  frontend:
+  backend:

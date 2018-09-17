@@ -3,7 +3,6 @@ const MINICSS = require('mini-css-extract-plugin');
 
 module.exports = {
   devServer: {
-    public: '0.0.0.0:3001',
     port: 3001
   },
   module: {
