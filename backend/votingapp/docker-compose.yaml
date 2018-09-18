@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile.dev
     image: frontend.dev:latest
     ports:
-      - '3001:3001'
+      - 3001:3001
     volumes:
       - ./frontend:/app
     networks:
@@ -14,7 +14,7 @@ services:
   backend:
     build: .
     ports:
-      - '3000:3000'
+      - 3000:3000
     volumes:
       - .:/app
     networks:
@@ -24,6 +24,10 @@ services:
       - "mongo"
   mongo:
     image: mongo
+    volumes:
+      - ./data/db:/data/db
+    ports:
+      - 27017:27017
     networks:
       - backend
 networks:
