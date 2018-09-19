@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Route } from 'react-router-dom';
 
-const AuthRoutes = ({ user, component, pathname, ...rest }) => (
+const AuthRoutes = ({ user, component: Component, redirect, ...rest }) => (
   <Route
     {...rest}
-    render={props => (user ? <component {...props} /> : <Redirect to={{ pathname }} />)}
+    render={props => (user ? <Component {...props} /> : <Redirect to={{ pathname: redirect }} />)}
   />
 );
 
@@ -14,10 +15,10 @@ AuthRoutes.propTypes = {
   pathname: PropTypes.string.isRequired
 };
 
-const UnauthRoutes = ({ user, component, pathname, ...rest }) => (
+const UnauthRoutes = ({ user, component: Component, redirect, ...rest }) => (
   <Route
     {...rest}
-    render={props => (!user ? <component {...props} /> : <Redirect to={{ pathname }} />)}
+    render={props => (!user ? <Component {...props} /> : <Redirect to={{ pathname: redirect }} />)}
   />
 );
 

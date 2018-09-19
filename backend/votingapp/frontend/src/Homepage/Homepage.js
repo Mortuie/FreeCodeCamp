@@ -19,8 +19,7 @@ class Homepage extends Component {
   }
 
   render() {
-    // return <PollContainer polls={this.state.polls} />;
-    return <div>Hello World</div>;
+    return <PollContainer polls={this.state.polls} />;
   }
 }
 

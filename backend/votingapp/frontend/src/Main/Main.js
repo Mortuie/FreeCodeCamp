@@ -4,12 +4,11 @@ import { Navbar } from '../Navbar';
 
 export default class Main extends Component {
   render() {
-    // return (
-    //   <div>
-    //     <Navbar />
-    //     <Routes />
-    //   </div>
-    // );
-    return <div>Hello Nugget</div>;
+    return (
+      <div>
+        <Navbar />
+        <Routes />
+      </div>
+    );
   }
 }

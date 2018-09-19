@@ -4,15 +4,15 @@ import { NotFound } from '../Misc';
 import { Login } from '../User';
 import { Homepage } from '../Homepage';
 import { Votepage } from '../Votepage';
-import { AuthRoute, UnauthRoute } from './Subroutes';
+import {} from './Subroutes';
 
 class Routes extends Component {
   render() {
     return (
       <Switch>
         <Route exact path="/" component={Homepage} />
-        <Route path="/:voteid" component={Votepage} />
-        <UnauthRoute path="/login" user={false} component={Login} pathname={'/'} />
+        <UnauthRoute path={'/login'} user={true} component={Login} redirect={'/'} />
+        <Route path="/vote/:voteid" component={Votepage} />
         <Route path="*" component={NotFound} />
       </Switch>
     );
@@ -20,3 +20,17 @@ class Routes extends Component {
 }
 
 export default Routes;
+
+const Authroute = ({ loggedIn, component: Component, redirect: path, ...rest }) => (
+  <Route
+    {...rest}
+    render={props => (loggedIn ? <Component {...props} /> : <Redirect to={{ pathname: path }} />)}
+  />
+);
+
+const UnauthRoute = ({ loggedIn, component: Component, redirect: path, ...rest }) => (
+  <Route
+    {...rest}
+    render={props => (!loggedIn ? <Component {...props} /> : <Redirect to={{ pathname: path }} />)}
+  />
+);
