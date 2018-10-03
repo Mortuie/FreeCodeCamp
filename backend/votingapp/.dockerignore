@@ -3,3 +3,5 @@ frontend
 .git
 *Dockerfile*
 *docker-compose*
+data
+yarn.lock

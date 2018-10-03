@@ -4,7 +4,6 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile.dev
-    image: frontend.dev:latest
     ports:
       - 3001:3001
     volumes:

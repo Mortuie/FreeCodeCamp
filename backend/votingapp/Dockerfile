@@ -1,9 +1,10 @@
 FROM node:alpine
 WORKDIR /app
 
-RUN apk update && apk add python g++ make
+RUN apk update
+#&& apk add python g++
 COPY ./package.json ./package.json
-RUN npm i
+RUN npm install
 
 COPY ./ ./
 

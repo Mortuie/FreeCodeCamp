@@ -1,3 +1,5 @@
 import Login from './Login';
+import userReducer from './Reducer';
 
-export { Login };
+
+export { Login, userReducer };

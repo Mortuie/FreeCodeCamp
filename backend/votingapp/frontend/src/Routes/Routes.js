@@ -4,14 +4,13 @@ import { NotFound } from '../Misc';
 import { Login } from '../User';
 import { Homepage } from '../Homepage';
 import { Votepage } from '../Votepage';
-import {} from './Subroutes';
 
 class Routes extends Component {
   render() {
     return (
       <Switch>
         <Route exact path="/" component={Homepage} />
-        <UnauthRoute path={'/login'} user={true} component={Login} redirect={'/'} />
+        <UnauthRoute path={'/login'} user={false} component={Login} redirect={'/'} />
         <Route path="/vote/:voteid" component={Votepage} />
         <Route path="*" component={NotFound} />
       </Switch>
