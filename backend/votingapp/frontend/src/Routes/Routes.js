@@ -8,7 +8,6 @@ import { connect } from 'react-redux';
 
 class Routes extends Component {
   render() {
-    console.log(this.props.user);
     return (
       <Switch>
         <Route exact path="/" component={Homepage} />
