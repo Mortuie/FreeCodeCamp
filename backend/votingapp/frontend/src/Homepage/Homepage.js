@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import PollContainer from './PollContainer';
-import { base } from '../Constants';
+import { BASE } from '../Constants';
 
 class Homepage extends Component {
   constructor() {
@@ -13,7 +13,7 @@ class Homepage extends Component {
 
   componentWillMount() {
     axios
-      .get(base + '/poll/getall')
+      .get(BASE + '/poll/getall')
       .then(res => this.setState({ polls: res.data.polls }))
       .catch(err => console.warn(err));
   }

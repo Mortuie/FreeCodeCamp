@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import { base } from '../Constants';
+import { BASE } from '../Constants';
 
 export default class Option extends Component {
   vote(pollId) {
     axios
-      .post(base + '/poll/upvote', {
+      .post(BASE + '/poll/upvote', {
         id: this.props.id,
         optionid: pollId
       })

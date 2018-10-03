@@ -1,30 +1,33 @@
 import * as Types from './Types';
 
 const initialState = {
-  user: {},
+  user: false,
   attempting: false,
   error: {},
 };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case Types.LOGIN_ATTEMPT:
+    case Types.ATTEMPT:
       return {
         ...state,
         attempting: true,
+        user: false,
+        error: {},
       };
-    case Types.LOGIN_ERROR:
+    case Types.ERROR:
       return {
         ...state,
         attempting: false,
+        user: false,
         error: action.error,
       };
-    case Types.LOGIN_SUCCESS:
+    case Types.SUCCESS:
       return {
         ...state,
         attempting: false,
         error: {},
-        user: action.user,
+        user: true,
       };
     case Types.LOGOUT:
       return initialState;

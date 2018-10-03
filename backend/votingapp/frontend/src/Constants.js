@@ -1,3 +1,3 @@
-const base = 'http://localhost:3000';
+const BASE = 'http://localhost:3000';
 
-export { base };
+export { BASE };

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import register from './Actions';
+import { register } from './Actions';
 import { connect } from 'react-redux';
 
 class Login extends Component {
@@ -15,26 +15,30 @@ class Login extends Component {
     this.setState(obj);
   }
 
+  login = () => {
+    if (this.state.email && this.state.password)
+      this.props.register(this.state.email, this.state.password);
+  }
+
   render() {
     return (
       <div>
         <input name="email" value={this.state.email} onChange={this.changeState} />
         <input name="password" type="password" value={this.state.password} onChange={this.changeState} />
-        <button>Submit</button>
+        <button onClick={this.login}>Submit</button>
       </div>
     );
   }
 }
 
-// TODO
 const mapStateToProps = state => {
   return state;
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    register: dispatch(register(this.state.email, this.state.password)),
-  }
+    register: (email, password) => dispatch(register(email, password)),
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

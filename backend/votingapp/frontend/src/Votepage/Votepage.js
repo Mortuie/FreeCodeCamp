@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { base } from '../Constants';
+import { BASE } from '../Constants';
 import { Pie } from 'react-chartjs-2';
 import Option from './Option';
 const randomColor = require('random-color');
@@ -15,7 +15,7 @@ export default class Votepage extends Component {
 
   componentWillMount() {
     axios
-      .get(base + '/poll/' + this.props.match.params.voteid)
+      .get(BASE + '/poll/' + this.props.match.params.voteid)
       .then(res => this.setState({ poll: res.data.status }))
       .catch(err => console.log(err));
   }
