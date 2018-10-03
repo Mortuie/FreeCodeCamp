@@ -26,6 +26,7 @@ class Login extends Component {
   }
 }
 
+// TODO
 const mapStateToProps = state => {
   return state;
 }
