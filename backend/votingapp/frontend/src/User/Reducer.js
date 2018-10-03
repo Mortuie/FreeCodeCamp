@@ -3,7 +3,7 @@ import * as Types from './Types';
 const initialState = {
   user: false,
   attempting: false,
-  error: {},
+  error: '',
 };
 
 export default function reducer(state = initialState, action) {
@@ -13,7 +13,7 @@ export default function reducer(state = initialState, action) {
         ...state,
         attempting: true,
         user: false,
-        error: {},
+        error: '',
       };
     case Types.ERROR:
       return {
@@ -26,7 +26,7 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         attempting: false,
-        error: {},
+        error: '',
         user: true,
       };
     case Types.LOGOUT:

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { login } from './Actions';
+import { register } from './Actions';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
@@ -52,11 +52,12 @@ const ErrorBar = styled.div`
   margin-bottom: 5px;
 `;
 
-class Login extends Component {
+class Register extends Component {
 
   state = {
     email: '',
     password: '',
+    cpassword: '',
     error: '',
   };
 
@@ -66,13 +67,14 @@ class Login extends Component {
     this.setState(obj);
   }
 
-  login = () => {
-    if (this.state.email && this.state.password) this.props.login(this.state.email, this.state.password);
-    else this.setState({error: 'Enter something into the fields.'});
+  register = () => {
+    if (this.state.email && (this.state.password === this.state.cpassword)) this.props.register(this.state.email, this.state.password);
+    else this.setState({error: 'Enter something into the fields and make sure both passwords match!'});
   }
 
   render() {
     console.log(this.props);
+
     if (this.props.attempting) {
       return (
         <RegisterBox>LOADING....</RegisterBox>
@@ -84,10 +86,11 @@ class Login extends Component {
     return (
       <Container>
         <RegisterBox>
-          <Title>LOGIN</Title>
+          <Title>REGISTER</Title>
           <Input name="email" placeholder="you@example.com" value={this.state.email} onChange={this.changeState} />
           <Input name="password" placeholder="your password" type="password" value={this.state.password} onChange={this.changeState} />
-          <Submit onClick={this.login}>SUBMIT</Submit>
+          <Input name="cpassword" placeholder="confirm your password" type="password" value={this.state.cpassword} onChange={this.changeState} />
+          <Submit onClick={this.register}>SUBMIT</Submit>
           {error ? (
             <ErrorBar>{error}</ErrorBar>
           ) : (
@@ -108,8 +111,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    login: (email, password) => dispatch(login(email, password)),
+    register: (email, password) => dispatch(register(email, password)),
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

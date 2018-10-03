@@ -8,7 +8,7 @@ function attempt() {
     };
 }
 
-function success(user) {
+function success() {
     return {
         type: Types.SUCCESS,
     };
@@ -36,7 +36,32 @@ export function register(email, password) {
             email,
             password
         })
-        .then(res => dispatch(success(res.data.user)))
+        .then(res => dispatch(success()))
         .catch(err => dispatch(error(err)));
     };
+}
+
+export function login(email, password) {
+    return function(dispatch) {
+        dispatch(attempt());
+
+        return axios.post(BASE + '/auth/login', {
+            email,
+            password
+        })
+        .then(res => dispatch(success()))
+        .catch(err => dispatch(error(err)));
+    }
+}
+
+
+export function logout() {
+  return function(dispatch) {
+    dispatch(attempt());
+
+    return axios.get(BASE + '/auth/logout')
+      .then(res => dispatch(success()))
+      .catch(err => dispatch(error(err)));
+
+  }
 }
