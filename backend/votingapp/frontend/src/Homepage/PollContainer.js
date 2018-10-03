@@ -5,14 +5,13 @@ import { pollContainer } from './Homepage.css';
 
 export default class PollContainer extends Component {
   render() {
-    return <a href="/login">LOGIN</a>;
-    // return (
-    //   <div className={pollContainer}>
-    //     {this.props.polls.map(poll => (
-    //       <Poll key={poll._id} data={poll} />
-    //     ))}
-    //   </div>
-    // );
+    return (
+      <div className={pollContainer}>
+        {this.props.polls.map(poll => (
+          <Poll key={poll._id} data={poll} />
+        ))}
+      </div>
+    );
   }
 }
 
