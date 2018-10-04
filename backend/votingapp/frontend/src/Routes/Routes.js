@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import { NotFound } from '../Misc';
-import { Register, Login } from '../User';
+import { Register, Login, Logout } from '../User';
 import { Homepage } from '../Homepage';
 import { Votepage } from '../Votepage';
 import { connect } from 'react-redux';
@@ -13,6 +13,7 @@ class Routes extends Component {
         <Route exact path="/" component={Homepage} />
         <UnauthRoute path={'/register'} user={this.props.user} component={Register} redirect={'/'} />
         <UnauthRoute path={'/login'} user={this.props.user} component={Login} redirect={'/'} />
+        <Route path={'/logout'} component={Logout} />
         <Route path="/vote/:voteid" component={Votepage} />
         <Route path="*" component={NotFound} />
       </Switch>

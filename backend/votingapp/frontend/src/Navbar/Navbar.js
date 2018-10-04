@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { withRouter, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 const Wrapper = styled.div`
@@ -24,9 +24,11 @@ const Path = styled(Link)`
 class Navbar extends Component {
 
   getBar = () => {
-    if (this.props.user) { // logged in
+    if (!this.props.user) { // logged in
       return (
         <Wrapper>
+          <Path left to="/">VOTING</Path>
+          <Path to="/logout">LOGOUT</Path>
         </Wrapper>
       );
     } else { // not logged in
@@ -41,7 +43,6 @@ class Navbar extends Component {
   }
 
   render() {
-
     return this.getBar();
   }
 }

@@ -15,8 +15,9 @@ const RegisterBox = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 250px;
-  height: 300px;
+  width: 310px;
+  height: 280px;
+  background-color: white;
 `;
 
 const Input = styled.input`

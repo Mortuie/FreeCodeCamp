@@ -22,7 +22,7 @@ function error(error) {
 }
 
 
-function logout() {
+function logoutHelper() {
     return {
         type: Types.LOGOUT,
     }
@@ -60,7 +60,7 @@ export function logout() {
     dispatch(attempt());
 
     return axios.get(BASE + '/auth/logout')
-      .then(res => dispatch(success()))
+      .then(res => dispatch(logoutHelper()))
       .catch(err => dispatch(error(err)));
 
   }

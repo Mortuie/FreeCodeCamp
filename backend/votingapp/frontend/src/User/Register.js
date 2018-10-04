@@ -15,7 +15,8 @@ const RegisterBox = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 250px;
+  background-color: white;
+  width: 310px;
   height: 300px;
 `;
 
@@ -39,6 +40,7 @@ const Submit = styled.button`
 const Title = styled.div`
   font-size: 25px;
   margin-bottom: 5px;
+  margin-top: 10px;
   font-weight: bold;
 `;
 
