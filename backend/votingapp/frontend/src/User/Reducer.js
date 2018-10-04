@@ -32,7 +32,7 @@ export default function reducer(state = initialState, action) {
     case Types.LOGOUT:
       return {
         ...state,
-        initialState
+        ...initialState
       };
     default:
       return state;

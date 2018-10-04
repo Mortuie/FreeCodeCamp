@@ -24,7 +24,7 @@ const Path = styled(Link)`
 class Navbar extends Component {
 
   getBar = () => {
-    if (!this.props.user) { // logged in
+    if (this.props.user) { // logged in
       return (
         <Wrapper>
           <Path left to="/">VOTING</Path>

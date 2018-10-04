@@ -1,15 +1,28 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { container, titleStyle } from './Homepage.css';
 import { withRouter } from 'react-router-dom';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  width: 250px;
+  height: 100px;
+  border: 3px solid grey;
+  margin: 3px;
+  padding: 4px;
+  cursor: pointer;
+`;
+
+const Title = styled.div`
+  text-align: center;
+`;
 
 class Poll extends Component {
   render() {
     const { title, _id } = this.props.data;
     return (
-      <div className={container} onClick={() => this.props.history.push('/' + _id)}>
-        <div className={titleStyle}>{title}</div>
-      </div>
+      <Container onClick={() => this.props.history.push('/' + _id)}>
+        <Title>{title}</Title>
+      </Container>
     );
   }
 }

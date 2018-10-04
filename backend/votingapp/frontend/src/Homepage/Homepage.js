@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import PollContainer from './PollContainer';
 import { BASE } from '../Constants';
+import { connect } from 'react-redux';
 
 class Homepage extends Component {
   constructor() {
@@ -19,8 +20,14 @@ class Homepage extends Component {
   }
 
   render() {
-    return <PollContainer polls={this.state.polls} />;
+    return <PollContainer polls={this.state.polls} user={this.props.user} />;
   }
 }
 
-export default Homepage;
+const mapStateToProps = state => {
+  return {
+    user: state.userReducer.user,
+  };
+}
+
+export default connect(mapStateToProps)(Homepage);
