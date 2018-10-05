@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import Poll from './Poll';
 import styled from 'styled-components';
 import Modal from 'react-modal';
+import axios from 'axios';
+import { BASE } from '../Constants';
 
 const Container = styled.div`
   display: flex;
@@ -24,10 +26,32 @@ export default class PollContainer extends Component {
 
   state = {
     modalIsOpen: false,
+    options: '',
+    title: '',
   };
 
   changeModal = () => {
     this.setState({modalIsOpen: !this.state.modalIsOpen});
+  }
+
+  changeState = (e) => {
+    let obj = {};
+    obj[e.target.name] = e.target.value;
+    this.setState(obj);
+  }
+
+  addPoll = () => {
+    const options = this.state.options.split(',').map(i => { return { name: i }});
+
+    axios.post(BASE + '/poll', {
+      title: this.state.title,
+      options,
+    }, {
+      withCredentials: true,
+    })
+    .then(res => console.log(res))
+    .catch(err => console.log(err));
+
   }
 
   render() {
@@ -52,6 +76,9 @@ export default class PollContainer extends Component {
             <div>Adding polls</div>
             <Cross onClick={this.changeModal}>X</Cross>
           </Topbar>
+          <input name="title" placeholder="Title" onChange={this.changeState} />
+          <input name="options" placeholder="options" onChange={this.changeState} />
+          <button onClick={this.addPoll}>Submit</button>
         </Modal>
       </div>
     );

@@ -15,14 +15,17 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
+
 const corsOptions = {
-  origin: process.env.CORS_DOMAIN
+  origin: process.env.CORS_DOMAIN,
+  credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization', 'Content-Length', 'X-Requested-With', 'Accept', 'Cache'],
 };
 
 app.use(morgan('dev'));
+app.use(cookieParser(process.env.SESSION_SECRET));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
 app.use(passport.session());

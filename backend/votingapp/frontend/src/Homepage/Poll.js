@@ -20,7 +20,7 @@ class Poll extends Component {
   render() {
     const { title, _id } = this.props.data;
     return (
-      <Container onClick={() => this.props.history.push('/' + _id)}>
+      <Container onClick={() => this.props.history.push('/poll/' + _id)}>
         <Title>{title}</Title>
       </Container>
     );

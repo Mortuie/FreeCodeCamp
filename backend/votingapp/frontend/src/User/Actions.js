@@ -35,6 +35,8 @@ export function register(email, password) {
         return axios.post(BASE + '/auth/register', {
             email,
             password
+        }, {
+            withCredentials: true,
         })
         .then(res => dispatch(success()))
         .catch(err => dispatch(error(err)));
@@ -48,6 +50,8 @@ export function login(email, password) {
         return axios.post(BASE + '/auth/login', {
             email,
             password
+        }, {
+            withCredentials: true,
         })
         .then(res => dispatch(success()))
         .catch(err => dispatch(error(err)));

@@ -2,6 +2,8 @@
 
 module.exports = {
     isLoggedIn: function(req, res, next) {
+        console.log(req);
+        console.log("user ", req.user);
         if (req.isAuthenticated()) return next();
 
         res.status(401);

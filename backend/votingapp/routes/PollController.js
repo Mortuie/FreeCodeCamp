@@ -43,10 +43,9 @@ module.exports = app => {
       console.log(req.user);
 
       tempPoll.save(err => {
-        let error = '';
-        if (err) error = err;
+        if (err) return res.json({ err });
 
-        res.json({ status: !error ? 'Your poll has been saved.' : '', error });
+        return res.json({ status: 'Your poll has been saved.' });
       });
     }
   });

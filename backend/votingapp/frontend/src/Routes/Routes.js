@@ -14,7 +14,7 @@ class Routes extends Component {
         <UnauthRoute path={'/register'} user={this.props.user} component={Register} redirect={'/'} />
         <UnauthRoute path={'/login'} user={this.props.user} component={Login} redirect={'/'} />
         <Route path={'/logout'} component={Logout} />
-        <Route path="/vote/:voteid" component={Votepage} />
+        <Route path="/poll/:voteid" component={Votepage} />
         <Route path="*" component={NotFound} />
       </Switch>
     );
