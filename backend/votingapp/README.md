@@ -15,9 +15,9 @@ Steps:
 - You should see the frontend...
 
 ### User Stories
-- [ x ] User Story: As an authenticated user, I can keep my polls and come back later to access them.
+- [x] User Story: As an authenticated user, I can keep my polls and come back later to access them.
 
-- [ x ] User Story: As an authenticated user, I can share my polls with my friends.
+- [x] User Story: As an authenticated user, I can share my polls with my friends.
 
 - [ x ] User Story: As an authenticated user, I can see the aggregate results of my polls.
 
