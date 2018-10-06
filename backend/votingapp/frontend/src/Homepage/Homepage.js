@@ -8,19 +8,37 @@ class Homepage extends Component {
   constructor() {
     super();
     this.state = {
-      polls: []
+      polls: [],
+      ownPolls: []
     };
   }
 
   componentWillMount() {
     axios
       .get(BASE + '/poll/getall')
-      .then(res => this.setState({ polls: res.data.polls }))
+      .then(res => {
+        const allPolls = res.data.polls;
+        let ownPolls = [];
+
+        if (this.props.user) { // only if logged in
+          axios.get(BASE + '/poll/user', {
+            withCredentials: true,
+          })
+          .then(res => {
+            ownPolls = res.data.polls;
+            this.setState({ polls: allPolls, ownPolls })
+          })
+          .catch(err => console.log(err));
+        } else {
+          this.setState({ polls: allPolls });
+        }
+      })
       .catch(err => console.warn(err));
   }
 
   render() {
-    return <PollContainer polls={this.state.polls} user={this.props.user} />;
+    console.log(this.state);
+    return <PollContainer polls={this.state.polls} ownPolls={this.state.ownPolls} user={this.props.user} />;
   }
 }
 

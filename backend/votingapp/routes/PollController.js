@@ -40,8 +40,6 @@ module.exports = app => {
       tempPoll.creator = req.user.id;
       tempPoll.options = req.body.options;
 
-      console.log(req.user);
-
       tempPoll.save(err => {
         if (err) return res.json({ err });
 
@@ -51,14 +49,31 @@ module.exports = app => {
   });
 
   app.delete('/poll', HelperFunctions.isLoggedIn, (req, res) => {
-    if (!req.body.id) {
-      res.json({ status: '', error: 'No poll identifier was given.' });
+    if (!req.query.id) {
+      return res.json({ status: '', error: 'No poll identifier was given.' });
     } else {
-      Poll.findByIdAndRemove(req.body.id, err => {
-        let error = '';
-        if (err) error = err;
+      Poll.findByIdAndRemove(req.query.id, err => {
+        if (err) return res.json({ err });
+        return res.json({ status: 'Your poll has been deleted.' });
+      });
+    }
+  });
 
-        res.json({ status: !error ? 'Your poll has been deleted.' : '', error });
+  app.patch('/poll', HelperFunctions.isLoggedIn, (req, res) => {
+    console.log(req.body.options);
+
+    if (!req.body.id) {
+      return res.json({ status : '', error: 'No poll identifier was given.' });
+    } else {
+      Poll.findByIdAndUpdate(req.body.id, {
+        "$push": { "options" : req.body.options }
+      }, (err, poll) => {
+        if (err) return res.json({ err });
+
+        console.log(poll);
+
+        return res.json({ status: "Your poll has been updated..." })
+
       });
     }
   });

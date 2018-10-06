@@ -28,10 +28,15 @@ export default class PollContainer extends Component {
     modalIsOpen: false,
     options: '',
     title: '',
+    view: false,
   };
 
   changeModal = () => {
     this.setState({modalIsOpen: !this.state.modalIsOpen});
+  }
+
+  changeView = () => {
+    this.setState({ view: !this.state.view });
   }
 
   changeState = (e) => {
@@ -60,10 +65,17 @@ export default class PollContainer extends Component {
         {this.props.user &&
           <div>
             <button onClick={this.changeModal}>Add a new poll</button>
+            <button onClick={this.changeView}>See your polls</button>
           </div>
         }
         <Container>
-          {this.props.polls.map(poll => (
+          {this.props.user && this.state.view && this.props.ownPolls &&
+            this.props.ownPolls.map(poll => (
+                <Poll key={poll._id} data={poll} user />
+            ))
+          }
+          {!this.state.view &&
+            this.props.polls.map(poll => (
             <Poll key={poll._id} data={poll} />
           ))}
         </Container>
