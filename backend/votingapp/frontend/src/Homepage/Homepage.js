@@ -20,15 +20,17 @@ class Homepage extends Component {
         const allPolls = res.data.polls;
         let ownPolls = [];
 
-        if (this.props.user) { // only if logged in
-          axios.get(BASE + '/poll/user', {
-            withCredentials: true,
-          })
-          .then(res => {
-            ownPolls = res.data.polls;
-            this.setState({ polls: allPolls, ownPolls })
-          })
-          .catch(err => console.log(err));
+        if (this.props.user) {
+          // only if logged in
+          axios
+            .get(BASE + '/poll/user', {
+              withCredentials: true
+            })
+            .then(res => {
+              ownPolls = res.data.polls;
+              this.setState({ polls: allPolls, ownPolls });
+            })
+            .catch(err => console.log(err));
         } else {
           this.setState({ polls: allPolls });
         }
@@ -38,14 +40,20 @@ class Homepage extends Component {
 
   render() {
     console.log(this.state);
-    return <PollContainer polls={this.state.polls} ownPolls={this.state.ownPolls} user={this.props.user} />;
+    return (
+      <PollContainer
+        polls={this.state.polls}
+        ownPolls={this.state.ownPolls}
+        user={this.props.user}
+      />
+    );
   }
 }
 
 const mapStateToProps = state => {
   return {
-    user: state.userReducer.user,
+    user: state.userReducer.user
   };
-}
+};
 
 export default connect(mapStateToProps)(Homepage);

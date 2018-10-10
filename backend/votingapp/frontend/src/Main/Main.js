@@ -3,17 +3,14 @@ import { Routes } from '../Routes';
 import { Navbar } from '../Navbar';
 import styled from 'styled-components';
 
-const Background = styled.div`
-  background-color: #F0F0F0;
-`;
 
 export default class Main extends Component {
   render() {
     return (
-      <Background>
+      <div>
         <Navbar />
         <Routes />
-      </Background>
+      </div>
     );
   }
 }

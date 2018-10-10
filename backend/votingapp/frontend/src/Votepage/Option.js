@@ -20,7 +20,6 @@ export default class Option extends Component {
     return (
       <div onClick={() => this.vote(_id)}>
         <div>{name}</div>
-        <div>{upvotes}</div>
       </div>
     );
   }

@@ -2,45 +2,32 @@ import React, { Component } from 'react';
 import { login } from './Actions';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import Paper from '@material-ui/core/Paper';
+import FormControl from '@material-ui/core/FormControl';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import Button from '@material-ui/core/Button';
+import Avatar from '@material-ui/core/Avatar';
+import LockIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
+
+const StyledAvatar = styled(Avatar)`
+`;
+
+const StyledPaper = styled(Paper)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  width: 310px;
+  height: 310px;
+  padding: 15px;
+  margin-top: 100px;
+`;
 
 const Container = styled.div`
   width: 100%;
   height: 100vh;
-`;
-
-const RegisterBox = styled.div`
-  margin: auto;
-  margin-top: 25vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 310px;
-  height: 280px;
-  background-color: white;
-`;
-
-const Input = styled.input`
-  border: none;
-  width: 90%;
-  height: 40px;
-  border-bottom: 1px solid #757575;
-  margin-bottom: 4px;
-  text-align: center;
-`;
-
-const Submit = styled.button`
-  margin-top: 10px;
-  background-color: #FF5A5F;
-  width: 90%;
-  height: 50px;
-  color: white;
-`;
-
-const Title = styled.div`
-  font-size: 25px;
-  margin-bottom: 5px;
-  font-weight: bold;
 `;
 
 const ErrorBar = styled.div`
@@ -75,25 +62,57 @@ class Login extends Component {
   render() {
     if (this.props.attempting) {
       return (
-        <RegisterBox>LOADING....</RegisterBox>
+        <div>LOADING....</div>
       );
     }
-
     const error = this.props.error || this.state.error;
 
     return (
       <Container>
-        <RegisterBox>
-          <Title>LOGIN</Title>
-          <Input name="email" placeholder="you@example.com" value={this.state.email} onChange={this.changeState} />
-          <Input name="password" placeholder="your password" type="password" value={this.state.password} onChange={this.changeState} />
-          <Submit onClick={this.login}>SUBMIT</Submit>
-          {error ? (
-            <ErrorBar>{error}</ErrorBar>
-          ) : (
-            <ErrorBar></ErrorBar>
-          )}
-        </RegisterBox>
+        <StyledPaper>
+        <Avatar>
+          <LockIcon />
+        </Avatar>
+          <form>
+            <FormControl margin="normal" required fullWidth>
+              <InputLabel htmlFor="email">Email Address</InputLabel>
+              <Input
+                id="email"
+                name="email"
+                autoComplete="email"
+                autoFocus
+                value={this.state.email}
+                onChange={this.changeState}
+              />
+            </FormControl>
+            <FormControl margin="normal" required fullWidth>
+              <InputLabel htmlFor="password">Password</InputLabel>
+              <Input
+                name="password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                value={this.state.password}
+                onChange={this.changeState}
+              />
+            </FormControl>
+            <Button
+              onClick={this.login}
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+            >
+              Sign in
+            </Button>
+            {error ? (
+              <ErrorBar>{error}</ErrorBar>
+            ) : (
+              <ErrorBar></ErrorBar>
+            )}
+
+          </form>
+        </StyledPaper>
       </Container>
     );
   }

@@ -2,46 +2,27 @@ import React, { Component } from 'react';
 import { register } from './Actions';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import Paper from '@material-ui/core/Paper';
+import FormControl from '@material-ui/core/FormControl';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import Button from '@material-ui/core/Button';
+import Avatar from '@material-ui/core/Avatar';
+import LockIcon from '@material-ui/icons/LockOutlined';
 
-const Container = styled.div`
-  width: 100%;
-  height: 100vh;
+const StyledAvatar = styled(Avatar)`
+  background-color: red;
 `;
 
-const RegisterBox = styled.div`
-  margin: auto;
-  margin-top: 25vh;
+const StyledPaper = styled(Paper)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  background-color: white;
+  margin: auto;
   width: 310px;
-  height: 300px;
-`;
-
-const Input = styled.input`
-  border: none;
-  width: 90%;
-  height: 40px;
-  border-bottom: 1px solid #757575;
-  margin-bottom: 4px;
-  text-align: center;
-`;
-
-const Submit = styled.button`
-  margin-top: 10px;
-  background-color: #FF5A5F;
-  width: 90%;
-  height: 50px;
-  color: white;
-`;
-
-const Title = styled.div`
-  font-size: 25px;
-  margin-bottom: 5px;
-  margin-top: 10px;
-  font-weight: bold;
+  height: 350px;
+  padding: 15px;
+  margin-top: 100px;
 `;
 
 const ErrorBar = styled.div`
@@ -55,50 +36,88 @@ const ErrorBar = styled.div`
 `;
 
 class Register extends Component {
-
   state = {
     email: '',
     password: '',
     cpassword: '',
-    error: '',
+    error: ''
   };
 
-  changeState = (e) => {
+  changeState = e => {
     let obj = { error: '' };
     obj[e.target.name] = e.target.value;
     this.setState(obj);
-  }
+  };
 
   register = () => {
-    if (this.state.email && (this.state.password === this.state.cpassword)) this.props.register(this.state.email, this.state.password);
-    else this.setState({error: 'Enter something into the fields and make sure both passwords match!'});
-  }
+    if (this.state.email && this.state.password === this.state.cpassword)
+      this.props.register(this.state.email, this.state.password);
+    else
+      this.setState({
+        error: 'Enter something into the fields and make sure both passwords match!'
+      });
+  };
 
   render() {
-
     if (this.props.attempting) {
-      return (
-        <RegisterBox>LOADING....</RegisterBox>
-      );
+      return <RegisterBox>LOADING....</RegisterBox>;
     }
 
     const error = this.props.error || this.state.error;
 
     return (
-      <Container>
-        <RegisterBox>
-          <Title>REGISTER</Title>
-          <Input name="email" placeholder="you@example.com" value={this.state.email} onChange={this.changeState} />
-          <Input name="password" placeholder="your password" type="password" value={this.state.password} onChange={this.changeState} />
-          <Input name="cpassword" placeholder="confirm your password" type="password" value={this.state.cpassword} onChange={this.changeState} />
-          <Submit onClick={this.register}>SUBMIT</Submit>
-          {error ? (
-            <ErrorBar>{error}</ErrorBar>
-          ) : (
-            <ErrorBar></ErrorBar>
-          )}
-        </RegisterBox>
-      </Container>
+      <div>
+        <StyledPaper>
+          <StyledAvatar>
+            <LockIcon />
+          </StyledAvatar>
+          <form>
+            <FormControl margin="normal" required fullWidth>
+              <InputLabel htmlFor="email">Email Address</InputLabel>
+              <Input
+                id="email"
+                name="email"
+                autoComplete="email"
+                autoFocus
+                value={this.state.email}
+                onChange={this.changeState}
+              />
+            </FormControl>
+            <FormControl margin="normal" required fullWidth>
+              <InputLabel htmlFor="password">Password</InputLabel>
+              <Input
+                name="password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                value={this.state.password}
+                onChange={this.changeState}
+              />
+            </FormControl>
+            <FormControl margin="normal" required fullWidth>
+              <InputLabel htmlFor="cpassword">Confirm Password</InputLabel>
+              <Input
+                name="cpassword"
+                type="password"
+                id="cpassword"
+                autoComplete="cpassword"
+                value={this.state.cpassword}
+                onChange={this.changeState}
+              />
+            </FormControl>
+            <Button
+              onClick={this.register}
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+            >
+              Register
+            </Button>
+          </form>
+          {error ? <ErrorBar>{error}</ErrorBar> : <ErrorBar />}
+        </StyledPaper>
+      </div>
     );
   }
 }
@@ -108,12 +127,15 @@ const mapStateToProps = state => {
     attempting: state.userReducer.attempting,
     error: state.userReducer.error
   };
-}
+};
 
 const mapDispatchToProps = dispatch => {
   return {
-    register: (email, password) => dispatch(register(email, password)),
+    register: (email, password) => dispatch(register(email, password))
   };
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Register);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Register);
