@@ -11,9 +11,6 @@ import Avatar from '@material-ui/core/Avatar';
 import LockIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 
-const StyledAvatar = styled(Avatar)`
-`;
-
 const StyledPaper = styled(Paper)`
   display: flex;
   flex-direction: column;
@@ -27,7 +24,6 @@ const StyledPaper = styled(Paper)`
 
 const Container = styled.div`
   width: 100%;
-  height: 100vh;
 `;
 
 const ErrorBar = styled.div`
@@ -37,42 +33,39 @@ const ErrorBar = styled.div`
   text-align: center;
   font-weight: bold;
   margin-top: 5px;
-  margin-bottom: 5px;
 `;
 
 class Login extends Component {
-
   state = {
     email: '',
     password: '',
-    error: '',
+    error: ''
   };
 
-  changeState = (e) => {
+  changeState = e => {
     let obj = { error: '' };
     obj[e.target.name] = e.target.value;
     this.setState(obj);
-  }
+  };
 
   login = () => {
-    if (this.state.email && this.state.password) this.props.login(this.state.email, this.state.password);
-    else this.setState({error: 'Enter something into the fields.'});
-  }
+    if (this.state.email && this.state.password)
+      this.props.login(this.state.email, this.state.password);
+    else this.setState({ error: 'Enter something into the fields.' });
+  };
 
   render() {
     if (this.props.attempting) {
-      return (
-        <div>LOADING....</div>
-      );
+      return <div>LOADING....</div>;
     }
     const error = this.props.error || this.state.error;
 
     return (
       <Container>
         <StyledPaper>
-        <Avatar>
-          <LockIcon />
-        </Avatar>
+          <Avatar>
+            <LockIcon />
+          </Avatar>
           <form>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="email">Email Address</InputLabel>
@@ -96,6 +89,7 @@ class Login extends Component {
                 onChange={this.changeState}
               />
             </FormControl>
+            {error ? <ErrorBar>{error}</ErrorBar> : <ErrorBar />}
             <Button
               onClick={this.login}
               type="submit"
@@ -105,12 +99,6 @@ class Login extends Component {
             >
               Sign in
             </Button>
-            {error ? (
-              <ErrorBar>{error}</ErrorBar>
-            ) : (
-              <ErrorBar></ErrorBar>
-            )}
-
           </form>
         </StyledPaper>
       </Container>
@@ -123,12 +111,15 @@ const mapStateToProps = state => {
     attempting: state.userReducer.attempting,
     error: state.userReducer.error
   };
-}
+};
 
 const mapDispatchToProps = dispatch => {
   return {
-    login: (email, password) => dispatch(login(email, password)),
+    login: (email, password) => dispatch(login(email, password))
   };
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login);

@@ -20,70 +20,68 @@ const Cross = styled.button`
   justify-content: flex-end;
 `;
 
-Modal.setAppElement('#root')
+Modal.setAppElement('#root');
 
 export default class PollContainer extends Component {
-
   state = {
     modalIsOpen: false,
     options: '',
     title: '',
-    view: false,
+    view: false
   };
 
   changeModal = () => {
-    this.setState({modalIsOpen: !this.state.modalIsOpen});
-  }
+    this.setState({ modalIsOpen: !this.state.modalIsOpen });
+  };
 
   changeView = () => {
     this.setState({ view: !this.state.view });
-  }
+  };
 
-  changeState = (e) => {
+  changeState = e => {
     let obj = {};
     obj[e.target.name] = e.target.value;
     this.setState(obj);
-  }
+  };
 
   addPoll = () => {
-    const options = this.state.options.split(',').map(i => { return { name: i }});
+    const options = this.state.options.split(',').map(i => {
+      return { name: i };
+    });
 
-    axios.post(BASE + '/poll', {
-      title: this.state.title,
-      options,
-    }, {
-      withCredentials: true,
-    })
-    .then(res => console.log(res))
-    .catch(err => console.log(err));
-
-  }
+    axios
+      .post(
+        BASE + '/poll',
+        {
+          title: this.state.title,
+          options
+        },
+        {
+          withCredentials: true
+        }
+      )
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+  };
 
   render() {
     return (
       <div>
-        {this.props.user &&
+        {this.props.user && (
           <div>
             <button onClick={this.changeModal}>Add a new poll</button>
             <button onClick={this.changeView}>See your polls</button>
           </div>
-        }
+        )}
         <Container>
-          {this.props.user && this.state.view && this.props.ownPolls &&
-            this.props.ownPolls.map(poll => (
-                <Poll key={poll._id} data={poll} user />
-            ))
-          }
-          {!this.state.view &&
-            this.props.polls.map(poll => (
-            <Poll key={poll._id} data={poll} />
-          ))}
+          {this.props.user &&
+            this.state.view &&
+            this.props.ownPolls &&
+            this.props.ownPolls.map(poll => <Poll key={poll._id} data={poll} user />)}
+          {!this.state.view && this.props.polls.map(poll => <Poll key={poll._id} data={poll} />)}
         </Container>
 
-        <Modal
-          isOpen={this.state.modalIsOpen}
-          onRequestClose={this.changeModal}
-        >
+        <Modal isOpen={this.state.modalIsOpen} onRequestClose={this.changeModal}>
           <Topbar>
             <div>Adding polls</div>
             <Cross onClick={this.changeModal}>X</Cross>
