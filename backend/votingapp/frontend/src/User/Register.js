@@ -20,7 +20,7 @@ const StyledPaper = styled(Paper)`
   align-items: center;
   margin: auto;
   width: 310px;
-  height: 350px;
+  height: 380px;
   padding: 15px;
   margin-top: 100px;
 `;
@@ -32,7 +32,6 @@ const ErrorBar = styled.div`
   text-align: center;
   font-weight: bold;
   margin-top: 5px;
-  margin-bottom: 5px;
 `;
 
 class Register extends Component {
@@ -105,6 +104,7 @@ class Register extends Component {
                 onChange={this.changeState}
               />
             </FormControl>
+            {error ? <ErrorBar>{error}</ErrorBar> : <ErrorBar />}
             <Button
               onClick={this.register}
               type="submit"
@@ -115,7 +115,6 @@ class Register extends Component {
               Register
             </Button>
           </form>
-          {error ? <ErrorBar>{error}</ErrorBar> : <ErrorBar />}
         </StyledPaper>
       </div>
     );
