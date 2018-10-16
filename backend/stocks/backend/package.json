@@ -1,0 +1,12 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Backend for the stocks app",
+  "main": "server.js",
+  "author": "Leon Boehmer",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "neat-csv": "^3.0.0"
+  }
+}
