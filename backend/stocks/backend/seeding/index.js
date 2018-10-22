@@ -1,3 +1,3 @@
-const { seedDb } = require("./init.seed");
+const { seedDb } = require('./init.seed');
 
 module.exports = { seedDb };

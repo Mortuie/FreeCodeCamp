@@ -1,3 +1,3 @@
-const { seedDb } = require("./seeding");
+const { seedDb } = require('./seeding');
 
-seedDb("./seeding/data.csv", "hello world");
+seedDb('./seeding/data.csv', 'hello world');
