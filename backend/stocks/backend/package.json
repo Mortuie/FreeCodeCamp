@@ -6,11 +6,18 @@
   "author": "Leon Boehmer",
   "license": "MIT",
   "private": false,
+  "scripts": {
+    "dev": "supervisor server.js",
+    "seed": "node seeding/init.seed.js"
+  },
   "dependencies": {
     "boom": "^7.2.0",
     "chalk": "^2.4.1",
     "dotenv": "^6.1.0",
     "mongoose": "^5.3.5",
     "neat-csv": "^3.0.0"
+  },
+  "devDependencies": {
+    "supervisor": "^0.12.0"
   }
 }

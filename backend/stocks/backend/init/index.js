@@ -1,1 +1,1 @@
-exports.initialiseDB = require('./db');
+exports.initialiseDB = require('./db').initialiseDB;
