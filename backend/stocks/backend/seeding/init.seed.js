@@ -3,7 +3,7 @@ const neatCsv = require('neat-csv');
 const Stock = require('../models').Stock;
 const chalk = require('chalk');
 
-const start =  async () => {
+const start = async () => {
   fs.readFile('./seeding/data.csv', async (err, data) => {
     if (err) console.log('Error: ' + err);
 
@@ -15,8 +15,6 @@ const start =  async () => {
         desc: data.DESCRIPTION
       };
     });
-
-
 
     await asyncForEach(csv, async value => {
       const temp = new Stock({
@@ -32,7 +30,7 @@ const start =  async () => {
       }
     });
   });
-}
+};
 
 async function asyncForEach(array, callback) {
   for (let i = 0; i < array.length; i++) {
