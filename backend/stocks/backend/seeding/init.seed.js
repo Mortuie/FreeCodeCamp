@@ -48,6 +48,7 @@ async function readCsv() {
 
       return await tempStock.save();
     });
+      
     try {
       const r = await Promise.all(resArray);
       console.log(r);
@@ -66,7 +67,7 @@ async function readCsv() {
 async function main() {
   try {
     await start();
-    const codeDescObjs = await readCsv();
+    await readCsv();
   } catch (err) {
     console.log(err);
     process.exit(1);
