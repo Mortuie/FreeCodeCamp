@@ -1,1 +1,3 @@
-exports.Stock = require('./Stock').Stock;
+module.exports = {
+  Stock: require('./Stock').Stock
+};

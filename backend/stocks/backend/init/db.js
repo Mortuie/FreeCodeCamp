@@ -1,13 +1,21 @@
-const mongo = require('mongoose');
+const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 
-exports.initialiseDB = () => {
-  return new Promise((resolve, reject) => {
-    mongo
-      .connect(
-        process.env.MONGO_URI,
-        { useNewUrlParser: true }
-      )
-      .then(() => resolve('Mongodb has been connected to.'))
-      .catch(err => reject(err));
-  });
+async function init() {
+  await mongoose.connect(
+    process.env.MONGO_URI,
+    {
+      useNewUrlParser: true,
+      useCreateIndex: true
+    }
+  );
+}
+
+async function close() {
+  await mongoose.connection.close();
+}
+
+module.exports = {
+  init,
+  close
 };

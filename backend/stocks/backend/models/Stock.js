@@ -10,6 +10,11 @@ const stockSchema = new mongoose.Schema({
     type: String,
     required: true,
     default: 'No description was added'
+  },
+  is_active: {
+    type: Boolean,
+    required: true,
+    default: false
   }
 });
 

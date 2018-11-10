@@ -1,35 +1,87 @@
 const fs = require('fs');
-const neatCsv = require('neat-csv');
 const Stock = require('../models').Stock;
 const chalk = require('chalk');
+const db = require('../init');
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
 
-const seedDb = seedDataStore => {
-  fs.readFile(seedDataStore, async (err, data) => {
-    if (err) console.log('Error: ' + err);
 
-    const parsedCsv = await neatCsv(data);
+async function start() {
+  try {
+    await db.init();
+    console.log(chalk.green("Connected to the Database."));
+  } catch (err) {
+    console.log(err);
+    process.exit(1);
+  }
+}
 
-    const csv = parsedCsv.map(data => {
-      return {
-        code: data.CODE,
-        desc: data.DESCRIPTION
-      };
+async function stop() {
+  try {
+    await db.close();
+    console.log(chalk.green("Disconnected from the Database"));
+  } catch (err) {
+    console.log(err);
+    process.exit(1);
+  }
+}
+
+
+async function readCsv() {
+  let rows;
+  fs.readFile('./seeding/data.csv', 'utf8', async (err, data) => {
+    if (err) {
+      console.log(err);
+      await stop();
+      process.exit(1);
+    }
+
+    rows = data.split('\n');
+    rows = rows.map(row => {
+      const tempRow = row.split(',');
+      const code = tempRow[0].replace('WIKI/', '');
+      const desc = tempRow[1].replace('\"', '');
+      
+      return { code, desc }
+    
     });
+    const resArray = rows.map(async row => {
 
-    await csv.forEach(async value => {
-      const temp = new Stock({
-        code: value.code,
-        description: value.desc
-      });
+      const tempStock = new Stock(row);
 
-      try {
-        let tempStock = await temp.save();
-        console.log(chalk.green('Saved!'));
-      } catch (err) {
-        console.log(err);
+      return await tempStock.save();
+    });
+    try {
+      const r = await Promise.all(resArray);
+      console.log(r);
+      await stop();
+    } catch (err) {
+      if (err.code === 11000) {
+        console.log(chalk.green('Database has already been seeded.'));
+        await stop();
+        process.exit(0);
       }
-    });
+      console.log(err);
+    }
   });
-};
+}
 
-seedDb('./seeding/data.csv');
+async function main() {
+  try {
+    await start();
+    const codeDescObjs = await readCsv();
+  } catch (err) {
+    console.log(err);
+    process.exit(1);
+  }
+
+}
+ 
+process.on('SIGTERM', async () => {
+  await stop();
+  process.exit(1);
+});
+  
+main();
+
