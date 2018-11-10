@@ -6,11 +6,10 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
-
 async function start() {
   try {
     await db.init();
-    console.log(chalk.green("Connected to the Database."));
+    console.log(chalk.green('Connected to the Database.'));
   } catch (err) {
     console.log(err);
     process.exit(1);
@@ -20,13 +19,12 @@ async function start() {
 async function stop() {
   try {
     await db.close();
-    console.log(chalk.green("Disconnected from the Database"));
+    console.log(chalk.green('Disconnected from the Database'));
   } catch (err) {
     console.log(err);
     process.exit(1);
   }
 }
-
 
 async function readCsv() {
   let rows;
@@ -41,13 +39,11 @@ async function readCsv() {
     rows = rows.map(row => {
       const tempRow = row.split(',');
       const code = tempRow[0].replace('WIKI/', '');
-      const desc = tempRow[1].replace('\"', '');
-      
-      return { code, desc }
-    
+      const desc = tempRow[1].replace('"', '');
+
+      return { code, desc };
     });
     const resArray = rows.map(async row => {
-
       const tempStock = new Stock(row);
 
       return await tempStock.save();
@@ -75,13 +71,11 @@ async function main() {
     console.log(err);
     process.exit(1);
   }
-
 }
- 
+
 process.on('SIGTERM', async () => {
   await stop();
   process.exit(1);
 });
-  
-main();
 
+main();
