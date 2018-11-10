@@ -48,7 +48,7 @@ async function readCsv() {
 
       return await tempStock.save();
     });
-      
+
     try {
       const r = await Promise.all(resArray);
       console.log(r);
