@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "supervisor server.js",
     "seed": "node seeding/init.seed.js",
-    "test": "yarn mocha"
+    "test": "yarn mocha --exit"
   },
   "dependencies": {
     "boom": "^7.2.0",
@@ -21,6 +21,7 @@
     "websocket": "^1.0.28"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
     "mocha": "^5.2.0",
     "supervisor": "^0.12.0"
   }
