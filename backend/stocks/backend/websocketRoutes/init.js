@@ -42,6 +42,17 @@ module.exports = wsserver => {
           break;
         case 'removeStock':
           console.log('Removing stock...');
+          try {
+            const result = await routes.removeStock(data.stock);
+            conn.send(
+              JSON.stringify({
+                type: 'removeStock',
+                result
+              })
+            );
+          } catch (err) {
+            conn.send(JSON.stringify({ type: 'error', err }));
+          }
           break;
         case 'stockInfo':
           console.log('Getting stock info...');

@@ -21,5 +21,19 @@ module.exports = {
     } catch (err) {
       throw new Error(err);
     }
+  },
+  removeStock: async code => {
+    try {
+      const result = await Stock.findOneAndUpdate(
+        { code },
+        { is_active: false }
+      );
+      if (!result) {
+        throw new Error(`Stock ${code} doesn't exist.`);
+      }
+      return `Stock ${code} has been removed`;
+    } catch (err) {
+      throw new Error(err);
+    }
   }
 };

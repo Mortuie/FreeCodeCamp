@@ -91,11 +91,27 @@ describe('Websocket server tests', function() {
 
   it('Removing a stock', function(done) {
     clientConn.send(JSON.stringify({ type: 'removeStock', stock: 'CMG' }));
+    const stringResult = `Stock CMG has been removed`;
 
     clientConn.on('message', message => {
       const decoded = JSON.parse(message.utf8Data);
 
       assert.isObject(decoded);
+      assert.isString(decoded.result);
+      assert.equal(stringResult, decoded.result);
+      assert.equal('removeStock', decoded.type, 'Types are not the same!?!');
+
+      done();
+    });
+  });
+
+  it('Removing a stock with falsy code.', function(done) {
+    clientConn.send(JSON.stringify({ type: 'removeStock', stock: 'xxxx' }));
+
+    clientConn.on('message', message => {
+      const decoded = JSON.parse(message.utf8Data);
+
+      assert.equal('error', decoded.type, 'Types are not equal!?!');
 
       done();
     });
