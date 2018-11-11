@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const websocketserver = require('websocket').server;
 const db = require('./init');
+const ws = require('./websocketRoutes').wsInit;
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
@@ -29,40 +30,8 @@ async function initServers() {
     autoAcceptConnections: true
   });
 
-  wsserver.on('connect', conn => {
-    console.log('Client has connected: ', conn.remoteAddress);
+  ws(wsserver);
 
-    conn.on('message', message => {
-      const data = JSON.parse(message.utf8Data);
-      switch (data.type) {
-        case 'getAllStocks':
-          console.log('Getting all stocks..');
-          break;
-        case 'addStock':
-          console.log('Adding stock...');
-          break;
-        case 'removeStock':
-          console.log('Removing stock...');
-          break;
-        case 'stockInfo':
-          console.log('Getting stock info...');
-          break;
-        default:
-          console.log('This is the default case..');
-          conn.send(
-            JSON.stringify({
-              type: 'default',
-              error: 'None of the types matched'
-            })
-          );
-          break;
-      }
-    });
-  });
-
-  wsserver.on('close', (conn, reason, desc) => {
-    console.log('Client has disconnected: ', conn.remoteAddress);
-  });
   return { server, wsserver };
 }
 

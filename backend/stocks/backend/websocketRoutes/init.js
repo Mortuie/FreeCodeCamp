@@ -1,0 +1,65 @@
+const routes = require('./routes');
+
+module.exports = wsserver => {
+  wsserver.on('connect', conn => {
+    console.log('Client has connected: ', conn.remoteAddress);
+
+    conn.on('message', async message => {
+      const data = JSON.parse(message.utf8Data);
+      switch (data.type) {
+        case 'getAllStocks':
+          console.log('Getting all stocks..');
+          try {
+            const stocks = await routes.getAllStocks();
+            conn.send(
+              JSON.stringify({
+                type: 'getAllStocks',
+                stocks
+              })
+            );
+          } catch (err) {
+            conn.send(
+              JSON.stringify({
+                type: 'error',
+                err
+              })
+            );
+          }
+          break;
+        case 'addStock':
+          console.log('Adding stock...');
+          try {
+            const result = await routes.addStock(data.stock);
+            conn.send(
+              JSON.stringify({
+                type: 'addStock',
+                result
+              })
+            );
+          } catch (err) {
+            conn.send(JSON.stringify({ type: 'error', err }));
+          }
+          break;
+        case 'removeStock':
+          console.log('Removing stock...');
+          break;
+        case 'stockInfo':
+          console.log('Getting stock info...');
+          break;
+        default:
+          console.log('This is the default case..');
+          conn.send(
+            JSON.stringify({
+              type: 'default',
+              error: 'None of the types matched'
+            })
+          );
+          break;
+      }
+    });
+  });
+
+  wsserver.on('close', (conn, reason, desc) => {
+    console.log('Client has disconnected: ', conn.remoteAddress);
+  });
+};

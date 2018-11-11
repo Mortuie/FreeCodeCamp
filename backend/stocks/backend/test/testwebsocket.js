@@ -62,19 +62,35 @@ describe('Websocket server tests', function() {
   });
 
   it('Adding a stock', function(done) {
-    clientConn.send(JSON.stringify({ type: 'addStock' }));
+    clientConn.send(JSON.stringify({ type: 'addStock', stock: 'CMG' }));
+    const stringResult = `Stock CMG has been added`;
 
     clientConn.on('message', message => {
       const decoded = JSON.parse(message.utf8Data);
 
       assert.isObject(decoded);
+      assert.isString(decoded.result);
+      assert.equal(stringResult, decoded.result);
+      assert.equal('addStock', decoded.type, 'Types are not the same!?!');
+
+      done();
+    });
+  });
+
+  it('Adding a stock error', function(done) {
+    clientConn.send(JSON.stringify({ type: 'addStock', stock: 'xxxx' }));
+
+    clientConn.on('message', message => {
+      const decoded = JSON.parse(message.utf8Data);
+
+      assert.equal('error', decoded.type, 'Types are not equal!?!');
 
       done();
     });
   });
 
   it('Removing a stock', function(done) {
-    clientConn.send(JSON.stringify({ type: 'removeStock', stock: 'APPL' }));
+    clientConn.send(JSON.stringify({ type: 'removeStock', stock: 'CMG' }));
 
     clientConn.on('message', message => {
       const decoded = JSON.parse(message.utf8Data);
