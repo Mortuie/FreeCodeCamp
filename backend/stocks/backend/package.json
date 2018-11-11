@@ -8,7 +8,8 @@
   "private": false,
   "scripts": {
     "dev": "supervisor server.js",
-    "seed": "node seeding/init.seed.js"
+    "seed": "node seeding/init.seed.js",
+    "test": "yarn mocha"
   },
   "dependencies": {
     "boom": "^7.2.0",
