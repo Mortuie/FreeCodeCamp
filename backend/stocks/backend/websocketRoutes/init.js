@@ -56,6 +56,11 @@ module.exports = wsserver => {
           break;
         case 'stockInfo':
           console.log('Getting stock info...');
+          try {
+            await routes.stockInfo('CMG');
+          } catch (err) {
+            console.log(err);
+          }
           break;
         default:
           console.log('This is the default case..');

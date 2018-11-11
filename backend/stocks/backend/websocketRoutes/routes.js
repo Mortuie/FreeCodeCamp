@@ -1,4 +1,5 @@
 const Stock = require('../models').Stock;
+const axios = require('axios');
 
 module.exports = {
   getAllStocks: async () => {
@@ -35,5 +36,14 @@ module.exports = {
     } catch (err) {
       throw new Error(err);
     }
+  },
+  stockInfo: async code => {
+    const query = `${
+      process.env.QUANDL_BASE
+    }WIKI/${code}/data.json?rows=100&api_key=${process.env.QUANDL_KEY}`;
+    axios
+      .get(query)
+      .then(res => console.log(res.data.dataset_data.data))
+      .catch(err => console.log(err));
   }
 };
