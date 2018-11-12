@@ -2,6 +2,8 @@ const Stock = require('../models').Stock;
 const axios = require('axios');
 const chalk = require('chalk');
 
+// INVOLVE THE REDIS CACHE HERE PLEASE.... Thenks.
+
 const stockInfo = code => {
   return new Promise((resolve, reject) => {
     const query = `${
