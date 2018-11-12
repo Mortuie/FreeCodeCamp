@@ -1,5 +1,9 @@
 # FCC Fullstack Application - Stock Market
 
+My learning objectives for this project were to learn about and use websockets in Javascript. Moreover I wanted to try some test driven development as I don't have a postman client for websockets. So I used my test suite from mocha to act as my websocket client.
+
+I also wanted to implement a redis cache on the backend to learn about caching and to learn more about redis. I mean this project doesn't really need a cache system but it's a nice implementation detail and will teach me about caching and redis itself.
+
 ## Local Development
 
 ### Running Replica

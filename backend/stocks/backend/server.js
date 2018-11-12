@@ -11,10 +11,14 @@ if (process.env.NODE_ENV !== 'production') {
 
 const PORT = process.env.PORT || 3000;
 
+let redis;
+
 async function start() {
   try {
-    await db.init();
-    console.log(chalk.green('Connected to the Database'));
+    await db.mongodb.init();
+    console.log(chalk.green('Connected to the MongoDB'));
+    redis = await db.redis();
+    console.log(chalk.green('Redis connected'));
   } catch (err) {
     console.log(err);
     process.exit(1);

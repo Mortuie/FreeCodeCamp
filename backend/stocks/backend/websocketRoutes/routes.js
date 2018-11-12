@@ -43,7 +43,8 @@ module.exports = {
     }WIKI/${code}/data.json?rows=100&api_key=${process.env.QUANDL_KEY}`;
     axios
       .get(query)
-      .then(res => console.log(res.data.dataset_data.data))
+      .then(res => console.log('hello'))
+      // .then(res => console.log(res.data.dataset_data.data))
       .catch(err => console.log(err));
   }
 };
