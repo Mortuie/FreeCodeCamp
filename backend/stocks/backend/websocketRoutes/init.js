@@ -1,6 +1,6 @@
 const routes = require('./routes');
 
-module.exports = wsserver => {
+module.exports = (wsserver, redis) => {
   wsserver.on('connect', conn => {
     console.log('Client has connected: ', conn.remoteAddress);
 
@@ -11,6 +11,7 @@ module.exports = wsserver => {
           console.log('Getting all stocks..');
           try {
             const stocks = await routes.getAllStocks();
+            // console.log(stocks);
             conn.send(
               JSON.stringify({
                 type: 'getAllStocks',
@@ -52,14 +53,6 @@ module.exports = wsserver => {
             );
           } catch (err) {
             conn.send(JSON.stringify({ type: 'error', err }));
-          }
-          break;
-        case 'stockInfo':
-          console.log('Getting stock info...');
-          try {
-            await routes.stockInfo('CMG');
-          } catch (err) {
-            console.log(err);
           }
           break;
         default:

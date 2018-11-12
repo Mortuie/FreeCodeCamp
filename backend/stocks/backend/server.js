@@ -34,7 +34,7 @@ async function initServers() {
     autoAcceptConnections: true
   });
 
-  ws(wsserver);
+  ws(wsserver, redis);
 
   return { server, wsserver };
 }
@@ -42,8 +42,7 @@ async function initServers() {
 module.exports = (async () => {
   try {
     await start();
-    const res = await initServers();
-    return res;
+    return await initServers();
   } catch (err) {
     console.log(err);
   }

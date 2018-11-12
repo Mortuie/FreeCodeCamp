@@ -117,18 +117,6 @@ describe('Websocket server tests', function() {
     });
   });
 
-  it('Getting stock info', function(done) {
-    clientConn.send(JSON.stringify({ type: 'stockInfo', stock: 'APPL' }));
-
-    clientConn.on('message', message => {
-      const decoded = JSON.parse(message.utf8Data);
-
-      assert.isObject(decoded);
-
-      done();
-    });
-  });
-
   afterEach(function(done) {
     clientConn.close();
     done();
