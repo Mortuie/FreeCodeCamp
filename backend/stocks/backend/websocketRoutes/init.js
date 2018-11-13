@@ -10,7 +10,7 @@ module.exports = (wsserver, redis) => {
         case 'getAllStocks':
           console.log('Getting all stocks..');
           try {
-            const stocks = await routes.getAllStocks();
+            const stocks = await routes.getAllStocks(redis);
             // console.log(stocks);
             conn.send(
               JSON.stringify({

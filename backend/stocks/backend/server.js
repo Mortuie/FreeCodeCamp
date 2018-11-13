@@ -36,7 +36,7 @@ async function initServers() {
 
   ws(wsserver, redis);
 
-  return { server, wsserver };
+  return { server, wsserver, redis };
 }
 
 module.exports = (async () => {

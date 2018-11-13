@@ -1,5 +1,5 @@
 const wsc = require('websocket').client;
-var assert = require('chai').assert;
+const assert = require('chai').assert;
 
 describe('Websocket server tests', function() {
   let servers;
@@ -39,6 +39,7 @@ describe('Websocket server tests', function() {
   });
 
   it('Getting all available stocks', function(done) {
+    this.timeout(0);
     clientConn.send(JSON.stringify({ type: 'getAllStocks' }));
 
     clientConn.on('message', message => {
@@ -46,6 +47,7 @@ describe('Websocket server tests', function() {
 
       assert.isObject(messageDecoded, 'Should be a JSON object');
 
+      console.log(messageDecoded);
       assert.equal(
         'getAllStocks',
         messageDecoded.type,
@@ -118,12 +120,15 @@ describe('Websocket server tests', function() {
   });
 
   afterEach(function(done) {
+    this.timeout(2000);
     clientConn.close();
     done();
   });
 
   after(function(done) {
     servers.wsserver.shutDown();
-    servers.server.close(done);
+    servers.server.close();
+    servers.redis.quit();
+    done();
   });
 });
