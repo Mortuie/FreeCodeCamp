@@ -2,8 +2,6 @@ const routes = require('./routes');
 
 module.exports = (wsserver, redis) => {
   wsserver.on('connect', conn => {
-    console.log('Client has connected: ', conn.remoteAddress);
-
     conn.on('message', async message => {
       const data = JSON.parse(message.utf8Data);
       switch (data.type) {
@@ -11,7 +9,6 @@ module.exports = (wsserver, redis) => {
           console.log('Getting all stocks..');
           try {
             const stocks = await routes.getAllStocks(redis);
-            // console.log(stocks);
             conn.send(
               JSON.stringify({
                 type: 'getAllStocks',

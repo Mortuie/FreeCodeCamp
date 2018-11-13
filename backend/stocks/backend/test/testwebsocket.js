@@ -47,7 +47,6 @@ describe('Websocket server tests', function() {
 
       assert.isObject(messageDecoded, 'Should be a JSON object');
 
-      console.log(messageDecoded);
       assert.equal(
         'getAllStocks',
         messageDecoded.type,

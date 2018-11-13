@@ -1,6 +1,5 @@
 const Stock = require('../models').Stock;
 const axios = require('axios');
-const chalk = require('chalk');
 const redisFunctions = require('../redis/functions');
 
 const stockInfo = (code, redis) => {
