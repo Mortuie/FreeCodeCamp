@@ -1,7 +1,6 @@
 const chalk = require('chalk');
 const express = require('express');
 const app = express();
-const websocketserver = require('websocket').server;
 const db = require('./init');
 const websocket = require('./websocketRoutes').wsInit;
 const ws = require('ws');
@@ -10,7 +9,7 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 let redis;
 
@@ -30,14 +29,9 @@ async function initServers() {
   const server = app.listen(PORT, () =>
     console.log('Listening on port: ', PORT)
   );
-  // const wsserver = new websocketserver({
-  //   httpServer: server,
-  //   autoAcceptConnections: true
-  // });
 
   const wss = new ws.Server({ server });
 
-  // websocket(wsserver, redis);
   websocket(wss, redis);
   return { server, wss, redis };
 }

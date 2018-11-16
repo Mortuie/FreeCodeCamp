@@ -11,8 +11,8 @@ describe('Websocket server tests', function() {
   });
 
   beforeEach(function(done) {
-    client = new ws('ws://localhost:3000/');
-    client2 = new ws('ws://localhost:3000/');
+    client = new ws('ws://localhost:3001/');
+    client2 = new ws('ws://localhost:3001/');
 
     client.on('open', () => {
       client2.on('open', () => {
