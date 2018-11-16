@@ -1,27 +1,21 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
 
 class App extends Component {
+  componentWillMount() {
+    this.ws = new WebSocket('ws://localhost:3001/');
+
+    this.ws.onopen = event => {
+      console.log('WS open...');
+      this.ws.send(JSON.stringify({ xd: '12' }));
+    };
+
+    this.ws.onmessage = event => {
+      console.log('Um message recieved: ', event);
+    };
+  }
+
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+    return <div />;
   }
 }
 

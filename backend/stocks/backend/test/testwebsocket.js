@@ -28,7 +28,6 @@ describe('Websocket server tests', function() {
   });
 
   it('Testing Default case', function(done) {
-    var triggered = false;
     const expectedOutput = {
       type: 'default',
       error: 'None of the types matched'
@@ -42,8 +41,7 @@ describe('Websocket server tests', function() {
         JSON.parse(message),
         'Should equal a default error'
       );
-      if (!triggered) done();
-      triggered = true;
+      done();
     });
   });
 
@@ -124,6 +122,66 @@ describe('Websocket server tests', function() {
       assert.equal('error', decoded.type, 'Types are not equal!?!');
 
       done();
+    });
+  });
+
+  it('Broadcasting for Adding Stocks', function(done) {
+    client.send(JSON.stringify({ type: 'addStock', stock: 'CMG' }));
+    const stringResult = `Stock CMG has been added`;
+    let triggered = false;
+
+    client.on('message', message => {
+      const decoded = JSON.parse(message);
+
+      assert.isObject(decoded);
+      assert.isString(decoded.result);
+      assert.equal(stringResult, decoded.result);
+      assert.equal('addStock', decoded.type, 'Types are not the same!?!');
+
+      if (triggered) done();
+      triggered = true;
+    });
+
+    client2.on('message', message => {
+      const decoded = JSON.parse(message);
+
+      assert.isObject(decoded);
+      assert.isString(decoded.result);
+      assert.equal(stringResult, decoded.result);
+      assert.equal('addStock', decoded.type, 'Types are not the same!?!');
+
+      if (triggered) done();
+      triggered = true;
+    });
+  });
+
+  it('Broadcasting for deleting stocks', function(done) {
+    client.send(JSON.stringify({ type: 'removeStock', stock: 'CMG' }));
+    const stringResult = `Stock CMG has been removed`;
+    let triggered = false;
+
+    client.on('message', message => {
+      const decoded = JSON.parse(message);
+
+      assert.isObject(decoded);
+      assert.isString(decoded.result);
+      assert.equal(stringResult, decoded.result);
+      assert.equal('removeStock', decoded.type, 'Types are not the same!?!');
+
+      if (triggered) done();
+      triggered = true;
+    });
+
+    client2.on('message', message => {
+      const decoded = JSON.parse(message);
+
+      assert.isObject(decoded);
+      assert.isString(decoded.result);
+      assert.equal(stringResult, decoded.result);
+      assert.equal('removeStock', decoded.type, 'Types are not the same!?!');
+
+      if (triggered) done();
+      triggered = true;
     });
   });
 

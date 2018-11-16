@@ -29,12 +29,17 @@ module.exports = (wss, redis) => {
           console.log('Adding stock...');
           try {
             const result = await routes.addStock(data.stock);
-            conn.send(
-              JSON.stringify({
-                type: 'addStock',
-                result
-              })
-            );
+
+            wss.clients.forEach(client => {
+              if (client.readyState === ws.OPEN) {
+                client.send(
+                  JSON.stringify({
+                    type: 'addStock',
+                    result
+                  })
+                );
+              }
+            });
           } catch (err) {
             conn.send(JSON.stringify({ type: 'error', err }));
           }
@@ -43,12 +48,16 @@ module.exports = (wss, redis) => {
           console.log('Removing stock...');
           try {
             const result = await routes.removeStock(data.stock);
-            conn.send(
-              JSON.stringify({
-                type: 'removeStock',
-                result
-              })
-            );
+            wss.clients.forEach(client => {
+              if (client.readyState === ws.OPEN) {
+                client.send(
+                  JSON.stringify({
+                    type: 'removeStock',
+                    result
+                  })
+                );
+              }
+            });
           } catch (err) {
             conn.send(JSON.stringify({ type: 'error', err }));
           }
@@ -57,7 +66,7 @@ module.exports = (wss, redis) => {
           console.log('This is the default case..');
           wss.clients.forEach(client => {
             if (client.readyState === ws.OPEN) {
-              conn.send(
+              client.send(
                 JSON.stringify({
                   type: 'default',
                   error: 'None of the types matched'
