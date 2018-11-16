@@ -1,49 +1,58 @@
-const wsc = require('websocket').client;
+const ws = require('ws');
 const assert = require('chai').assert;
 
 describe('Websocket server tests', function() {
   let servers;
   let client;
-  let clientConn;
+  let client2;
+
   before(async function() {
     servers = await require('../server');
   });
 
   beforeEach(function(done) {
-    client = new wsc();
+    client = new ws('ws://localhost:3000/');
+    client2 = new ws('ws://localhost:3000/');
 
-    client.connect('ws://localhost:3000/');
+    client.on('open', () => {
+      client2.on('open', () => {
+        done();
+      });
+    });
 
-    client.on('connect', conn => {
-      clientConn = conn;
-      done();
+    client2.on('open', () => {
+      client.on('open', () => {
+        done();
+      });
     });
   });
 
-  it('Testing Default case..', function(done) {
+  it('Testing Default case', function(done) {
+    var triggered = false;
     const expectedOutput = {
       type: 'default',
       error: 'None of the types matched'
     };
 
-    clientConn.send(JSON.stringify({ name: 'leon' }));
+    client.send(JSON.stringify({ name: 'leon' }));
 
-    clientConn.on('message', message => {
+    client.on('message', message => {
       assert.deepEqual(
         expectedOutput,
-        JSON.parse(message.utf8Data),
+        JSON.parse(message),
         'Should equal a default error'
       );
-      done();
+      if (!triggered) done();
+      triggered = true;
     });
   });
 
   it('Getting all available stocks', function(done) {
     this.timeout(0);
-    clientConn.send(JSON.stringify({ type: 'getAllStocks' }));
+    client.send(JSON.stringify({ type: 'getAllStocks' }));
 
-    clientConn.on('message', message => {
-      const messageDecoded = JSON.parse(message.utf8Data);
+    client.on('message', message => {
+      const messageDecoded = JSON.parse(message);
 
       assert.isObject(messageDecoded, 'Should be a JSON object');
 
@@ -63,11 +72,11 @@ describe('Websocket server tests', function() {
   });
 
   it('Adding a stock', function(done) {
-    clientConn.send(JSON.stringify({ type: 'addStock', stock: 'CMG' }));
+    client.send(JSON.stringify({ type: 'addStock', stock: 'CMG' }));
     const stringResult = `Stock CMG has been added`;
 
-    clientConn.on('message', message => {
-      const decoded = JSON.parse(message.utf8Data);
+    client.on('message', message => {
+      const decoded = JSON.parse(message);
 
       assert.isObject(decoded);
       assert.isString(decoded.result);
@@ -79,10 +88,10 @@ describe('Websocket server tests', function() {
   });
 
   it('Adding a stock error', function(done) {
-    clientConn.send(JSON.stringify({ type: 'addStock', stock: 'xxxx' }));
+    client.send(JSON.stringify({ type: 'addStock', stock: 'xxxx' }));
 
-    clientConn.on('message', message => {
-      const decoded = JSON.parse(message.utf8Data);
+    client.on('message', message => {
+      const decoded = JSON.parse(message);
 
       assert.equal('error', decoded.type, 'Types are not equal!?!');
 
@@ -91,11 +100,11 @@ describe('Websocket server tests', function() {
   });
 
   it('Removing a stock', function(done) {
-    clientConn.send(JSON.stringify({ type: 'removeStock', stock: 'CMG' }));
+    client.send(JSON.stringify({ type: 'removeStock', stock: 'CMG' }));
     const stringResult = `Stock CMG has been removed`;
 
-    clientConn.on('message', message => {
-      const decoded = JSON.parse(message.utf8Data);
+    client.on('message', message => {
+      const decoded = JSON.parse(message);
 
       assert.isObject(decoded);
       assert.isString(decoded.result);
@@ -107,10 +116,10 @@ describe('Websocket server tests', function() {
   });
 
   it('Removing a stock with falsy code.', function(done) {
-    clientConn.send(JSON.stringify({ type: 'removeStock', stock: 'xxxx' }));
+    client.send(JSON.stringify({ type: 'removeStock', stock: 'xxxx' }));
 
-    clientConn.on('message', message => {
-      const decoded = JSON.parse(message.utf8Data);
+    client.on('message', message => {
+      const decoded = JSON.parse(message);
 
       assert.equal('error', decoded.type, 'Types are not equal!?!');
 
@@ -120,12 +129,13 @@ describe('Websocket server tests', function() {
 
   afterEach(function(done) {
     this.timeout(2000);
-    clientConn.close();
+    client.close();
+    client2.close();
     done();
   });
 
   after(function(done) {
-    servers.wsserver.shutDown();
+    servers.wss.close();
     servers.server.close();
     servers.redis.quit();
     done();

@@ -3,7 +3,8 @@ const express = require('express');
 const app = express();
 const websocketserver = require('websocket').server;
 const db = require('./init');
-const ws = require('./websocketRoutes').wsInit;
+const websocket = require('./websocketRoutes').wsInit;
+const ws = require('ws');
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
@@ -29,14 +30,16 @@ async function initServers() {
   const server = app.listen(PORT, () =>
     console.log('Listening on port: ', PORT)
   );
-  const wsserver = new websocketserver({
-    httpServer: server,
-    autoAcceptConnections: true
-  });
+  // const wsserver = new websocketserver({
+  //   httpServer: server,
+  //   autoAcceptConnections: true
+  // });
 
-  ws(wsserver, redis);
+  const wss = new ws.Server({ server });
 
-  return { server, wsserver, redis };
+  // websocket(wsserver, redis);
+  websocket(wss, redis);
+  return { server, wss, redis };
 }
 
 module.exports = (async () => {

@@ -1,9 +1,10 @@
 const routes = require('./routes');
+const ws = require('ws');
 
-module.exports = (wsserver, redis) => {
-  wsserver.on('connect', conn => {
+module.exports = (wss, redis) => {
+  wss.on('connection', conn => {
     conn.on('message', async message => {
-      const data = JSON.parse(message.utf8Data);
+      const data = JSON.parse(message);
       switch (data.type) {
         case 'getAllStocks':
           console.log('Getting all stocks..');
@@ -54,18 +55,23 @@ module.exports = (wsserver, redis) => {
           break;
         default:
           console.log('This is the default case..');
-          conn.send(
-            JSON.stringify({
-              type: 'default',
-              error: 'None of the types matched'
-            })
-          );
+          wss.clients.forEach(client => {
+            if (client.readyState === ws.OPEN) {
+              conn.send(
+                JSON.stringify({
+                  type: 'default',
+                  error: 'None of the types matched'
+                })
+              );
+            }
+          });
           break;
       }
     });
   });
 
-  wsserver.on('close', (conn, reason, desc) => {
-    console.log('Client has disconnected: ', conn.remoteAddress);
+  wss.on('close', xd => {
+    console.log('Client has disconnected');
+    console.log(xd);
   });
 };
