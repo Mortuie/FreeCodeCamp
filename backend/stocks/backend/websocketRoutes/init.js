@@ -27,15 +27,19 @@ module.exports = (wss, redis) => {
           break;
         case 'addStock':
           console.log('Adding stock...');
+          console.log('Message to add: ', data);
           try {
             const result = await routes.addStock(data.stock);
+
+            const stocks = await routes.getAllStocks(redis);
 
             wss.clients.forEach(client => {
               if (client.readyState === ws.OPEN) {
                 client.send(
                   JSON.stringify({
                     type: 'addStock',
-                    result
+                    result,
+                    stocks
                   })
                 );
               }
