@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import StockList from './StockList';
+import Linechart from './Linechart';
 
 class App extends Component {
   state = {
@@ -77,6 +78,7 @@ class App extends Component {
           stockList={this.state.availableStocks}
           removeStock={this.removeStock}
         />
+        <Linechart stocks={this.state.stocks} />
       </div>
     );
   }
