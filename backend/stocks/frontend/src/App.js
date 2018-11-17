@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import StockList from './StockList';
 
 class App extends Component {
   state = {
@@ -17,16 +18,26 @@ class App extends Component {
     this.ws.onmessage = event => {
       const data = JSON.parse(event.data);
       console.log('Um message recieved: ', data);
-
+      let names;
       switch (data.type) {
         case 'getAllStocks':
-          const names = data.stocks.map(s => s.code);
+          names = data.stocks.map(s => s.code);
           this.setState({ stocks: data.stocks, availableStocks: names });
           break;
         case 'addStock':
+          names = data.stocks.map(s => s.code);
+          this.setState({
+            stocks: data.stocks,
+            availableStocks: names,
+            code: ''
+          });
+          break;
+        case 'removeStock':
+          names = data.stocks.map(s => s.code);
           this.setState({ stocks: data.stocks, availableStocks: names });
           break;
         default:
+          console.log('Default triggered', data);
           break;
       }
     };
@@ -40,7 +51,10 @@ class App extends Component {
     this.ws.send(JSON.stringify({ type: 'addStock', stock: this.state.code }));
   };
 
-  removeStock = () => {};
+  removeStock = code => {
+    console.log(code);
+    this.ws.send(JSON.stringify({ type: 'removeStock', stock: code }));
+  };
 
   render() {
     const readyState = this.ws.readyState;
@@ -59,6 +73,10 @@ class App extends Component {
           onChange={this.handleChange}
         />
         <button onClick={this.addStock}>Add stock</button>
+        <StockList
+          stockList={this.state.availableStocks}
+          removeStock={this.removeStock}
+        />
       </div>
     );
   }

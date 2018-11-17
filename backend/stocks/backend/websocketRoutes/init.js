@@ -52,12 +52,14 @@ module.exports = (wss, redis) => {
           console.log('Removing stock...');
           try {
             const result = await routes.removeStock(data.stock);
+            const stocks = await routes.getAllStocks(redis);
             wss.clients.forEach(client => {
               if (client.readyState === ws.OPEN) {
                 client.send(
                   JSON.stringify({
                     type: 'removeStock',
-                    result
+                    result,
+                    stocks
                   })
                 );
               }
