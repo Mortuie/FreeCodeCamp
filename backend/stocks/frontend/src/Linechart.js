@@ -8,13 +8,13 @@ export default class Linechart extends Component {
         ...point,
         data: point.data.map(dataPoint => {
           return {
-            x: new Date(dataPoint.date).getTime() / 1000,
+            x: new Date(dataPoint.date).getTime(),
             y: dataPoint.closing
           };
         })
       };
     });
-
+    console.log(stocks);
     return (
       <div>
         <XYPlot height={600} width={1000}>
@@ -25,8 +25,10 @@ export default class Linechart extends Component {
             tickFormat={function tickFormat(d) {
               return new Date(d).toLocaleDateString();
             }}
+            tickTotal={10}
+            title="Date"
           />
-          <YAxis attr="y" attrAxis="x" orientation="left" />
+          <YAxis attr="y" attrAxis="x" orientation="left" title="Closing" />
           {stocks.map(stock => {
             return <LineSeries data={stock.data} />;
           })}
