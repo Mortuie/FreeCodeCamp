@@ -37,6 +37,9 @@ class App extends Component {
           names = data.stocks.map(s => s.code);
           this.setState({ stocks: data.stocks, availableStocks: names });
           break;
+        case 'error':
+          console.log(data);
+          break;
         default:
           console.log('Default triggered', data);
           break;
@@ -57,6 +60,12 @@ class App extends Component {
     this.ws.send(JSON.stringify({ type: 'removeStock', stock: code }));
   };
 
+  keyPress = e => {
+    if (e.key === 'Enter') {
+      this.addStock();
+    }
+  };
+
   render() {
     const readyState = this.ws.readyState;
 
@@ -72,6 +81,7 @@ class App extends Component {
           value={this.state.code}
           placeholder={'AAPL'}
           onChange={this.handleChange}
+          onKeyPress={this.keyPress}
         />
         <button onClick={this.addStock}>Add stock</button>
         <StockList
