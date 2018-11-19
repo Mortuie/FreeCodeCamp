@@ -14,7 +14,6 @@ export default class Linechart extends Component {
         })
       };
     });
-    console.log(stocks);
     return (
       <div>
         <XYPlot height={600} width={1000}>
@@ -30,7 +29,7 @@ export default class Linechart extends Component {
           />
           <YAxis attr="y" attrAxis="x" orientation="left" title="Closing" />
           {stocks.map(stock => {
-            return <LineSeries data={stock.data} />;
+            return <LineSeries key={stock.code} data={stock.data} />;
           })}
         </XYPlot>
       </div>

@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
 import StockList from './StockList';
 import Linechart from './Linechart';
+import Snackbar from '@material-ui/core/Snackbar';
+import styled from 'styled-components';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 class App extends Component {
   state = {
     stocks: [],
     code: '',
-    availableStocks: []
+    availableStocks: [],
+    snackbar: false,
+    snackbarContent: 'ASDASDASDD',
+    snackbarClose: 2500
   };
 
   componentWillMount = () => {
@@ -18,7 +25,6 @@ class App extends Component {
 
     this.ws.onmessage = event => {
       const data = JSON.parse(event.data);
-      console.log('Um message recieved: ', data);
       let names;
       switch (data.type) {
         case 'getAllStocks':
@@ -30,18 +36,25 @@ class App extends Component {
           this.setState({
             stocks: data.stocks,
             availableStocks: names,
-            code: ''
+            code: '',
+            snackbar: true,
+            snackbarContent: data.result
           });
           break;
         case 'removeStock':
           names = data.stocks.map(s => s.code);
-          this.setState({ stocks: data.stocks, availableStocks: names });
+          this.setState({
+            stocks: data.stocks,
+            availableStocks: names,
+            snackbar: true,
+            snackbarContent: data.result
+          });
           break;
         case 'error':
-          console.log(data);
+          console.error(data);
           break;
         default:
-          console.log('Default triggered', data);
+          console.warn('Default triggered', data);
           break;
       }
     };
@@ -56,7 +69,6 @@ class App extends Component {
   };
 
   removeStock = code => {
-    console.log(code);
     this.ws.send(JSON.stringify({ type: 'removeStock', stock: code }));
   };
 
@@ -66,6 +78,10 @@ class App extends Component {
     }
   };
 
+  closeSnackbar = () => {
+    this.setState({ snackbar: false });
+  };
+
   render() {
     const readyState = this.ws.readyState;
 
@@ -73,25 +89,52 @@ class App extends Component {
       return <div>Loading...</div>;
     }
 
-    console.log(this.state.stocks);
-
     return (
       <div>
-        <input
-          value={this.state.code}
-          placeholder={'AAPL'}
-          onChange={this.handleChange}
-          onKeyPress={this.keyPress}
-        />
-        <button onClick={this.addStock}>Add stock</button>
+        <Graph>
+          <Linechart stocks={this.state.stocks} />
+        </Graph>
+        <AddStock>
+          <TextField
+            id="code"
+            label="Stock Code"
+            value={this.state.code}
+            onChange={this.handleChange}
+            onKeyPress={this.keyPress}
+          />
+          <Button color="primary" onClick={this.addStock}>
+            Add Stock
+          </Button>
+        </AddStock>
         <StockList
           stockList={this.state.availableStocks}
           removeStock={this.removeStock}
         />
-        <Linechart stocks={this.state.stocks} />
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left'
+          }}
+          open={this.state.snackbar}
+          autoHideDuration={this.state.snackbarClose}
+          onClose={this.closeSnackbar}
+          message={<span>{this.state.snackbarContent}</span>}
+        />
       </div>
     );
   }
 }
+
+const Graph = styled.div`
+  margin-top: 10px;
+`;
+
+const AddStock = styled.div`
+  margin: auto;
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+`;
 
 export default App;
