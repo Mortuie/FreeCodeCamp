@@ -9,7 +9,8 @@ I also wanted to implement a redis cache on the backend to learn about caching a
 ### Running Replica
 
 - Copy the `.env.sample` file into a `.env` file getting your own version of all the secrets required to run this project.
-- TODO
+- Get a local redis and mongodb running in the background
+- Start the backend and frontend separately, by using `npm run`
 
 ### Running Tests
 
@@ -28,10 +29,10 @@ This is done with Prettier and Eslint see the `.prettierrc.yaml` and `.eslintrc.
 
 ## User Stories
 
-- [ ] I can view a graph displaying the recent trend lines for each added stock
-- [ ] I can add new stocks by their symbol name
-- [ ] I can remove stocks
-- [ ] I can see changes in real-time when any other user adds or removes
+- [ x ] I can view a graph displaying the recent trend lines for each added stock
+- [ x ] I can add new stocks by their symbol name
+- [ x ] I can remove stocks
+- [ x ] I can see changes in real-time when any other user adds or removes
       a stock.
 
 ## Stack
