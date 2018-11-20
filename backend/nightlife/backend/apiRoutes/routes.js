@@ -1,6 +1,8 @@
 const axios = require('axios');
+const passport = require('passport');
+var _ = require('lodash');
 
-module.exports = app => {
+module.exports = (app, redis) => {
   app.get('/places', (req, res) => {
     axios
       .get('https://api.yelp.com/v3/businesses/search', {
@@ -17,4 +19,33 @@ module.exports = app => {
       })
       .catch(err => console.log(err));
   });
+
+  app.get(
+    '/api/v1/login/twitter',
+    (req, res, next) => {
+      const queryString = JSON.stringify(req.query);
+      const unique = _.uniqueId('req_');
+
+      redis.set(unique, queryString, redis.print);
+
+      req.session.state = unique;
+      next();
+    },
+    passport.authenticate('twitter')
+  );
+
+  app.get(
+    '/api/v1/twitter',
+
+    passport.authenticate('twitter', { failureRedirect: '/login' }),
+    (req, res) => {
+      redis.get(req.session.state, (err, ress) => {
+        req.session.state = null;
+        const qs = JSON.parse(ress);
+        res.send('hello world!');
+
+        //  TODO: use hmsets..
+      });
+    }
+  );
 };

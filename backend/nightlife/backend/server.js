@@ -1,5 +1,9 @@
 const express = require('express');
 const app = express();
+const redis = require('redis');
+const chalk = require('chalk');
+const passport = require('passport');
+const TwitterStrategy = require('passport-twitter').Strategy;
 const routes = require('./apiRoutes');
 let server;
 
@@ -17,11 +21,55 @@ process.on('exit', () => {
   server.close(() => console.log('Closed express server.'));
 });
 
-async function initServer() {
-  server = app.listen(PORT, () => {
-    console.log('Listening on:', PORT);
+passport.use(
+  new TwitterStrategy(
+    {
+      consumerKey: process.env.TWITTER_API,
+      consumerSecret: process.env.TWITTER_API_SECRET,
+      callbackURL: 'http://127.0.0.1:3000/api/v1/twitter'
+    },
+    (token, tokenSecret, profile, cb) => {
+      console.log(profile.id);
+      return cb(null, profile);
+    }
+  )
+);
 
-    routes.apiRoutes(app);
+passport.serializeUser(function(user, cb) {
+  cb(null, user);
+});
+
+passport.deserializeUser(function(obj, cb) {
+  cb(null, obj);
+});
+
+app.use(
+  require('express-session')({
+    secret: 'keyboard cat',
+    resave: true,
+    saveUninitialized: true,
+    secure: true
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+
+async function initRedis() {
+  try {
+    const redisConn = await redis.createClient();
+    console.log(chalk.green('Redis Connected'));
+    return redisConn;
+  } catch (err) {
+    console.log(err);
+    process.exit(5);
+  }
+}
+
+async function initServer(redisConn) {
+  server = app.listen(PORT, () => {
+    console.log(chalk.green('Listening on:', PORT));
+
+    routes.apiRoutes(app, redisConn);
 
     return { server };
   });
@@ -29,7 +77,9 @@ async function initServer() {
 
 module.exports = (async () => {
   try {
-    return await initServer();
+    const redisConn = await initRedis();
+    const express = await initServer(redisConn);
+    return { express, redisConn };
   } catch (err) {
     console.log(err);
   }
