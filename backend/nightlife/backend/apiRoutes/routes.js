@@ -1,6 +1,6 @@
 const axios = require('axios');
 const passport = require('passport');
-var _ = require('lodash');
+const _ = require('lodash');
 
 module.exports = (app, redis) => {
   app.get('/places', (req, res) => {
@@ -26,7 +26,7 @@ module.exports = (app, redis) => {
       const queryString = JSON.stringify(req.query);
       const unique = _.uniqueId('req_');
 
-      redis.set(unique, queryString, redis.print);
+      redis.set(unique, queryString, 'EX', 120, redis.print);
 
       req.session.state = unique;
       next();
@@ -36,16 +36,24 @@ module.exports = (app, redis) => {
 
   app.get(
     '/api/v1/twitter',
-
     passport.authenticate('twitter', { failureRedirect: '/login' }),
     (req, res) => {
       redis.get(req.session.state, (err, ress) => {
         req.session.state = null;
         const qs = JSON.parse(ress);
-        res.send('hello world!');
 
-        //  TODO: use hmsets..
+        console.log('userid: ', req.user.id);
+        console.log('querystring: ', qs);
+
+        redis.HMSET(req.user.id, qs);
+
+        res.send('hello world!');
       });
     }
   );
+
+  app.get('/api/v1/logout', (req, res) => {
+    req.logout();
+    res.redirect('/');
+  });
 };

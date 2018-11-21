@@ -29,7 +29,6 @@ passport.use(
       callbackURL: 'http://127.0.0.1:3000/api/v1/twitter'
     },
     (token, tokenSecret, profile, cb) => {
-      console.log(profile.id);
       return cb(null, profile);
     }
   )
