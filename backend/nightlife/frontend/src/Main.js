@@ -8,16 +8,18 @@ class Main extends React.Component {
     console.log(store);
     return (
       <div>
-        <button onClick={this.newTodo}>Click me</button>
-        {store.todos.map(t => (
-          <ul>{t.task}</ul>
-        ))}
+        {store.loggedIn && <div>Logged in...</div>}
+        <button onClick={this.login}>Click me</button>
       </div>
     );
   }
 
-  newTodo = () => {
-    this.props.store.addTodo(prompt('New todo task: ', 'example'));
+  login = () => {
+    if (this.props.store.loggedIn) {
+      this.props.store.user = null;
+    } else {
+      this.props.store.user = 'hello world';
+    }
   };
 }
 
