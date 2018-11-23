@@ -3,6 +3,7 @@ const app = express();
 const redis = require('redis');
 const chalk = require('chalk');
 const passport = require('passport');
+const cors = require('cors');
 const TwitterStrategy = require('passport-twitter').Strategy;
 const routes = require('./apiRoutes');
 let server;
@@ -47,11 +48,16 @@ app.use(
     secret: 'keyboard cat',
     resave: true,
     saveUninitialized: true,
-    secure: true
+    cookie: { secure: false }
   })
 );
 app.use(passport.initialize());
 app.use(passport.session());
+var corsOptions = {
+  origin: 'http://localhost:3001',
+  credentials: true
+};
+app.use(cors(corsOptions));
 
 async function initRedis() {
   try {

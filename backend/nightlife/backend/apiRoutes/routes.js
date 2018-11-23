@@ -47,7 +47,8 @@ module.exports = (app, redis) => {
 
         redis.HMSET(req.user.id, qs);
 
-        res.send('hello world!');
+        // res.send('hello world!');
+        res.redirect('http://127.0.0.1:3001/huehuehue');
       });
     }
   );
