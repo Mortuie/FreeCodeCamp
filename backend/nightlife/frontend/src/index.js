@@ -12,7 +12,6 @@ if ('geolocation' in navigator) {
   navigator.geolocation.getCurrentPosition(function(position) {
     const { latitude, longitude } = position.coords;
     ObservableUserStore.setCoords(latitude, longitude);
-
     ReactDOM.render(
       <div>
         <DevTools />
