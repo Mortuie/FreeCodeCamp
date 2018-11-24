@@ -14,8 +14,33 @@ module.exports = (app, redis) => {
         headers: { Authorization: 'bearer ' + process.env.API_KEY }
       })
       .then(response => {
-        console.log(response.data.businesses[0].location);
-        res.json({ places: response.data.businesses });
+        const places = response.data.businesses;
+
+        const goingPlaces = Promise.all(
+          places.map(p => {
+            return new Promise((resolve, reject) => {
+              redis.get(p.id, (err, redisres) => {
+                if (err) {
+                  // console.log(err);
+                  return reject(err);
+                }
+
+                if (!redisres) {
+                  // console.log(p);
+                  return resolve({ ...p, going: 0, me: false });
+                }
+
+                // MIv9RY9k2MjWo-bWgwJe-g
+                console.log('dis:', redisres);
+                console.log('id:');
+                const array = JSON.parse(redisres);
+                return resolve({ ...p, going: array.length, me: false });
+              });
+            });
+          })
+        );
+
+        goingPlaces.then(places => res.json({ places }));
       })
       .catch(err => console.log(err));
   });

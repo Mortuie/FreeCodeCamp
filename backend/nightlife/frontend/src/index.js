@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { UserStore } from './Stores';
+import { UserStore, EventStore } from './Stores';
 import DevTools from 'mobx-react-devtools';
 import { Provider } from 'mobx-react';
 import { Routes } from './Routes';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 const ObservableUserStore = new UserStore();
+const ObservableEventStore = new EventStore();
 
 if ('geolocation' in navigator) {
   console.log('Geolocation is here!');
@@ -16,7 +17,10 @@ if ('geolocation' in navigator) {
     // ObservableUserStore.getCity();
 
     ReactDOM.render(
-      <Provider userStore={ObservableUserStore}>
+      <Provider
+        userStore={ObservableUserStore}
+        eventStore={ObservableEventStore}
+      >
         <Router>
           <div>
             <DevTools />

@@ -6,7 +6,8 @@ class UserStore {
   @observable user = null;
   @observable longitude = null;
   @observable latitude = null;
-  @observable city = null;
+  // @observable city = null;
+  @observable city = 'London';
   @observable state = 'loading';
   @observable error = null;
 

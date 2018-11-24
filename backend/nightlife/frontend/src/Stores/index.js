@@ -1,3 +1,4 @@
 import UserStore from './UserStore';
+import EventStore from './EventStore';
 
-export { UserStore };
+export { UserStore, EventStore };
