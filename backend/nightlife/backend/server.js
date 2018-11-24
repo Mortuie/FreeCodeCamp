@@ -4,6 +4,7 @@ const redis = require('redis');
 const chalk = require('chalk');
 const passport = require('passport');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 const TwitterStrategy = require('passport-twitter').Strategy;
 const routes = require('./apiRoutes');
 let server;
@@ -58,6 +59,7 @@ var corsOptions = {
   credentials: true
 };
 app.use(cors(corsOptions));
+app.use(bodyParser.json());
 
 async function initRedis() {
   try {

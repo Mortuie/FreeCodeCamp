@@ -45,6 +45,58 @@ module.exports = (app, redis) => {
       .catch(err => console.log(err));
   });
 
+  app.post('/api/v1/going', (req, res) => {
+    const userid = 123; // req.user.id;
+    const eventid = req.body.id;
+    console.log(req.body);
+
+    redis.get(eventid, (err, redisres) => {
+      if (err) return res.json({ err });
+
+      if (!redisres) {
+        // no result found i.e. first one so set it..
+        redis.set(eventid, JSON.stringify([userid]), (err, redissetres) => {
+          if (err) return res.json({ err });
+          console.log(redissetres);
+          return res.json({ redissetres });
+        });
+      } else {
+        // already been set.
+        const oldArray = JSON.parse(redisres);
+
+        oldArray.push(userid);
+
+        redis.set(eventid, JSON.stringify(oldArray), (err, redissetsetres) => {
+          if (err) return res.json({ err });
+
+          console.log(redissetsetres);
+
+          return res.json({ redissetsetres });
+        });
+      }
+    });
+  });
+
+  app.delete('/api/v1/going', (req, res) => {
+    const userid = 123; // req.user.id;
+    const eventid = req.body.id;
+    console.log(req.body);
+
+    redis.get(eventid, (err, redisres) => {
+      if (err) return res.json({ redisres });
+
+      if (!redisres) {
+        // not set...
+      } else {
+        const array = JSON.parse(redisres);
+
+        // TODO: remove from array and put back into redis.......
+      }
+    });
+
+    res.send('Hello World');
+  });
+
   app.get(
     '/api/v1/login/twitter',
     (req, res, next) => {
@@ -82,4 +134,11 @@ module.exports = (app, redis) => {
     req.logout();
     res.redirect('/');
   });
+
+  function isAuthenticated(req, res, next) {
+    if (req.user.authenticated) return next();
+
+    // IF A USER ISN'T LOGGED IN, THEN REDIRECT THEM SOMEWHERE
+    res.redirect('/');
+  }
 };
