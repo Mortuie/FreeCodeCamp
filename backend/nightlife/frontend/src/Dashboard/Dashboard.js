@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import styled from 'styled-components';
 import EventGrid from './EventGrid';
+import { TwitterLogin } from '../User';
 
 const Header = styled.div`
   margin: auto;
@@ -20,6 +21,7 @@ class Dashboard extends Component {
 
     return (
       <div>
+        {!userStore.isLoggedIn && <TwitterLogin />}
         <Header>Events in {userStore.city}</Header>
         <EventGrid events={eventStore} />
       </div>

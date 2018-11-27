@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { observer, inject } from 'mobx-react';
 
-const Event = observer(({ event }) => (
+const Event = observer(({ event, user }) => (
   <EventCell>
     <div>{event.alias}</div>
     <EventImage src={event.image_url} />
     <div>{event.going}</div>
-    <button onClick={event.ister}>Click me</button>
+    {user && <button onClick={event.ister}>Click me</button>}
   </EventCell>
 ));
 
@@ -25,14 +25,16 @@ const EventImage = styled.img`
   height: 100px;
 `;
 
+@inject('userStore')
 @observer
 class EventGrid extends Component {
   render() {
     const { events } = this.props.events;
+    const { userStore } = this.props;
     return (
       <Grid>
         {events.map(e => (
-          <Event key={e.id} event={e} />
+          <Event user={userStore.isLoggedIn} key={e.id} event={e} />
         ))}
       </Grid>
     );

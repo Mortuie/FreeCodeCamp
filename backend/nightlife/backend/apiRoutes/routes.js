@@ -49,8 +49,9 @@ module.exports = (app, redis) => {
       .catch(err => console.log(err));
   });
 
-  app.post('/api/v1/going', (req, res) => {
-    const userid = 123; // req.user.id;
+  app.post('/api/v1/going', spicy, (req, res) => {
+    console.log('USERID: ', req.user);
+    const userid = req.user.id;
     const eventid = req.body.id;
     console.log(req.body);
 
@@ -81,8 +82,8 @@ module.exports = (app, redis) => {
     });
   });
 
-  app.delete('/api/v1/going', (req, res) => {
-    const userid = 123; // req.user.id;
+  app.delete('/api/v1/going', spicy, (req, res) => {
+    const userid = req.user.id;
     const eventid = req.body.id;
     console.log('boday: ', req.body);
 
@@ -150,10 +151,10 @@ module.exports = (app, redis) => {
     res.redirect('/');
   });
 
-  function isAuthenticated(req, res, next) {
-    if (req.user.authenticated) return next();
+  function spicy(req, res, next) {
+    if (req.isAuthenticated()) return next();
 
-    // IF A USER ISN'T LOGGED IN, THEN REDIRECT THEM SOMEWHERE
+    // IF A USER ISN'T LOGGED IN, THEN REDIRECT THEM SOMEWHERE i.e. LOUGOUT ROUTE..... THENKS
     res.redirect('/');
   }
 };

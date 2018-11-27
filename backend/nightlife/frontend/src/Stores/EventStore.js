@@ -26,9 +26,15 @@ class Event {
   @action ister = () => {
     console.log('this: ', this.id);
     axios
-      .post(`${backendBase}/api/v1/going`, {
-        id: this.id
-      })
+      .post(
+        `${backendBase}/api/v1/going`,
+        {
+          id: this.id
+        },
+        {
+          withCredentials: true
+        }
+      )
       .then(res => {
         console.log(res);
       })
