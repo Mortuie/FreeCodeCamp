@@ -23,8 +23,8 @@ class UserStore {
     this.user = null;
   }
 
-  @action login(user) {
-    this.user = user;
+  @action login() {
+    this.user = true;
   }
 
   @action setCoords(lat, long) {

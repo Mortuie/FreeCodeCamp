@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { observer } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 
 const Event = observer(({ event }) => (
   <EventCell>
@@ -32,7 +32,7 @@ class EventGrid extends Component {
     return (
       <Grid>
         {events.map(e => (
-          <Event event={e} />
+          <Event key={e.id} event={e} />
         ))}
       </Grid>
     );

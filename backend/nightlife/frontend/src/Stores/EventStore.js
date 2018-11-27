@@ -24,8 +24,15 @@ class Event {
   }
 
   @action ister = () => {
-    // console.log('id: ', this.id, ' has been pressed');
     console.log('this: ', this.id);
+    axios
+      .post(`${backendBase}/api/v1/going`, {
+        id: this.id
+      })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => console.log(err));
   };
 }
 
@@ -44,6 +51,7 @@ class EventStore {
       })
       .then(res => {
         console.log(res);
+        this.events = [];
         res.data.places.map(p => this.events.push(new Event(p)));
       })
       .catch(err => console.log(err));

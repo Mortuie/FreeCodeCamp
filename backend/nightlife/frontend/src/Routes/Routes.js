@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import { TwitterLogin } from '../User';
 import Notfound from '../Notfound';
 import { Dashboard } from '../Dashboard';
+import LoginSuccess from '../LoginSuccess';
 
 @inject('userStore', 'eventStore')
 @observer
@@ -23,7 +24,7 @@ class Routes extends Component {
     return (
       <Switch>
         <Route exact path="/" component={Dashboard} />
-        <Route exact path="/login/twitter" component={TwitterLogin} />
+        <Route exact path="/:CONFIRMED" component={LoginSuccess} />
         <Route path="*" component={Notfound} />
       </Switch>
     );

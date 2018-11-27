@@ -28,7 +28,7 @@ passport.use(
     {
       consumerKey: process.env.TWITTER_API,
       consumerSecret: process.env.TWITTER_API_SECRET,
-      callbackURL: 'http://127.0.0.1:3000/api/v1/twitter'
+      callbackURL: 'http://localhost:3002/api/v1/twitter'
     },
     (token, tokenSecret, profile, cb) => {
       return cb(null, profile);
@@ -46,7 +46,7 @@ passport.deserializeUser(function(obj, cb) {
 
 app.use(
   require('express-session')({
-    secret: 'keyboard cat',
+    secret: 'keyboardasdasdcat',
     resave: true,
     saveUninitialized: true,
     cookie: { secure: false }

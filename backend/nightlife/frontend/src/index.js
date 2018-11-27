@@ -5,6 +5,7 @@ import DevTools from 'mobx-react-devtools';
 import { Provider } from 'mobx-react';
 import { Routes } from './Routes';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { TwitterLogin } from './User';
 
 const ObservableUserStore = new UserStore();
 const ObservableEventStore = new EventStore();
@@ -24,6 +25,7 @@ if ('geolocation' in navigator) {
         <Router>
           <div>
             <DevTools />
+            <TwitterLogin />
             <Routes />
           </div>
         </Router>
@@ -31,7 +33,6 @@ if ('geolocation' in navigator) {
       document.getElementById('root')
     );
   });
-  // <TwitterLogin />
 } else {
   console.log('Geolocation is not here!');
   ReactDOM.render(

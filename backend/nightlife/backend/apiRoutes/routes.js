@@ -21,20 +21,24 @@ module.exports = (app, redis) => {
             return new Promise((resolve, reject) => {
               redis.get(p.id, (err, redisres) => {
                 if (err) {
-                  // console.log(err);
+                  // console.log('error redis find: ', err);
                   return reject(err);
                 }
 
                 if (!redisres) {
-                  // console.log(p);
+                  // console.log('!redisres: ', p);
                   return resolve({ ...p, going: 0, me: false });
                 }
 
                 // MIv9RY9k2MjWo-bWgwJe-g
                 console.log('dis:', redisres);
-                console.log('id:');
+                console.log('id:', p.id);
                 const array = JSON.parse(redisres);
-                return resolve({ ...p, going: array.length, me: false });
+                let me = false;
+                if (req.user && array.indexOf(req.user.id) >= 0) {
+                  me = true;
+                }
+                return resolve({ ...p, going: array.length, me });
               });
             });
           })
@@ -136,7 +140,7 @@ module.exports = (app, redis) => {
         redis.HMSET(req.user.id, qs);
 
         // res.send('hello world!');
-        res.redirect('http://127.0.0.1:3001/twitter/login');
+        res.redirect('http://localhost:3001/LOGGEDIN');
       });
     }
   );
