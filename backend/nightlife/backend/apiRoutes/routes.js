@@ -80,21 +80,32 @@ module.exports = (app, redis) => {
   app.delete('/api/v1/going', (req, res) => {
     const userid = 123; // req.user.id;
     const eventid = req.body.id;
-    console.log(req.body);
+    console.log('boday: ', req.body);
 
     redis.get(eventid, (err, redisres) => {
       if (err) return res.json({ redisres });
 
       if (!redisres) {
         // not set...
+        return res.json({ redisres });
       } else {
         const array = JSON.parse(redisres);
+
+        const removed = array.filter(x => x !== userid);
+
+        console.log('rem: ', removed);
+
+        redis.set(eventid, JSON.stringify(removed), (err, redissetsetres) => {
+          if (err) return res.json({ err });
+
+          console.log(redissetsetres);
+
+          return res.json({ redissetsetres });
+        });
 
         // TODO: remove from array and put back into redis.......
       }
     });
-
-    res.send('Hello World');
   });
 
   app.get(
