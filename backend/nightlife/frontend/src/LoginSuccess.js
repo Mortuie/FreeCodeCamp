@@ -9,6 +9,7 @@ class LoginSuccess extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props.match.params.CONFIRMED);
     if (this.props.match.params.CONFIRMED === 'LOGGEDIN') {
       // we got itttt...
       this.login();

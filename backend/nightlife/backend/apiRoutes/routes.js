@@ -162,6 +162,6 @@ module.exports = (app, redis) => {
     if (req.isAuthenticated()) return next();
 
     // IF A USER ISN'T LOGGED IN, THEN REDIRECT THEM SOMEWHERE i.e. LOUGOUT ROUTE..... THENKS
-    res.redirect('/');
+    return res.redirect('http://localhost:3001/LOGOUT');
   }
 };

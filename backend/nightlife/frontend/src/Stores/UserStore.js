@@ -1,6 +1,6 @@
 import { observable, action, computed } from 'mobx';
 import axios from 'axios';
-import { opencageApiKey } from '../config';
+import { opencageApiKey, backendBase } from '../config';
 
 class UserStore {
   @observable user = null;
