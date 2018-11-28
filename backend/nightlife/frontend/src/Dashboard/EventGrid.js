@@ -7,7 +7,7 @@ const Event = observer(({ event, user }) => (
     <div>{event.alias}</div>
     <EventImage src={event.image_url} />
     <div>{event.going}</div>
-    {user && <button onClick={event.ister}>Click me</button>}
+    {user && <button onClick={event.ister}>{event.buttonText}</button>}
   </EventCell>
 ));
 

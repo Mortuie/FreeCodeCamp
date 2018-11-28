@@ -31,11 +31,11 @@ module.exports = (app, redis) => {
                 }
 
                 // MIv9RY9k2MjWo-bWgwJe-g
-                console.log('dis:', redisres);
-                console.log('id:', p.id);
                 const array = JSON.parse(redisres);
+                // console.log('ARRAY', array);
+                // console.log('USERID', req.user);
                 let me = false;
-                if (req.user && array.indexOf(req.user.id) >= 0) {
+                if (req.user && array.indexOf(req.user.id.toString()) >= 0) {
                   me = true;
                 }
                 return resolve({ ...p, going: array.length, me });
@@ -50,7 +50,6 @@ module.exports = (app, redis) => {
   });
 
   app.post('/api/v1/going', spicy, (req, res) => {
-    console.log('USERID: ', req.user);
     const userid = req.user.id;
     const eventid = req.body.id;
     console.log(req.body);
@@ -63,21 +62,30 @@ module.exports = (app, redis) => {
         redis.set(eventid, JSON.stringify([userid]), (err, redissetres) => {
           if (err) return res.json({ err });
           console.log(redissetres);
-          return res.json({ redissetres });
+          return res.json({ me: true, going: 1 });
         });
       } else {
         // already been set.
         const oldArray = JSON.parse(redisres);
 
-        oldArray.push(userid);
+        if (oldArray.indexOf(userid) > -1) {
+          console.log('THIS HAS ALREAADY BEEN SET...');
+          return res.json({ me: true, going: oldArray.length });
+        } else {
+          oldArray.push(userid);
 
-        redis.set(eventid, JSON.stringify(oldArray), (err, redissetsetres) => {
-          if (err) return res.json({ err });
+          redis.set(
+            eventid,
+            JSON.stringify(oldArray),
+            (err, redissetsetres) => {
+              if (err) return res.json({ err });
 
-          console.log(redissetsetres);
+              console.log(redissetsetres);
 
-          return res.json({ redissetsetres });
-        });
+              return res.json({ me: true, going: oldArray.length });
+            }
+          );
+        }
       }
     });
   });
@@ -105,7 +113,7 @@ module.exports = (app, redis) => {
 
           console.log(redissetsetres);
 
-          return res.json({ redissetsetres });
+          return res.json({ me: false, going: removed.length });
         });
 
         // TODO: remove from array and put back into redis.......
@@ -140,7 +148,6 @@ module.exports = (app, redis) => {
 
         redis.HMSET(req.user.id, qs);
 
-        // res.send('hello world!');
         res.redirect('http://localhost:3001/LOGGEDIN');
       });
     }

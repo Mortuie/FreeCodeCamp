@@ -2,12 +2,19 @@ import { observable, action, computed } from 'mobx';
 import axios from 'axios';
 import { backendBase } from '../config';
 
+const DEREGISTER = 'DEGREGISTER';
+const REGISTER = 'Click me';
+
 class Event {
   @observable id;
   @observable alias;
   @observable image_url = 'http://mydaymyplan.com//images/no-image-large.png';
   @observable going = 0;
   @observable me = false;
+
+  @computed get buttonText() {
+    return this.me ? DEREGISTER : REGISTER;
+  }
 
   constructor(event) {
     this.id = event.id;
@@ -25,20 +32,40 @@ class Event {
 
   @action ister = () => {
     console.log('this: ', this.id);
-    axios
-      .post(
-        `${backendBase}/api/v1/going`,
-        {
-          id: this.id
-        },
-        {
+    if (this.buttonText === REGISTER) {
+      axios
+        .post(
+          `${backendBase}/api/v1/going`,
+          {
+            id: this.id
+          },
+          {
+            withCredentials: true
+          }
+        )
+        .then(res => {
+          console.log(res);
+
+          this.me = res.data.me;
+          this.going = res.data.going;
+        })
+        .catch(err => console.log(err));
+    } else {
+      axios
+        .delete(`${backendBase}/api/v1/going`, {
+          data: {
+            id: this.id
+          },
           withCredentials: true
-        }
-      )
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => console.log(err));
+        })
+        .then(res => {
+          console.log(res);
+
+          this.me = res.data.me;
+          this.going = res.data.going;
+        })
+        .catch(err => console.log(res));
+    }
   };
 }
 
@@ -53,7 +80,8 @@ class EventStore {
         params: {
           latitude: lat,
           longitude: long
-        }
+        },
+        withCredentials: true
       })
       .then(res => {
         console.log(res);

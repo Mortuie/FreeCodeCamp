@@ -14,7 +14,7 @@ if ('geolocation' in navigator) {
   navigator.geolocation.getCurrentPosition(function(position) {
     const { latitude, longitude } = position.coords;
     ObservableUserStore.setCoords(latitude, longitude);
-    // ObservableUserStore.getCity();
+    ObservableUserStore.getCity();
 
     ReactDOM.render(
       <Provider
