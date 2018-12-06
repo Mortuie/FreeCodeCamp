@@ -13,6 +13,7 @@ knex
   .raw('SELECT 1 + 1 AS RESULT')
   .then(res => {
     console.log(chalk.green('DB has been connected to.....'));
+
     module.exports = knex;
   })
   .catch(err => {
