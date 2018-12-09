@@ -13,8 +13,6 @@ exports.seed = (knex, Promise) => {
                 .select('id')
                 .where({ name: 'Leon' })
                 .then(rows => {
-                  console.log('HERE: ', rows);
-                  console.log(rows[0].id);
                   return knex('todos').insert([
                     {
                       title: 'Clean kitchen',
