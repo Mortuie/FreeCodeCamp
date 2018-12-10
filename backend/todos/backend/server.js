@@ -1,7 +1,8 @@
 const express = require('express');
 const app = express();
-var bodyParser = require('body-parser');
-var knex = require('knex')({
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const knex = require('knex')({
   client: 'pg',
   connection: {
     host: 'localhost',
@@ -11,7 +12,12 @@ var knex = require('knex')({
   }
 });
 
+var corsOptions = {
+  origin: 'http://localhost:3001'
+};
+
 app.use(bodyParser.json());
+app.use(cors(corsOptions));
 
 require('./routes')(app, knex);
 

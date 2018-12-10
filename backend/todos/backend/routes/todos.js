@@ -1,19 +1,9 @@
 module.exports = (app, knex) => {
-  app.get('/api/v1/todo/:id', (req, res) => {
+  app.get('/api/v1/todo/:userid', (req, res) => {
     knex
       .from('todos')
       .select('*')
-      .where({ id: req.params.id })
-      .then(rows => {
-        console.log(rows);
-        res.json(rows[0]);
-      });
-  });
-
-  app.get('/api/v1/todos', (req, res) => {
-    knex
-      .from('todos')
-      .select('*')
+      .where({ userId: req.params.userid })
       .then(rows => {
         console.log(rows);
         res.json(rows);
