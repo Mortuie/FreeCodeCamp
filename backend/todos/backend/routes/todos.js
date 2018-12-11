@@ -51,7 +51,14 @@ module.exports = (app, knex) => {
       .update(updated)
       .then(ress => {
         console.log(ress);
-        return res.json({ status: ress });
+        knex
+          .from('todos')
+          .select('*')
+          .where({ userId: req.body.userid })
+          .then(rows => {
+            return res.json(rows);
+          })
+          .catch(err => console.log(err));
       });
   });
 

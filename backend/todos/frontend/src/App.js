@@ -38,12 +38,7 @@ const App = ({ userObject }) => {
   if (!user) {
     return <div>Loading...</div>;
   } else {
-    return (
-      <div>
-        <div>{user.id}</div>
-        <TodoPage userid={user.id} />
-      </div>
-    );
+    return <TodoPage userid={user.id} />;
   }
 };
 
