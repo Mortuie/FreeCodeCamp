@@ -3,14 +3,26 @@ module.exports = (app, knex) => {
     knex('users')
       .insert({ name: req.params.username })
       .then(ress => {
-        console.log(ress);
-        return res.json(ress);
+        knex
+          .from('users')
+          .select('*')
+          .where({ name: req.params.username })
+          .then(resss => {
+            return res.json(resss);
+          });
       })
       .catch(err => {
         console.log(err);
-        return res.json(err);
+        if (err.code === '23505') {
+          // already exists.
+          return res.json({
+            error: true,
+            code: 1,
+            status: 'Name has already  been taken.'
+          });
+        } else {
+          return res.json({ error: true, status: 'Unknown Error' });
+        }
       });
   });
-
-  app.get('/api/v1/user', (req, res) => {});
 };
