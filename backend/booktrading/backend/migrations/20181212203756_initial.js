@@ -6,9 +6,15 @@ exports.up = function(knex, Promise) {
         .string('name')
         .unique()
         .notNullable();
+      table
+        .string('githubid')
+        .unique()
+        .default(null);
       table.string('password').notNullable();
     })
   ]);
 };
 
-exports.down = function(knex, Promise) {};
+exports.down = function(knex, Promise) {
+  knex.schema.dropTable('users');
+};

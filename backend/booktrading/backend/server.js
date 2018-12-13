@@ -10,7 +10,7 @@ const knex = require('knex')({
     host: 'localhost',
     user: 'postgres',
     password: 'root',
-    database: 'sql'
+    database: 'postgres'
   }
 });
 
@@ -20,7 +20,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 const PORT = process.env.PORT || 3000;
 
-confs.pconf(passport);
+confs.pconf(passport, knex);
 
 // middleware
 app.use(bodyParser.json());
