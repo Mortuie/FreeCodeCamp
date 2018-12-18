@@ -10,7 +10,6 @@ module.exports = (app, knex, passport) => {
   );
 
   app.get('/logout', (req, res) => {
-    console.log('TRYING TO LOGOUT');
     req.logout();
     res.redirect('/');
   });
