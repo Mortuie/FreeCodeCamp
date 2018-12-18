@@ -1,5 +1,5 @@
-const pconf = require('./passport-conf');
+const passportConf = require('./passport-conf');
 
 module.exports = {
-  pconf
+  passportConf
 };

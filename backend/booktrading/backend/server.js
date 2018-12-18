@@ -20,7 +20,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 const PORT = process.env.PORT || 3000;
 
-confs.pconf(passport, knex);
+confs.passportConf(passport, knex);
 
 // middleware
 app.use(bodyParser.json());
@@ -34,16 +34,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/auth/github', passport.authenticate('github'));
-
-app.get(
-  '/auth/github/callback',
-  passport.authenticate('github', { failureRedirect: '/login' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/');
-  }
-);
+const routes = require('./routes')(app, knex, passport);
 
 app.listen(PORT, () => {
   console.log('Listening on port: ', PORT);
