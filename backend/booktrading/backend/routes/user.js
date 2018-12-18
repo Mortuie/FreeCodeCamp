@@ -5,7 +5,9 @@ module.exports = (app, knex, passport) => {
     '/auth/github/callback',
     passport.authenticate('github', { failureRedirect: '/login' }),
     function(req, res) {
-      res.redirect('/');
+      console.log('UMMM');
+      res.send('<h1>HELLO WORLD</h1>');
+      // res.redirect('/');
     }
   );
 
