@@ -1,0 +1,17 @@
+<div>xDDD</div>
+<p><%= JSON.stringify(user) %></p>
+
+<script>
+  document.body.onload = function() {
+    var injectedUser = <%- JSON.stringify(user) %>;
+    console.log(injectedUser);
+    window.opener.postMessage(
+      {
+        payload: injectedUser,
+        status: 'success'
+      },
+      // window.opener.location
+      "*"
+    );
+  };
+</script>

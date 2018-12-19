@@ -22,6 +22,8 @@ const PORT = process.env.PORT || 3000;
 
 confs.passportConf(passport, knex);
 
+app.set('view engine', 'ejs');
+
 // middleware
 app.use(bodyParser.json());
 app.use(

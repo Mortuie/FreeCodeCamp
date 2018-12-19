@@ -19,8 +19,7 @@ const loginTab = myUrl => {
     window.screenY + (window.outerHeight - windowArea.height) / 8
   );
 
-  const sep = myUrl.indexOf('?') !== -1 ? '&' : '?';
-  const url = `http://localhost:3000${myUrl}${sep}`;
+  const url = `http://127.0.0.1:3000${myUrl}`;
   const windowOpts = `toolbar=0,scrollbars=1,status=1,resizable=1,location=1,menuBar=0,
     width=${windowArea.width},height=${windowArea.height},
     left=${windowArea.left},top=${windowArea.top}`;
@@ -38,15 +37,10 @@ const loginTab = myUrl => {
     eventer(
       messageEvent,
       msg => {
-        if (
-          !~msg.origin.indexOf(
-            `${window.location.protocol}//${window.location.host}`
-          )
-        ) {
+        if (!~msg.origin.indexOf(`http://127.0.0.1:3000`)) {
           authWindow.close();
           reject('Not allowed');
         }
-
         if (msg.data.payload) {
           try {
             resolve(JSON.parse(msg.data.payload));
@@ -70,6 +64,10 @@ const loginTab = myUrl => {
 const App = () => {
   const login = () => {
     const msg = loginTab('/auth/github');
+
+    msg
+      .then(res => console.log('RESS: ', res))
+      .catch(err => console.log('ERR: ', err));
   };
 
   return (
