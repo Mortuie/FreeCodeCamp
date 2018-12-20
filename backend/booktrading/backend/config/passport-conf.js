@@ -12,7 +12,7 @@ module.exports = (passport, knex) => {
         knex
           .from('users')
           .select('*')
-          .where({ githubid: profile.id })
+          .where({ githubId: profile.id })
           .then(rows => {
             if (rows.length) {
               return cb(null, rows[0]);
@@ -21,12 +21,12 @@ module.exports = (passport, knex) => {
             knex('users')
               .insert({
                 name: profile.username,
-                githubid: profile.id
+                githubId: profile.id
               })
               .then(res => {
                 return cb(null, {
                   name: profile.username,
-                  githubid: profile.id
+                  githubId: profile.id
                 });
               });
           })
@@ -36,14 +36,14 @@ module.exports = (passport, knex) => {
   );
 
   passport.serializeUser((user, cb) => {
-    cb(null, user.githubid);
+    cb(null, user.githubId);
   });
 
   passport.deserializeUser(function(id, cb) {
     knex
       .from('users')
       .select('*')
-      .where({ githubid: id })
+      .where({ githubId: id })
       .then(rows => {
         cb(null, rows[0]);
       })

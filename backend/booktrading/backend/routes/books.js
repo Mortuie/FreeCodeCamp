@@ -2,12 +2,28 @@ const isAuthenticated = require('./helpers').isAuthenticated;
 
 module.exports = (app, knex, passport) => {
   app.get('/api/v1/books', (req, res) => {
-    res.send('get all books');
+    knex('books')
+      .select('*')
+      .then(rows => {
+        res.json({
+          error: false,
+          message: {
+            data: rows
+          }
+        });
+      });
   });
 
   // should be authenticated
-  app.post('/api/v1/book', (req, res) => {
-    res.send('add a book');
+  app.post('/api/v1/book', isAuthenticated, (req, res) => {
+    const { name, author } = req.body;
+    const userId = 1;
+    knex('books')
+      .insert({ name, author, userId })
+      .then(rows => {
+        console.log(rows);
+        res.send('add a book');
+      });
   });
 
   // should be auth

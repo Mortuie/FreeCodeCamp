@@ -7,7 +7,7 @@ exports.up = function(knex, Promise) {
         .unique()
         .notNullable();
       table
-        .string('githubid')
+        .string('githubId')
         .unique()
         .default(null);
       table.string('password').notNullable();
@@ -16,5 +16,5 @@ exports.up = function(knex, Promise) {
 };
 
 exports.down = function(knex, Promise) {
-  knex.schema.dropTable('users');
+  return knex.schema.dropTable('users');
 };
