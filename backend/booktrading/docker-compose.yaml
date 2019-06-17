@@ -1,0 +1,35 @@
+version: '3'
+services:
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - 3001:3000
+    volumes:
+      - ./frontend:/app
+    networks:
+      - frontend
+    depends_on:
+      - backend
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - 3000:3000
+    volumes:
+      - ./backend:/app
+    networks:
+      - frontend
+      - backend
+    depends_on:
+      - psql
+  psql:
+    image: postgres:11.3-alpine
+    ports:
+      - 5432:5432
+    restart: always
+    networks:
+      - backend
+networks:
+  frontend:
+  backend:
