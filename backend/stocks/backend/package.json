@@ -12,7 +12,7 @@
     "test": "yarn mocha --exit"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "boom": "^7.2.0",
     "chalk": "^2.4.1",
     "dotenv": "^6.1.0",
