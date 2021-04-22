@@ -19,7 +19,7 @@ CREATE TABLE users (
 CREATE TABLE books (
     uuid UUID PRIMARY KEY NOT NULL DEFAULT uuid_generate_v4(),
     name VARCHAR (200) NOT NULL,
-    picture TEXT NOT NULL,
+    picture TEXT NOT NULL DEFAULT 'https://www.adazing.com/wp-content/uploads/2019/02/open-book-clipart-03.png',
     user_uuid UUID NOT NULL REFERENCES users(uuid),
     created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
 );
