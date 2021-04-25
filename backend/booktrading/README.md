@@ -26,6 +26,5 @@ PSQL to server: `sudo -u postgres psql`
 
 ### Todo
 
-- Complete User Router
 - Complete Trading Router
 - Sessionless Login with passport
