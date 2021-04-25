@@ -7,7 +7,6 @@ passport.use(
   new Strategy(
     { usernameField: "email", passReqToCallback: true },
     async (req, email, password, done) => {
-      console.log("deets", req.body, email, password);
       const { fullname } = req.body;
 
       if (!fullname) {
