@@ -1,0 +1,32 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Users {
+  id Int @id @default(autoincrement())
+  username String @unique
+  password String
+  createdAt DateTime @default(now())
+  books Books[]
+}
+
+model Books {
+  id Int @id @default(autoincrement())
+  title String @db.VarChar(50)
+  description String @default("")
+  user Users @relation(fields: [userId], references: [id])
+  userId Int 
+  createdAt DateTime @default(now())
+}
+
+model Sessions {
+  cookieUuid String @unique
+  userId Int 
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+}
