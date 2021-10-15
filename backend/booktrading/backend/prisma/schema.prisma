@@ -7,6 +7,11 @@ generator client {
   provider = "prisma-client-js"
 }
 
+enum Status {
+  INCOMPLETE
+  COMPLETE
+}
+
 model Users {
   id Int @id @default(autoincrement())
   username String @unique
@@ -22,6 +27,15 @@ model Books {
   user Users @relation(fields: [userId], references: [id])
   userId Int 
   createdAt DateTime @default(now())
+}
+
+model Trades {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  message String @default("")
+  fromUserId Int 
+  toUserId Int
+  status Status @default(INCOMPLETE)
 }
 
 model Sessions {

@@ -17,6 +17,9 @@ const isLoggedOut = (req: Request, res: Response, next: NextFunction) => {
   next();
 };
 
+/**
+ * Checks whether a user is logged in or not
+ */
 const isAuthenticated = (req: Request, res: Response, next: NextFunction) => {
   const loggedInUser = req.user;
 

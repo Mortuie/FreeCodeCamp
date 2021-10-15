@@ -1,11 +1,8 @@
 import { Router } from "express";
 import { INVALID_PARAMETERS } from "../../common/restErrors";
 import { isAuthenticated } from "../../middleware";
-import {
-  createBook,
-  onlyBookId,
-  paginationBaseTypes,
-} from "../../types/bookRestTypes";
+import { createBook, onlyBookId } from "../../types/booksRestTypes";
+import { paginationBaseTypes } from "../../types/common";
 import { prismaClient } from "../../utils/prismaClient";
 
 const getV1BookRouter = () => {
@@ -40,6 +37,9 @@ const getV1BookRouter = () => {
     const books = await prismaClient.books.findMany({
       skip: queryParams.offset,
       take: queryParams.limit,
+      orderBy: {
+        createdAt: "desc",
+      },
     });
 
     return res.json({ data: books });
@@ -61,7 +61,7 @@ const getV1BookRouter = () => {
     const book = await prismaClient.books.create({
       data: {
         ...body,
-        userId: req.user?.userId,
+        userId: req.user.userId,
       },
     });
 

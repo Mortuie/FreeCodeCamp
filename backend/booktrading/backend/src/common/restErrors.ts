@@ -23,10 +23,16 @@ const INTERNAL_SERVER_ERROR = {
   message: "Internal server error.",
 };
 
+const NOT_FOUND = {
+  errorType: "RESOURCE_NOT_FOUND",
+  message: "Resource not found.",
+};
+
 export {
   INTERNAL_SERVER_ERROR,
   INVALID_PARAMETERS,
   UNAUTHORISED,
   UNAUTHENTICATED,
   AUTHENTICATED,
+  NOT_FOUND,
 };
