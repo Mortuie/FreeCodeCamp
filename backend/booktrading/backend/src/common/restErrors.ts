@@ -18,4 +18,15 @@ const AUTHENTICATED = {
   errorMessage: "No need to authenticate again.",
 };
 
-export { INVALID_PARAMETERS, UNAUTHORISED, UNAUTHENTICATED, AUTHENTICATED };
+const INTERNAL_SERVER_ERROR = {
+  errorType: "INTERNAL_SERVER_ERROR",
+  message: "Internal server error.",
+};
+
+export {
+  INTERNAL_SERVER_ERROR,
+  INVALID_PARAMETERS,
+  UNAUTHORISED,
+  UNAUTHENTICATED,
+  AUTHENTICATED,
+};

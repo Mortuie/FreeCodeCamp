@@ -14,6 +14,6 @@ const parseEnvVars = () => {
   return envVars.parse(process.env);
 };
 
-type envVarsType = z.infer<typeof envVars>;
+type EnvVarsType = z.infer<typeof envVars>;
 
-export { parseEnvVars, envVars };
+export { parseEnvVars, envVars, EnvVarsType };
