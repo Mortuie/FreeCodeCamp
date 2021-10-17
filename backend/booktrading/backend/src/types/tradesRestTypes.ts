@@ -6,7 +6,9 @@ const onlyTradesId = z.object({
 
 const createTrades = z.object({
   toUserId: z.number(),
-  message: z.string().optional(),
+  toBookId: z.number(),
+  fromBookId: z.number(),
+  message: z.string().optional().default(""),
 });
 
 export { onlyTradesId, createTrades };

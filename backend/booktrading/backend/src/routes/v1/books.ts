@@ -68,6 +68,8 @@ const getV1BookRouter = () => {
     return res.json({ data: book });
   });
 
+  // need a delete route here.
+
   return bookRouter;
 };
 

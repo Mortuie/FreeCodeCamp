@@ -5,7 +5,7 @@ import {
   UNAUTHENTICATED,
   UNAUTHORISED,
 } from "../common/restErrors";
-import { onlyUserId } from "../types";
+import { onlyUserId } from "../types/usersRestTypes";
 
 const isLoggedOut = (req: Request, res: Response, next: NextFunction) => {
   const loggedInUser = req.user;

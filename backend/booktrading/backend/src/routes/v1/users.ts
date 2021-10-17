@@ -8,13 +8,13 @@ import {
   isLoggedOut,
   userIdMatchesLoggedInUserId,
 } from "../../middleware";
-import { onlyUserId, userAuthParams } from "../../types";
 import { prismaClient } from "../../utils/prismaClient";
 import bcrypt from "bcrypt";
 import { v4 } from "uuid";
 import { DateTime } from "luxon";
 import { EnvVarsType } from "../../utils/envVars";
 import { Prisma } from ".prisma/client";
+import { onlyUserId, userAuthParams } from "../../types/usersRestTypes";
 
 const getV1UserRouter = (envVars: EnvVarsType) => {
   // /api/v1/users....
@@ -154,7 +154,7 @@ const getV1UserRouter = (envVars: EnvVarsType) => {
   });
 
   userRouter.delete(
-    "/users/:userId",
+    "/:userId",
     isAuthenticated,
     userIdMatchesLoggedInUserId,
     async (req, res) => {
@@ -166,26 +166,33 @@ const getV1UserRouter = (envVars: EnvVarsType) => {
 
       const userData = validatedQueryParams.data;
 
-      await prismaClient.books.deleteMany({
+      const books = prismaClient.books.deleteMany({
         where: {
           userId: userData.userId,
         },
       });
-      await prismaClient.sessions.deleteMany({
+      const sessions = prismaClient.sessions.deleteMany({
         where: {
           userId: userData.userId,
         },
       });
-      await prismaClient.users.deleteMany({
+      const trades = prismaClient.trades.deleteMany({
+        where: {
+          OR: [{ toUserId: userData.userId }, { fromUserId: userData.userId }],
+        },
+      });
+      const user = prismaClient.users.delete({
         where: {
           id: userData.userId,
         },
       });
 
+      await prismaClient.$transaction([books, sessions, trades, user]);
+
       delete req.user;
       res.clearCookie("id");
 
-      return res.status(200);
+      return res.status(200).json();
     }
   );
 
