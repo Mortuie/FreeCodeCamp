@@ -1,5 +1,9 @@
 import { Router } from "express";
-import { INVALID_PARAMETERS, NOT_FOUND } from "../../common/restErrors";
+import {
+  INVALID_PARAMETERS,
+  NOT_FOUND,
+  UNAUTHORISED,
+} from "../../common/restErrors";
 import { isAuthenticated } from "../../middleware";
 import { paginationBaseTypes } from "../../types/common";
 import { createTrades, onlyTradesId } from "../../types/tradesRestTypes";
@@ -54,10 +58,72 @@ const getV1TradesRouter = () => {
       return res.status(400).json(INVALID_PARAMETERS);
     }
 
-    // TODO
+    if (!req?.user) {
+      return res.send("error, this will never happen though");
+    }
+
+    const tempTrade = validatedBody.data;
+
+    const trade = await prismaClient.trades.create({
+      data: {
+        ...tempTrade,
+        fromUserId: req.user?.userId,
+      },
+      include: {
+        toUser: {
+          select: {
+            id: true,
+            username: true,
+            createdAt: true,
+          },
+        },
+        fromUser: {
+          select: {
+            id: true,
+            username: true,
+            createdAt: true,
+          },
+        },
+        toBook: true,
+        fromBook: true,
+      },
+    });
+
+    return res.json({ data: trade });
   });
   tradesRouter.patch("/:tradesId", isAuthenticated, async (req, res) => {});
-  tradesRouter.delete("/:tradesId", isAuthenticated, async (req, res) => {});
+
+  tradesRouter.delete("/:tradesId", isAuthenticated, async (req, res) => {
+    const validatedQueryParams = onlyTradesId.safeParse(req.params);
+
+    if (!validatedQueryParams.success) {
+      return res.status(400).send(INVALID_PARAMETERS);
+    }
+
+    if (!req?.user) {
+      return res.send("error, this will never happen though");
+    }
+
+    const tradesId = validatedQueryParams.data.tradesId;
+    const userId = req.user.userId;
+
+    const trade = await prismaClient.trades.findUnique({
+      where: {
+        id: tradesId,
+      },
+    });
+    if (!trade) {
+      return res.status(404).json(NOT_FOUND);
+    } else if (trade.fromUserId !== userId) {
+      return res.status(403).json(UNAUTHORISED);
+    } else {
+      await prismaClient.trades.delete({
+        where: { id: tradesId },
+      });
+
+      return res.status(200).json();
+    }
+  });
 
   return tradesRouter;
 };

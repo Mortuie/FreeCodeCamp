@@ -18,6 +18,8 @@ model Users {
   password String
   createdAt DateTime @default(now())
   books Books[]
+  recievedTrades Trades[] @relation("toUser")
+  madeTrades Trades[] @relation("fromUser")  
 }
 
 model Books {
@@ -26,6 +28,8 @@ model Books {
   description String @default("")
   user Users @relation(fields: [userId], references: [id])
   userId Int 
+  toBook Trades[] @relation("toBook")
+  fromBook Trades[] @relation("fromBook")
   createdAt DateTime @default(now())
 }
 
@@ -33,8 +37,14 @@ model Trades {
   id Int @id @default(autoincrement())
   createdAt DateTime @default(now())
   message String @default("")
+  fromUser Users @relation("fromUser", fields: [fromUserId], references: [id])
   fromUserId Int 
+  fromBook Books @relation("fromBook", fields: [fromBookId], references: [id])
+  fromBookId Int
+  toBookId Int
+  toBook Books @relation("toBook", fields: [toBookId], references: [id])
   toUserId Int
+  toUser Users @relation("toUser", fields: [toUserId], references: [id])
   status Status @default(INCOMPLETE)
 }
 
