@@ -150,7 +150,7 @@ const getV1UserRouter = (envVars: EnvVarsType) => {
       res.clearCookie("id");
       delete req.user;
     }
-    res.status(200);
+    res.status(200).json();
   });
 
   userRouter.delete(

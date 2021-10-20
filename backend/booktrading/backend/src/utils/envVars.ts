@@ -5,7 +5,7 @@ dotenv.config();
 
 const envVars = z.object({
   DATABASE_URL: z.string(),
-  PORT: z.preprocess((val) => Number(val), z.number()).default(3000),
+  PORT: z.preprocess((val) => Number(val), z.number()).default(9000),
   COOKIE_SECRET: z.string().min(10),
   COOKIE_MAX_AGE: z.preprocess((val) => Number(val), z.number()).default(36000),
 });
