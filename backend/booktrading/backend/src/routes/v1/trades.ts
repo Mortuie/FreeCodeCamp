@@ -6,7 +6,11 @@ import {
 } from "../../common/restErrors";
 import { isAuthenticated } from "../../middleware";
 import { paginationBaseTypes } from "../../types/common";
-import { createTrades, onlyTradesId } from "../../types/tradesRestTypes";
+import {
+  createTrades,
+  onlyTradesId,
+  updateTrades,
+} from "../../types/tradesRestTypes";
 import { prismaClient } from "../../utils/prismaClient";
 
 const getV1TradesRouter = () => {
@@ -91,7 +95,47 @@ const getV1TradesRouter = () => {
 
     return res.json({ data: trade });
   });
-  tradesRouter.patch("/:tradesId", isAuthenticated, async (req, res) => {});
+  tradesRouter.patch("/:tradesId", isAuthenticated, async (req, res) => {
+    const validatedQueryParams = onlyTradesId.safeParse(req.params);
+    const validatedBody = updateTrades.safeParse(req.body);
+
+    if (!validatedQueryParams.success || !validatedBody.success) {
+      return res.status(400).json(INVALID_PARAMETERS);
+    }
+
+    if (!req?.user) {
+      return res.send("error, this will never happen though");
+    }
+
+    const userId = req.user.userId;
+    const tradesId = validatedQueryParams.data.tradesId;
+    const updatedTradesBody = validatedBody.data.status;
+
+    const originalTrade = await prismaClient.trades.findUnique({
+      where: {
+        id: tradesId,
+      },
+    });
+
+    if (!originalTrade) {
+      return res.status(404).json(NOT_FOUND);
+    }
+
+    if (originalTrade.fromUserId !== userId) {
+      return res.status(403).json(UNAUTHORISED);
+    }
+
+    const trade = await prismaClient.trades.update({
+      where: {
+        id: tradesId,
+      },
+      data: {
+        status: updatedTradesBody,
+      },
+    });
+
+    return res.status(200).json({ data: trade });
+  });
 
   tradesRouter.delete("/:tradesId", isAuthenticated, async (req, res) => {
     const validatedQueryParams = onlyTradesId.safeParse(req.params);

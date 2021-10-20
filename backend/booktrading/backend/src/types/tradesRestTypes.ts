@@ -11,4 +11,8 @@ const createTrades = z.object({
   message: z.string().optional().default(""),
 });
 
-export { onlyTradesId, createTrades };
+const updateTrades = z.object({
+  status: z.enum(["INCOMPLETE", "COMPLETE"]),
+});
+
+export { onlyTradesId, createTrades, updateTrades };

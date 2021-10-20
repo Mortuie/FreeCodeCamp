@@ -31,6 +31,7 @@ model Books {
   toBook Trades[] @relation("toBook")
   fromBook Trades[] @relation("fromBook")
   createdAt DateTime @default(now())
+  image String @default("https://simple.wiktionary.org/wiki/book#/media/File:Open_book_nae_02.svg")
 }
 
 model Trades {
