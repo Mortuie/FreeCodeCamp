@@ -89,7 +89,9 @@ const getV1UserRouter = (envVars: EnvVarsType) => {
       return res.status(400).json(INVALID_PARAMETERS);
     }
 
-    const hashedPassword = await bcrypt.hash(validatedBody.data.password, 10);
+    const body = validatedBody.data;
+
+    const hashedPassword = await bcrypt.hash(body.password, 10);
 
     const tempUser = {
       ...validatedBody.data,
