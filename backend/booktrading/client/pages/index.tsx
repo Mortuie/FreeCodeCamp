@@ -29,7 +29,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 const Home: NextPage<Props> = ({ books }) => {
   console.log(books);
 
-  return <div>{books && books.map((book) => <div>{book.title}</div>)}</div>;
+  // return <div>{books && books.map((book) => <div>{book.title}</div>)}</div>;
+  return <div>homepage...</div>;
 };
 
 export default Home;
