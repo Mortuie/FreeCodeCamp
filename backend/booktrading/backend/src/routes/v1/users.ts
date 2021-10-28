@@ -12,11 +12,11 @@ import { prismaClient } from "../../utils/prismaClient";
 import bcrypt from "bcrypt";
 import { v4 } from "uuid";
 import { DateTime } from "luxon";
-import { EnvVarsType } from "../../utils/envVars";
+import { parsedEnvVars } from "../../utils/envVars";
 import { Prisma } from ".prisma/client";
 import { onlyUserId, userAuthParams } from "../../types/usersRestTypes";
 
-const getV1UserRouter = (envVars: EnvVarsType) => {
+const getV1UserRouter = () => {
   // /api/v1/users....
   const userRouter = Router();
 
@@ -61,7 +61,7 @@ const getV1UserRouter = (envVars: EnvVarsType) => {
 
       const uuid = v4();
 
-      const expires = DateTime.now().plus(envVars.COOKIE_MAX_AGE);
+      const expires = DateTime.now().plus(parsedEnvVars.COOKIE_MAX_AGE);
       const sqlExpires = expires.toISO();
       const cookieExpires = expires.toMillis() - DateTime.now().toMillis();
 
@@ -111,7 +111,7 @@ const getV1UserRouter = (envVars: EnvVarsType) => {
 
       const uuid = v4();
 
-      const expires = DateTime.now().plus(envVars.COOKIE_MAX_AGE);
+      const expires = DateTime.now().plus(parsedEnvVars.COOKIE_MAX_AGE);
       const sqlExpires = expires.toISO();
       const cookieExpires = expires.toMillis() - DateTime.now().toMillis();
 

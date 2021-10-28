@@ -12,18 +12,10 @@ const envVars = z.object({
     .default(36000000),
 });
 
-const parseEnvVars = () => {
-  return envVars.parse(process.env);
-};
-
 const parsedEnvVars = (() => {
   return envVars.parse(process.env);
 })();
 
-// console.log(parsedEnvVars);
-
 type EnvVarsType = z.infer<typeof envVars>;
 
-export { parseEnvVars, envVars, EnvVarsType, parsedEnvVars };
-
-// module.exports = parsedEnvVars;
+export { EnvVarsType, parsedEnvVars };
