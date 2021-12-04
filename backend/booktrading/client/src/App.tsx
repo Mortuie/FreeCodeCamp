@@ -1,14 +1,35 @@
+import { Navbar } from "./components";
 import { UserContext } from "./context";
 import Router from "./router";
+import { createGlobalStyle } from "styled-components";
+import { ApiProvider } from "./hooks/useApi";
 
-function App() {
+const GlobalStyle = createGlobalStyle`
+  body {
+    margin: 0px;
+    display: flex;
+    height: 100vh;
+    width: 100%;
+  }
+
+  #root {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
+const App = () => {
   return (
     <>
-      <UserContext>
-        <Router />
-      </UserContext>
+      <ApiProvider>
+        <UserContext>
+          <GlobalStyle />
+          <Navbar />
+          <Router />
+        </UserContext>
+      </ApiProvider>
     </>
   );
-}
+};
 
 export default App;

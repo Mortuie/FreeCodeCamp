@@ -1,23 +1,19 @@
 import React from "react";
 import { Navigate } from "react-router";
 import { useUser } from "../hooks";
+import { Props } from "./types";
 
-interface Props {
-  component: React.ComponentType;
-  redirectPath?: string;
-}
-
-const PrivateRoute: React.FC<Props> = ({
+const NeedAuth: React.FC<Props> = ({
   component: RouteComponent,
   redirectPath = "/",
 }) => {
-  const { user } = useUser();
+  const { isLoggedIn } = useUser();
 
-  if (user) {
+  if (isLoggedIn) {
     return <RouteComponent />;
   }
 
   return <Navigate to={redirectPath} />;
 };
 
-export default PrivateRoute;
+export default NeedAuth;

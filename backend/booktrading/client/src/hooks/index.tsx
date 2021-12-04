@@ -1,3 +1,4 @@
 import { useUser } from "./useUser";
+import { useApi } from "./useApi";
 
-export { useUser };
+export { useUser, useApi };

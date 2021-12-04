@@ -1,5 +1,6 @@
 import Dashboard from "./Dashboard";
-import About from "./About";
-import Private from "./Private";
+import Signin from "./Signin";
+import Signup from "./Signup";
+import fourOhFour from "./404";
 
-export { Dashboard, About, Private };
+export { Dashboard, Signin, Signup, fourOhFour };
