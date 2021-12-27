@@ -23,6 +23,8 @@ const isLoggedOut = (req: Request, res: Response, next: NextFunction) => {
 const isAuthenticated = (req: Request, res: Response, next: NextFunction) => {
   const loggedInUser = req.user;
 
+  console.log("HERE", loggedInUser);
+
   if (!loggedInUser) {
     return res.status(401).send(UNAUTHENTICATED);
   }

@@ -1,21 +1,37 @@
 import styled from "styled-components";
-import { useUser } from "../hooks";
+import { useApi, useUser } from "../hooks";
 import { Link } from "react-router-dom";
 
-interface RouteType {
-  [k: string]: {
-    type?: string;
-    name: string;
-    route?: string;
-  };
-}
+const LOGGED_IN = "loggedIn";
+const LOGGED_OUT = "loggedOut";
+
+type Route = {
+  type?: string;
+  name: string;
+  route: string;
+};
+
+type RouteType = {
+  [k: string]: Route;
+};
 
 const baseRoutes: RouteType = {
-  home: { name: "Home", route: "/" },
+  home: { name: "Booktrading App", route: "/" },
   signin: { name: "Signin", route: "/auth/signin" },
   signup: { name: "Signup", route: "/auth/signup" },
-  logout: { type: "link", name: "Logout" },
+  newbook: { name: "New Book", route: "/books/new" },
+  profile: { name: "My Profile", route: "/profile" },
+  logout: { type: "link", name: "Logout", route: "" },
 };
+
+const loggedInRoutes = [
+  baseRoutes.home,
+  baseRoutes.newbook,
+  baseRoutes.profile,
+  baseRoutes.logout,
+];
+const loggedOutRoutes = [baseRoutes.home, baseRoutes.signin, baseRoutes.signup];
+const obj = { [LOGGED_IN]: loggedInRoutes, [LOGGED_OUT]: loggedOutRoutes };
 
 const Wrapper = styled.div`
   width: 100%;
@@ -40,26 +56,52 @@ const NavElementLink = styled.div<NavElementProps>`
   ${(props) => props.$isFirst && `margin-right: auto`}
 `;
 
-const Navbar = () => {
-  const { isLoggedIn } = useUser();
+const Route = ({
+  route,
+  index,
+  links,
+}: {
+  route: Route;
+  index: number;
+  links: { [k: string]: () => Promise<any> };
+}) => {
+  return route.type ? (
+    <NavElementLink onClick={links[route.name]} $isFirst={index === 0}>
+      {route.name}
+    </NavElementLink>
+  ) : (
+    <NavElement to={route.route} $isFirst={index === 0}>
+      {route.name}
+    </NavElement>
+  );
+};
 
-  const loggedInRoutes = [baseRoutes.home];
-  const loggedOutRoutes = [
-    baseRoutes.home,
-    baseRoutes.signin,
-    baseRoutes.signup,
-  ];
-  const obj = { loggedIn: loggedInRoutes, loggedOut: loggedOutRoutes };
+const Navbar = () => {
+  const { setUserDetails, user } = useUser();
+  const { User } = useApi();
+
+  const x = {
+    Logout: async () => {
+      try {
+        const { data, status } = await User.logout();
+
+        console.log(data, status);
+        if (status === 200) {
+          setUserDetails(null);
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    },
+  };
+
+  const routes = obj[user ? LOGGED_IN : LOGGED_OUT];
 
   return (
     <Wrapper>
-      {obj[isLoggedIn ? "loggedIn" : "loggedOut"].map((route, index) => {
-        return (
-          <NavElement key={route.route} to={route.route} $isFirst={index === 0}>
-            {route.name}
-          </NavElement>
-        );
-      })}
+      {routes.map((route, index) => (
+        <Route key={index} route={route} index={index} links={x} />
+      ))}
     </Wrapper>
   );
 };

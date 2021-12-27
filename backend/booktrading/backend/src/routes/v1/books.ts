@@ -40,6 +40,13 @@ const getV1BookRouter = () => {
       orderBy: {
         createdAt: "desc",
       },
+      include: {
+        user: {
+          select: {
+            username: true,
+          },
+        },
+      },
     });
 
     return res.json({ data: books });

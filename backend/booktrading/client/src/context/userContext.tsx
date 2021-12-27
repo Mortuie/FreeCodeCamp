@@ -1,10 +1,8 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 
 type UserContextType = {
-  user: any;
-  isLoggedIn: boolean;
-  toggleUser: () => void;
-  setUserDetails: (userDetails: UserResponse) => void;
+  user: null | UserResponse;
+  setUserDetails: (userDetails: User) => void;
 };
 
 type UserResponse = {
@@ -13,25 +11,19 @@ type UserResponse = {
   username: string;
 };
 
+type User = UserResponse | null;
+
 export const userContext = createContext({} as UserContextType);
 
 export const UserContext = ({ children }: { children: ReactNode }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState<null | UserResponse>(null);
 
-  const toggleUser = () => {
-    setIsLoggedIn((prevState) => !prevState);
-  };
-
-  const setUserDetails = (userDetails: UserResponse) => {
-    setIsLoggedIn(true);
+  const setUserDetails = (userDetails: User) => {
     setUser(userDetails);
   };
 
   return (
-    <userContext.Provider
-      value={{ user, toggleUser, isLoggedIn, setUserDetails }}
-    >
+    <userContext.Provider value={{ user, setUserDetails }}>
       {children}
     </userContext.Provider>
   );

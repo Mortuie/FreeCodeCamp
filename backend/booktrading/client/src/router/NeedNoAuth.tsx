@@ -7,9 +7,9 @@ const NeedNoAuth: React.FC<Props> = ({
   component: RouteComponent,
   redirectPath = "/",
 }) => {
-  const { isLoggedIn } = useUser();
+  const { user } = useUser();
 
-  if (!isLoggedIn) {
+  if (!user) {
     return <RouteComponent />;
   }
 

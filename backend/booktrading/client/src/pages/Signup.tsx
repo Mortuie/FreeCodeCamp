@@ -10,12 +10,9 @@ const Signup = () => {
 
   const signup = async () => {
     try {
-      const ret = await User.signup(username, password);
-      console.log("ret", ret);
+      const { data, status } = await User.signup(username, password);
 
-      if (ret.status === 200) {
-        const { data } = ret;
-
+      if (status === 200) {
         setUserDetails(data);
       }
     } catch (e) {
