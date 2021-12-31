@@ -9,4 +9,8 @@ const userAuthParams = z.object({
   password: z.string().min(3),
 });
 
-export { onlyUserId, userAuthParams };
+const onlyId = z.object({
+  id: z.preprocess((val) => Number(val), z.number()),
+});
+
+export { onlyUserId, userAuthParams, onlyId };

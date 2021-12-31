@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   INTERNAL_SERVER_ERROR,
   INVALID_PARAMETERS,
+  NOT_FOUND,
 } from "../../common/restErrors";
 import {
   isAuthenticated,
@@ -14,11 +15,45 @@ import { v4 } from "uuid";
 import { DateTime } from "luxon";
 import { parsedEnvVars } from "../../utils/envVars";
 import { Prisma } from ".prisma/client";
-import { onlyUserId, userAuthParams } from "../../types/usersRestTypes";
+import { onlyId, onlyUserId, userAuthParams } from "../../types/usersRestTypes";
+import { paginationBaseTypes } from "../../types/common";
+import _ from "lodash";
+import { sanitiseUser } from "../../sanitise/common";
 
 const getV1UserRouter = () => {
   // /api/v1/users....
   const userRouter = Router();
+
+  userRouter.get("/", async (req, res) => {
+    const validatedQueryParams = paginationBaseTypes.safeParse(req.query);
+
+    return res.send("hello world");
+  });
+
+  userRouter.get("/:id", async (req, res) => {
+    const validatedParams = onlyId.safeParse(req.params);
+
+    if (!validatedParams.success) {
+      return res.status(400).json(INVALID_PARAMETERS);
+    }
+
+    const { id } = validatedParams.data;
+
+    const user = await prismaClient.users.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        books: true,
+      },
+    });
+
+    if (!user) {
+      return res.status(404).json(NOT_FOUND);
+    }
+
+    return res.json(sanitiseUser(user));
+  });
 
   userRouter.post("/login", isLoggedOut, async (req, res) => {
     const validatedBody = userAuthParams.safeParse(req.body);

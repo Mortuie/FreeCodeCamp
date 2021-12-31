@@ -31,6 +31,10 @@ class UserApi {
   public async logout() {
     return this.axios.get("v1/users/logout");
   }
+
+  public async getUserById(userId: string) {
+    return this.axios.get("v1/users/" + userId);
+  }
 }
 
 class BooksApi {

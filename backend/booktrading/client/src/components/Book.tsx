@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 interface Props {
   book: {
@@ -36,7 +37,7 @@ const Image = styled.img`
 
 const Title = styled.div``;
 
-const Username = styled.div`
+const Username = styled(Link)`
   text-align: right;
 `;
 
@@ -46,7 +47,7 @@ const Book: React.FC<Props> = ({ book }) => {
       <Image src={book.image} />
 
       <Title>{book.title}</Title>
-      <Username>{book.user.username}</Username>
+      <Username to={"/profile/" + book.userId}>{book.user.username}</Username>
     </Container>
   );
 };
