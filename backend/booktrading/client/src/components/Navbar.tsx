@@ -31,7 +31,10 @@ const loggedInRoutes = [
   baseRoutes.logout,
 ];
 const loggedOutRoutes = [baseRoutes.home, baseRoutes.signin, baseRoutes.signup];
-const obj = { [LOGGED_IN]: loggedInRoutes, [LOGGED_OUT]: loggedOutRoutes };
+const allRoutes = {
+  [LOGGED_IN]: loggedInRoutes,
+  [LOGGED_OUT]: loggedOutRoutes,
+};
 
 const Wrapper = styled.div`
   width: 100%;
@@ -95,7 +98,7 @@ const Navbar = () => {
     },
   };
 
-  const routes = obj[user ? LOGGED_IN : LOGGED_OUT];
+  const routes = allRoutes[user ? LOGGED_IN : LOGGED_OUT];
 
   return (
     <Wrapper>
