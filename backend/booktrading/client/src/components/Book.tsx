@@ -1,16 +1,9 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { BookWithUser } from "../types";
 
 interface Props {
-  book: {
-    createdAt: string;
-    description: string;
-    id: number;
-    image: string;
-    title: string;
-    userId: number;
-    user: { username: string };
-  };
+  book: BookWithUser;
 }
 
 const Container = styled.div`

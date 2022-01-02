@@ -16,6 +16,7 @@ model Users {
   id Int @id @default(autoincrement())
   username String @unique
   password String
+  image String
   createdAt DateTime @default(now())
   books Books[]
   recievedTrades Trades[] @relation("toUser")
@@ -31,7 +32,7 @@ model Books {
   toBook Trades[] @relation("toBook")
   fromBook Trades[] @relation("fromBook")
   createdAt DateTime @default(now())
-  image String @default("https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1600572146l/55381916._SX318_.jpg")
+  image String 
 }
 
 model Trades {

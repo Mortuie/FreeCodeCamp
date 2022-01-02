@@ -1,27 +1,11 @@
 import { useEffect, useState } from "react";
 import { useApi, useUser } from "../hooks";
-import { Book } from "../components";
+import { BookGrid } from "../components";
 import styled from "styled-components";
-
-type Book = {
-  createdAt: string;
-  description: string;
-  id: number;
-  image: string;
-  title: string;
-  userId: number;
-  user: { username: string };
-};
-
-const BookWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-`;
+import { BookWithUser } from "../types";
 
 const Dashboard = () => {
-  const [books, setBooks] = useState<null | Book[]>(null);
+  const [books, setBooks] = useState<null | BookWithUser[]>(null);
   const { user } = useUser();
   const { Books } = useApi();
 
@@ -50,13 +34,7 @@ const Dashboard = () => {
     <div>
       Dashboard:
       <div>{user ? user.username : "not logged in"}</div>
-      {books && (
-        <BookWrapper>
-          {books.map((book) => (
-            <Book key={book.id} book={book} />
-          ))}
-        </BookWrapper>
-      )}
+      <BookGrid books={books} />
     </div>
   );
 };
