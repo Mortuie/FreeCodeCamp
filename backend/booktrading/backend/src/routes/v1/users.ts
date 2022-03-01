@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Response, Request, Router } from "express";
 import {
   INTERNAL_SERVER_ERROR,
   INVALID_PARAMETERS,
@@ -24,10 +24,14 @@ const getV1UserRouter = () => {
   // /api/v1/users....
   const userRouter = Router();
 
-  userRouter.get("/", async (req, res) => {
+  userRouter.get("/", async (req: Request, res: Response) => {
     const validatedQueryParams = paginationBaseTypes.safeParse(req.query);
 
-    return res.send("hello world");
+    return res.json({ message: "yessir", ...req.user });
+  });
+
+  userRouter.get("/status", (req, res) => {
+    return res.json({ message: "yessir", ...req.user });
   });
 
   userRouter.get("/:id", async (req, res) => {

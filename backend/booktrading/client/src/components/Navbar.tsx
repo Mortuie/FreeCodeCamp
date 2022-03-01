@@ -85,16 +85,18 @@ const Navbar = () => {
 
   const x = {
     Logout: async () => {
-      try {
-        const { data, status } = await User.logout();
+      console.log("HERE WE ARE");
+      console.log(user);
+      // try {
+      //   const { data, status } = await User.logout();
 
-        console.log(data, status);
-        if (status === 200) {
-          setUserDetails(null);
-        }
-      } catch (e) {
-        console.log(e);
-      }
+      //   console.log(data, status);
+      //   if (status === 200) {
+      //     setUserDetails(null);
+      //   }
+      // } catch (e) {
+      //   console.log(e);
+      // }
     },
   };
 

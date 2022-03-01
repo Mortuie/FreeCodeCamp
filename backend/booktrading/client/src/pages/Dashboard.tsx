@@ -28,8 +28,6 @@ const Dashboard = () => {
     getBooks();
   }, []);
 
-  console.log(books);
-
   return (
     <div>
       Dashboard:

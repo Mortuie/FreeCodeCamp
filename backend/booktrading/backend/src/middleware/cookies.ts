@@ -29,6 +29,7 @@ const parseSignedCookies: RequestHandler = async (
       req.user = {
         userId: row.userId,
         cookieUuid: signedCookies.id,
+        createdAt: row.createdAt,
       };
     }
     next();

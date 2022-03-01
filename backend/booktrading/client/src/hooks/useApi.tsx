@@ -1,9 +1,11 @@
 import axios, { AxiosInstance } from "axios";
 import { createContext, FunctionComponent, useContext, useMemo } from "react";
 
+const PORT = 9001;
+
 export class Api {
   private readonly axios: AxiosInstance = axios.create({
-    baseURL: "http://localhost:9000/api",
+    baseURL: `http://localhost:${PORT}/api`,
     validateStatus: () => true,
     withCredentials: true,
   });
