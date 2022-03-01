@@ -12,3 +12,9 @@
 - write the trading ui
 - write a trade view
 - write when you click on "my profile" it takes you to your ids profile :D (or do it smerter)
+
+## Setup
+
+```sh
+npx primsa db push
+```
