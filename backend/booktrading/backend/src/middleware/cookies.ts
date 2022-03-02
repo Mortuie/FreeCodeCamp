@@ -34,7 +34,7 @@ const parseSignedCookies: RequestHandler = async (
 
     if (row) {
       req.user = {
-        userId: row.userId,
+        id: row.userId,
         cookieUuid: signedCookies.id,
         createdAt: row.createdAt,
         username: row.user.username,

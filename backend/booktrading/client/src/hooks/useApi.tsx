@@ -1,4 +1,4 @@
-import axios, { AxiosInstance } from "axios";
+import axios, { Axios, AxiosInstance } from "axios";
 import { createContext, FunctionComponent, useContext, useMemo } from "react";
 import { ApiBookType, ApiBookTypeWithUser } from "../types";
 
@@ -12,6 +12,7 @@ export class Api {
   });
   public readonly User: UserApi = new UserApi(this.axios);
   public readonly Books: BooksApi = new BooksApi(this.axios);
+  public readonly Trades: TradesApi = new TradesApi(this.axios);
 }
 
 class UserApi {
@@ -36,7 +37,7 @@ class UserApi {
   }
 
   public async getUserById(userId: string) {
-    return this.axios.get("/v1/users/" + userId);
+    return this.axios.get(`/v1/users/${userId}`);
   }
 }
 
@@ -62,6 +63,21 @@ class BooksApi {
 
   public async getBook(id: string) {
     return this.axios.get<ApiBookType | null>(`/v1/books/${id}`);
+  }
+}
+
+interface d {
+  toUserId: number;
+  toBookId: number;
+  fromBookId: number;
+  message?: string;
+}
+
+class TradesApi {
+  constructor(private readonly axios: AxiosInstance) {}
+
+  public async createNewTrade(data: d) {
+    return this.axios.post("/v1/trades", { ...data });
   }
 }
 

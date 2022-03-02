@@ -88,7 +88,7 @@ const getV1BookRouter = () => {
     const book = await prismaClient.books.create({
       data: {
         ...body,
-        userId: req.user.userId,
+        userId: req.user.id,
       },
     });
 

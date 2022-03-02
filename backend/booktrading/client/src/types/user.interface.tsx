@@ -1,5 +1,5 @@
 type UserResponse = {
-  userId: number;
+  id: number;
   createdAt: string;
   username: string;
   cookieUuid: string;

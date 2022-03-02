@@ -1,5 +1,5 @@
 type User = {
-  userId: number;
+  id: number;
   cookieUuid: string;
   createdAt: Date;
   username: string;

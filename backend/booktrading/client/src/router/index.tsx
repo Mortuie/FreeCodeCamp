@@ -9,11 +9,14 @@ const Router = () => {
       {/* public routes you can also be logged in to see*/}
       <Route path="/" element={<p.Dashboard />} />
       <Route path="/profile/:id" element={<p.Profile />} />
-      <Route path="/book/:id" element={<p.Book />} />
+      <Route path="/books/:id" element={<p.Book />} />
 
       {/* should be logged in to see these routes */}
       <Route path="/books/new" element={<NeedAuth component={p.Newbook} />} />
-      {/* <Route path="/profile" element={<NeedAuth component={p.Profile} />} /> */}
+      <Route
+        path="/trades/new/"
+        element={<NeedAuth component={p.NewTrades} />}
+      />
 
       {/* should be logged out to see these routes */}
       <Route

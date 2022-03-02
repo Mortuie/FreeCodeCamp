@@ -5,7 +5,7 @@ import { ApiBookType } from "../types";
 
 const Book = () => {
   const { id } = useParams();
-  const { Books } = useApi();
+  const { Books, Trades } = useApi();
   const { user } = useUser();
   const [book, setBook] = useState<ApiBookType | null>();
 
@@ -29,7 +29,7 @@ const Book = () => {
   return (
     <div>
       <div>book comp</div>
-      {user && user.userId !== book.userId && <button>trade</button>}
+      {user && user.id !== book.userId && <button>trade</button>}
       <div></div>
     </div>
   );

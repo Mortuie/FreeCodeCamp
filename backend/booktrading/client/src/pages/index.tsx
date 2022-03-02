@@ -5,5 +5,15 @@ import fourOhFour from "./404";
 import Newbook from "./NewBook";
 import Profile from "./Profile";
 import Book from "./Book";
+import NewTrades from "./NewTrades";
 
-export { Dashboard, Signin, Signup, fourOhFour, Newbook, Profile, Book };
+export {
+  Dashboard,
+  Signin,
+  Signup,
+  fourOhFour,
+  Newbook,
+  Profile,
+  Book,
+  NewTrades,
+};

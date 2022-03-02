@@ -100,7 +100,8 @@ const Navbar = () => {
       }
     },
     "My Profile": () => {
-      navigate(`profile/${user?.userId}`);
+      console.log(user);
+      navigate(`profile/${user?.id}`);
     },
   };
 

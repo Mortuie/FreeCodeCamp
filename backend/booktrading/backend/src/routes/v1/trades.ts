@@ -71,21 +71,19 @@ const getV1TradesRouter = () => {
     const trade = await prismaClient.trades.create({
       data: {
         ...tempTrade,
-        fromUserId: req.user?.userId,
+        fromUserId: req.user.id,
       },
       include: {
         toUser: {
           select: {
             id: true,
             username: true,
-            createdAt: true,
           },
         },
         fromUser: {
           select: {
             id: true,
             username: true,
-            createdAt: true,
           },
         },
         toBook: true,
@@ -93,8 +91,9 @@ const getV1TradesRouter = () => {
       },
     });
 
-    return res.json({ data: trade });
+    return res.json(trade);
   });
+
   tradesRouter.patch("/:tradesId", isAuthenticated, async (req, res) => {
     const validatedQueryParams = onlyTradesId.safeParse(req.params);
     const validatedBody = updateTrades.safeParse(req.body);
@@ -107,7 +106,7 @@ const getV1TradesRouter = () => {
       return res.send("error, this will never happen though");
     }
 
-    const userId = req.user.userId;
+    const userId = req.user.id;
     const tradesId = validatedQueryParams.data.tradesId;
     const updatedTradesBody = validatedBody.data.status;
 
@@ -149,7 +148,7 @@ const getV1TradesRouter = () => {
     }
 
     const tradesId = validatedQueryParams.data.tradesId;
-    const userId = req.user.userId;
+    const userId = req.user.id;
 
     const trade = await prismaClient.trades.findUnique({
       where: {

@@ -40,7 +40,7 @@ const userIdMatchesLoggedInUserId = (
     return res.status(400).send(INVALID_PARAMETERS);
   }
 
-  const loggedInUser = req.user?.userId;
+  const loggedInUser = req.user?.id;
   const userIdRequest = validatedUserId.data.userId;
 
   if (userIdRequest !== loggedInUser) {

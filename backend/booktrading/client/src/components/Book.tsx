@@ -39,7 +39,7 @@ const Book: React.FC<Props> = ({ book }) => {
 
   return (
     <Container>
-      <Image src={book.image} onClick={() => navigate(`/book/${book.id}`)} />
+      <Image src={book.image} onClick={() => navigate(`/books/${book.id}`)} />
 
       <Title>{book.title}</Title>
       <Username to={"/profile/" + book.userId}>{book.user.username}</Username>
