@@ -1,5 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 import { createContext, FunctionComponent, useContext, useMemo } from "react";
+import { ApiBookType, ApiBookTypeWithUser } from "../types";
 
 const PORT = 9001;
 
@@ -54,7 +55,13 @@ class BooksApi {
     if (doesNotContainUserId) {
       filter.doesNotContainUserId = doesNotContainUserId;
     }
-    return this.axios.get("/v1/books", { params: filter });
+    return this.axios.get<ApiBookTypeWithUser[]>("/v1/books", {
+      params: filter,
+    });
+  }
+
+  public async getBook(id: string) {
+    return this.axios.get<ApiBookType | null>(`/v1/books/${id}`);
   }
 }
 

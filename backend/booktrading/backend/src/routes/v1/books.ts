@@ -26,7 +26,7 @@ const getV1BookRouter = () => {
       },
     });
 
-    return res.json({ data: book });
+    return res.json({ ...book });
   });
 
   bookRouter.get("/", async (req, res) => {
@@ -69,7 +69,7 @@ const getV1BookRouter = () => {
       },
     });
 
-    return res.json({ data: books });
+    return res.json(books);
   });
 
   bookRouter.post("/", isAuthenticated, async (req, res) => {

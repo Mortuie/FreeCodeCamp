@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import styled from "styled-components";
 import { useApi } from "../hooks";
-import { BookWithoutUser } from "../types";
+import { ApiBookTypeWithUser } from "../types";
 
 const Container = styled.div`
   flex: 1;
@@ -21,7 +21,7 @@ const Profile = () => {
   const [user, setUser] = useState<null | {
     username: string;
     image: string;
-    books: BookWithoutUser[];
+    books: ApiBookTypeWithUser[];
   }>(null);
   const { User } = useApi();
 

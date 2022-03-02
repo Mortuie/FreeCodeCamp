@@ -1,16 +1,6 @@
 import { UserResponse } from "./user.interface";
+import { ApiBookType, ApiBookTypeWithUser } from "./books.interface";
 
-type BookWithoutUser = {
-  createdAt: string;
-  description: string;
-  id: number;
-  image: string;
-  title: string;
-  userId: number;
-};
 
-type BookWithUser = BookWithoutUser & {
-  user: { username: string };
-};
 
-export type { BookWithUser, BookWithoutUser, UserResponse };
+export type { ApiBookType, ApiBookTypeWithUser, UserResponse };

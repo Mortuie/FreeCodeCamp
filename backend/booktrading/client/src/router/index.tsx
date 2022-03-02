@@ -7,8 +7,9 @@ const Router = () => {
   return (
     <Routes>
       {/* public routes you can also be logged in to see*/}
-      <Route path="/" element={<p.Dashboard />}></Route>
-      <Route path="/profile/:id" element={<p.Profile />}></Route>
+      <Route path="/" element={<p.Dashboard />} />
+      <Route path="/profile/:id" element={<p.Profile />} />
+      <Route path="/book/:id" element={<p.Book />} />
 
       {/* should be logged in to see these routes */}
       <Route path="/books/new" element={<NeedAuth component={p.Newbook} />} />

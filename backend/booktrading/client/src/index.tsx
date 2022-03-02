@@ -25,6 +25,6 @@ axios
       document.getElementById("root")
     );
   })
-  .catch((res) => console.error(res));
+  .catch((res) => console.error("error:", res));
 
 reportWebVitals();

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { BookWithUser } from "../types";
+import { ApiBookTypeWithUser } from "../types";
 import Book from "./Book";
 
 const BookWrapper = styled.div`
@@ -10,7 +10,7 @@ const BookWrapper = styled.div`
 `;
 
 interface Props {
-  books: BookWithUser[] | null;
+  books: ApiBookTypeWithUser[] | undefined;
 }
 
 const BookGrid: React.FC<Props> = ({ books }) => {

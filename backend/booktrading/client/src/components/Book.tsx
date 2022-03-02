@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { BookWithUser } from "../types";
+import { Link, useNavigate } from "react-router-dom";
+import { ApiBookTypeWithUser } from "../types";
 
 interface Props {
-  book: BookWithUser;
+  book: ApiBookTypeWithUser;
 }
 
 const Container = styled.div`
@@ -35,9 +35,11 @@ const Username = styled(Link)`
 `;
 
 const Book: React.FC<Props> = ({ book }) => {
+  const navigate = useNavigate();
+
   return (
     <Container>
-      <Image src={book.image} />
+      <Image src={book.image} onClick={() => navigate(`/book/${book.id}`)} />
 
       <Title>{book.title}</Title>
       <Username to={"/profile/" + book.userId}>{book.user.username}</Username>

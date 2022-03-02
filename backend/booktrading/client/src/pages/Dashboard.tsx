@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { useApi, useUser } from "../hooks";
 import { BookGrid } from "../components";
 import styled from "styled-components";
-import { BookWithUser } from "../types";
+import { ApiBookTypeWithUser } from "../types";
 
 const Dashboard = () => {
-  const [books, setBooks] = useState<null | BookWithUser[]>(null);
+  const [books, setBooks] = useState<ApiBookTypeWithUser[]>();
   const { user } = useUser();
   const { Books } = useApi();
 
@@ -13,10 +13,7 @@ const Dashboard = () => {
     const getBooks = async () => {
       try {
         const userId = user ? user.userId : null;
-        const {
-          data: { data },
-          status,
-        } = await Books.getBooks(userId);
+        const { data, status } = await Books.getBooks(userId);
 
         if (status === 200) {
           setBooks(data);
