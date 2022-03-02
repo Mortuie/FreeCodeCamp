@@ -1,7 +1,11 @@
 import { Router } from "express";
 import { INVALID_PARAMETERS } from "../../common/restErrors";
 import { isAuthenticated } from "../../middleware";
-import { createBook, onlyBookId } from "../../types/booksRestTypes";
+import {
+  createBook,
+  filterParams,
+  onlyBookId,
+} from "../../types/booksRestTypes";
 import { paginationBaseTypes } from "../../types/common";
 import { prismaClient } from "../../utils/prismaClient";
 
@@ -26,13 +30,28 @@ const getV1BookRouter = () => {
   });
 
   bookRouter.get("/", async (req, res) => {
-    const validatedQueryParams = paginationBaseTypes.safeParse(req.query);
+    const validatedQuery = paginationBaseTypes.safeParse(req.query);
 
-    if (!validatedQueryParams.success) {
+    if (!validatedQuery.success) {
       return res.status(400).send(INVALID_PARAMETERS);
     }
 
-    const queryParams = validatedQueryParams.data;
+    const optionalFilterParams = filterParams.safeParse(req.query);
+
+    const queryParams = validatedQuery.data;
+
+    const filter: any = {};
+
+    if (
+      optionalFilterParams.success &&
+      optionalFilterParams.data.doesNotContainUserId
+    ) {
+      filter.where = {
+        userId: {
+          not: optionalFilterParams.data.doesNotContainUserId,
+        },
+      };
+    }
 
     const books = await prismaClient.books.findMany({
       skip: queryParams.offset,
@@ -40,6 +59,7 @@ const getV1BookRouter = () => {
       orderBy: {
         createdAt: "desc",
       },
+      ...filter,
       include: {
         user: {
           select: {
@@ -56,7 +76,7 @@ const getV1BookRouter = () => {
     const validatedBody = createBook.safeParse(req.body);
 
     if (!validatedBody.success) {
-      return res.status(400).send(INVALID_PARAMETERS);
+      return res.status(400).json(INVALID_PARAMETERS);
     }
 
     if (!req.user) {

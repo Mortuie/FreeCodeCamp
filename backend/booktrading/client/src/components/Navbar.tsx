@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useApi, useUser } from "../hooks";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const LOGGED_IN = "loggedIn";
 const LOGGED_OUT = "loggedOut";
@@ -20,7 +20,7 @@ const baseRoutes: RouteType = {
   signin: { name: "Signin", route: "/auth/signin" },
   signup: { name: "Signup", route: "/auth/signup" },
   newbook: { name: "New Book", route: "/books/new" },
-  profile: { name: "My Profile", route: "/profile" },
+  profile: { type: "link", name: "My Profile", route: "" },
   logout: { type: "link", name: "Logout", route: "" },
 };
 
@@ -66,7 +66,7 @@ const Route = ({
 }: {
   route: Route;
   index: number;
-  links: { [k: string]: () => Promise<any> };
+  links: { [k: string]: () => Promise<any> | void };
 }) => {
   return route.type ? (
     <NavElementLink onClick={links[route.name]} $isFirst={index === 0}>
@@ -82,21 +82,25 @@ const Route = ({
 const Navbar = () => {
   const { setUserDetails, user } = useUser();
   const { User } = useApi();
+  const navigate = useNavigate();
 
   const x = {
     Logout: async () => {
-      console.log("HERE WE ARE");
-      console.log(user);
-      // try {
-      //   const { data, status } = await User.logout();
+      // console.log("HERE WE ARE");
+      // console.log(user);
+      try {
+        const { data, status } = await User.logout();
 
-      //   console.log(data, status);
-      //   if (status === 200) {
-      //     setUserDetails(null);
-      //   }
-      // } catch (e) {
-      //   console.log(e);
-      // }
+        console.log(data, status);
+        if (status === 200) {
+          setUserDetails(null);
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    "My Profile": () => {
+      navigate(`profile/${user?.userId}`);
     },
   };
 

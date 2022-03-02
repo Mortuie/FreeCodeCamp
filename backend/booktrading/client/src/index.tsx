@@ -4,23 +4,27 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import axios from "axios";
+import { UserResponse } from "./types";
+import _ from "lodash";
 
 const PORT = 9001;
 
 axios
-  .get(`http://localhost:${PORT}/api/v1/users/status`, {
+  .get<UserResponse>(`http://localhost:${PORT}/api/v1/users/status`, {
     withCredentials: true,
   })
-  .then(({ data }) => console.log("IN THE INDEX", data))
-  .catch((res) => console.log("AT THE INDEX", res));
-
-ReactDOM.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+  .then(({ data }) => {
+    console.log(data);
+    const initialUser = _.isEmpty(data) ? null : data;
+    ReactDOM.render(
+      <React.StrictMode>
+        <BrowserRouter>
+          <App initialUser={initialUser} />
+        </BrowserRouter>
+      </React.StrictMode>,
+      document.getElementById("root")
+    );
+  })
+  .catch((res) => console.error(res));
 
 reportWebVitals();

@@ -13,4 +13,10 @@ const createBook = z.object({
   image: z.string().optional().default(DEFAULT_BOOK_IMAGE_URI),
 });
 
-export { onlyBookId, createBook };
+const filterParams = z.object({
+  doesNotContainUserId: z
+    .preprocess((val) => Number(val), z.number())
+    .optional(),
+});
+
+export { onlyBookId, createBook, filterParams };

@@ -3,6 +3,7 @@ import { UserContext } from "./context";
 import Router from "./router";
 import { createGlobalStyle } from "styled-components";
 import { ApiProvider } from "./hooks/useApi";
+import { UserResponse } from "./types";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -20,11 +21,15 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const App = () => {
+interface Props {
+  initialUser: null | UserResponse;
+}
+
+const App = ({ initialUser }: Props) => {
   return (
     <>
       <ApiProvider>
-        <UserContext>
+        <UserContext initialUser={initialUser}>
           <GlobalStyle />
           <Navbar />
           <Router />

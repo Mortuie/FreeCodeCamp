@@ -21,6 +21,7 @@ model Users {
   books Books[]
   recievedTrades Trades[] @relation("toUser")
   madeTrades Trades[] @relation("fromUser")  
+  sessions Sessions[] @relation("user")
 }
 
 model Books {
@@ -52,7 +53,8 @@ model Trades {
 
 model Sessions {
   cookieUuid String @unique
-  userId Int 
+  userId Int
+  user Users @relation("user", fields: [userId], references: [id])
   createdAt DateTime @default(now())
   expiresAt DateTime
 }

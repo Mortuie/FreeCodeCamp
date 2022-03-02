@@ -1,3 +1,5 @@
+import { UserResponse } from "./user.interface";
+
 type BookWithoutUser = {
   createdAt: string;
   description: string;
@@ -11,4 +13,4 @@ type BookWithUser = BookWithoutUser & {
   user: { username: string };
 };
 
-export type { BookWithUser, BookWithoutUser };
+export type { BookWithUser, BookWithoutUser, UserResponse };

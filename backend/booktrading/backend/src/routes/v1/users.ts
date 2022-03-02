@@ -24,6 +24,20 @@ const getV1UserRouter = () => {
   // /api/v1/users....
   const userRouter = Router();
 
+  userRouter.get("/logout", async (req, res) => {
+    console.log("HERE");
+    if (req.user) {
+      await prismaClient.sessions.deleteMany({
+        where: {
+          cookieUuid: req.user.cookieUuid,
+        },
+      });
+      res.clearCookie("id");
+      delete req.user;
+    }
+    res.status(200).json();
+  });
+
   userRouter.get("/", async (req: Request, res: Response) => {
     const validatedQueryParams = paginationBaseTypes.safeParse(req.query);
 
@@ -31,7 +45,7 @@ const getV1UserRouter = () => {
   });
 
   userRouter.get("/status", (req, res) => {
-    return res.json({ message: "yessir", ...req.user });
+    return res.json({ ...req.user });
   });
 
   userRouter.get("/:id", async (req, res) => {
@@ -179,19 +193,6 @@ const getV1UserRouter = () => {
       }
       return res.status(500).json(INTERNAL_SERVER_ERROR);
     }
-  });
-
-  userRouter.get("/logout", async (req, res) => {
-    if (req.user) {
-      await prismaClient.sessions.deleteMany({
-        where: {
-          cookieUuid: req.user.cookieUuid,
-        },
-      });
-      res.clearCookie("id");
-      delete req.user;
-    }
-    res.status(200).json();
   });
 
   userRouter.delete(

@@ -12,10 +12,11 @@ const Dashboard = () => {
   useEffect(() => {
     const getBooks = async () => {
       try {
+        const userId = user ? user.userId : null;
         const {
           data: { data },
           status,
-        } = await Books.getBooks();
+        } = await Books.getBooks(userId);
 
         if (status === 200) {
           setBooks(data);
@@ -26,7 +27,7 @@ const Dashboard = () => {
     };
 
     getBooks();
-  }, []);
+  }, [user]);
 
   return (
     <div>

@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useApi } from "../hooks";
 
 const NewBook = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const navigate = useNavigate();
 
   const { Books } = useApi();
 
@@ -11,7 +13,11 @@ const NewBook = () => {
     try {
       const { status, data } = await Books.createNewBook(title, description);
 
-      console.log(status, data);
+      if (status === 200) {
+        navigate("/");
+      } else {
+        console.log(data);
+      }
     } catch (e) {
       console.log(e);
     }

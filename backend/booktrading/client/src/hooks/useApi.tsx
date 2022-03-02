@@ -31,11 +31,11 @@ class UserApi {
   }
 
   public async logout() {
-    return this.axios.get("v1/users/logout");
+    return this.axios.get("/v1/users/logout");
   }
 
   public async getUserById(userId: string) {
-    return this.axios.get("v1/users/" + userId);
+    return this.axios.get("/v1/users/" + userId);
   }
 }
 
@@ -49,8 +49,12 @@ class BooksApi {
     });
   }
 
-  public async getBooks() {
-    return this.axios.get("/v1/books");
+  public async getBooks(doesNotContainUserId: number | null) {
+    const filter: { doesNotContainUserId?: number } = {};
+    if (doesNotContainUserId) {
+      filter.doesNotContainUserId = doesNotContainUserId;
+    }
+    return this.axios.get("/v1/books", { params: filter });
   }
 }
 

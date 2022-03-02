@@ -23,6 +23,13 @@ const parseSignedCookies: RequestHandler = async (
           },
         ],
       },
+      include: {
+        user: {
+          select: {
+            username: true,
+          },
+        },
+      },
     });
 
     if (row) {
@@ -30,6 +37,7 @@ const parseSignedCookies: RequestHandler = async (
         userId: row.userId,
         cookieUuid: signedCookies.id,
         createdAt: row.createdAt,
+        username: row.user.username,
       };
     }
     next();
