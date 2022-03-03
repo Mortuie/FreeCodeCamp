@@ -14,7 +14,7 @@ const Router = () => {
       {/* should be logged in to see these routes */}
       <Route path="/books/new" element={<NeedAuth component={p.Newbook} />} />
       <Route
-        path="/trades/new/"
+        path="/trades/new/:toUserId/:toBookId"
         element={<NeedAuth component={p.NewTrades} />}
       />
 

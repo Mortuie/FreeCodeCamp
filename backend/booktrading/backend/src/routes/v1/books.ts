@@ -53,6 +53,12 @@ const getV1BookRouter = () => {
       };
     }
 
+    if (optionalFilterParams.success && optionalFilterParams.data.byUserId) {
+      filter.where = {
+        userId: optionalFilterParams.data.byUserId,
+      };
+    }
+
     const books = await prismaClient.books.findMany({
       skip: queryParams.offset,
       take: queryParams.limit,

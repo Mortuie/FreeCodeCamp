@@ -17,6 +17,7 @@ const filterParams = z.object({
   doesNotContainUserId: z
     .preprocess((val) => Number(val), z.number())
     .optional(),
+  byUserId: z.preprocess((val) => Number(val), z.number()).optional(),
 });
 
 export { onlyBookId, createBook, filterParams };

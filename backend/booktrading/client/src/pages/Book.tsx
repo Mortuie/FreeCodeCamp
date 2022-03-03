@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useApi, useUser } from "../hooks";
 import { ApiBookType } from "../types";
 
@@ -8,6 +8,7 @@ const Book = () => {
   const { Books, Trades } = useApi();
   const { user } = useUser();
   const [book, setBook] = useState<ApiBookType | null>();
+  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
@@ -29,7 +30,13 @@ const Book = () => {
   return (
     <div>
       <div>book comp</div>
-      {user && user.id !== book.userId && <button>trade</button>}
+      {user && user.id !== book.userId && (
+        <button
+          onClick={() => navigate(`/trades/new/${book.userId}/${book.id}`)}
+        >
+          trade
+        </button>
+      )}
       <div></div>
     </div>
   );

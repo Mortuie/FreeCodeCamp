@@ -7,7 +7,7 @@ import axios from "axios";
 import { UserResponse } from "./types";
 import _ from "lodash";
 
-const PORT = 9001;
+const PORT = 9000;
 
 axios
   .get<UserResponse>(`http://localhost:${PORT}/api/v1/users/status`, {

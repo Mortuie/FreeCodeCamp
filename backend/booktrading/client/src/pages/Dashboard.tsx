@@ -12,8 +12,8 @@ const Dashboard = () => {
   useEffect(() => {
     const getBooks = async () => {
       try {
-        const userId = user ? user.id : null;
-        const { data, status } = await Books.getBooks(userId);
+        const obj = user ? { doesNotContainUserId: user.id } : {};
+        const { data, status } = await Books.getBooks(obj);
 
         if (status === 200) {
           setBooks(data);

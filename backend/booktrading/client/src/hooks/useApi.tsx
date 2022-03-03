@@ -2,7 +2,7 @@ import axios, { Axios, AxiosInstance } from "axios";
 import { createContext, FunctionComponent, useContext, useMemo } from "react";
 import { ApiBookType, ApiBookTypeWithUser } from "../types";
 
-const PORT = 9001;
+const PORT = 9000;
 
 export class Api {
   private readonly axios: AxiosInstance = axios.create({
@@ -51,11 +51,10 @@ class BooksApi {
     });
   }
 
-  public async getBooks(doesNotContainUserId: number | null) {
-    const filter: { doesNotContainUserId?: number } = {};
-    if (doesNotContainUserId) {
-      filter.doesNotContainUserId = doesNotContainUserId;
-    }
+  public async getBooks(filter: {
+    doesNotContainUserId?: number;
+    byUserId?: number;
+  }) {
     return this.axios.get<ApiBookTypeWithUser[]>("/v1/books", {
       params: filter,
     });
