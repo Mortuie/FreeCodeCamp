@@ -7,10 +7,13 @@ import { UserResponse } from "./types";
 
 const GlobalStyle = createGlobalStyle`
   body {
-    margin: 0px;
+    margin: 0;
+    padding: 0;
     display: flex;
     height: 100vh;
     width: 100%;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 27px;
   }
 
   #root {

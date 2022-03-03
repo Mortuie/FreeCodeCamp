@@ -1,12 +1,11 @@
 import axios, { Axios, AxiosInstance } from "axios";
 import { createContext, FunctionComponent, useContext, useMemo } from "react";
 import { ApiBookType, ApiBookTypeWithUser } from "../types";
-
-const PORT = 9000;
+import { ApiUserWithBooksType } from "../types/user.interface";
 
 export class Api {
   private readonly axios: AxiosInstance = axios.create({
-    baseURL: `http://localhost:${PORT}/api`,
+    baseURL: `${process.env.REACT_APP_BASE_API_URL}/api`,
     validateStatus: () => true,
     withCredentials: true,
   });
@@ -37,7 +36,7 @@ class UserApi {
   }
 
   public async getUserById(userId: string) {
-    return this.axios.get(`/v1/users/${userId}`);
+    return this.axios.get<ApiUserWithBooksType>(`/v1/users/${userId}`);
   }
 }
 
@@ -54,6 +53,9 @@ class BooksApi {
   public async getBooks(filter: {
     doesNotContainUserId?: number;
     byUserId?: number;
+    availableBooksOnly?: boolean;
+    limit?: number;
+    offset?: number;
   }) {
     return this.axios.get<ApiBookTypeWithUser[]>("/v1/books", {
       params: filter,
@@ -61,7 +63,7 @@ class BooksApi {
   }
 
   public async getBook(id: string) {
-    return this.axios.get<ApiBookType | null>(`/v1/books/${id}`);
+    return this.axios.get<ApiBookTypeWithUser | null>(`/v1/books/${id}`);
   }
 }
 

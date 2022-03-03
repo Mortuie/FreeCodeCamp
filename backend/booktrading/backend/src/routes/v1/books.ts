@@ -24,7 +24,18 @@ const getV1BookRouter = () => {
       where: {
         id: validatedQueryParams.data.bookId,
       },
+      include: {
+        user: {
+          select: {
+            username: true,
+          },
+        },
+      },
     });
+
+    if (!book) {
+      return res.json(null);
+    }
 
     return res.json({ ...book });
   });
@@ -37,6 +48,7 @@ const getV1BookRouter = () => {
     }
 
     const optionalFilterParams = filterParams.safeParse(req.query);
+    console.log("OPTIONAL", req.query, optionalFilterParams);
 
     const queryParams = validatedQuery.data;
 

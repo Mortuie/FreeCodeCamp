@@ -5,7 +5,7 @@ import Book from "./Book";
 const BookWrapper = styled.div`
   width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
 `;
 

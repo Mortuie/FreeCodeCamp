@@ -49,6 +49,7 @@ model Trades {
   toUserId Int
   toUser Users @relation("toUser", fields: [toUserId], references: [id])
   status Status @default(INCOMPLETE)
+  @@unique([fromBookId, fromUserId, toBookId, toUserId])
 }
 
 model Sessions {

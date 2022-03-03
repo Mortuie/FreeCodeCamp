@@ -18,6 +18,9 @@ const filterParams = z.object({
     .preprocess((val) => Number(val), z.number())
     .optional(),
   byUserId: z.preprocess((val) => Number(val), z.number()).optional(),
+  availableBooksOnly: z
+    .preprocess((val) => JSON.parse(String(val)), z.boolean())
+    .optional(),
 });
 
 export { onlyBookId, createBook, filterParams };

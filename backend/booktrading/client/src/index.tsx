@@ -5,21 +5,19 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import axios from "axios";
 import { UserResponse } from "./types";
-import _ from "lodash";
-
-const PORT = 9000;
 
 axios
-  .get<UserResponse>(`http://localhost:${PORT}/api/v1/users/status`, {
-    withCredentials: true,
-  })
+  .get<UserResponse | null>(
+    `${process.env.REACT_APP_BASE_API_URL}/api/v1/users/status`,
+    {
+      withCredentials: true,
+    }
+  )
   .then(({ data }) => {
-    console.log(data);
-    const initialUser = _.isEmpty(data) ? null : data;
     ReactDOM.render(
       <React.StrictMode>
         <BrowserRouter>
-          <App initialUser={initialUser} />
+          <App initialUser={data} />
         </BrowserRouter>
       </React.StrictMode>,
       document.getElementById("root")

@@ -45,6 +45,10 @@ const getV1UserRouter = () => {
   });
 
   userRouter.get("/status", (req, res) => {
+    if (!req?.user) {
+      return res.json(null);
+    }
+
     return res.json({ ...req.user });
   });
 

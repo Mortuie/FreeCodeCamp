@@ -1,3 +1,4 @@
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
 import { Router } from "express";
 import {
   INVALID_PARAMETERS,
@@ -68,30 +69,44 @@ const getV1TradesRouter = () => {
 
     const tempTrade = validatedBody.data;
 
-    const trade = await prismaClient.trades.create({
-      data: {
-        ...tempTrade,
-        fromUserId: req.user.id,
-      },
-      include: {
-        toUser: {
-          select: {
-            id: true,
-            username: true,
-          },
+    try {
+      const trade = await prismaClient.trades.create({
+        data: {
+          ...tempTrade,
+          fromUserId: req.user.id,
         },
-        fromUser: {
-          select: {
-            id: true,
-            username: true,
+        include: {
+          toUser: {
+            select: {
+              id: true,
+              username: true,
+            },
           },
+          fromUser: {
+            select: {
+              id: true,
+              username: true,
+            },
+          },
+          toBook: true,
+          fromBook: true,
         },
-        toBook: true,
-        fromBook: true,
-      },
-    });
+      });
 
-    return res.json(trade);
+      return res.json(trade);
+    } catch (e) {
+      if (e instanceof PrismaClientKnownRequestError) {
+        if (e.code === "P2002") {
+          return res.status(409).json({
+            message: "This trade already exists",
+            error: "UNIQUE_CONSTRAINT_VIOLATION",
+          });
+        }
+      }
+    }
+
+    // this should never happen
+    return res.json(null);
   });
 
   tradesRouter.patch("/:tradesId", isAuthenticated, async (req, res) => {
