@@ -5,6 +5,7 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import axios from "axios";
 import { UserResponse } from "./types";
+import "./index.css";
 
 axios
   .get<UserResponse | null>(

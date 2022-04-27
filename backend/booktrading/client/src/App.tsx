@@ -12,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
     display: flex;
     height: 100vh;
     width: 100%;
-    font-family: 'Bebas Neue', cursive;
+    // font-family: 'Bebas Neue', cursive;
     font-size: 27px;
   }
 
