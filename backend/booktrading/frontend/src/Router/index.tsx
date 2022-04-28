@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Dashboard, Login, Register } from "../components";
+import { Dashboard, Login, Register } from "../pages";
 
 interface Props {
   children: React.ReactNode;

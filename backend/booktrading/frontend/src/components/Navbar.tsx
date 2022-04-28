@@ -26,9 +26,8 @@ const Navbar: FC = () => {
           </a>
         </div>
         <div className="hidden space-x-8 lg:flex uppercase text-2xl font-bold">
-          <Link to="/">Home</Link>
-          <Link to="/login">Login</Link>
           <Link to="/register">Register</Link>
+          <Link to="/login">Login</Link>
         </div>
         <div
           className="flex lg:hidden cursor-pointer mr-3 sm:mr-0"

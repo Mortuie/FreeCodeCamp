@@ -9,8 +9,10 @@
   },
   "dependencies": {
     "axios": "^0.26.1",
+    "csstype": "^3.0.11",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-hot-toast": "^2.2.0",
     "react-router-dom": "^6.3.0"
   },
   "devDependencies": {
