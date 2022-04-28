@@ -24,7 +24,7 @@
     "webpack-dev-server": "^3.1.10"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.2",
     "mobx": "^5.6.0",
     "mobx-react": "^5.4.2",
     "prop-types": "^15.6.2",
