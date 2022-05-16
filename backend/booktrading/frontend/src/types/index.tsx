@@ -6,4 +6,10 @@ type UserType = {
 
 type User = null | UserType;
 
+enum ModalType {
+  NONE,
+  LOADING,
+}
+
+export { ModalType };
 export type { User, UserType };

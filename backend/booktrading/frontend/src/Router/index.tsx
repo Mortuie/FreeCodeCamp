@@ -1,20 +1,29 @@
-import React, { FC } from "react";
+import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useModal, useUser } from "../hooks";
+import Modals from "../modals";
 import { Dashboard, Login, Register } from "../pages";
+import { NeedAuthRoute, NeedNoAuthRoute } from "./RouteTypes";
 
 interface Props {
   children: React.ReactNode;
 }
 
-const Router: FC<Props> = ({ children }) => {
+const Router = ({ children }: Props) => {
+  const { isModalOpen } = useModal();
+  const { user } = useUser();
+
   return (
     <BrowserRouter>
       {children}
       <Routes>
         <Route path="/" element={<Dashboard />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route element={<NeedNoAuthRoute user={user} />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Route>
       </Routes>
+      {isModalOpen && <Modals />}
     </BrowserRouter>
   );
 };

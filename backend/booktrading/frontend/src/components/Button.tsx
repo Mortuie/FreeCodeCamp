@@ -15,7 +15,7 @@ const Button: FC<Props> = ({
 }) => {
   const classes = `${
     secondary ? "bg-orange-400 hover:bg-orange-300 active:bg-orange-500" : ""
-  } uppercase rounded-md p-2 mb-3 font-bold`;
+  } rounded-md p-2 mb-3 font-bold`;
 
   return (
     <button onClick={onClick} className={classes}>

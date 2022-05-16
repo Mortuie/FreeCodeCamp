@@ -25,7 +25,6 @@ const getV1UserRouter = () => {
   const userRouter = Router();
 
   userRouter.get("/logout", async (req, res) => {
-    console.log("HERE");
     if (req.user) {
       await prismaClient.sessions.deleteMany({
         where: {
