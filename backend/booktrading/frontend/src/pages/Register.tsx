@@ -4,25 +4,17 @@ import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { Button, Input } from "../components";
 import { useApi, useUser } from "../hooks";
-
-interface RegisterResponse {
-  username: string;
-  id: number;
-  createdAt: string;
-}
+import { Container } from "../layout";
 
 const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { logout, register } = useUser();
-
-  const _logout = () => logout();
+  const { register } = useUser();
 
   const _register = () => register(username, password);
 
   return (
-    <div className="flex w-full h-full bg-slate-300">
-      <button onClick={_logout}>LOGOUT</button>
+    <Container>
       <div className="flex flex-col m-auto">
         <div className="text-2xl text-center mb-3">Register</div>
 
@@ -51,7 +43,7 @@ const Register = () => {
           </div>
         </div>
       </div>
-    </div>
+    </Container>
   );
 };
 

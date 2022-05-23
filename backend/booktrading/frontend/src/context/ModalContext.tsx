@@ -14,9 +14,9 @@ interface Props {
   children: ReactNode;
 }
 
-const sleep = (milliseconds: number) => {
-  return new Promise((resolve) => setTimeout(resolve, milliseconds));
-};
+// const sleep = (milliseconds: number) => {
+//   return new Promise((resolve) => setTimeout(resolve, milliseconds));
+// };
 
 const ModalProvider: FC<Props> = ({ children }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -28,10 +28,8 @@ const ModalProvider: FC<Props> = ({ children }) => {
   };
 
   const stopLoading = () => {
-    sleep(2000).then(() => {
-      setIsModalOpen(false);
-      setModalType(ModalType.NONE);
-    });
+    setIsModalOpen(false);
+    setModalType(ModalType.NONE);
   };
 
   return (

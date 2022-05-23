@@ -12,6 +12,7 @@ specifiers:
   react-dom: ^18.0.0
   react-hot-toast: ^2.2.0
   react-router-dom: ^6.3.0
+  spinners-react: ^1.0.7
   tailwindcss: ^3.0.24
   typescript: ^4.6.3
   vite: ^2.9.5
@@ -23,6 +24,7 @@ dependencies:
   react-dom: 18.0.0_react@18.0.0
   react-hot-toast: 2.2.0_aee3b59847029cfc9aee5217330a3daf
   react-router-dom: 6.3.0_react-dom@18.0.0+react@18.0.0
+  spinners-react: 1.0.7_7d29b7de67429dc440865e67c402a452
 
 devDependencies:
   '@types/react': 18.0.6
@@ -1197,6 +1199,20 @@ packages:
     resolution: {integrity: sha1-igOdLRAh0i0eoUyA2OpGi6LvP8w=}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /spinners-react/1.0.7_7d29b7de67429dc440865e67c402a452:
+    resolution: {integrity: sha512-Xcgpc7Ybm6HOrpCVJjbH1G/NV852HaV4Zc9T1sJ2+S2hn05lGiBZS1dBOKGLc1kp8wv2sd3wtt94I/NNqDjs3Q==}
+    peerDependencies:
+      '@types/react': ^16.x || ^17.x || ^18.x
+      '@types/react-dom': ^16.x || ^17.x || ^18.x
+      react: ^16.x || ^17.x || ^18.x
+      react-dom: ^16.x || ^17.x || ^18.x
+    dependencies:
+      '@types/react': 18.0.6
+      '@types/react-dom': 18.0.2
+      react: 18.0.0
+      react-dom: 18.0.0_react@18.0.0
+    dev: false
 
   /supports-color/5.5.0:
     resolution: {integrity: sha512-QjVjwdXIt408MIiAqCX4oUKsgU2EqAGzs2Ppkm4aQYbjm+ZEWEcW4SfFNTr4uMNZma0ey4f5lgLrkB0aX0QMow==}

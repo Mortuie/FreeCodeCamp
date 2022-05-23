@@ -24,7 +24,17 @@ const UserProvider: FC<Props> = ({ children }) => {
   const { UserV1 } = useApi();
   const { startLoading, stopLoading } = useModal();
 
-  const login = async (username: string, password: string) => {};
+  const login = async (username: string, password: string) => {
+    try {
+      startLoading();
+      const { data, status } = await UserV1.login(username, password);
+      setUser(data);
+      console.log(data, status);
+    } catch (e) {
+    } finally {
+      stopLoading();
+    }
+  };
 
   const register = async (username: string, password: string) => {
     try {
@@ -46,10 +56,16 @@ const UserProvider: FC<Props> = ({ children }) => {
 
   const logout = async () => {
     try {
+      startLoading();
       const { data, status } = await UserV1.logout();
       console.log(data, status);
+      if (status === 200) {
+        setUser(null);
+      }
     } catch (e) {
       console.log(e);
+    } finally {
+      stopLoading();
     }
   };
 
