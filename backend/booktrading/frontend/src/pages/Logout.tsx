@@ -1,13 +1,5 @@
-import { useEffect } from "react";
 import { useUser } from "../hooks";
-
-const asyncUseEffect = (fn: any) => {
-  return useEffect(() => {
-    (async () => {
-      await fn();
-    })();
-  }, []);
-};
+import { asyncUseEffect } from "../utils";
 
 const Logout = () => {
   const { logout } = useUser();

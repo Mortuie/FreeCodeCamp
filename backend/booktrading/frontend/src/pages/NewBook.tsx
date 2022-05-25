@@ -2,21 +2,30 @@ import { Container } from "../layout";
 import { Button, Input } from "../components";
 import { useState } from "react";
 import { useApi } from "../hooks";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const NewBook = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
   const { BooksV1 } = useApi();
+  const navigate = useNavigate();
 
-  // const _newBook = () => Promise<void>;
-  // const _newBook = () => {
-  //   if (image.length === 0) {
-  //     return BooksV1.createBook(title, description);
-  //   } else {
-  //     return BooksV1.createBook(title, description, image);
-  //   }
-  // };
+  const _newBook = async () => {
+    try {
+      const { data } = await BooksV1.createBook(title, description, image);
+
+      console.log(data);
+      toast.success("Book listed");
+      navigate("/");
+    } catch (e) {
+      if (axios.isAxiosError(e) && e.response) {
+        toast.error(e.response.data.message);
+      }
+    }
+  };
 
   return (
     <Container>
@@ -45,7 +54,7 @@ const NewBook = () => {
             onChange={(e) => setImage(e.target.value)}
           />
 
-          {/* <Button buttonText="List Book" secondary onClick={_newBook} /> */}
+          <Button buttonText="List Book" secondary onClick={_newBook} />
         </div>
       </div>
     </Container>

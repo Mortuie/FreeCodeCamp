@@ -36,6 +36,7 @@ const Navbar: FC = () => {
         {user && (
           <div className="hidden space-x-8 lg:flex uppercase text-2xl font-bold">
             <Link to="/books/new">New Book</Link>
+            <Link to="/profile">Profile</Link>
             <Link to="/logout">Logout</Link>
           </div>
         )}
