@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useModal, useUser } from "../hooks";
 import Modals from "../modals";
-import { Dashboard, Login, Register, Logout, NewBook } from "../pages";
+import { Dashboard, Login, Register, Logout, NewBook, Profile } from "../pages";
 import { NeedAuthRoute, NeedNoAuthRoute } from "./RouteTypes";
 
 interface Props {
@@ -18,6 +18,7 @@ const Router = ({ children }: Props) => {
       {children}
       <Routes>
         <Route path="/" element={<Dashboard />} />
+        <Route path="/profile/:id" element={<Profile />} />
         <Route element={<NeedNoAuthRoute user={user} />}>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
@@ -25,6 +26,7 @@ const Router = ({ children }: Props) => {
         <Route element={<NeedAuthRoute user={user} />}>
           <Route path="/logout" element={<Logout />} />
           <Route path="/books/new" element={<NewBook />} />
+          <Route path="/profile" element={<Profile self />} />
         </Route>
       </Routes>
       {isModalOpen && <Modals />}

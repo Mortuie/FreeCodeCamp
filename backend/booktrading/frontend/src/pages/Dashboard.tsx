@@ -47,7 +47,7 @@ const Dashboard = () => {
     <Container>
       <div className="flex-col m-auto mt-10 bg-white w-3/5">
         {books.map((book) => (
-          <div>{book.title}</div>
+          <div key={book.id}>{book.title}</div>
         ))}
       </div>
     </Container>
