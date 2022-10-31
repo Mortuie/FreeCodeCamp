@@ -7,6 +7,11 @@ This is a repository which houses all of my experimental projects which I have c
 
 There are varying tech stacks here as I became a more proficient software developer throughout the years. 
 
+Frontend: React/Javascript/Typescript/Redux/React Context/React Query
+Backend: Nodejs/Express/Javascript/Typescript/Java
+DB: MongoDB/PostgreSQL/OpenSearch
+Ops: Docker/DockerCompose
+
 ## Frontend Projects:
 These are all the links to the frontend projects, that I have completed during this part of the curriculum. Technologies used: HTML & CSS, Bootstrap, JavaScript, JQuery, React.
 
