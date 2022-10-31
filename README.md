@@ -10,7 +10,7 @@ There are varying tech stacks here as I became a more proficient software develo
 Frontend: React/Javascript/Typescript/Redux/React Context/React Query
 Backend: Nodejs/Express/Javascript/Typescript/Java
 DB: MongoDB/PostgreSQL/OpenSearch
-Ops: Docker/DockerCompose
+Ops: Docker/Docker Compose
 
 ## Frontend Projects:
 These are all the links to the frontend projects, that I have completed during this part of the curriculum. Technologies used: HTML & CSS, Bootstrap, JavaScript, JQuery, React.
