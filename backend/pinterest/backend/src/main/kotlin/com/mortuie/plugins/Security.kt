@@ -3,19 +3,25 @@ package com.mortuie.plugins
 import io.ktor.server.auth.*
 import io.ktor.server.auth.jwt.*
 import com.mortuie.utils.JwtUtils
+import io.ktor.http.*
 import io.ktor.server.application.*
+import io.ktor.server.response.*
 
 fun Application.configureSecurity() {
     authentication {
             jwt {
-                val jwtAudience = this@configureSecurity.environment.config.property("jwt.audience").getString()
-                realm = this@configureSecurity.environment.config.property("jwt.realm").getString()
                 verifier(JwtUtils.verifier)
                 validate { credential ->
-                    if (credential.payload.audience.contains(jwtAudience)) JWTPrincipal(credential.payload) else null
+                    JwtUtils.validator(credential)
                 }
 
 
+                challenge { _, _ ->
+                    call.respond(
+                        HttpStatusCode.Unauthorized,
+                        hashMapOf("message" to "Token is invalid or has expired.")
+                    )
+                }
             }
         }
 
