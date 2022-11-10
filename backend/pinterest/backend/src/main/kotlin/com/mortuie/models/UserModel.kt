@@ -1,4 +1,3 @@
 package com.mortuie.models
 
-class UserModel {
-}
+data class UserModel(val id: String, val username: String)

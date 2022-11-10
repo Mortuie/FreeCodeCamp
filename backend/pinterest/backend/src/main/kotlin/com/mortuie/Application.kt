@@ -1,11 +1,11 @@
 package com.mortuie
 
-import com.jillesvangurp.ktsearch.KtorRestClient
-import com.jillesvangurp.ktsearch.SearchClient
+import com.mortuie.models.UserModel
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import com.mortuie.plugins.*
+import com.mortuie.services.ElasticSearchService
 import com.mortuie.utils.ElasticSearchFactory
 
 fun main() {
@@ -14,7 +14,8 @@ fun main() {
 }
 
 fun Application.module() {
-    ElasticSearchFactory.init()
+    ElasticSearchService.init()
+    ElasticSearchService.insertUser(UserModel("123", "bob"))
 
 
     configureSerialization()

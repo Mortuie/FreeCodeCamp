@@ -1,38 +1,29 @@
 package com.mortuie.utils
 
-import com.jillesvangurp.ktsearch.KtorRestClient
-import com.jillesvangurp.ktsearch.SearchClient
-import com.jillesvangurp.ktsearch.createIndex
-import com.jillesvangurp.ktsearch.getIndex
-import kotlinx.coroutines.runBlocking
+import co.elastic.clients.elasticsearch.ElasticsearchClient
+import co.elastic.clients.elasticsearch._types.ElasticsearchException
+import co.elastic.clients.json.jackson.JacksonJsonpMapper
+import co.elastic.clients.transport.rest_client.RestClientTransport
+import org.apache.http.HttpHost
+import org.elasticsearch.client.RestClient
+
 
 object ElasticSearchFactory {
-    private val indexes = listOf<String>("test", "test123")
+    private var client: ElasticsearchClient? = null
 
-    fun init() {
-        val client = SearchClient(KtorRestClient())
-        client.
-            for (index in indexes) {
-                runBlocking {
-                    try {
-                        client.getIndex(index)
-                        client.createIndex(index)
-                    } catch (e: Exception) {
-                        println("Index: $index already exists.")
-                    }
-                }
-
-//            indexes.forEach {
-//                try {
-//                    client.getIndex(it)
-//                    client.createIndex(it)
-//                } catch (e: Exception) {
-//                    println("Index: $it already exists.")
-//                }
-//            }
-
+    fun getEsClient(): ElasticsearchClient {
+        val tempClient = client
+        if (tempClient != null) {
+            return tempClient
         }
+        val restClient: RestClient = RestClient.builder(
+            HttpHost("localhost", 9200)
+        ).build()
+
+        val transport = RestClientTransport(restClient, JacksonJsonpMapper())
+
+        val tempClient2 = ElasticsearchClient(transport)
+        client = tempClient2
+        return tempClient2
     }
-
-
 }
